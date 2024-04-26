@@ -15,6 +15,7 @@ function getArticle(req, res) {
 function deleteArticle(req, res) {
     const articleId = req.query.id
     articlesModel.deleteArticle(articleId)
+    // TODO : Remove query in path so it wont keep on deleting with each refresh
     getAllArticles(req, res)
 }
 

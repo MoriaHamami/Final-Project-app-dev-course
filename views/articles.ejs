@@ -21,9 +21,9 @@
     <section>
         <% for(let i=0; i< articles.length; i++) { %>
             <article>
-                <h1><%articles[i].title %></h1>
-                <a href="/article?id=<% articles[i].id %>">Read full article</a>
-                <a href="/deleteArticle?id=<%articles[i].id%>">Delete article</a>
+                <h1><%= articles[i].title %></h1>
+                <a href="/article?id=<%= articles[i].id %>">Read full article</a>
+                <a href="/deleteArticle?id=<%= articles[i].id%>">Delete article</a>
             </article>
         <% } %>
     </section>
