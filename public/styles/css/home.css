@@ -8,6 +8,7 @@
     /* CHANGE */
     /* background-color: var(--almost-white); */
     background-color: whitesmoke;
+    /* overflow-x: hidden; */
 }
 .home .welcome {
     display: flex;
@@ -15,9 +16,9 @@
     justify-content: center;
     position: relative;
     /* height: fit-content; */
-    overflow: hidden;
+    /* overflow: hidden; */
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-image: url('../imgs/home/bg.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -57,6 +58,9 @@
     /* color: var(--l-gold); */
     background-color: rgb(255, 204, 62);
 }
+/* .home .welcome button:hover i{
+    margin-left: 10px;
+} */
 
 .home .welcome button p {
     margin: 0;
@@ -64,7 +68,12 @@
 }
 
 
-.team-slide h1:hover {
+/* .home .team-slide {
+width: 100%;
+overflow: hidden;
+} */
+
+.home .team-slide h1:hover {
         /* CHANGE */
     /* color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); */
     background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
@@ -73,11 +82,11 @@
     -webkit-text-fill-color: transparent; 
 }
 
-.team-slide h1 {
+.home .team-slide h1 {
     text-align: center;
 
     font-family: boldTitle;
-    font-size: 800%;
+    font-size: 600%;
 
 
     font-weight: bold;
@@ -85,35 +94,38 @@
 
 
 
-html,
+/* html,
 body {
     position: relative;
     height: 100%;
-}
+} */
 
-body {
+/* body {
     background: #eee;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #000;
     margin: 0;
     padding: 0;
-}
+} */
 
-.swiper {
+.home .swiper {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
 }
 
-.swiper-slide {
+.home .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 300px;
-    /* height: 300px; */
+    width: 40vw;
+    /* height: 50vh; */
 }
 
-.swiper-slide img {
-    display: block;
+.home .swiper-slide img {
+    /* display: block; */
     width: 100%;
+    /* height: 100%; */
 }
+
+

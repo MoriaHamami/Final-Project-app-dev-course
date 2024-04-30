@@ -1,0 +1,15 @@
+footer {
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* position: relative; */
+    /* height: fit-content; */
+    /* overflow: hidden; */
+    height: 80vh;
+    /* width: 100%; */
+    background-color: whitesmoke;
+    background-image: url('../imgs/footer/abstract-bg.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
