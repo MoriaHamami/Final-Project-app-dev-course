@@ -1,0 +1,119 @@
+/* CHANGE */
+@font-face {
+    font-family: boldTitle;
+    src: url('../fonts/Assistant-Bold.ttf');
+}
+
+.home{
+    /* CHANGE */
+    /* background-color: var(--almost-white); */
+    background-color: whitesmoke;
+}
+.home .welcome {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    position: relative;
+    /* height: fit-content; */
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../imgs/home/bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* .home .welcome img {
+    height: 100vh;
+    
+    position: absolute;
+} */
+
+.home .welcome button {
+    position: relative;
+    top: 80vh;
+    height: fit-content;
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 10px;
+    /* height: fit-content; */
+    /* CHANGE */
+    /* color: var(--almost-white); */
+    color: white;
+
+    /* CHANGE */
+    /* border: 1px solid var(--almost-white); */
+    border: 3px solid white;
+
+    /* CHANGE */
+    /* color: var(--gold); */
+    background-color: rgb(254, 190, 16);
+
+}
+
+.home .welcome button:hover {
+    /* CHANGE */
+    /* color: var(--l-gold); */
+    background-color: rgb(255, 204, 62);
+}
+
+.home .welcome button p {
+    margin: 0;
+
+}
+
+
+.team-slide h1:hover {
+        /* CHANGE */
+    /* color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); */
+    background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.team-slide h1 {
+    text-align: center;
+
+    font-family: boldTitle;
+    font-size: 800%;
+
+
+    font-weight: bold;
+}
+
+
+
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    /* height: 300px; */
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
