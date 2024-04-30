@@ -5,11 +5,80 @@ footer {
     /* position: relative; */
     /* height: fit-content; */
     /* overflow: hidden; */
-    height: 80vh;
+    /* height: 80vh; */
     /* width: 100%; */
     background-color: whitesmoke;
     background-image: url('../imgs/footer/abstract-bg.png');
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
+    overflow: hidden;
+}
+
+footer .words-border {
+    margin: 20px 0;
+height: 3px;
+width: 100%;
+/* color: black; */
+     /* CHANGE */
+    /* color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); */
+    background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
+
+}
+footer .words {
+
+    font-size: 800%;
+    width: max-content;
+    /* width: 100%; */
+    position: relative;
+    animation: move-words 20s linear infinite;
+    margin: 0;
+
+    /* CHANGE */
+    /* color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); */
+    background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* This specifies the name of our animation. */
+@keyframes move-words {
+
+    /* At the start of the animation, we set the initial position of the text to left: 100%, which means the text is completely off-screen to the right. */
+    0% {
+        left: 100%;
+    }
+
+    /* At the end of the animation, we set the final position of the text to left: -100%, which means the text is completely off-screen to the left. This creates the effect of the text moving from right to left across the screen. */
+    100% {
+        left: -100%;
+    }
+}
+
+footer nav{
+    margin-inline-start: 30px;
+    font-weight: bold;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+footer .pages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+footer .pages .start,footer .pages .end{
+    display: flex;
+    flex-direction: column;
+}
+footer .pages .end{
+    margin-inline-end: 30px;
+}
+
+footer .logo{
+    text-align: center;
+}
+footer .logo img{
+    height: 100px;
 }
