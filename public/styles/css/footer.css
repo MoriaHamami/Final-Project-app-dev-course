@@ -82,3 +82,20 @@ footer .logo{
 footer .logo img{
     height: 100px;
 }
+footer .sponsors,footer .contact{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-block:30px;
+}
+footer .sponsors img,footer .contact img{
+    cursor: pointer;
+    height: 30px;
+    padding: 10px;
+    box-sizing:content-box;
+}
+/* footer .contact img:hover{
+    background-color: rgba(211, 211, 211, 0.43);
+    border-radius: 50%;
+    color: blue;
+} */
