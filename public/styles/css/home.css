@@ -33,7 +33,7 @@
 
 .home .welcome button {
     position: relative;
-    top: 80vh;
+    top: 70vh;
     height: fit-content;
     display: flex;
     padding: 10px 20px;
@@ -73,9 +73,9 @@ width: 100%;
 overflow: hidden;
 } */
 
-.home .team-slide h1:hover {
-        /* CHANGE */
-    /* color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); */
+/* .home .team-slide h1:hover {
+        // CHANGE
+    // color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); 
     background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
 
     -webkit-background-clip: text;
@@ -92,23 +92,6 @@ overflow: hidden;
     font-weight: bold;
 }
 
-
-
-/* html,
-body {
-    position: relative;
-    height: 100%;
-} */
-
-/* body {
-    background: #eee;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-} */
-
 .home .swiper {
     width: 100%;
     padding-top: 50px;
@@ -119,13 +102,10 @@ body {
     background-position: center;
     background-size: cover;
     width: 40vw;
-    /* height: 50vh; */
 }
 
 .home .swiper-slide img {
-    /* display: block; */
     width: 100%;
-    /* height: 100%; */
 }
 
-
+ */
