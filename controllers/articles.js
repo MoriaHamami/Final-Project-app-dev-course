@@ -1,7 +1,7 @@
 const articlesModel = require('../models/articles')
 
-function getAllArticles(req, res) {
-    const articles =  articlesModel.getAllArticles()
+async function getAllArticles(req, res) {
+    const articles =  await articlesModel.getAllArticles()
     res.render('articles.ejs',{articles})
 }
 
