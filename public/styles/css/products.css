@@ -1,27 +1,41 @@
 .header {
-    background-color: #031322; /* כחול כהה */
-    color: white; /* צבע טקסט לבן */
-    padding: 20px; /* ריווח מסביב לתוכן */
-    text-align: center; /* מרכוז את התוכן במרכז */ 
+    background-color: #031322;
+    /* כחול כהה */
+    color: white;
+    /* צבע טקסט לבן */
+    padding: 20px;
+    /* ריווח מסביב לתוכן */
+    text-align: center;
+    /* מרכוז את התוכן במרכז */
     padding: 2%;
-} 
+}
 
 .header::after {
-    content: ''; /* תוספת של אלמנט ריק */
-    display: block; /* הצגת האלמנט כבלוק */
-    position: absolute; /* הפעלת מיקום יחסי אבסולוטי על האב */
-    left: 0; /* מרכוז לשמאל */
-    bottom: 0; /* מרכוז לתחתית */
-    width: 100%; /* רוחב הפס השחור הוא 100% */
-    height: 5px; /* גובה הפס השחור */ 
-    height: 2px; /* עובי הפס השחור */
-    background-color: black; /* צבע הפס השחור */ 
-    bottom: -130px; 
-} 
+    content: '';
+    /* תוספת של אלמנט ריק */
+    display: block;
+    /* הצגת האלמנט כבלוק */
+    position: absolute;
+    /* הפעלת מיקום יחסי אבסולוטי על האב */
+    left: 0;
+    /* מרכוז לשמאל */
+    bottom: 0;
+    /* מרכוז לתחתית */
+    width: 100%;
+    /* רוחב הפס השחור הוא 100% */
+    height: 5px;
+    /* גובה הפס השחור */
+    height: 2px;
+    /* עובי הפס השחור */
+    background-color: black;
+    /* צבע הפס השחור */
+    bottom: -130px;
+}
 
 .image-part {
     position: absolute;
-    top: 150px; /* מרחק מהחלק הכחול */
+    top: 150px;
+    /* מרחק מהחלק הכחול */
     left: 0;
     right: 0;
     bottom: 0;
@@ -32,34 +46,52 @@
 
 .image-part img {
     max-width: 100%;
-    max-height: 100%; 
-    width: 100%; /* התמונה תהיה רחבה לכל הרוחב שהגדרת */
-    height: auto; /* נשמר יחס הרוחב לגובה */
+    max-height: 100%;
+    width: 100%;
+    /* התמונה תהיה רחבה לכל הרוחב שהגדרת */
+    height: auto;
+    /* נשמר יחס הרוחב לגובה */
 }
+
 .clothes {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 עמודות בכל שורה */
-    gap: 20px; /* רווח בין התמונות */ 
+    /* תתן לכל תא רוחב של 186 פיקסל, ואם הוא צריך יותר מזה
+     (תמתח מעט את התאים עד שלבסוף תעלה תא אחד מלמטה לשורה זו (כאשר יהיה מקום לתא נוסף */
+    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+    gap: 20px;
+    /* רווח בין התמונות */
     margin-top: 800px;
 }
 
 .image-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* ליצור את התמונה והטקסט במרכז האנכי של הקונטיינר */
-    align-items: center; /* ליצור את התמונה והטקסט במרכז האופקי של הקונטיינר */
-    text-align: center; /* למרכז את הטקסט בתוך הקונטיינר */ 
+
+    justify-content: center;
+    /* ליצור את התמונה והטקסט במרכז האנכי של הקונטיינר */
+    align-items: center;
+    /* ליצור את התמונה והטקסט במרכז האופקי של הקונטיינר */
+    text-align: center;
+    /* למרכז את הטקסט בתוך הקונטיינר */
     position: relative;
-    overflow: hidden; /* כדי להסתיר תמונה שמתחרטת מחוץ לתיבת התמונה */
-    background-color: lightgray; /* הגדרת רקע אפור בהיר */
+    overflow: hidden;
+    /* כדי להסתיר תמונה שמתחרטת מחוץ לתיבת התמונה */
+    background-color: lightgray;
+    /* הגדרת רקע אפור בהיר */
 }
+
 .image-container img {
-    max-width: 100%; /* מקסימום רוחב של התמונה */
-    height: auto; /* שמירה על יחסיות */
-    display: block; /* מניעת רווחים מסביב לתמונה */
-    margin-bottom: 10px; /* רווח בין התמונה לטקסט */ 
-    width: 100%; /* שימוש ברוחב מקסימלי של התמונה בתיבה */
-} 
+    max-width: 100%;
+    /* מקסימום רוחב של התמונה */
+    height: auto;
+    /* שמירה על יחסיות */
+    display: block;
+    /* מניעת רווחים מסביב לתמונה */
+    margin-bottom: 10px;
+    /* רווח בין התמונה לטקסט */
+    width: 100%;
+    /* שימוש ברוחב מקסימלי של התמונה בתיבה */
+}
 
 .model-title {
     position: absolute;
@@ -67,33 +99,48 @@
     left: -500px;
     width: 100%;
     text-align: center;
-    color: rgb(255, 255, 255), 255; /* צבע הטקסט */
-    padding: 5px; /* ריווח פנימי */
-    font-weight: bold; /* דגש בטקסט */ 
-    font-size: 120px; 
+    color: rgb(255, 255, 255), 255;
+    /* צבע הטקסט */
+    padding: 5px;
+    /* ריווח פנימי */
+    font-weight: bold;
+    /* דגש בטקסט */
+    font-size: 120px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .item {
     background-color: #f2f2f2;
-    text-align: center; 
+    text-align: center;
 }
+
 .clothes img {
-    margin-bottom: 70px; /* מוסיף רווח של 70 פיקסלים מתחת לכל תמונה */ 
-    max-width: 100%; /* מקסימום רוחב של התמונה */
-    height: auto; /* שמירה על יחסיות */
-    display: block; /* מניעת רווחים מסביב לתמונה */
-    margin: 0 auto; /* מרכוז התמונה באופן אופקי */
+    margin-bottom: 70px;
+    /* מוסיף רווח של 70 פיקסלים מתחת לכל תמונה */
+    max-width: 100%;
+    /* מקסימום רוחב של התמונה */
+    height: auto;
+    /* שמירה על יחסיות */
+    display: block;
+    /* מניעת רווחים מסביב לתמונה */
+    margin: 0 auto;
+    /* מרכוז התמונה באופן אופקי */
 }
 
 .image-name {
-    text-align: center; /* מירכוז הטקסט */
+    text-align: center;
+    /* מירכוז הטקסט */
 }
-.price { 
-    text-align: center; /* מירכוז הטקסט */
+
+.price {
+    text-align: center;
+    /* מירכוז הטקסט */
 
 }
+
 img {
-    width: 80%; /* קטן את הרוחב של התמונה ל-80% מהרוחב המקורי */
-    height: auto; /* יחסיות בין הרוחב לגובה */ 
+    width: 80%;
+    /* קטן את הרוחב של התמונה ל-80% מהרוחב המקורי */
+    height: auto;
+    /* יחסיות בין הרוחב לגובה */
 }
