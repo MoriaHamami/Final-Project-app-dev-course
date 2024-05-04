@@ -1,0 +1,85 @@
+.home {
+    background-color: var(--almost-white);
+}
+
+/* Align a large centered intro image in home page */
+.home .welcome {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: url('../imgs/home/bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.home .welcome button {
+    display: flex;
+    /* Make the button relative to the whole big image in the background */
+    position: relative;
+    /* Position the button in the lower part of the image in the bg */
+    top: 70vh;
+    height: fit-content;
+    padding: 10px 20px;
+    color: var(--almost-white);
+    background-color: var(--gold);
+    border-radius: 10px;
+    border: 1px solid var(--almost-white);
+}
+
+.home .welcome button:hover {
+    background-color: var(--l-gold);
+}
+
+/* Remove default p tag margin */
+.home .welcome button p {
+    margin: 0;
+}
+
+/* SLIDER STYLING */
+
+.home .carousel{
+    width: 500px;
+}
+
+/* Center the slider */
+.home .slider {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Give a height to each slider img */
+.home .carousel-inner img {
+    height: 500px;
+}
+
+/* Style side buttons in slider */
+.home .change-slide-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: var(--l-gray);
+}
+
+/* Style bottom navigation buttons in slider */
+.home .carousel-indicators{
+    position: absolute;
+    bottom: -40px;
+    background-color: var(--ll-gray);
+    border-radius: 30px;
+}
+
+/* Style text in slider */
+.home .carousel-caption{
+    text-shadow: var(--dark-txtsh);
+    color: black;
+    background-color: #ffffffb9;
+    border-radius: 20px;
+}

@@ -1,7 +1,7 @@
 const articlesModel = require('../models/articles')
 
-function getAllArticles(req, res) {
-    const articles =  articlesModel.getAllArticles()
+async function getAllArticles(req, res) {
+    const articles =  await articlesModel.getAllArticles()
     res.render('articles.ejs',{articles})
 }
 
@@ -16,7 +16,8 @@ function deleteArticle(req, res) {
     const articleId = req.query.id
     articlesModel.deleteArticle(articleId)
     // TODO : Remove query in path so it wont keep on deleting with each refresh
-    getAllArticles(req, res)
+    // getAllArticles(req, res)
+    res.redirect('/')
 }
 
 module.exports = {

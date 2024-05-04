@@ -1,6 +1,5 @@
 const express = require('express')
-const articleController = require('./controllers/articles')
-
+const articlesRoutes = require('./routes/articles')
 // Create the server
 const server = express()
 
@@ -8,9 +7,6 @@ const server = express()
 // will be given if nothing else is requested
 server.use(express.static('public'))
 
-// Routes
-server.get('/', articleController.getAllArticles)
-server.get('/article', articleController.getArticle)
-server.get('/deleteArticle', articleController.deleteArticle)
+server.use("/", articlesRoutes)
 
 server.listen(80)

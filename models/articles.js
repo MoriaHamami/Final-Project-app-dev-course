@@ -4,8 +4,16 @@ const articles = [
 ]
 
 
-function getAllArticles() {
-    return articles
+async function getAllArticles() {
+    // return articles
+
+    const {MongoClient} = require('mongodb')
+    // Connect URI
+    const uri = 'mongodb://127.0.0.1:27017/'
+    const client = new MongoClient(uri)
+    await client.connect()
+    const articles = await client.db('RealMadrid').collection('articles').find()
+    return articles.toArray()
 }
 
 function getArticle(id) {
