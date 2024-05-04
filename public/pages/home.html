@@ -11,8 +11,10 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="../styles/css/setup/font-face.css">
     <link rel="stylesheet" href="../styles/css/setup/vars.css">
     <link rel="stylesheet" href="../styles/css/footer.css">
     <link rel="stylesheet" href="../styles/css/header.css">
@@ -57,41 +59,50 @@
             </button>
         </section>
 
-        <!-- <section class="team-slide">
-            <h1>OUR TEAM MEMBERS</h1>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
+        <section class="slider">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../styles/imgs/home/player1.png" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-md-block">
+                            <h5>Daniel Holgon</h5>
+                            <p>Our lead player with 12 gold medals.</p>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
+                    <div class="carousel-item">
+                        <img src="../styles/imgs/home/player1.png" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-md-block">
+                            <h5>Daniel Holgon</h5>
+                            <p>Our lead player with 12 gold medals.</p>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../styles/imgs/home/player1.png" />
+                    <div class="carousel-item">
+                        <img src="../styles/imgs/home/player1.png" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-md-block">
+                            <h5>Daniel Holgon</h5>
+                            <p>Our lead player with 12 gold medals.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-pagination"></div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="change-slide-button">
+
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="change-slide-button">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </section> -->
+        </section>
 
     </main>
 
@@ -103,27 +114,28 @@
         </div>
         <nav class="pages">
             <div class="start">
-                <a>Home</a>
-                <a>Shop</a>
-                <a>Log In</a>
-                <a>Cart</a>
+                <a href="./home.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="./cart.html">Cart</a>
+                <a href="login.html">Log In</a>
+                <a href="account.html">My Account</a>
             </div>
             <div class="end">
-                <a>Tickets</a>
-                <a>New</a>
-                <a>About</a>
-                <a>Contact Us</a>
+                <a href="tickets.html">Tickets</a>
+                <a href="news.html">News</a>
+                <a href="about.html">About Us</a>
+                <a href="about.html">Contact Us</a>
             </div>
         </nav>
         <nav class="sponsors">
-            <a><img src="../styles/imgs/footer/mahou-logo.png" alt="Mahou"></a>
-            <a><img src="../styles/imgs/footer/bmw-logo.png" alt="BMW"></a>
-            <a><img src="../styles/imgs/footer/ea-logo.png" alt="EA sports"></a>
-            <a><img src="../styles/imgs/footer/abbot-logo.png" alt="Abbot"></a>
-            <a><img src="../styles/imgs/footer/nivea-logo.png" alt="Nivea Men"></a>
-            <a><img src="../styles/imgs/footer/adobe-logo.svg" alt="Adobe"></a>
-            <a><img src="../styles/imgs/footer/zegna-logo.png" alt="ZEGNA"></a>
-            <a><img src="../styles/imgs/footer/canon-logo.png" alt="Canon"></a>
+            <a href="https://www.mahou.com/en/"><img src="../styles/imgs/footer/mahou-logo.png" alt="Mahou"></a>
+            <a href="https://www.bmw.com/en/index.html"><img src="../styles/imgs/footer/bmw-logo.png" alt="BMW"></a>
+            <a href="https://www.ea.com/"><img src="../styles/imgs/footer/ea-logo.png" alt="EA sports"></a>
+            <a href="https://www.abbott.com/"><img src="../styles/imgs/footer/abbot-logo.png" alt="Abbott"></a>
+            <a href="https://www.nivea.com/"><img src="../styles/imgs/footer/nivea-logo.png" alt="Nivea Men"></a>
+            <a href="https://get.adobe.com/reader/"><img src="../styles/imgs/footer/adobe-logo.svg" alt="Adobe"></a>
+            <a href="https://www.zegna.com/us-en/"><img src="../styles/imgs/footer/zegna-logo.png" alt="ZEGNA"></a>
+            <a href="https://www.zegna.com/us-en/"><img src="../styles/imgs/footer/canon-logo.png" alt="Canon"></a>
         </nav>
         <nav class="contact">
             <a href="https://www.facebook.com/RealMadrid/" title="Facebook"><img
@@ -149,7 +161,15 @@
     </footer>
 
     <!-- Libraries  -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

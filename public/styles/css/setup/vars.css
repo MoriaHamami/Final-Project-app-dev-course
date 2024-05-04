@@ -1,11 +1,17 @@
 :root {
     /* colors */
     --almost-white: whitesmoke;
-    /* --l-yellow: rgb(251, 252, 219); */
-    --l-gray: rgb(219, 219, 219);
+    /* --l-gray: rgb(219, 219, 219); */
+    --ll-gray:rgb(224, 224, 224);
+    --l-gray:rgb(207, 207, 207);
     --m-gray: rgb(235, 235, 235);
+    --gold: rgb(254, 190, 16);
+    --l-gold: rgb(255, 204, 62);
+    --red: rgb(238, 50, 78);
+    --blue: rgb(0, 82, 159);
 
     /* shadows */
     --bsh: 1px 1px 4px 0px #00000028;
     --txtsh: 0px 0px 2px #00000032;
+    --dark-txtsh: 0px 0px 2px #00000192;
 }

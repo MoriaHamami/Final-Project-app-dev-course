@@ -1,22 +1,14 @@
 /* CHANGE */
-@font-face {
-    font-family: boldTitle;
-    src: url('../fonts/Assistant-Bold.ttf');
+
+
+.home {
+    background-color: var(--almost-white);
 }
 
-.home{
-    /* CHANGE */
-    /* background-color: var(--almost-white); */
-    background-color: whitesmoke;
-    /* overflow-x: hidden; */
-}
 .home .welcome {
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     position: relative;
-    /* height: fit-content; */
-    /* overflow: hidden; */
     height: 100vh;
     width: 100%;
     background-image: url('../imgs/home/bg.png');
@@ -25,12 +17,6 @@
     background-size: cover;
 }
 
-/* .home .welcome img {
-    height: 100vh;
-    
-    position: absolute;
-} */
-
 .home .welcome button {
     position: relative;
     top: 70vh;
@@ -38,74 +24,58 @@
     display: flex;
     padding: 10px 20px;
     border-radius: 10px;
-    /* height: fit-content; */
-    /* CHANGE */
-    /* color: var(--almost-white); */
-    color: white;
-
-    /* CHANGE */
-    /* border: 1px solid var(--almost-white); */
-    border: 3px solid white;
-
-    /* CHANGE */
-    /* color: var(--gold); */
-    background-color: rgb(254, 190, 16);
-
+    color: var(--almost-white);
+    border: 1px solid var(--almost-white);
+    background-color: var(--gold);
 }
 
 .home .welcome button:hover {
-    /* CHANGE */
-    /* color: var(--l-gold); */
-    background-color: rgb(255, 204, 62);
+    background-color: var(--l-gold);
 }
-/* .home .welcome button:hover i{
-    margin-left: 10px;
-} */
 
 .home .welcome button p {
     margin: 0;
-
 }
 
-
-/* .home .team-slide {
-width: 100%;
-overflow: hidden;
-} */
-
-/* .home .team-slide h1:hover {
-        // CHANGE
-    // color: linear-gradient(to bottom right, var(--red), var(--blue), var(--gold)); 
-    background: linear-gradient(90deg, rgb(238, 50, 78), rgb(0, 82, 159), rgb(254, 190, 16));
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+.home .carousel{
+    width: 500px;
 }
 
-.home .team-slide h1 {
-    text-align: center;
-
-    font-family: boldTitle;
-    font-size: 600%;
-
-
-    font-weight: bold;
+.home .slider {
+    position: relative;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.home .swiper {
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
+.home .carousel-item  {
+    height: 500px;
 }
 
-.home .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 40vw;
+.home .carousel-inner img {
+    height: 500px;
 }
 
-.home .swiper-slide img {
-    width: 100%;
+.home .change-slide-button {
+    background-color: var(--l-gray);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
- */
+.home .carousel-indicators{
+    position: absolute;
+    bottom: -40px;
+    background-color: var(--ll-gray);
+    border-radius: 30px;
+}
+
+.home .carousel-caption{
+    text-shadow: var(--dark-txtsh);
+    color: black;
+    background-color: #ffffffb9;
+    border-radius: 20px;
+}
