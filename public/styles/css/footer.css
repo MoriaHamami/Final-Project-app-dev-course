@@ -24,6 +24,7 @@ footer {
     overflow: hidden;
 }
 
+/* Lines surrounding moving words in footer */
 footer .words-border {
     margin: 20px 0;
     height: 3px;
@@ -31,23 +32,31 @@ footer .words-border {
     background: linear-gradient(90deg, var(--red), var(--blue), var(--gold));
 }
 
+/* Moving words in footer */
 footer .words {
+    position: relative;
     font-size: 800%;
     width: max-content;
-    position: relative;
     animation: move-words 20s linear infinite;
     margin: 0;
+
+    /* Giving words a gradient color */
+    /* First, create a gradient background */
     background: linear-gradient(90deg, var(--red), var(--blue), var(--gold));
+    /* Fill the text with the gradient background */
     -webkit-background-clip: text;
+    /* Turn the whole gradient-background transparent */
     -webkit-text-fill-color: transparent;
 }
 
+/* Every section in footer */
 footer nav {
+    display: flex;
     margin-inline: 30px;
     font-weight: bold;
-    display: flex;
 }
 
+/* The list of pages in the website */
 footer .pages {
     display: flex;
     flex-direction: row;
@@ -65,24 +74,14 @@ footer .pages a:hover {
     opacity: 0.8;
 }
 
+/* Create two columns in footer pages list */
 footer .pages .start,
 footer .pages .end {
     display: flex;
     flex-direction: column;
 }
 
-footer .pages .end {
-    margin-inline-end: 30px;
-}
-
-footer .logo {
-    text-align: center;
-}
-
-footer .logo img {
-    height: 100px;
-}
-
+/* Sponsors icon will have a seperating line from social media */
 footer .sponsors {
     border-bottom: 1px solid gray;
 }
@@ -101,5 +100,14 @@ footer .contact img {
     cursor: pointer;
     height: 40px;
     padding: 10px;
+    /* The height of the img wont include the padding */
     box-sizing: content-box;
+}
+
+footer .logo {
+    text-align: center;
+}
+
+footer .logo img {
+    height: 100px;
 }

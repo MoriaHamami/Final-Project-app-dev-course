@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Proj</title>
 
-    <!-- Libraries -->
+    <!-- LIBRARIES -->
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+    <!-- CSS local files -->
     <link rel="stylesheet" href="../styles/css/setup/font-face.css">
     <link rel="stylesheet" href="../styles/css/setup/vars.css">
     <link rel="stylesheet" href="../styles/css/footer.css">
@@ -24,8 +25,10 @@
 
 <body>
 
+    <!-- Dark screen during header dropdown -->
     <div class="dark-screen" onclick="onToggleMenu()"></div>
 
+    <!-- Header section -->
     <header>
         <section class="start-icons">
             <a href="./home.html"><img class="logo" src="../styles/imgs/header/real-madrid-logo.png"></a>
@@ -37,14 +40,12 @@
         </section>
 
         <section class="end-icons">
-
-            <a class="cart-btn"><i class="bi bi-bag"></i>
+            <a class="cart-btn" href="cart.html"><i class="bi bi-bag"></i>
                 <p>Cart</p>
             </a>
-            <a class="signin-btn"><i class="bi bi-person"></i>
+            <a class="signin-btn" href="login.html"><i class="bi bi-person"></i>
                 <p>Sign in</p>
             </a>
-
             <button class="menu-toggle-btn" onclick="onToggleMenu()"><i class="bi bi-list"></i>
             </button>
         </section>
@@ -52,20 +53,23 @@
 
     <main class="home">
 
+        <!-- Welcome section in home -->
         <section class="welcome">
-            <!-- <img src="../styles/imgs/home/bg.png" alt="welcome"> -->
             <button>
                 <p>SHOP NOW</p> <i class="bi bi-arrow-right"></i>
             </button>
         </section>
 
+        <!-- Bootstrap carousel section in home -->
         <section class="slider">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <!-- Slider bottom navigation indicator -->
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                 </ol>
+                <!-- Slider images and text boxes -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="../styles/imgs/home/player1.png" class="d-block w-100" alt="...">
@@ -89,6 +93,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Slider side navigation buttons -->
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                     <span class="change-slide-button">
 
@@ -106,12 +111,15 @@
 
     </main>
 
+    <!-- Footer section -->
     <footer>
+        <!-- Moving words on screen -->
         <div class="words-border">
         </div>
         <h1 class="words">Hala Madrid, y nada más</h1>
         <div class="words-border">
         </div>
+        <!-- Pages list in footer -->
         <nav class="pages">
             <div class="start">
                 <a href="./home.html">Home</a>
@@ -127,6 +135,7 @@
                 <a href="about.html">Contact Us</a>
             </div>
         </nav>
+        <!-- Sponsors icons in footer -->
         <nav class="sponsors">
             <a href="https://www.mahou.com/en/"><img src="../styles/imgs/footer/mahou-logo.png" alt="Mahou"></a>
             <a href="https://www.bmw.com/en/index.html"><img src="../styles/imgs/footer/bmw-logo.png" alt="BMW"></a>
@@ -137,6 +146,7 @@
             <a href="https://www.zegna.com/us-en/"><img src="../styles/imgs/footer/zegna-logo.png" alt="ZEGNA"></a>
             <a href="https://www.zegna.com/us-en/"><img src="../styles/imgs/footer/canon-logo.png" alt="Canon"></a>
         </nav>
+        <!-- Social Media icons in footer -->
         <nav class="contact">
             <a href="https://www.facebook.com/RealMadrid/" title="Facebook"><img
                     src="../styles/imgs/footer/facebook-logo.png" alt="Facebook"></a>
@@ -160,19 +170,17 @@
         </div>
     </footer>
 
-    <!-- Libraries  -->
+    <!-- LIBRARIES  -->
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- JS local files -->
     <script src="../js/utils.js"></script>
     <script src="../js/home.js"></script>
 

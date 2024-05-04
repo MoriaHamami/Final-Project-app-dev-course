@@ -2,47 +2,47 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  top: 0;
+
   background-color: var(--almost-white);
   border-bottom: 1px solid rgba(140, 140, 140, 0.384);
+
   height: 100px;
-  position: fixed;
   width: 100%;
-  z-index: 3;
+  padding: 30px;
+
+  /* Stay at the top always */
+  position: fixed;
+  top: 0;
+
+  /* Make the header appear above all elemnts */
+  z-index: 16;
 }
 
-header .end-icons {
-  display: flex;
-}
-
-header nav a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-
+/* Remove a tags default styling */
 header nav a {
   text-decoration: none;
   color: inherit;
 }
 
-header .signin-btn,
-header .cart-btn,
-header .menu-toggle-btn {
-  align-self: center;
+/* Remove a tags default styling */
+header nav a:hover {
+  color: inherit;
+  text-decoration: none;
 }
 
-header .start-icons {
+header .start-icons,
+header .end-icons {
   display: flex;
   align-items: center;
 }
 
 header .logo {
-  margin: auto 0 auto 30px;
-  height: 50px;
   cursor: pointer;
+  height: 50px;
   border-radius: 50%;
 }
 
+/* Remove default margin in p tag */
 header .signin-btn p,
 header .cart-btn p {
   margin: 0;
@@ -54,15 +54,14 @@ header .signin-btn i {
 
 header .signin-btn,
 header .cart-btn {
-  margin-inline-end: 10px;
-  background: none;
-  border-radius: 8px;
-  border: none;
-  padding: 3px 10px;
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
   text-align: center;
+  margin-inline-end: 10px;
+  padding: 3px 10px;
+  background: none;
+  /* Remove a tag default styling */
+  color: inherit;
+  text-decoration: none;
 }
 
 header .signin-btn:hover,
@@ -71,40 +70,37 @@ header .cart-btn:hover {
   color: var(--blue);
 }
 
-header .signin-btn {
-  margin: auto 30px auto 0;
-
-}
-
 /* MOBILE */
 @media (max-width: 600px) {
 
-  header .start-icons {
-    width: 100%;
+  .menu-toggle-btn{
+    position: relative;
   }
 
-  header .signin-btn p,
-  header .cart-btn p {
-    display: none;
-  }
-
+  /* In small screens create a dropdown effect */
   header nav {
-    text-align: center;
-    display: flex;
+    /* Start the dropdown below the header */
     position: absolute;
     top: 100px;
-    transform: translateY(0%);
-    width: 100%;
+    /* Position the items in the dropdown */
+    display: flex;
     flex-direction: column;
-    background: #292929f7;
-    max-height: 0;
     justify-content: flex-end;
-    overflow: hidden;
+    text-align: center;
+    width: 100%;
+/* Give dropdown no height at first for later transition */
+    max-height: 0;
+    transform: translateY(0%);
     transition: max-height 0.6s;
+    overflow: hidden;
   }
 
   body.menu-open nav {
     max-height: 100vh;
+  }
+
+  header .start-icons {
+    width: 100%;
   }
 
   header nav a {
@@ -123,6 +119,12 @@ header .signin-btn {
     cursor: auto;
   }
 
+  /* Remove text in sign in and cart buttons for minimal display */
+  header .signin-btn p,
+  header .cart-btn p {
+    display: none;
+  }
+
   .dark-screen {
     position: fixed;
     inset: 0;
@@ -131,7 +133,7 @@ header .signin-btn {
     opacity: 0;
     transition: opacity 0.6s;
     pointer-events: none;
-    z-index: 1;
+    z-index: 16;
   }
 
   body.menu-open .dark-screen {
@@ -143,22 +145,17 @@ header .signin-btn {
     background: none;
     border: none;
     font-size: 30px;
-    margin: auto 30px auto 0;
   }
 
   .menu-toggle-btn:hover {
     color: var(--blue);
   }
-
 }
 
 /* TABLET */
 @media (min-width: 600px) {
 
   header {
-    top: auto;
-    width: auto;
-    position: static;
     height: 73px;
   }
 
@@ -181,16 +178,5 @@ header .signin-btn {
   .menu-toggle-btn,
   .dark-screen {
     display: none;
-  }
-}
-
-/* DESKTOP */
-@media (min-width: 970px) {
-  header .logo {
-    margin: auto 0 auto 81px;
-  }
-
-  header nav {
-    margin: auto 263px auto 0;
   }
 }
