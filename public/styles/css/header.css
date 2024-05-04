@@ -6,7 +6,7 @@ header {
   background-color: var(--almost-white);
   border-bottom: 1px solid rgba(140, 140, 140, 0.384);
 
-  height: 100px;
+  height: 73px;
   width: 100%;
   padding: 30px;
 
@@ -30,6 +30,11 @@ header nav a:hover {
   text-decoration: none;
 }
 
+/* For the page we are on, make the a tag in the header seem unclickable */
+header nav a.active {
+  cursor: default;
+}
+
 header .start-icons,
 header .end-icons {
   display: flex;
@@ -40,6 +45,7 @@ header .logo {
   cursor: pointer;
   height: 50px;
   border-radius: 50%;
+  margin-inline-end: 10px;
 }
 
 /* Remove default margin in p tag */
@@ -70,11 +76,24 @@ header .cart-btn:hover {
   color: var(--blue);
 }
 
-/* MOBILE */
+/* SMALL SCREENS */
 @media (max-width: 600px) {
 
-  .menu-toggle-btn{
-    position: relative;
+  /* Make the height of the header bigger in small screens */
+  header {
+    padding: 0;
+    height: 100px;
+  }
+
+  /* Menu icon styling */
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+  }
+
+  .menu-toggle-btn:hover {
+    color: var(--blue);
   }
 
   /* In small screens create a dropdown effect */
@@ -88,35 +107,35 @@ header .cart-btn:hover {
     justify-content: flex-end;
     text-align: center;
     width: 100%;
-/* Give dropdown no height at first for later transition */
+    /* Give dropdown no height at first for later transition */
     max-height: 0;
-    transform: translateY(0%);
+    /* When the height changes, change it slowly and gradually */
     transition: max-height 0.6s;
+    /* Dont show the dropdown hidden over the header */
     overflow: hidden;
   }
 
   body.menu-open nav {
+    /* When dropdown is selected to open, change gradually the height */
+    transition: max-height 0.6s;
     max-height: 100vh;
   }
 
-  header .start-icons {
-    width: 100%;
-  }
-
   header nav a {
-    padding: 1rem 0;
+    padding: 16px 0;
     border: none;
     background-color: var(--almost-white);
     border-bottom: 1px solid rgb(218, 218, 218);
   }
 
+  /* For each page (except the one we are on), give darker background on hover */
   header nav a:hover:not(.active) {
     background-color: var(--m-gray);
   }
 
+  /* The page we are on must have a darker background in dropdown, to seem selected */
   header nav a.active {
     background-color: var(--l-gray);
-    cursor: auto;
   }
 
   /* Remove text in sign in and cart buttons for minimal display */
@@ -127,54 +146,44 @@ header .cart-btn:hover {
 
   .dark-screen {
     position: fixed;
+    cursor: pointer;
+    /* Center the dark screen (= top: 0, bottom: 0, left: 0, right: 0) */
     inset: 0;
     background-color: black;
-    cursor: pointer;
+    /* Change opacity gradually when appearing and disappearing */
     opacity: 0;
     transition: opacity 0.6s;
-    pointer-events: none;
+    /* Show infront of everything (except the header) */
     z-index: 16;
+    /* When the darkscreen isnt seen, dont trigger its pointer events */
+    pointer-events: none;
   }
 
+  /* Make the dark screen seen when the menu is open and trigger its pointer events */
   body.menu-open .dark-screen {
     pointer-events: auto;
     opacity: 1;
   }
-
-  .menu-toggle-btn {
-    background: none;
-    border: none;
-    font-size: 30px;
-  }
-
-  .menu-toggle-btn:hover {
-    color: var(--blue);
-  }
 }
 
-/* TABLET */
+/* WIDE SCREENS */
 @media (min-width: 600px) {
 
-  header {
-    height: 73px;
-  }
-
+  /* Underline the page we are on in the header */
   header nav a.active {
-    border: none;
-    margin: 0.25em 0.8em;
     border-bottom: 1px solid black;
-    cursor: default;
   }
 
-  header nav a:not(.active) {
-    margin: 0.25em 0.8em;
+  /* Space the a tags in the header nav */
+  header nav a {
+    margin: 0 10px;
   }
 
   header .header-btn:not(.active):hover {
     text-shadow: var(--dark-txtsh);
-
   }
 
+  /* Dont show the dark screen in wide screens */
   .menu-toggle-btn,
   .dark-screen {
     display: none;
