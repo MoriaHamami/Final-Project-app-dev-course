@@ -1,0 +1,257 @@
+
+body {
+    background: linear-gradient(to right, #ededed, #b8b8b8); /* הגדרת גרדיאנט עם כיוון משמאל לימין עם צבעים אפורים */
+}
+
+
+#imgheader {  
+    position: relative; 
+    width: 100%;
+    height: 50vh; /* 50% מגובה המסך */
+    overflow: hidden; 
+}
+
+#headerimg {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transform: translateY(-30%);
+}
+    
+
+.title {
+    position: absolute;
+    top: 50%; /* מיקום אנכי מחזיק באמצע המסך */
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ececec;
+    text-align: center;
+    letter-spacing: 4px;
+    z-index: 999;
+    background-color: #161b79; /* צבע רקע */
+    padding: 5px;
+    padding-left: 14px;
+    padding-right: 10px;
+    border-radius: 4px;
+}
+
+#whoarewe {
+    border: none; 
+    padding: 20px; 
+    margin: 55px ; 
+    margin-top: 40px;
+    margin-left: 75px;
+    width: 55%;
+
+}
+
+#whoarewe p1 {
+    font-size:xx-large;
+    font-weight: bold;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 2px gray;
+  }
+  
+
+  #whoarewe p2 {
+    margin-top: 7px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  }
+
+  .font{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+    text-shadow: none;
+    letter-spacing: normal;
+  }
+  
+
+#pictures {
+    max-width: 35%; /* קובע את הרוחב המרבי של ה־section ל־90% מרוחב החלון */
+    margin: 55px auto; /* מרכז את ה־section באופן אופקי */
+    margin-top: -45%; /* מרווח מלמעלה */
+    margin-right: 3%;
+    float: right; /* הידוק האלמנט לצד ימין */
+}
+
+#carouselExampleSlidesOnly {
+    width: 100%; /* קרוסלה ברוחב של 40% מהמסך */
+
+}
+
+.carousel-item img {
+    max-width: 100%; /* הגדרת גודל מרבי לתמונה */
+    max-height: 100%; /* הגדרת גודל מרבי לתמונה */
+    width: auto; /* הגדרת רוחב אוטומטי */
+    height: auto; /* הגדרת גובה אוטומטי */
+    border-radius: 5px;
+}
+
+
+
+#innumbers {
+    background: rgb(255, 230, 67); /* צבע רקע בסיסי */
+    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); /* גרדיאנט */
+    padding: 30px;
+}
+
+#innumbers h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(25, 25, 123);
+}
+
+#titlesCard span {
+    margin-right: ; /* יצירת רווח בין הספאנים */
+    margin-left: 109px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
+    font-weight: bold;
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 111px;
+    
+}
+
+.card {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    perspective: 1000px;
+    background: rgb(255, 230, 67); /* צבע רקע בסיסי */
+    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); /* גרדיאנט */
+    border: none;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background-color: #f0f0f0;
+    border:solid 5px #161b79;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-back {
+    background-color:#f0f0f0;
+    border-radius: 20px;
+    border:solid 5px #161b79;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotateY(180deg);
+  
+}
+
+.card img {
+    width: 80px;
+    height: auto;
+    object-fit:cover; /* תמונה תואמת את גודל המרחב בלי לשנות את יחסי היחס */
+    border-radius: 5px;
+    
+}
+
+
+.card p {
+    font-size: 3rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   
+}
+
+.card-back .side {
+    display: none;
+}
+
+.card:hover .card-back .side {
+    display: block;
+    padding: 20px;
+}
+
+
+
+
+#gallery {
+    display: flex; /* הצגת החלוניות בשורה */
+    flex-wrap: wrap; /* עטיפת שורה - החלוניות ימשיכו להציג כאשר הגודל מוגדר כמו ב־flexbox */
+    margin-left: 5%; /* מרווח משמאל */
+    margin-top: 10%; /* מרווח מלמעלה */
+    
+}
+
+
+.window {
+    width: 100px; /* רוחב קבוע של החלונית */
+    height: 100px; /* גובה קבוע של החלונית */
+    overflow: hidden; /* הסתרת התוכן החורג מהחלון */
+    transition: width 0.3s, height 0.3s; /* אנימציה כאשר החלונית מתרחבת */
+    margin-right: 20px; /* מרווח מימין בין החלוניות */
+    margin: 3%;
+}
+
+.window:hover {
+    width: 320px; /* רוחב החלונית כאשר העכבר עובר מעליה */
+    height: 400px; /* גובה החלונית כאשר העכבר עובר מעליה */
+}
+
+.window-content {
+    position: relative;
+}
+
+.window-content img {
+    display: block;
+    padding: 15px;
+    width: 100%; /* רוחב התמונה יהיה כמו רוחב החלונית */
+    height: 100%; /* גובה התמונה יהיה כמו גובה החלונית */
+}
+
+
+.window-content .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(239, 205, 52, 0.693); /* רקע שקוף לכיתוב */
+    color: #082b83; /* צבע טקסט */
+    font-weight: bolder;
+    padding: 10px; /* מרווח פנימי לכיתוב */
+    transition: transform 0.3s; /* אנימציה כאשר הכיתוב מוצג */
+    transform: translateY(100%); /* הסתרת הכיתוב בתחילה */
+}
+
+.window:hover .caption {
+    transform: translateY(0); /* הצגת הכיתוב כאשר העכבר עובר מעליו */
+}
