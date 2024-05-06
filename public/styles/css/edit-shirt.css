@@ -1,0 +1,67 @@
+
+.color {
+    width: 30px; /* Increase the width */
+    height: 30px; /* Increase the height */
+    border: none; /* Remove button border */
+    margin: 5px; /* Spacing between buttons */
+    cursor: pointer;
+    outline: none;
+}
+.color-button {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    color: white; /* לשים צבע לטקסט שמתאים לרקע */
+}
+
+.color-palette .color {
+    width: 20px; /* רוחב הכפתור */
+    height: 20px; /* גובה הכפתור */
+    border: none; /* מחיקת הגבול של הכפתור */
+    margin: 5px; /* מרווח בין הכפתורים */
+    cursor: pointer;
+    outline: none;
+}
+
+.color-palette .color:hover {
+    opacity: 0.7; 
+
+} 
+#myCanvas {
+    border: none;
+    width: 300px; /* גודל ה-Canvas */
+    height: 300px; /* גובה ה-Canvas */
+    background-image: url('public/pages/photos/מסגרת לתמונה.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    
+}
+#saveBtn,
+#undoBtn,
+#redoBtn,
+#clearBtn,
+#colorBtn,
+#colorShirt,
+#addTextBtn , 
+#textInput {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 5px; 
+    margin-left: 500px; 
+
+}
+.btn-custom {
+    font-size: 18px; /* גודל פונט */
+    padding: 10px 20px; /* גודל הכפתור */
+    margin: 5px; /* מרווח בין הכפתורים */
+}
+ .edit-shirt { 
+    width: 100px;
+    margin-left: 500px; 
+    margin-top: 50px; /* הוסף מרווח למעלה */
+}
