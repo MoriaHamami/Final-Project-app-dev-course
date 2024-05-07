@@ -16,18 +16,21 @@
 
 <body>
 
-    <main class="edit-shirt">
-        <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000; background-image: url('../path/to/shirt/image.png'); background-size: cover;"></canvas>
-        <button id="saveBtn">save</button>
-        <button id="undoBtn">back</button>
-        <button id="redoBtn">forward</button>
-        <button id="clearBtn">restart</button> 
+    <main> 
+       
+    <main>
+        <div class="container">
+            <div class="edit-shirt">
+                <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000; background-image: url('public/מסגרת לתמונה.png'); background-size: cover;"></canvas>
+            </div>
+            <div class="buttons-container">
+                <button id="saveBtn">save</button>
+                <button id="undoBtn">back</button>
+                <button id="redoBtn">forward</button>
+                <button id="clearBtn">restart</button>
 
-
-
-        <button id="colorBtn">בחר צבע</button>
-        <div id="colorPicker" style="display: none;">
-
+                <button id="colorBtn">בחר צבע</button>
+                <div id="colorPicker" style="display: none;">
             <button class="color" style="background-color: red;" onclick="setColor('red');"></button>
             <button class="color" style="background-color: blue;" onclick="setColor('blue');"></button>
             <button class="color" style="background-color: green;"onclick="setColor('green');"></button>
@@ -58,14 +61,35 @@
 
         </div> 
         <input type="text" id="textInput">
-        <button id="addTextBtn">הוסף טקסט</button>
+        <button id="addTextBtn">הוסף טקסט</button> 
+    </div> 
+</div> 
 
             </main>
 
     <!-- Libraries  -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="../js/edit-shirt.js"></script>
+    <script src="../js/edit-shirt.js"></script> 
+    <script>
+        function drawShirtFrame() {
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+    
+            // הוסף כאן קוד לציור התמונה על הקנבס
+            var shirtImage = new Image();
+            shirtImage.src = 'public/מסגרת לתמונה.png'; // נניח שזה הנתיב לתמונה שלך
+            shirtImage.onload = function() {
+                // ציור התמונה על ה-Canvas
+                ctx.drawImage(shirtImage, 0, 0, canvas.width, canvas.height); // אפשר לשנות את המיקום והגודל כרצונך
+            };
+        }
+    
+        window.addEventListener('load', function() {
+            drawShirtFrame();
+        });
+    </script>
+    
 
 </body>
 
