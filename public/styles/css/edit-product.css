@@ -1,11 +1,9 @@
-/* .edit-product .edit-actions */
-/* .edit-product .edit-txt */
 .edit-product {
     display: flex;
-    background-color: var(--almost-white);
     flex-wrap: wrap;
-    /* align-items: center; */
     justify-content: center;
+    /* Make background on whole page that is seen */
+    background-color: var(--almost-white);
     height: 100vh;
     overflow-y: scroll;
 }
@@ -18,17 +16,18 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--card-bsh);
+    /* Prevent sections from being smeared unnecessarily */
     height: min-content;
-
 }
 
-.edit-product .edit-sizes article{
-margin: 5px;
+.edit-product .edit-sizes article {
+    margin: 5px;
 }
 
-.edit-product .edit-sizes button{
-margin: 10px;
+.edit-product .edit-sizes button {
+    margin: 10px;
 }
+
 .edit-product .edit-imgs ul {
     display: flex;
     flex-wrap: wrap;
@@ -43,7 +42,8 @@ margin: 10px;
     border-radius: 5px;
     margin: 3px 2px;
 }
-.edit-product button:hover{
+
+.edit-product button:hover {
     background-color: var(--ll-gray);
 }
 
@@ -65,7 +65,7 @@ margin: 10px;
     padding: 5px 15px;
 }
 
-.edit-product input:focus{
+.edit-product input:focus {
     outline: none;
 }
 
