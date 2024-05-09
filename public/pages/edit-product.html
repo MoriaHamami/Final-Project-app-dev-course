@@ -18,7 +18,8 @@
 <body>
 
     <main class="edit-product">
-        <section class="edit-imgs">
+        <article class="edit-imgs">
+            <h3>Images</h3>
             <ul>
                 <li>
                     <img src="../styles/imgs/products/shirt.png">
@@ -36,43 +37,52 @@
                     <button>DELETE</button>
                 </li>
             </ul>
-        </section>
+            <button>
+                <i class="bi bi-plus"></i>
+                Add another image
+            </button>
+        </article>
 
-        <section class="edit-sizes">
-            <article>
+        <article class="edit-sizes">
+            <h3>Sizes</h3>
+
+            <section>
                 <input value="XL">
                 <button><i class="bi bi-trash"></i>
                 </button>
-            </article>
-            <article>
+            </section>
+            <section>
                 <input value="L">
                 <button><i class="bi bi-trash"></i>
                 </button>
-            </article>
-            <article>
+            </section>
+            <section>
                 <input value="M">
                 <button><i class="bi bi-trash"></i>
                 </button>
-            </article>
-            <article>
+            </section>
+            <section>
                 <input value="S">
                 <button><i class="bi bi-trash"></i>
                 </button>
-            </article>
-            <article>
+            </section>
+            <section>
                 <input value="XS">
                 <button><i class="bi bi-trash"></i>
                 </button>
-            </article>
+            </section>
 
             <button>
                 <i class="bi bi-plus"></i>
                 Add size
             </button>
-        </section>
+        </article>
 
-        <section class="edit-txt">
+        <article class="edit-txt">
+            <h3>Info</h3>
+
             <form>
+
                 <label>
                     Title
                     <input id="title" value="adidas Mens Pro UCL Training Shorts 23/24 Black">
@@ -84,7 +94,7 @@
 
                 <label>
                     Price
-                    <input id="price" value="110">
+                    <input id="price" type="number" value="110">
                 </label>
 
                 <label>
@@ -92,10 +102,12 @@
                     <input id="favePlayer" value="Courtois">
                 </label>
             </form>
-        </section>
+        </article>
 
 
-        <section class="edit-actions">
+        <article class="edit-actions">
+            <h3>Options</h3>
+
             <label>
                 Is sold out?
                 <input id="soldOut" type="checkbox">
@@ -103,7 +115,7 @@
 
             <button>Save Item</button>
             <button>Delete Item</button>
-        </section>
+        </article>
 
     </main>
 

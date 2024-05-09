@@ -8,7 +8,15 @@
     overflow-y: scroll;
 }
 
-.edit-product section {
+.edit-product h3:not(.edit-actions) {
+    margin: 5px;
+}
+
+.edit-product .edit-sizes input {
+    margin: 0;
+}
+
+.edit-product article {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -16,11 +24,11 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--card-bsh);
-    /* Prevent sections from being smeared unnecessarily */
+    /* Prevent articles from being smeared unnecessarily */
     height: min-content;
 }
 
-.edit-product .edit-sizes article {
+.edit-product .edit-sizes section {
     margin: 5px;
 }
 
@@ -79,4 +87,10 @@
 .edit-product img {
     height: 200px;
     border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+    .edit-product .edit-imgs h3 {
+        text-align: center;
+    }
 }
