@@ -1,0 +1,73 @@
+.edit-ticket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Make background on whole page that is seen */
+    background-color: var(--almost-white);
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.edit-ticket h3:not(.edit-actions) {
+    margin: 5px;
+}
+
+.edit-ticket article {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--card-bsh);
+    /* Prevent articles from being smeared unnecessarily */
+    height: min-content;
+}
+
+.edit-ticket button {
+    background-color: white;
+    border: 1px solid var(--l-gray);
+    border-radius: 5px;
+    margin: 3px 2px;
+}
+
+.edit-ticket button:hover {
+    background-color: var(--ll-gray);
+}
+
+.edit-ticket form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-ticket label {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.edit-ticket input {
+    margin-inline-start: 10px;
+    border: 1px solid var(--l-gray);
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
+.edit-ticket input:focus {
+    outline: none;
+}
+
+.edit-ticket li {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 5px;
+}
+
+.edit-ticket img {
+    height: 170px;
+    border-radius: 50%;
+}
+.edit-ticket .edit-txt #date{
+    width: 64%;
+}
