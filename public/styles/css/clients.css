@@ -1,0 +1,135 @@
+/* כללי */
+.clients .manager-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* טבלה */
+.clients .table-container {
+    overflow-x: hidden;
+    border: 1px solid black;
+    width: 60%;
+    height: 550px;
+}
+
+.clients table {
+    border-collapse: collapse;
+    margin: auto;
+    caption-side: top;
+    empty-cells: show;
+    table-layout: auto;
+}
+
+.clients th,
+.clients td {
+    padding: 15px;
+    text-align: center;
+    width: 15%;
+}
+
+.clients tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.clients .client-photo {
+    width: 80%;
+}
+
+.clients .nav-item {
+    width: 110%;
+    font-size: 80%;
+    display: flex;
+}
+
+.clients .nav-pills .nav-link.active,
+.clients .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3%;
+    background-color: rgba(188, 197, 190, 0.36);
+    color: black;
+}
+
+.clients .bi-bag-check-fill::before,
+.clients .delete_acc_btn {
+    font-size: 120%;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.clients .th,
+.clients .td,
+.clients .caption,
+.clients .nav-pills .nav-link.active,
+.clients .nav-link {
+    font-size: 16px;
+}
+
+.clients th:nth-child(6),
+.clients td:nth-child(6) {
+    width: 5%;
+}
+
+
+/* עגלת קניות - מועתק מהקוד של נועה עם התאמות */
+.clients .shopping-cart {
+    width: 500px;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+}
+
+.clients .product-container {
+    max-height: 350px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+.clients .product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #989696;
+    border-radius: 16px;
+}
+
+.clients .product-Price {
+    margin-top: -6px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+
+.clients .product img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.clients .product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.clients .product-info+.product-info {
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.clients #top-shopping-cart {
+    margin-top: 0rem !important;
+}
+
