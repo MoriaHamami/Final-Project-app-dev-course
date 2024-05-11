@@ -5,6 +5,23 @@ var undoStack = [];
 var redoStack = [];
 var currentColor = 'black'; // הגדרת צבע ברירת מחדל
 var toolbarOpen = false; // האם הסרגל כלים פתוח או סגור
+ 
+var img = new Image();
+
+// נקבע את נתיב התמונה
+img.src = 'public/js/מסגרת לתמונה2 .jpg';
+
+
+// מתייחסים לאירוע onload כדי לוודא שהתמונה נטענה לגמרי לפני ביצוע כל פעולה עליה
+img.onload = function() {
+    // הדפסת רוחב התמונה
+    console.log('Width: 500' + img.naturalWidth);
+    // הדפסת גובה התמונה
+    console.log('Height:500 ' + img.naturalHeight);
+
+    // ציור התמונה על ה-Canvas
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+};
 
 canvas.addEventListener('mousedown', function(event) {
     painting = true;
@@ -117,7 +134,7 @@ function drawShirtFrame() {
 
 // טעינת תמונת המסגרת
 var frameImage = new Image();
-frameImage.src = 'public/pages/photos/מסגרת לתמונה.png'; // כאן יש להזין את נתיב התמונה של המסגרת
+frameImage.src = 'public/js/מסגרת לתמונה2 .jpg'; // כאן יש להזין את נתיב התמונה של המסגרת
 
 // הוספת אירוע טעינת התמונה
 frameImage.onload = function() {
@@ -147,13 +164,6 @@ document.getElementById('colorShirt').addEventListener('click', function() {
     // החלפת תצוגת הכפתורים בין גלוי למוסתר
     colorShirtPicker.style.display = (colorShirtPicker.style.display === 'block') ? 'none' : 'block';
 });
-
-// פונקציה לשינוי צבע החולצה
-function changeShirtColor(color) {
-    // השמת צבע הרקע של המסגרת לצבע הנבחר
-    document.getElementById('myCanvas').style.backgroundColor = color;
-}
-
 
 // קוד כתיבת טקסט על החולצה
 function drawText(text) {
@@ -205,4 +215,3 @@ canvas.addEventListener('mousedown', function(event) {
 
     drawSketch(mouseX, mouseY);
 });
- 
