@@ -1,0 +1,200 @@
+/* כללי  */
+.account {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+ 
+    flex-direction: row;
+    flex-basis: auto;
+    
+} 
+
+/* personal data card */
+.account .personal_data {
+    border: 2px solid rgba(44, 105, 130, 0.519);
+    background-color: rgba(130, 198, 217, 0.382);
+    padding: 8%;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.account .account_details {
+    width: 25%;
+}
+
+.account .btn_account {
+    height: 8%;
+    width: 50%;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    font-size: 120%;
+    background-color: #c9c0c03c;
+    overflow: hidden;
+}
+
+.account img.user-image {
+    width: 60%;
+    margin-left: 25%;
+}
+
+/* history and favorite section */
+.account .mt-md-5 {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+}
+
+.account .tab-content mt-0 mt-md-5 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.account .tab-content>.active {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    height: 550px;
+    scrollbar-width: none;
+}
+
+.account .history-line {
+    margin-top: 30px;
+}
+
+/* מועדפים */
+.account .favorite_list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row wrap;
+}
+
+.account .card_product, .card_history {
+    flex: 1 1 20%;
+    padding: 3px;
+    border: 1px solid #736b6b;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1em;
+    background-color: white;
+    margin: 2% 1%;
+}
+
+.account .card-body {
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account .card-body i {
+    font-size: 16px;
+}
+
+.account .btn-primary, .see_product {
+    display: inline-block;
+    height: 10%;
+    font-size: 0.9em;
+}
+
+.account .product_btn {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.account .see_product {
+    height: 2%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 100%;
+    overflow: hidden;
+}
+
+.account i.bi.bi-heart-fill {
+    padding: 0;
+    cursor: pointer;
+}
+
+/* היסטוריית הזמנות  */
+.account .yourhistory {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-left: 5%;
+    border: 2px rgba(203, 236, 249, 0.519);
+    background-color: rgba(130, 198, 217, 0.382);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 0 10px;
+    max-height: 60%;
+    width: 62%;
+}
+
+.account .res_history {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    width: 80%;
+}
+
+
+.account .shopping-cart {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: hidden;
+    margin: 2% 0;
+}
+
+.account .product-container {
+    max-height: 350px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+.account .product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #989696;
+    border-radius: 16px;
+}
+
+.account .product-Price {
+    margin-top: -6px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+
+.account .product img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.account .product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.account .product-info+.product-info {
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 20px;
+}
