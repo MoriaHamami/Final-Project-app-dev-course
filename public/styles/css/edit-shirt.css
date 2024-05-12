@@ -1,0 +1,128 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    margin: 0;
+}
+canvas {
+    border: 1px solid black;
+}
+.color {
+    width: 30px; /* Increase the width */
+    height: 30px; /* Increase the height */
+    border: none; /* Remove button border */
+    margin: 5px; /* Spacing between buttons */
+    cursor: pointer;
+    outline: none;
+}
+.color-button {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    color: white; /* לשים צבע לטקסט שמתאים לרקע */
+}
+.color-palette {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-palette .color {
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+} 
+ 
+#colorPicker {
+    display: none;
+    position: absolute;
+    left: 50px;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+#colorPicker .color {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: block;
+}
+#colorShirtPicker {
+    display: none;
+    position: absolute;
+    left: 0; /* שינוי הערך של left ל-0 כדי להציב את האלמנט בקצה השמאלי של הכפתור */
+    right: calc(100% + 10px); /* הוספת מרווח מימין כדי להפריד את האלמנט מהכפתור */
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+#colorShirtPicker .color {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: block;
+}
+
+.color-palette .color:hover {
+    opacity: 0.7; 
+
+} 
+#myCanvas {
+    border: none;
+    width: 500px; /* גודל ה-Canvas */
+    height: 500px; /* גובה ה-Canvas */ 
+    background-image: url('public/מסגרת לתמונה.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    
+}
+#saveBtn,
+#undoBtn,
+#redoBtn,
+#clearBtn,
+#colorBtn,
+#colorShirt,
+#addTextBtn , 
+#textInput {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 5px; 
+    margin-left: -700px; 
+
+} 
+.btn-custom {
+    font-size: 18px; /* גודל פונט */
+    padding: 10px 20px; /* גודל הכפתור */
+    margin: 5px; /* מרווח בין הכפתורים */
+} .container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-shirt {
+    width: 300px;
+    height: 300px;
+    background-color: white; /* ללא גרשים סביב white */
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.edit-button {
+    margin-bottom: 10px;
+    width: 100px;
+}
