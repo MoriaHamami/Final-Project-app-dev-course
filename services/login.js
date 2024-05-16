@@ -1,7 +1,7 @@
-const User= require("../models/user");
+const User= require("../models/clients");
 
 async function login(username,password){
-    const user= await User.findOne({_id: username,password });
+    const user= await User.findOne({ username,password });
     return user !=null  //if the user correct it will be diffrent fron null and return true
 }
 
@@ -12,10 +12,9 @@ async function register(username, password, email) {
     }
 
     const user = new User({
-        _id: username,
-        password,
-        email
-    });
+        username,
+        password
+        });
 
     await user.save();
 }

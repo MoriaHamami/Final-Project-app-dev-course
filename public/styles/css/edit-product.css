@@ -55,7 +55,8 @@
     background-color: var(--ll-gray);
 }
 
-.edit-product form {
+.edit-product form,
+.edit-product .info {
     display: flex;
     flex-direction: column;
 }
