@@ -5,7 +5,7 @@ const productsController = require("../controllers/products")
 
 router.route('/edit/:id')
     .get(productsController.getProduct)
-    .patch(productsController.updateProduct)
+    .put(productsController.updateProduct)
 router.route('/edit')
     .get(productsController.getProduct)
     .post(productsController.createProduct)

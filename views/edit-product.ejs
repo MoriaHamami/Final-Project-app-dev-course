@@ -19,193 +19,114 @@
 
     <main class="edit-product">
 
-        <%if(product !=null){%>
-
-            <form method="PATCH" id="editProduct">
-                <article class="edit-imgs">
-                    <h3>Images</h3>
-                    <ul>
+        <!-- <form method="<%= (product !=null) ? 'PATCH' : 'POST'%>" id="editProduct" action="<%= (product !=null) ? ('/products/edit/'+product._id+'?_method=PUT') : ('/products/edit')%>"> -->
+        <form method="POST" id="editProduct" action="<%= (product !=null) ? '' : '/products/edit'%>">
+            <article class="edit-imgs">
+                <h3>Images</h3>
+                <ul>
+                    <%if(product !=null){%>
                         <% for(let i=0; i< product.srcImg.length; i++) { %>
-                            <li>
+                            <li id="<%=i%>">
                                 <img src="/styles/imgs/products/<%= product.srcImg[i] %>">
-                                <button>UPDATE</button>
-                                <button>DELETE</button>
+                                <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)" src="/styles/imgs/products/<%= product.srcImg[i] %>">
+                                <button type="button">UPDATE</button>
+                                </input>
+                                <button type="button">DELETE</button>
                             </li>
                             <%}%>
-                    </ul>
-                    <button>
-                        <i class="bi bi-plus"></i>
-                        Add another image
-                    </button>
-                </article>
 
-                <article class="edit-sizes">
-                    <h3>Sizes</h3>
-
-                    <section>
-                        <input value="XL">
-                        <button><i class="bi bi-trash"></i>
-                        </button>
-                    </section>
-                    <section>
-                        <input value="L">
-                        <button><i class="bi bi-trash"></i>
-                        </button>
-                    </section>
-                    <section>
-                        <input value="M">
-                        <button><i class="bi bi-trash"></i>
-                        </button>
-                    </section>
-                    <section>
-                        <input value="S">
-                        <button><i class="bi bi-trash"></i>
-                        </button>
-                    </section>
-                    <section>
-                        <input value="XS">
-                        <button><i class="bi bi-trash"></i>
-                        </button>
-                    </section>
-
-                    <button>
-                        <i class="bi bi-plus"></i>
-                        Add size
-                    </button>
-                </article>
-
-                <article class="edit-txt">
-                    <h3>Info</h3>
-
-                    <form>
-
-                        <label>
-                            Title
-                            <input id="title" value="<%= product.title %>">
-                        </label>
-                        <label>
-                            Color
-                            <input id="color" value="<%= product.color %>">
-                        </label>
-
-                        <label>
-                            Price
-                            <input id="price" type="number" value="<%= product.price %>">
-                        </label>
-
-                        <label>
-                            Fave Player
-                            <input id="favePlayer" value="<%= product.favePlayer %>">
-                        </label>
-                    </form>
-                </article>
+                                <%}else{%>
+                                    <li>
+                                        <img src="/styles/imgs/products/shirt.png">
+                                        <button>UPDATE</button>
+                                        <button>DELETE</button>
+                                    </li>
+                                    <%}%>
+                </ul>
+                <button onclick="addImg()">
+                    <i class="bi bi-plus"></i>
+                    Add another image
+                </button>
+            </article>
 
 
-                <article class="edit-actions">
-                    <h3>Options</h3>
+            <article class="edit-sizes">
+                <h3>Sizes</h3>
+                <%if(product !=null){%>
+                    <% for(let i=0; i< product.sizes.length; i++) { %>
+
+                        <section>
+                            <input value="<%= product.sizes[i] %>" name="sizes">
+                            <button><i class="bi bi-trash"></i>
+                            </button>
+                        </section>
+                        <%}%>
+
+                            <%}else{%>
+
+                                <section>
+                                    <input value="S">
+                                    <button><i class="bi bi-trash"></i>
+                                    </button>
+                                </section>
+                                <% } %>
+
+                                    <button>
+                                        <i class="bi bi-plus"></i>
+                                        Add size
+                                    </button>
+            </article>
+
+            <article class="edit-txt">
+                <h3>Info</h3>
+
+                <section class="info">
 
                     <label>
-                        Is sold out?
-                        <input id="soldOut" type="checkbox">
+                        Title
+                        <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title">
+                    </label>
+                    <label>
+                        Color
+                        <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color">
                     </label>
 
-                    <button type="submit">Save Item</button>
-                </article>
-            </form>
-            <% }else {%>
-                <form action="/products/edit" method="POST" id="addProduct">
+                    <label>
+                        Price
+                        <input id="price" type="number" value="<%= (product !=null) ? product.price : '' %>"
+                            name="price">
+                    </label>
 
-                    <article class="edit-imgs">
-                        <h3>Images</h3>
-                        <ul>
-                            <li>
-                                <img src="/styles/imgs/products/shirt.png">
-                                <button>UPDATE</button>
-                                <button>DELETE</button>
-                            </li>
-                        </ul>
-                        <button>
-                            <i class="bi bi-plus"></i>
-                            Add another image
-                        </button>
-                    </article>
-
-                    <article class="edit-sizes">
-                        <h3>Sizes</h3>
-
-                        <section>
-                            <input value="XL">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-                        <section>
-                            <input value="L">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-                        <section>
-                            <input value="M">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-                        <section>
-                            <input value="S">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-                        <section>
-                            <input value="XS">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-
-                        <button>
-                            <i class="bi bi-plus"></i>
-                            Add size
-                        </button>
-                    </article>
-
-                    <article class="edit-txt">
-                        <h3>Info</h3>
-
-                        <section class="info">
-
-                            <label>
-                                Title
-                                <input id="title" value="" name="title">
-                            </label>
-                            <label>
-                                Color
-                                <input id="color" value="" name="color">
-                            </label>
-
-                            <label>
-                                Price
-                                <input id="price" type="number" value="" name="price">
-                            </label>
-
-                            <label>
-                                Fave Player
-                                <input id="favePlayer" value="" name="favePlayer">
-                            </label>
-                        </section>
-                    </article>
+                    <label>
+                        Favorite Player
+                        <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
+                            name="favePlayer">
+                    </label>
+                </section>
+            </article>
 
 
-                    <article class="edit-actions">
-                        <h3>Options</h3>
+            <article class="edit-actions">
+                <h3>Options</h3>
 
-                        <label>
-                            Is sold out?
-                            <input id="soldOut" type="checkbox">
-                        </label>
+                <label>
+                    Is sold out?
+                    <input id="soldOut" type="checkbox">
+                </label>
 
-                        <button type="submit" for="addProduct">Save Item</button>
-                        <button>Delete Item</button>
-                    </article>
-                </form>
+                <%if(product !=null){%>
+                    <button type="button" onclick="updateProduct('<%=product._id%>')" id="updateButton" value="<%=product._id%>">
+                    Save Changes
+                    </button>
+                    <button>Delete Item</button>
+                    <% }else{ %>
+                    <button type="submit" for="editProduct">
+                         Add Item
+                    </button>
+                    <% } %>
+            </article>
+        </form>
 
-                <% }%>
     </main>
 
     <!-- Libraries  -->

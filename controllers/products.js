@@ -2,10 +2,12 @@ const productService = require('../services/products');
 
 const createProduct = async (req, res) => {
   // console.log('here:')
-  const { title, color, cat, price, gender, favePlayer, srcImg } = req.body
+  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
   try{
-    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg)
+    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
     // console.log('product.id:', newProduct._id)
+    // res.redirect("/products/product/"+newProduct._id);
+
   }
   catch(e){
     res.json("Product wasn't added successfully"+ e)
@@ -35,19 +37,25 @@ const getProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
+console.log('here:', req.body)
   if (!req.body.title) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "title is required",
-    });
+    })
   }
+  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
+try{
 
-  const product = await productService.updateProduct(req.params.id, req.body.title);
-  if (!product) {
-    return res.status(404).json({ errors: ['Product not found'] });
-  }
+  const product = await productService.updateProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
+}catch(e){
+  res.json("Product wasn't saved successfully"+ e)
+}
+  // if (!product) {
+  //   return res.status(404).json({ errors: ['Product not found'] });
+  // }
 
-  res.json(product);
-};
+  // res.json(product)
+}
 
 const deleteProduct = async (req, res) => {
   const product = await productService.deleteProduct(req.params.id);
