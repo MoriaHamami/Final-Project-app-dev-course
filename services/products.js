@@ -25,21 +25,20 @@ const getProducts = async () => {
     return await Product.find({});
 };
 
-const updateProduct = async (title ="", color="", cat="", price=0, gender="", favePlayer="", srcImg=[], sizes) => {
+const updateProduct = async (id, title ="", color="", cat="", price=0, gender="", favePlayer="", srcImg=[], sizes) => {
     const product = await getProductById(id);
     if (!product)
         return null;
 
     
-    product.title = title
-    product.color = color
-    product.price = price
-    product.title = title
-    product.gender = gender
-    product.favePlayer = favePlayer
-    product.srcImg = srcImg
-    product.sizes = sizes
-    // await product.save()
+    if(title)product.title = title
+     if(color)product.color = color
+     if(price)product.price = price
+     if(gender)product.gender = gender
+     if(favePlayer)product.favePlayer = favePlayer
+     if(srcImg.length !== 0)product.srcImg = srcImg
+     if(sizes.length !== 0)product.sizes = sizes
+    await product.save()
     return product
 }
 

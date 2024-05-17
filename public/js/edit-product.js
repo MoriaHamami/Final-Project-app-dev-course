@@ -54,9 +54,38 @@ let gFavePlayer = ''
 let prigPricece = 0
 let gSizes = []
 let gSrcImg = []
-$('#updateButton').on('click', function () {
+$('#updateButton').on('click', async function () {
+    
+    // $("form#editProduct :input").each(function () {
+    //     // inputs.push( $(this)) // This is the jquery object of the input, do what you will
+    //     switch ($(this).attr('name')) {
+    //         case "title":
+    //             gTitle = $(this).val()
+    //             break;
+    //         case "color":
+    //             gColor = $(this).val()
+    //             break;
+    //         case "favePlayer":
+    //             gFavePlayer = $(this).val()
+    //             break;
+    //         case "price":
+    //             gPrice = $(this).val()
+    //             break;
+    //         case "sizes":
+    //             $(this).each(function () {
+    //                 gSizes.push($(this).val())
+    //             })
+    //             break;
+    //         case "srcImg":
+    //             $(this).each(function () {
+    //                 gSrcImg.push($(this).attr('src'))
+    //             })
+    //             break;
 
+    //     }
+    // });
     // var rowEl = $(this).closest('article');
+
     gTitle = $('input[name="title"]').val()
     gColor = $('input[name="color"]').val()
     gFavePlayer = $('input[name="favePlayer"]').val()
@@ -67,15 +96,17 @@ $('#updateButton').on('click', function () {
     $('input[name="srcImg"]').each(function () {
         gSrcImg.push($(this).attr('src'))
     })
+
     // console.log('gImgSrc:', gSrcImg)
 
 
     try {
-        fetch('/products/edit/' + $('#updateButton').val(), {
+
+        // const res =
+         $.ajax({
+            url: '/products/edit/' + $('#updateButton').val(),
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            contentType: 'application/json',
             data: JSON.stringify({
                 // _id: Number,
                 title: gTitle,
@@ -87,12 +118,20 @@ $('#updateButton').on('click', function () {
                 // gender,
                 // sizes
 
-            })
-        }).then(data => {
-            if (!data.ok) 
-            console.log(data.status);
-            else return data.json();
-            })
+            }),
+            // success: function(data) {
+            //     console.log('success --> data :', data);
+
+            //   },
+        })
+        // console.log('res:', res)
+        // return res
+
+        // if (!res.ok) {
+        //     console.log('Bad fetch response')
+        //   }
+
+        //   return await res.json()
     } catch (e) {
         console.log('e:', e)
     }
@@ -111,8 +150,8 @@ $('#updateButton').on('click', function () {
 // USEFUL FROM WEB
 deleteUser = (id) => {
     let url = `https://contact-browser.herokuapp.com/contact/${id}`;
-    fetch(url, {method: 'delete'}).then(resp => {
-         this.fetchData();
+    fetch(url, { method: 'delete' }).then(resp => {
+        this.fetchData();
     });
 };
 

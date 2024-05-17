@@ -38,9 +38,24 @@ app.use(session({
 }))
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));  
+app.use(express.urlencoded({ extended: false }))
+
+app.use(express.json())
+
 app.use("/products", require("./routes/products"));
 app.use(express.static('public'))
+
+// app.use((req, res, next) => {
+//     res.header('access-control-allow-origin', `http://localhost:${process.env.PORT}`)
+//     res.header('Access-Control-Allow-Credentials', true)
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With')
+//     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+//     res.header('Access-Control-Max-Age', 1728000)
+//     if (req.method === 'OPTIONS') {
+//       return res.json({ status: 0, message: '', payload: null })
+//     }
+//     next()
+//   })
 // app.use(methodOverride('_method'))
 
 // app.use("/", require("./routes/login"));

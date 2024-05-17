@@ -37,16 +37,19 @@ const getProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-console.log('here:', req.body)
-  if (!req.body.title) {
-    return res.status(400).json({
-      message: "title is required",
-    })
-  }
+// const i = req.body
+// console.log('i:', i)
+let id = req.params.id;
+  // if (!req.body.title) {
+  //   return res.status(400).json({
+  //     message: "title is required",
+  //   })
+  // }
   const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
 try{
 
-  const product = await productService.updateProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
+  const product = await productService.updateProduct(id, title, color, cat, price, gender, favePlayer, srcImg, sizes)
+  console.log('product:', product)
 }catch(e){
   res.json("Product wasn't saved successfully"+ e)
 }
