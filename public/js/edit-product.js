@@ -48,6 +48,27 @@ const addProduct = (title, color, cat, srcImg, favePlayer, price, gender) => {
 //     gender = newGender
 
 // }
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        // console.log('input.id:', input.id)
+        reader.onload = function (e) {
+            // console.log('$(`.edit-product .srcImg#${input.id}`).attr:', $(`.edit-product .srcImg-${input.id}`).attr('src'))
+            $(`.edit-product .srcImg-${input.id}`).attr('src', e.target.result)
+            $(input).attr('src', e.target.result)
+        }
+
+        reader.readAsDataURL(input.files[0])
+    }
+}
+
+$('.edit-product input[name="srcImg"]').change(function () {
+    readURL(this)
+})
+
+
+
 let gTitle = ''
 let gColor = ''
 let gFavePlayer = ''
@@ -55,7 +76,7 @@ let prigPricece = 0
 let gSizes = []
 let gSrcImg = []
 $('#updateButton').on('click', async function () {
-    
+
     // $("form#editProduct :input").each(function () {
     //     // inputs.push( $(this)) // This is the jquery object of the input, do what you will
     //     switch ($(this).attr('name')) {
@@ -86,24 +107,34 @@ $('#updateButton').on('click', async function () {
     // });
     // var rowEl = $(this).closest('article');
 
-    gTitle = $('input[name="title"]').val()
-    gColor = $('input[name="color"]').val()
-    gFavePlayer = $('input[name="favePlayer"]').val()
-    gPrice = $('input[name="price"]').val()
-    $('input[name="sizes"]').each(function () {
+    gTitle = $('.edit-product input[name="title"]').val()
+    gColor = $('.edit-product input[name="color"]').val()
+    gFavePlayer = $('.edit-product input[name="favePlayer"]').val()
+    gPrice = $('.edit-product input[name="price"]').val()
+    $('.edit-product input[name="sizes"]').each(function () {
         gSizes.push($(this).val())
     })
-    $('input[name="srcImg"]').each(function () {
-        gSrcImg.push($(this).attr('src'))
+    $('.edit-product input[name="srcImg"]').each(function () {
+        // console.log('$(this).attr', $(this).attr('src'))
+        if ($(this).attr('src').includes('data:')) {
+            gSrcImg.push($(this).attr('src'))
+        } else {
+            const str = $(this).attr('src')
+            const i = str.lastIndexOf('/')
+            const res = str.substring(i + 1)
+            gSrcImg.push(res)
+            console.log('res:', res)
+        }
+        // gSrcImg.push($(this).attr('src'))
     })
 
     // console.log('gImgSrc:', gSrcImg)
-
+    console.log('gSrcImg:', gSrcImg)
 
     try {
 
         // const res =
-         $.ajax({
+        $.ajax({
             url: '/products/edit/' + $('#updateButton').val(),
             method: 'PUT',
             contentType: 'application/json',
@@ -112,7 +143,7 @@ $('#updateButton').on('click', async function () {
                 title: gTitle,
                 color: gColor,
                 // cat,
-                // srcImg,
+                srcImg: gSrcImg,
                 favePlayer: gFavePlayer,
                 price: gPrice,
                 // gender,

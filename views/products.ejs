@@ -31,7 +31,8 @@
             <% for(let i=0; i< products.length; i++) { %>
                 
             <a class="image-container" href="/products/product/<%= products[i]._id %>">
-                <img src="/styles/imgs/products/<%= products[i].srcImg[0] %>" alt="product"> 
+                <!-- <img src="<%= products[i].srcImg[0]?.contentType ? ('data:image/'+products[i].srcImg[0]?.contentType+';base64,'+products[i].srcImg[0]?.data.toString('base64')) : ('/styles/imgs/products/' + products[i].srcImg[0]?.data)%>" alt="product">  -->
+                <img src="<%= products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])%>" alt="product"> 
                     <div class="image-name"><%= products[i].title %></div> 
                 <div class="price"><%= products[i].price %>$</div>
             </a>

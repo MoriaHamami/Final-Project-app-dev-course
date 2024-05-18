@@ -27,8 +27,9 @@
                     <%if(product !=null){%>
                         <% for(let i=0; i< product.srcImg.length; i++) { %>
                             <li id="<%=i%>">
-                                <img src="/styles/imgs/products/<%= product.srcImg[i] %>">
-                                <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)" src="/styles/imgs/products/<%= product.srcImg[i] %>">
+                                <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>" class="srcImg-<%=i%>">
+                                <!-- <img src="/styles/imgs/products/<%= product.srcImg[i] %>" class="srcImg-<%=i%>"> -->
+                                <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)" src="/styles/imgs/products/<%= product.srcImg[i] %>" id="<%=i%>">
                                 <button type="button">UPDATE</button>
                                 </input>
                                 <button type="button">DELETE</button>

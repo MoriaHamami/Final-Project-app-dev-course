@@ -25,12 +25,12 @@ const getProducts = async () => {
     return await Product.find({});
 };
 
-const updateProduct = async (id, title ="", color="", cat="", price=0, gender="", favePlayer="", srcImg=[], sizes) => {
+const updateProduct = async (id, title ="", color="", cat="", price=0, gender="", favePlayer="", srcImg=[], sizes=[]) => {
     const product = await getProductById(id);
+    // console.log('here:', product)
     if (!product)
         return null;
 
-    
     if(title)product.title = title
      if(color)product.color = color
      if(price)product.price = price
@@ -38,8 +38,15 @@ const updateProduct = async (id, title ="", color="", cat="", price=0, gender=""
      if(favePlayer)product.favePlayer = favePlayer
      if(srcImg.length !== 0)product.srcImg = srcImg
      if(sizes.length !== 0)product.sizes = sizes
-    await product.save()
-    return product
+    //   console.log('here2:')
+     try{
+        
+
+         await product.save()
+         return product
+     }catch(e){
+        return e
+     }
 }
 
 const deleteProduct = async (id) => {

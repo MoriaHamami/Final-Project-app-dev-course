@@ -61,7 +61,7 @@
                     <% for(let i=0; i< product.srcImg.length; i++) { %>
 
                     <div class="carousel-item <%= i==0 ? 'active' : '' %>">
-                        <img class="d-block" src="/styles/imgs/products/<%= product.srcImg[i] %>" alt="Product img">
+                        <img class="d-block" src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>" alt="Product img">
                     </div>
 
                     <% } %>
