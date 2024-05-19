@@ -111,3 +111,19 @@ footer .logo {
 footer .logo img {
     height: 100px;
 }
+
+footer{
+    position: relative;
+    /* Because the main is 73px from top, 
+    we dont want the footer to be covered */
+    bottom: -73px;
+}
+
+@media (max-width: 600px) {
+    /* Because the main is 100px from top, 
+    we dont want the footer to be covered */
+    footer {
+        position: relative;
+        bottom: -100px;
+    }
+}

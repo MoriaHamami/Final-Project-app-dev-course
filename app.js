@@ -42,6 +42,8 @@ app.use(express.urlencoded({ extended: false, limit: '50mb' }))
 
 app.use(express.json({limit: '50mb'}))
 
+app.use("/", require("./routes/home"))
+app.use("/login", require("./routes/login"))
 app.use("/products", require("./routes/products"));
 app.use(express.static('public'))
 

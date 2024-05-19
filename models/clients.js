@@ -1,5 +1,9 @@
 const mongoose = require("mongoose")
 
+
+// TODO : Not sure I did this right
+const subSchema = new mongoose.Schema([Number])
+
 const Client = new mongoose.Schema({
   // _id: Number,
   fullname:String,
@@ -19,11 +23,9 @@ const Client = new mongoose.Schema({
   ],
   cartItems:[Number],
   isBanned:Boolean,
-  dateCreated:{ type: Date, default: Date.now }
+  dateCreated:{ type: Date, default: Date.now },
+  isManager:{type:Boolean, default: false}
 
 })
-
-// TODO : Not sure I did this right
-const subSchema = new mongoose.Schema([Number])
 
 module.exports = mongoose.model("clients", Client)

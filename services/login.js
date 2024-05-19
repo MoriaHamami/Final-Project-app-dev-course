@@ -1,22 +1,50 @@
-const User= require("../models/clients");
+const Client = require("../models/clients");
 
-async function login(username,password){
-    const user= await User.findOne({ username,password });
-    return user !=null  //if the user correct it will be diffrent fron null and return true
+async function login(username, password) {
+    try {
+
+        const user = await Client.findOne({ username, password })
+        console.log('user:', user)
+        return user != null  //if the user correct it will be diffrent than null and return true
+        // await user.save()
+    } catch (e) {
+        return e
+    }
 }
 
-async function register(username, password, email) {
+async function register(username, password) {
     // בדיקת תקינות האימייל
-    if (!isValidEmail(email)) {
-        throw new Error("Invalid email address");
+    // if (!isValidEmail(email)) {
+    //     throw new Error("Invalid email address");
+    // }
+    if (!username || !password) {
+        throw new Error("Missing username or password")
     }
+    
+    // Check if you can login the user
+    // if(login(username)) throw new Error("User already exists")
 
-    const user = new User({
+    const user = new Client({
         username,
-        password
-        });
+        pass: password
+    })
 
-    await user.save();
+    try {
+        await user.save()
+    } catch (e) {
+        return e
+    }
+}
+
+async function getIsManager(username) {
+    try {
+
+        const user = await Client.findOne({ username })
+        return user?.isManager 
+        // await user.save()
+    } catch (e) {
+        return e
+    }
 }
 
 function isValidEmail(email) {
@@ -24,5 +52,4 @@ function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
 }
 
- 
-module.exports={login,register}
+module.exports = { login, register, getIsManager }
