@@ -2,7 +2,7 @@ const Product = require('../models/products');
 
 const createProduct = async (title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = []) => {
     // Product.init() // Document gets generated (and gets an id)
-console.log('srcImg:', srcImg)
+// console.log('srcImg:', srcImg)
     const product = new Product({
         title,
         color,
@@ -34,7 +34,7 @@ const updateProduct = async (id, title = "", color = "", cat = "", price = 0, ge
     // console.log('here:', product)
     if (!product)
         return null
-
+console.log('srcImg.length:', srcImg.length)
     if (title) product.title = title
     if (color) product.color = color
     if (price) product.price = price

@@ -38,9 +38,9 @@ async function addImg(input) {
 
 }
 async function deleteImg(id) {
-console.log('id:', id)
-    $(`.edit-product .srcImg-${id}`).remove()
-  
+    console.log('id:', id)
+    $(`.edit-product li#${id}`).remove()
+
 }
 
 
@@ -74,30 +74,6 @@ console.log('id:', id)
 //     console.log('ev:', ev)
 
 // }
-
-const addProduct = (title, color, cat, srcImg, favePlayer, price, gender) => {
-    try {
-
-        fetch('/products', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                // _id: Number,
-                title,
-                color,
-                cat,
-                srcImg,
-                favePlayer,
-                price,
-                gender
-            })
-        })
-    } catch (e) {
-        console.log('e:', e)
-    }
-}
 
 // const onChange = (newTitle, newColor, newCat, newSrcImg, newFavePlayer, newPrice, newGender) => {
 //     title = newTitle
@@ -174,7 +150,7 @@ $('#addButton').on('click', async function () {
         }
         // gSrcImg.push($(this).attr('src'))
     })
-
+    // console.log('gSrcImg:', gSrcImg)
     gTitle = $('.edit-product input[name="title"]').val()
     gColor = $('.edit-product input[name="color"]').val()
     gFavePlayer = $('.edit-product input[name="favePlayer"]').val()
@@ -251,6 +227,7 @@ $('#updateButton').on('click', async function () {
     })
     $('.edit-product input[name="srcImg"]').each(function () {
         // console.log('$(this).attr', $(this).attr('src'))
+        console.log('this:', $(this).attr('src'))
         if ($(this).attr('src').includes('data:')) {
             gSrcImg.push($(this).attr('src'))
         } else {
