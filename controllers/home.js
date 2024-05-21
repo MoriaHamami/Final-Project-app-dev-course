@@ -1,5 +1,5 @@
 // Func renders the home page
-function getHomePage(req, res) {
+function getHomePage(req, res) { 
     res.render('home.ejs', {})
 }
 

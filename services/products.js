@@ -26,7 +26,13 @@ const getProductById = async (id) => {
 }
 
 const getProducts = async () => {
-    return await Product.find({})
+    // try{
+
+    // }catch(e){
+
+    // }
+    const products = await Product.find({})
+    return products
 }
 
 const updateProduct = async (id, title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = []) => {

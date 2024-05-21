@@ -4,6 +4,8 @@ const router = express.Router();
 const productsController = require("../controllers/products")
 const loginController = require("../controllers/login");
 
+router.route('/')
+    .get(productsController.getProducts)
 router.route('/edit/:id')
     .get( productsController.getProduct)
     // .get(loginController.isManagerLoggedIn, productsController.getProduct)
@@ -19,8 +21,6 @@ router.route('/edit')
     // .post(loginController.isManagerLoggedIn, productsController.createProduct)
 router.route('/product/:id')
     .get(productsController.getProduct)
-router.route('/')
-    .get(productsController.getProducts)
 
 module.exports = router;
 

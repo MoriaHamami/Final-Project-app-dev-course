@@ -155,6 +155,7 @@ $('#addButton').on('click', async function () {
     gColor = $('.edit-product input[name="color"]').val()
     gFavePlayer = $('.edit-product input[name="favePlayer"]').val()
     gPrice = $('.edit-product input[name="price"]').val()
+    // console.log('gColor:', gColor)
     $('.edit-product input[name="sizes"]').each(function () {
         gSizes.push($(this).val())
     })
