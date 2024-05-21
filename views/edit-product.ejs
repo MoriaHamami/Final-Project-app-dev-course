@@ -20,132 +20,133 @@
     <%- include('header.ejs', {page:'edit-product'}) -%>
 
 
-    <main class="edit-product">
+        <main class="edit-product">
 
-        <!-- <form method="<%= (product !=null) ? 'PATCH' : 'POST'%>" id="editProduct" action="<%= (product !=null) ? ('/products/edit/'+product._id+'?_method=PUT') : ('/products/edit')%>"> -->
-        <form method="POST" id="editProduct" action="<%= (product !=null) ? '' : '/products/edit'%>">
-            <article class="edit-imgs">
-                <h3>Images</h3>
-                <ul>
+            <!-- <form method="<%= (product !=null) ? 'PATCH' : 'POST'%>" id="editProduct" action="<%= (product !=null) ? ('/products/edit/'+product._id+'?_method=PUT') : ('/products/edit')%>"> -->
+            <form method="POST" id="editProduct" action="<%= (product !=null) ? '' : '/products/edit'%>">
+                <article class="edit-imgs">
+                    <h3>Images</h3>
+                    <ul>
+                        <%if(product !=null){%>
+                            <% for(let i=0; i< product.srcImg.length; i++) { %>
+                                <li id="<%=i%>">
+                                    <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
+                                        class="srcImg-<%=i%>">
+                                    <!-- <img src="/styles/imgs/products/<%= product.srcImg[i] %>" class="srcImg-<%=i%>"> -->
+                                    <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)"
+                                        src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
+                                        id="<%=i%>">
+                                    <button type="button">UPDATE</button>
+                                    </input>
+                                    <button type="button" id="<%=i%>" class="deleteImg">DELETE</button>
+                                </li>
+                                <%}%>
+
+                                    <%}else{%>
+                                        <li id="0">
+                                            <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
+                                            <input type="file" accept="image/*" name="srcImg"
+                                                src="/styles/imgs/products/shirt.png" id="0">
+                                            <button type="button" id="0" class="deleteImg">DELETE</button>
+                                        </li>
+                                        <%}%>
+                    </ul>
+                    <button>
+                        <input type="file" accept="image/*" name="addImg">
+                        <i class="bi bi-plus"></i>
+                        Add another image
+                    </button>
+                </article>
+
+
+                <article class="edit-sizes">
+                    <h3>Sizes</h3>
                     <%if(product !=null){%>
-                        <% for(let i=0; i< product.srcImg.length; i++) { %>
-                            <li id="<%=i%>">
-                                <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
-                                    class="srcImg-<%=i%>">
-                                <!-- <img src="/styles/imgs/products/<%= product.srcImg[i] %>" class="srcImg-<%=i%>"> -->
-                                <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)"
-                                    src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>" id="<%=i%>">
-                                <button type="button">UPDATE</button>
-                                </input>
-                                <button type="button" id="<%=i%>" class="deleteImg">DELETE</button>
-                            </li>
+                        <% for(let i=0; i< product.sizes.length; i++) { %>
+
+                            <section>
+                                <input value="<%= product.sizes[i] %>" name="sizes">
+                                <button><i class="bi bi-trash"></i>
+                                </button>
+                            </section>
                             <%}%>
 
                                 <%}else{%>
-                                    <li>
-                                        <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
-                                        <input type="file" accept="image/*" name="srcImg"
-                                            src="/styles/imgs/products/shirt.png" id="0">
-                                        <button type="button" id="0" class="deleteImg">DELETE</button>
-                                    </li>
-                                    <%}%>
-                </ul>
-                <button >
-                    <input type="file" accept="image/*" name="addImg">
-                    <i class="bi bi-plus"></i>
-                    Add another image
-                </button>
-            </article>
+
+                                    <section>
+                                        <input value="S">
+                                        <button><i class="bi bi-trash"></i>
+                                        </button>
+                                    </section>
+                                    <% } %>
+
+                                        <button>
+                                            <i class="bi bi-plus"></i>
+                                            Add size
+                                        </button>
+                </article>
+
+                <article class="edit-txt">
+                    <h3>Info</h3>
+
+                    <section class="info">
+
+                        <label>
+                            Title
+                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title">
+                        </label>
+                        <label>
+                            Color
+                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color">
+                        </label>
+
+                        <label>
+                            Price
+                            <input id="price" type="number" value="<%= (product !=null) ? product.price : '' %>"
+                                name="price">
+                        </label>
+
+                        <label>
+                            Favorite Player
+                            <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
+                                name="favePlayer">
+                        </label>
+                    </section>
+                </article>
 
 
-            <article class="edit-sizes">
-                <h3>Sizes</h3>
-                <%if(product !=null){%>
-                    <% for(let i=0; i< product.sizes.length; i++) { %>
-
-                        <section>
-                            <input value="<%= product.sizes[i] %>" name="sizes">
-                            <button><i class="bi bi-trash"></i>
-                            </button>
-                        </section>
-                        <%}%>
-
-                            <%}else{%>
-
-                                <section>
-                                    <input value="S">
-                                    <button><i class="bi bi-trash"></i>
-                                    </button>
-                                </section>
-                                <% } %>
-
-                                    <button>
-                                        <i class="bi bi-plus"></i>
-                                        Add size
-                                    </button>
-            </article>
-
-            <article class="edit-txt">
-                <h3>Info</h3>
-
-                <section class="info">
+                <article class="edit-actions">
+                    <h3>Options</h3>
 
                     <label>
-                        Title
-                        <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title">
-                    </label>
-                    <label>
-                        Color
-                        <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color">
+                        Is sold out?
+                        <input id="soldOut" type="checkbox">
                     </label>
 
-                    <label>
-                        Price
-                        <input id="price" type="number" value="<%= (product !=null) ? product.price : '' %>"
-                            name="price">
-                    </label>
-
-                    <label>
-                        Favorite Player
-                        <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
-                            name="favePlayer">
-                    </label>
-                </section>
-            </article>
-
-
-            <article class="edit-actions">
-                <h3>Options</h3>
-
-                <label>
-                    Is sold out?
-                    <input id="soldOut" type="checkbox">
-                </label>
-
-                <%if(product !=null){%>
-                    <button type="button" id="updateButton" value="<%=product._id%>">
-                        <!-- <button type="button" onclick="updateProduct('<%=product._id%>')" id="updateButton" value="<%=product._id%>"> -->
-                        Save Changes
-                    </button>
-                    <button type="button" id="deleteButton" value="<%=product._id%>">
-                        Delete Item
-                    </button>
-                    <% }else{ %>
-                        <button type="button" for="editProduct" id="addButton">
-                            Add Item
+                    <%if(product !=null){%>
+                        <button type="button" id="updateButton" value="<%=product._id%>">
+                            <!-- <button type="button" onclick="updateProduct('<%=product._id%>')" id="updateButton" value="<%=product._id%>"> -->
+                            Save Changes
                         </button>
-                        <% } %>
-            </article>
-        </form>
+                        <button type="button" id="deleteButton" value="<%=product._id%>">
+                            Delete Item
+                        </button>
+                        <% }else{ %>
+                            <button type="button" for="editProduct" id="addButton">
+                                Add Item
+                            </button>
+                            <% } %>
+                </article>
+            </form>
 
-    </main>
+        </main>
 
-    <%- include('footer.ejs') -%>
+        <%- include('footer.ejs') -%>
 
-    <!-- Libraries  -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="/js/edit-product.js"></script>
+            <!-- Libraries  -->
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+            <script src="/js/edit-product.js"></script>
 
 </body>
 

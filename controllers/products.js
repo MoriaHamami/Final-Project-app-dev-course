@@ -75,9 +75,9 @@ const deleteProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({ errors: ['Product not found'] })
     }
-    else {
-      res.json(product)
-    }
+    // else {
+    //   res.json(product)
+    // }
     // else{
     //   return product
     // }

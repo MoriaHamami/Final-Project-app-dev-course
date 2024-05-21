@@ -14,7 +14,7 @@ async function addImg(input) {
             ++gLastId
             // console.log('$(`.edit-product .srcImg#${input.id}`).attr:', $(`.edit-product .srcImg-${input.id}`).attr('src'))
             $(`.edit-product .edit-imgs li:last-child`).after(
-                `<li>
+                `<li id="${gLastId}">
                 <img src="${e.target.result}" class="srcImg-${gLastId}">
                 <input type="file" accept="image/*" name="srcImg"
                     src="${e.target.result}" id="${gLastId}">
@@ -31,9 +31,17 @@ async function addImg(input) {
             // ).insertAfter(`.edit-product .srcImg-${gLastId-1}`)
             // .attr('src', e.target.result)
             // $(input).attr('src', e.target.result)
+            $(`.edit-product li#${gLastId}  input[name="srcImg"]`).change(function () {
+                // console.log('this:', this)
+                readURL( this)
+            })
+            $(`.edit-product li#${gLastId} .deleteImg`).click(function () {
+                deleteImg(gLastId)
+            })
         }
 
         reader.readAsDataURL(input.files[0])
+
     }
 
 }
@@ -100,7 +108,9 @@ function readURL(input) {
     }
 }
 
-$('.edit-product input[name="srcImg"]').change(function () {
+$('.edit-product input[name="srcImg"]').change(function (e) {
+    // console.log('this:', this)
+    // console.log('e:', e)
     readURL(this)
 })
 $('.edit-product input[name="addImg"]').change(function () {
