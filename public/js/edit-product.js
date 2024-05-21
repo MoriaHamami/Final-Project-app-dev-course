@@ -12,15 +12,28 @@ async function addImg(input) {
         let reader = new FileReader();
         reader.onload = function (e) {
             ++gLastId
+            console.log('gLastId:', gLastId)
             // console.log('$(`.edit-product .srcImg#${input.id}`).attr:', $(`.edit-product .srcImg-${input.id}`).attr('src'))
-            $(`.edit-product .edit-imgs li:last-child`).after(
-                `<li id="${gLastId}">
-                <img src="${e.target.result}" class="srcImg-${gLastId}">
-                <input type="file" accept="image/*" name="srcImg"
-                    src="${e.target.result}" id="${gLastId}">
-                <button type="button" id=${gLastId} class="deleteImg">DELETE</button>
-                </li>`
-            )
+            if(gLastId != 0){
+                const elLastImg = $('.edit-product .edit-imgs li:last-child')
+                elLastImg.after(
+                    `<li id="${gLastId}">
+                    <img src="${e.target.result}" class="srcImg-${gLastId}">
+                    <input type="file" accept="image/*" name="srcImg"
+                        src="${e.target.result}" id="${gLastId}">
+                    <button type="button" id=${gLastId} class="deleteImg">DELETE</button>
+                    </li>`
+                )
+            } else{
+                $('.edit-product .edit-imgs ul').append(
+                    `<li id="0">
+                    <img src="${e.target.result}" class="srcImg-0">
+                    <input type="file" accept="image/*" name="srcImg"
+                        src="${e.target.result}" id="0">
+                    <button type="button" id=0 class="deleteImg">DELETE</button>
+                    </li>`
+                )
+            }
             // $(
             //     `<li>
             //     <img src="${e.target.result}" class="srcImg-${++gLastId}">
@@ -46,7 +59,9 @@ async function addImg(input) {
 
 }
 async function deleteImg(id) {
-    console.log('id:', id)
+    // console.log('id:', id)
+    gLastId--
+    console.log('gLastId:', gLastId)
     $(`.edit-product li#${id}`).remove()
 
 }
