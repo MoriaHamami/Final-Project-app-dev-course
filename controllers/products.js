@@ -1,28 +1,10 @@
 const productService = require('../services/products');
 
-const createProduct = async (req, res) => {
-  // console.log('here:', req.body)
-  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
-  try {
-    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
-    // res.redirect("/products/product/"+newProduct._id);
-    res.json(newProduct)
-    // console.log('product.id:', newProduct._id)
-    // console.log('redirect:')
-  }
-  catch (e) {
-    // return e
-    res.json(e)
-    // return res.json("Product wasn't added successfully"+ e)
-  }
-  // res.json(newProduct);
-
-}
-
 const getProducts = async (req, res) => {
   try {
+    // Get products from DB using service file
     const products = await productService.getProducts()
-    // res.json(products);
+    // Render products page and send the products from DB to it
     res.render('products.ejs', { products })
   } catch (e) {
     console.log('e:', e)
@@ -30,67 +12,67 @@ const getProducts = async (req, res) => {
 }
 
 const getProduct = async (req, res) => {
-  if (!req.params.id) return res.render('edit-product.ejs', { product: null })
-  const product = await productService.getProductById(req.params.id)
+  let product = null
+  // If the params in the path dont have and id, show the create new product page (dont send it a product)
+  if (!req.params.id) return res.render('edit-product.ejs', { product })
+  // Otherwise get the product from the DB using the id in the params
+  try {
+    product = await productService.getProductById(req.params.id)
+  }
+  catch (e) {
+    console.log('e:', e)
+  }
   if (!product) {
+    // If no product was found in the DB, return error
     return res.status(404).json({ errors: ['Product not found'] })
   }
   else if (req.path.includes('edit'))
+    // If a product exists in DB, and the path includes the word "edit", render the product's edit page
     res.render('edit-product.ejs', { product })
   else
+    // If a product exists in DB, and the path doesnt include the word edit, render a single product view page
     res.render('product.ejs', { product })
-  // console.log('req:', req)
-  // res.json(product);
+}
+
+const createProduct = async (req, res) => {
+  // Initialize the following variables, recieved from the body (in this case, from the ajax req)
+  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
+  try {
+    // Send the variables to the product service. There, it will add it to the DB.
+    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
+    // Send back to the ajax req, a res with the new product (including the new id given to it automatically)
+    res.json(newProduct)
+  }
+  catch (e) {
+    res.json(e)
+  }
 }
 
 const updateProduct = async (req, res) => {
-  // const i = req.body
-  // console.log('i:', i)
-  let id = req.params.id;
-  // if (!req.body.title) {
-  //   return res.status(400).json({
-  //     message: "title is required",
-  //   })
-  // }
+  // Save the id from the params in the website path
+  let id = req.params.id
+    // Initialize the following variables, recieved from the body (in this case, from the ajax req)
   const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
   try {
-
-    const product = await productService.updateProduct(id, title, color, cat, price, gender, favePlayer, srcImg, sizes)
-    // console.log('product:', product)
+    // Send the variables to the product service. There, it will update it in the DB.
+    await productService.updateProduct(id, title, color, cat, price, gender, favePlayer, srcImg, sizes)
   } catch (e) {
     res.json("Product wasn't saved successfully" + e)
   }
-  // if (!product) {
-  //   return res.status(404).json({ errors: ['Product not found'] });
-  // }
-
-  // res.json(product)
 }
 
 const deleteProduct = async (req, res) => {
   try {
-    // console.log('req.params.id:', req.params.id)
+    // Get the products id from the params in the web path 
+    // and send it to the service file 9there it will delete the product in DB)
     const product = await productService.deleteProduct(req.params.id)
-    // console.log('product:', product)
+    // If the product wasnt found in DB show an error
     if (!product) {
       return res.status(404).json({ errors: ['Product not found'] })
     }
-    // else {
-    //   res.json(product)
-    // }
-    // else{
-    //   return product
-    // }
-    // res.redirect("/")
-    // window.location.reload()
-    // req.method = 'GET'
-
   } catch (e) {
     res.json("Product wasn't deleted successfully" + e)
   }
-
-
-  // res.send()
 }
 
 module.exports = {

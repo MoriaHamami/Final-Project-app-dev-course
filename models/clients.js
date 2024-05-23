@@ -1,11 +1,13 @@
 const mongoose = require("mongoose")
 
-
-// TODO : Not sure I did this right
+// Create another mini scheme to represent an array of numbers
+// (for later use in the orders key which includes the following val:
+// arrays of arrays of product ids)
+// TODO: Make the subscheme works
 const subSchema = new mongoose.Schema([Number])
+// const subSchema = new mongoose.Schema([mongoose.Schema.ObjectId])
 
 const Client = new mongoose.Schema({
-  // _id: Number,
   fullname:String,
   username: {
     type: String,
@@ -21,6 +23,7 @@ const Client = new mongoose.Schema({
   orders:[
    subSchema
   ],
+  // EX: [[0,2,5], [1, 2, 7]]
   cartItems:[Number],
   isBanned:Boolean,
   dateCreated:{ type: Date, default: Date.now },
