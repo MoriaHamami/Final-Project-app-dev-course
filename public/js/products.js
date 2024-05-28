@@ -1,26 +1,67 @@
-let gPrice = null
-let gTitle = null
-let gCat = null
+// Global variables for updating use
+let gPrice = 0
+let gTitle = ''
+let gCat = ''
 let gSortIsAsc = {
     price: true,
     title: true
-
 }
+
+// Select inputs with values of filter and on events send to relevant function
+$('.products input[name="priceFilter"]').change(function () {
+    setPrice()
+})
+$('.products input[name="titleFilter"]').keyup(function () {
+    setTitle()
+})
+$('.products select[name="catFilter"]').change(function () {
+    setCat()
+})
+
+// Update the values of the global variables according to the changes in the input
+function setCat() {
+    gCat = $('.products select[name="catFilter"]').val()
+    getProductsBy()
+}
+function setTitle() {
+    gTitle = $('.products input[name="titleFilter"]').val()
+    getProductsBy()
+}
+function setPrice() {
+    gPrice = $('.products input[name="priceFilter"]').val()
+    getProductsBy()
+}
+
+// When clicking on the sort buttons, do the following:
+async function sortProductsBy(sortVal) {
+    try{
+        // Send the sort value (price or title) and if we want the sort to ascend or descend
+        await getProductsBy(sortVal, gSortIsAsc[sortVal])
+        // After the products are sorted and shown, change the isAsc value for next time use
+        gSortIsAsc[sortVal] = !gSortIsAsc[sortVal]
+        // Save a capitalized version of the sort value
+        const capSortVal = sortVal.charAt(0).toUpperCase() + sortVal.slice(1)
+        // Change the icon showing the ascend and descend direction in sort button
+        $(`.products .sortBy${capSortVal}Btn`).html(`
+        <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
+        Sort By ${capSortVal}
+        `)
+    }catch(e){
+        console.log('Products were not sorted succesfully')
+    }
+}
+
 async function getProductsBy(sortVal = '', isAsc = true) {
-    // gPrice = $('.products input[name="priceFilter"]').val()
-    // gCat = $('.products input[name="catFilter"]').val()
-    // gTitle = $('.products input[name="titleFilter"]').val()
-    // console.log('price:', price)
     try {
+        // Send a get request with the param and sort values from the updated global variables
         const products = await $.ajax({
             url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sort[sortVal]=${sortVal}&sort[isAsc]=${isAsc}`,
             method: 'GET',
             contentType: 'application/json',
         })
-        // window.location.assign(`/products?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}`)
+        // Create a long string that represents the HTML of products we want to be shown after we got the products from the DB (filtered and sorted)
         let str = ''
         for (let i = 0; i < products.length; i++) {
-
             str += `<a class="image-container" href="/products/product/${products[i]._id}">
                 <img src="${products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])}"
                     alt="product">
@@ -31,90 +72,11 @@ async function getProductsBy(sortVal = '', isAsc = true) {
                     ${products[i].price}$
                 </div>
             </a>`
-
         }
-        // console.log('str:', str)
+        // Inside the products area in the HTML, show all the products
         $('.products #products').html(str)
-        // console.log('products.prodcuts[0]:', products)
     } catch (e) {
         console.log('e:', e)
         // TODO: Later show an error modal
     }
 }
-
-$('.products input[name="priceFilter"]').change(function () {
-    // getProductsByFilter()
-    setPrice()
-})
-$('.products input[name="titleFilter"]').keyup(function () {
-    setTitle()
-})
-$('.products select[name="catFilter"]').change(function () {
-    setCat()
-})
-
-function setCat() {
-    gCat = $('.products select[name="catFilter"]').val()
-    getProductsBy()
-}
-
-function setTitle() {
-    gTitle = $('.products input[name="titleFilter"]').val()
-    getProductsBy()
-}
-
-function setPrice() {
-    gPrice = $('.products input[name="priceFilter"]').val()
-    getProductsBy()
-}
-
-async function sortProductsBy(sortVal) {
-    const capSortVal = sortVal.charAt(0).toUpperCase() + sortVal.slice(1)
-    // console.log('sortVal.toUpperCase():', capSortVal)
-    await getProductsBy(sortVal, gSortIsAsc[sortVal])
-    gSortIsAsc[sortVal] = !gSortIsAsc[sortVal]
-    $(`.products .sortBy${capSortVal}Btn`).html(`
-    <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
-    Sort By ${capSortVal}
-    `)
-
-}
-// async function sortProductsBy(sortVal){
-//     try {
-//         gSortAsc[sortVal] = !gSortAsc[sortVal]
-//         const capSortVal = sortVal.charAt(0).toUpperCase() + sortVal.slice(1)
-//         // console.log('sortVal.toUpperCase():', capSortVal)
-//         $(`.products .sortBy${capSortVal}Btn`).html(`
-//         <i class="bi bi-caret-${gSortAsc[sortVal] ? 'up' : 'down'}"></i>
-//         Sort By ${capSortVal}
-//         `)
-//         const products = await $.ajax({
-//             url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}`,
-//             method: 'GET',
-//             contentType: 'application/json',
-//             data: JSON.stringify({ sort: sortVal, asc: gSortAsc[sortVal] })
-//         })
-//         // window.location.assign(`/products?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}`)
-//         let str = ''
-//         for(let i=0; i< products.length; i++) {
-
-//             str += `<a class="image-container" href="/products/product/${ products[i]._id }">
-//                 <img src="${ products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])}"
-//                     alt="product">
-//                 <div class="image-name">
-//                     ${ products[i].title }
-//                 </div>
-//                 <div class="price">
-//                     ${ products[i].price }$
-//                 </div>
-//             </a>`
-
-//             }
-//             // console.log('str:', str)
-//         $('.products #products').html(str)
-//         // console.log('products.prodcuts[0]:', products)
-//     } catch (e) {
-//         console.log('e:', e)
-//         // TODO: Later show an error modal
-//     }
-// }
