@@ -25,7 +25,7 @@ const getProductById = async (id) => {
     return await Product.findById(id)
 }
 
-const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '') => {
+const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', sortVal='', isAsc) => {
     // try{
 
     // }catch(e){
@@ -42,10 +42,19 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '') =
     if (catFilter && catFilter!="null") {
         filter.cat = {$in : catFilter}
     }
-    console.log('filter:', filter)
-    
-    
-    let products = await Product.find(filter)
+
+    // console.log('filter:', filter)
+    let products =[]
+    if(sortVal && sortVal!="null"){
+        
+        isAsc = isAsc == "true" ? 1 : -1
+        const sortObj = {}
+        sortObj[sortVal] = isAsc
+        products = await Product.find(filter).sort(sortObj)
+        console.log('here:', products[0])
+    } else{
+        products = await Product.find(filter)
+    }
     // console.log('products:', products)
     // if (priceFilter) {
     //     await products?.where('price').lt(priceFilter)

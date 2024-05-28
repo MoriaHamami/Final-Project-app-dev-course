@@ -21,8 +21,15 @@ const getProductsByFilter = async (req, res) => {
     const priceFilter = req.query.filters?.price
     const titleFilter = req.query.filters?.title
     const catFilter = req.query.filters?.cat
+    const sortVal = req.query.sort?.sortVal
+    const isAsc = req.query.sort?.isAsc
+    // const sortVal = req.body?.sort
+    // const isAsc = req.body?.asc
+    // const {asc: isAsc , sort: sortVal  } = req.body
+    // console.log('sortVal:', sortVal)
+    // console.log('req:', req)
     // Get products from DB using service file
-    const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter)
+    const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter, sortVal, isAsc)
     // Render products page and send the products from DB to it
       res.json( productsInfo.products)
     

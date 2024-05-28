@@ -42,7 +42,10 @@
                         <option value="<%= cat[i]%>"><%= cat[i]%></option>
                         <% } %>
                 </select>
-                <h1>Sort By Name</h1>
+                <button onclick="sortProductsBy('price')" class="sortByPriceBtn"><i class="bi bi-caret-up"></i>
+                    Sort By Price</button>
+                <button onclick="sortProductsBy('title')" class="sortByTitleBtn"><i class="bi bi-caret-up"></i>
+                    Sort By Title</button>
                 <input type="text">
             </div>
 
