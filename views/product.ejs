@@ -18,6 +18,8 @@
 </head>
 
 <body>
+
+    <!-- Adds header code here and send to it page val as "product" -->
     <%- include('header.ejs', {page:'product'}) -%>
 
         <main class="product">
@@ -34,8 +36,9 @@
                 </text>
 
                 <div class="product_sizes">
-                    <hr>
+                <hr>
 
+                    <!-- Go over all the product sizes recieved and show each one -->
                     <% for(let i=0; i< product.sizes.length; i++) { %>
 
                         <input type="radio" class="btn-check" name="options-base" id="<%= 'option' + i %>"
@@ -44,9 +47,9 @@
                             <%= product.sizes[i] %>
                         </label>
 
-                        <% } %>
+                    <% } %>
 
-                            <hr>
+                    <hr>
 
                 </div>
 
@@ -70,17 +73,21 @@
                 <div id="carouselExampleIndicators" class="carousel">
 
                     <div class="carousel-inner">
+
+                        <!-- Go over all the product sizes recieved and show each one -->
                         <% for(let i=0; i< product.srcImg.length; i++) { %>
 
                             <div class="carousel-item <%= i==0 ? 'active' : '' %>">
+                                <!-- If the path of the products image has data recieved from an input put it as source, otherwise show image from loclal path -->
                                 <img class="d-block"
                                     src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                     alt="Product img">
                             </div>
 
-                            <% } %>
+                        <% } %>
                     </div>
 
+                    <!-- Images are shown in a bootstrap carousel and so the following are the carousel side navigating arrows -->
                     <div class="arrows">
                         <a class="carousel-control-prev" href="#" role="button" data-slide="prev" onclick="prevSlide()">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -93,6 +100,7 @@
                         </a>
                     </div>
 
+                    <!-- Bottom carousel navigation -->
                     <div class="carousel-indicators">
                         <% for(let i=0; i< product.srcImg.length; i++) { %>
                             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>"
@@ -106,12 +114,8 @@
 
         </main>
 
+        <!-- Adds footer code here -->
         <%- include('footer.ejs') -%>
-
-            <!-- <div class="other_product">
-            <div class="sugg_title"> YOU CAN ALSO LIKE </div>
-        </div> -->
-
 
             <!-- Libraries  -->
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

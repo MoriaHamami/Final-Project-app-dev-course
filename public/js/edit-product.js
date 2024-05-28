@@ -141,7 +141,7 @@ $('.edit-product .deleteImg').click(function () {
 let gTitle = ''
 let gColor = ''
 let gFavePlayer = ''
-let prigPricece = 0
+let gPrice = 0
 let gSizes = []
 let gSrcImg = []
 $('#deleteButton').on('click', async function () {

@@ -15,9 +15,11 @@
 </head>
 
 <body>
+    <!-- Adds header code here and send to it page val as "products" -->
     <%- include('header.ejs', {page:'products'}) -%>
 
         <main class="products">
+
             <div class="header">
                 <h1>products</h1>
             </div>
@@ -32,17 +34,25 @@
 
             <div>
                 <h1>Filter</h1>
-                <button>Price</button>
+                <input type="range" max="<%= maxPrice%>" min="<%= minPrice%>" name="priceFilter" value="<%= maxPrice%>">Max Price</input>
+                <input name="titleFilter" value="">Title</input>
+                <select name="catFilter">
+                    <option value="">Select Category</option>
+                    <% for(let i=0; i< cat.length; i++) { %>
+                        <option value="<%= cat[i]%>"><%= cat[i]%></option>
+                        <% } %>
+                </select>
                 <h1>Sort By Name</h1>
                 <input type="text">
             </div>
 
-            <div class="clothes">
+            <div id="products">
 
+                <!-- Go over all the products recieved and show each one in a card -->
                 <% for(let i=0; i< products.length; i++) { %>
 
                     <a class="image-container" href="/products/product/<%= products[i]._id %>">
-                        <!-- <img src="<%= products[i].srcImg[0]?.contentType ? ('data:image/'+products[i].srcImg[0]?.contentType+';base64,'+products[i].srcImg[0]?.data.toString('base64')) : ('/styles/imgs/products/' + products[i].srcImg[0]?.data)%>" alt="product">  -->
+                        <!-- If the path of the products image has data recieved from an input put it as source, otherwise show image from loclal path -->
                         <img src="<%= products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])%>"
                             alt="product">
                         <div class="image-name">
@@ -57,6 +67,8 @@
 
             </div>
         </main>
+
+        <!-- Adds footer code here -->
         <%- include('footer.ejs') -%>
 
             <!-- Libraries  -->

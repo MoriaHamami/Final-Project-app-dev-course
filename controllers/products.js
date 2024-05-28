@@ -2,10 +2,30 @@ const productService = require('../services/products');
 
 const getProducts = async (req, res) => {
   try {
+    
     // Get products from DB using service file
-    const products = await productService.getProducts()
+    const productsInfo = await productService.getProducts()
     // Render products page and send the products from DB to it
-    res.render('products.ejs', { products })
+      res.render('products.ejs', {
+        products: productsInfo.products,
+        maxPrice: productsInfo.maxPrice,
+        minPrice: productsInfo.minPrice,
+        cat: productsInfo.cat
+      })    
+  } catch (e) {
+    console.log('e:', e)
+  }
+}
+const getProductsByFilter = async (req, res) => {
+  try {
+    const priceFilter = req.query.filters?.price
+    const titleFilter = req.query.filters?.title
+    const catFilter = req.query.filters?.cat
+    // Get products from DB using service file
+    const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter)
+    // Render products page and send the products from DB to it
+      res.json( productsInfo.products)
+    
   } catch (e) {
     console.log('e:', e)
   }
@@ -51,7 +71,7 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   // Save the id from the params in the website path
   let id = req.params.id
-    // Initialize the following variables, recieved from the body (in this case, from the ajax req)
+  // Initialize the following variables, recieved from the body (in this case, from the ajax req)
   const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
   try {
     // Send the variables to the product service. There, it will update it in the DB.
@@ -80,5 +100,6 @@ module.exports = {
   getProducts,
   getProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getProductsByFilter
 }
