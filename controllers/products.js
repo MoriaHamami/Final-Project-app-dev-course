@@ -95,7 +95,9 @@ const deleteProduct = async (req, res) => {
     const product = await productService.deleteProduct(req.params.id)
     // If the product wasnt found in DB show an error
     if (!product) {
-      return res.status(404).json({ errors: ['Product not found'] })
+      res.status(404).json({ errors: ['Product not found'] })
+    }else{
+      res.json(product)
     }
   } catch (e) {
     res.json("Product wasn't deleted successfully" + e)
