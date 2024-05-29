@@ -34,9 +34,9 @@
 
             <div>
                 <h1>Filter</h1>
-                <input type="range" max="<%= maxPrice%>" min="<%= minPrice%>" name="priceFilter" value="<%= maxPrice%>">Max Price</input>
-                <input name="titleFilter" value="">Title</input>
-                <select name="catFilter">
+                <input type="range" max="<%= maxPrice%>" min="<%= minPrice%>" name="priceFilter" value="<%= maxPrice%>" onchange="setPrice(event.target.value)">Max Price</input>
+                <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)">Title</input>
+                <select name="catFilter" onchange="setCat(event.target.value)">
                     <option value="">Select Category</option>
                     <% for(let i=0; i< cat.length; i++) { %>
                         <option value="<%= cat[i]%>"><%= cat[i]%></option>

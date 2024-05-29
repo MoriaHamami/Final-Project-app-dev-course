@@ -7,28 +7,17 @@ let gSortIsAsc = {
     title: true
 }
 
-// Select inputs with values of filter and on events send to relevant function
-$('.products input[name="priceFilter"]').change(function () {
-    setPrice()
-})
-$('.products input[name="titleFilter"]').keyup(function () {
-    setTitle()
-})
-$('.products select[name="catFilter"]').change(function () {
-    setCat()
-})
-
 // Update the values of the global variables according to the changes in the input
-function setCat() {
-    gCat = $('.products select[name="catFilter"]').val()
+function setCat(newCat) {
+    gCat= newCat
     getProductsBy()
 }
-function setTitle() {
-    gTitle = $('.products input[name="titleFilter"]').val()
+function setTitle(newTitle) {
+    gTitle = newTitle
     getProductsBy()
 }
-function setPrice() {
-    gPrice = $('.products input[name="priceFilter"]').val()
+function setPrice(newPrice) {
+    gPrice = newPrice
     getProductsBy()
 }
 
