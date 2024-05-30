@@ -21,9 +21,6 @@
 
 
         <main class="edit-product">
-
-            <!-- <form method="<%= (product !=null) ? 'PATCH' : 'POST'%>" id="editProduct" action="<%= (product !=null) ? ('/products/edit/'+product._id+'?_method=PUT') : ('/products/edit')%>"> -->
-            <!-- <form method="POST" id="editProduct" action="<%= (product !=null) ? '' : '/products/edit'%>"> -->
             <form id="editProduct">
                 <article class="edit-imgs">
                     <h3>Images</h3>
@@ -33,13 +30,14 @@
                                 <li id="<%=i%>">
                                     <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                         class="srcImg-<%=i%>">
-                                    <!-- <img src="/styles/imgs/products/<%= product.srcImg[i] %>" class="srcImg-<%=i%>"> -->
-                                    <input type="file" accept="image/*" name="srcImg" onchange="onChangeImg(event.target)"
+                                    <input type="file" accept="image/*" name="srcImg"
+                                        onchange="onChangeImg(event.target)"
                                         src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                         id="<%=i%>">
                                     <button type="button">UPDATE</button>
                                     </input>
-                                    <button type="button" id="<%=i%>" class="deleteImg" onclick="onDeleteImg('<%=i%>')">DELETE</button>
+                                    <button type="button" id="<%=i%>" class="deleteImg"
+                                        onclick="onDeleteImg('<%=i%>')">DELETE</button>
                                 </li>
                                 <%}%>
 
@@ -47,8 +45,10 @@
                                         <li id="0">
                                             <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
                                             <input type="file" accept="image/*" name="srcImg"
-                                                src="/styles/imgs/products/shirt.png" id="0" onchange="onChangeImg(event.target)">
-                                            <button type="button" id="0" class="deleteImg" onclick="onDeleteImg(0)">DELETE</button>
+                                                src="/styles/imgs/products/shirt.png" id="0"
+                                                onchange="onChangeImg(event.target)">
+                                            <button type="button" id="0" class="deleteImg"
+                                                onclick="onDeleteImg(0)">DELETE</button>
                                         </li>
                                         <%}%>
                     </ul>
@@ -94,11 +94,13 @@
 
                         <label>
                             Title
-                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title" onchange="onChangeTitle(event.target.value)">
+                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title"
+                                onchange="onChangeTitle(event.target.value)">
                         </label>
                         <label>
                             Color
-                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color" onchange="onChangeColor(event.target.value)">
+                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color"
+                                onchange="onChangeColor(event.target.value)">
                         </label>
 
                         <label>
@@ -125,8 +127,8 @@
                     </label>
 
                     <%if(product !=null){%>
-                        <button type="button" id="updateButton" value="<%=product._id%>" onclick="onUpdateProduct(event)">
-                            <!-- <button type="button" onclick="updateProduct('<%=product._id%>')" id="updateButton" value="<%=product._id%>"> -->
+                        <button type="button" id="updateButton" value="<%=product._id%>"
+                            onclick="onUpdateProduct(event)">
                             Save Changes
                         </button>
                         <button type="button" id="deleteButton" onclick="onDeleteProduct('<%=product._id%>')">

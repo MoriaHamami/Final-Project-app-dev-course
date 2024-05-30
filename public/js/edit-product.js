@@ -4,8 +4,9 @@ let gColor = ''
 let gFavePlayer = ''
 let gPrice = 0
 let gSizes = []
-let gSrcImg = []
-let gNumOfImgs = 0
+let gSrcImgs = []
+// Initialize the amount of images according to the DOM
+let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0
 
 // Functions to update global vars when changes occur in inputs
 function onChangeTitle(newTitle) {
@@ -20,9 +21,30 @@ function onChangePrice(newPrice) {
 function onChangeFavePlayer(newFavePlayer) {
     gFavePlayer = newFavePlayer
 }
+function addTogSrcImgs(imgSrc) {
+    if (imgSrc.includes('data:')) {
+        // If the image was uploaded just add its source to the global srcImg array 
+        gSrcImgs.push(imgSrc)
+    } else {
+        // If the image is from a local path, get the file name saved localy (example: ".../fileName.jpeg" -> get "fileName.jpeg")
+        // Save a temp var
+        const str = imgSrc
+        // Get the index where the last "/" is in the img path
+        const i = str.lastIndexOf('/')
+        // get a substring from right after the first slash, until the end of the string
+        const res = str.substring(i + 1)
+        // Add the file name to the global srcImg array 
+        gSrcImgs.push(res)
+    }
+}
+function updateImgsSrc() {
+    // Get all the imgs in DOM
+    const imgs = $('.edit-product .edit-imgs li img')
+    if(!imgs) return gSrcImgs = []
+    else imgs.map((_, { src }) => addTogSrcImgs(src)) // extract src and add to gSrcImgs var
+}
 
 function onAddImg(input) {
-    // TODO: DEAL WITH ADDING IMG TO EXISTING PRODUCT
     // Check if file is recieved
     if (input.files && input.files[0]) {
         // The FileReader object enables to read the content of a file and use readAsDataURL
@@ -31,8 +53,6 @@ function onAddImg(input) {
         reader.readAsDataURL(input.files[0])
         // Onload is triggered when the reading successfully ends
         reader.onload = function (e) {
-            // Update local var
-            ++gNumOfImgs
             if (gNumOfImgs != 0) {
                 // If there are other images, add the image in DOM after the last image
                 const elLastImg = $('.edit-product .edit-imgs li:last-child')
@@ -55,6 +75,8 @@ function onAddImg(input) {
                  </li>`
                 )
             }
+            // Update local var
+            ++gNumOfImgs
         }
     }
 }
@@ -62,20 +84,7 @@ async function onChangeImg(input) {
     try {
         // Load, view and get the image  
         const imgSrc = await readChangedURL(input)
-        if (imgSrc.includes('data:')) {
-            // If the image was uploaded just add its source to the global srcImg array 
-            gSrcImg.push(imgSrc)
-        } else {
-            // If the image is from a local path, get the file name saved localy (example: ".../fileName.jpeg" -> get "fileName.jpeg")
-            // Save a temp var
-            const str = imgSrc
-            // Get the index where the last "/" is in the img path
-            const i = str.lastIndexOf('/')
-            // get a substring from right after the first slash, until the end of the string
-            const res = str.substring(i + 1)
-            // Add the file name to the global srcImg array 
-            gSrcImg.push(res)
-        }
+        addTogSrcImgs(imgSrc)
     } catch (e) {
         console.log('e:', e)
     }
@@ -121,7 +130,7 @@ async function onAddProduct(ev) {
     // $('.edit-product input[name="sizes"]').each(function () {
     //     gSizes.push($(this).val())
     // })
-
+    updateImgsSrc()
     try {
         // Send a post request using ajax, and send on the body the data from the form
         const newProduct = await $.ajax({
@@ -132,7 +141,7 @@ async function onAddProduct(ev) {
                 title: gTitle,
                 color: gColor,
                 // cat,
-                srcImg: gSrcImg,
+                srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
                 // gender,
@@ -155,6 +164,8 @@ async function onUpdateProduct(ev) {
     //     gSizes.push($(this).val())
     // })
 
+    updateImgsSrc()
+
     try {
         // Send a put (update) request using ajax, and send on the body the data from the form
         await $.ajax({
@@ -165,7 +176,7 @@ async function onUpdateProduct(ev) {
                 title: gTitle,
                 color: gColor,
                 // cat,
-                srcImg: gSrcImg,
+                srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
                 // gender,

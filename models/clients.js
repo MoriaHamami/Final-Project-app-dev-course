@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 // Create another mini scheme to represent an array of numbers
 // (for later use in the orders key which includes the following val:
 // arrays of arrays of product ids)
-// TODO: Make the subscheme works
+// TODO: Make the subscheme work
 const subSchema = new mongoose.Schema([Number])
 // const subSchema = new mongoose.Schema([mongoose.Schema.ObjectId])
 
