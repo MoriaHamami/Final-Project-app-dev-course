@@ -1,241 +1,121 @@
-// window.onload = function () {
-//     var chart = new CanvasJS.chart("chartContainer", {
-//         animationEnabled: true,
-//         zoomEnabled: true,
-//         theme: "dark2",
-//         title: {
-//             text: "Business Growth From 2000 to 2017"
-//         },
-//         axisX: {
-//             title: "Year",
-//             valueFormatString: "####",
-//             interval: 2
-//         },
-//         axisY: {
-//             logarithmic: true, //change it to false
-//             title: "Profit in USD (Log)",
-//             prefix: "$",
-//             titleFontColor: "#6D78AD",
-//             lineColor: "#6D78AD",
-//             gridThickness: 0,
-//             lineThickness: 1,
-//             labelFormatter: addSymbols
-//         },
-//         axisY2: {
-//             title: "Profit in USD",
-//             prefix: "$",
-//             titleFontColor: "#51CDA0",
-//             logarithmic: false, //change it to true
-//             lineColor: "#51CDA0",
-//             gridThickness: 0,
-//             lineThickness: 1,
-//             labelFormatter: addSymbols
-//         },
-//         legend: {
-//             verticalAlign: "top",
-//             fontSize: 16,
-//             dockInsidePlotArea: true
-//         },
-//         data: [{
-//             type: "line",
-//             xValueFormatString: "####",
-//             yValueFormatString: "$#,##0.##",
-//             showInLegend: true,
-//             name: "Log Scale",
-//             dataPoints: [
-//                 { x: 2001, y: 8000 },
-//                 { x: 2002, y: 20000 },
-//                 { x: 2003, y: 40000 },
-//                 { x: 2004, y: 60000 },
-//                 { x: 2005, y: 90000 },
-//                 { x: 2006, y: 140000 },
-//                 { x: 2007, y: 200000 },
-//                 { x: 2008, y: 400000 },
-//                 { x: 2009, y: 600000 },
-//                 { x: 2010, y: 800000 },
-//                 { x: 2011, y: 900000 },
-//                 { x: 2012, y: 1400000 },
-//                 { x: 2013, y: 2000000 },
-//                 { x: 2014, y: 4000000 },
-//                 { x: 2015, y: 6000000 },
-//                 { x: 2016, y: 8000000 },
-//                 { x: 2017, y: 9000000 }
-//             ]
-//         },
-//         {
-//             type: "line",
-//             xValueFormatString: "####",
-//             yValueFormatString: "$#,##0.##",
-//             axisYType: "secondary",
-//             showInLegend: true,
-//             name: "Linear Scale",
-//             dataPoints: [
-//                 { x: 2001, y: 8000 },
-//                 { x: 2002, y: 20000 },
-//                 { x: 2003, y: 40000 },
-//                 { x: 2004, y: 60000 },
-//                 { x: 2005, y: 90000 },
-//                 { x: 2006, y: 140000 },
-//                 { x: 2007, y: 200000 },
-//                 { x: 2008, y: 400000 },
-//                 { x: 2009, y: 600000 },
-//                 { x: 2010, y: 800000 },
-//                 { x: 2011, y: 900000 },
-//                 { x: 2012, y: 1400000 },
-//                 { x: 2013, y: 2000000 },
-//                 { x: 2014, y: 4000000 },
-//                 { x: 2015, y: 6000000 },
-//                 { x: 2016, y: 8000000 },
-//                 { x: 2017, y: 9000000 }
-//             ]
-//         }]
-//     });
-//     chart.render();
+// TODO: When changing viewport size, change the vh and vw accordingly
+updateGraphs()
+window.addEventListener("resize", updateGraphs)
+function updateGraphs() {
 
-//     function addSymbols(e) {
-//         var suffixes = ["", "K", "M", "B"];
+    $('#chart').empty()
+    $('#graph').empty()
 
-//         var order = Math.max(Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)), 0);
-//         if (order > suffixes.length - 1)
-//             order = suffixes.length - 1;
 
-//         var suffix = suffixes[order];
-//         return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
-//     }
+    let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-//     var pie = new CanvasJS.Chart("pieContainer", {
-//     // var options = {
-//         title: {
-//             text: "Desktop OS Market Share"
-//         },
-//         subtitles: [{
-//             text: "As of November, 2017"
-//         }],
-//         theme: "light2",
-//         animationEnabled: true,
-//         data: [{
-//             type: "pie",
-//             startAngle: 40,
-//             toolTipContent: "<b>{label}</b>: {y}%",
-//             showInLegend: "true",
-//             legendText: "{label}",
-//             indexLabelFontSize: 16,
-//             indexLabel: "{label} - {y}%",
-//             dataPoints: [
-//                 { y: 48.36, label: "Windows 7" },
-//                 { y: 26.85, label: "Windows 10" },
-//                 { y: 1.49, label: "Windows 8" },
-//                 { y: 6.98, label: "Windows XP" },
-//                 { y: 6.53, label: "Windows 8.1" },
-//                 { y: 2.45, label: "Linux" },
-//                 { y: 3.32, label: "Mac OS X 10.12" },
-//                 { y: 4.03, label: "Others" }
-//             ]
-//         }]
-//     })
-//     // $("#pieContainer").CanvasJSChart(options);
-//     pie.render();
-// }
+    // The Data that we wish to display on our graph, an array of Javascript Objects
+    var data = [{
+        'name': "Bar Charts", 'value': 7
+    }, {
+        'name': "Pie Charts", 'value': 19
+    }, {
+        'name': "Scatterplots", 'value': 12
+    }, {
+        'name': "Timelines", 'value': 14
+    }, {
+        'name': "Node Graphs", 'value': 23
+    }, {
+        'name': "Tree Graphs", 'value': 8
+    }, {
+        'name': "Stream Graphs", 'value': 11
+    }, {
+        'name': "Voronoi Diagrams", 'value': 14
+    }]
 
-// The Data that we wish to display on our graph, an array of Javascript Objects
-var data = [{
-    'name':"Bar Charts",'value': 7
-  },{
-    'name':"Pie Charts",'value': 19
-  },{
-    'name':"Scatterplots",'value': 12
-  },{
-    'name':"Timelines",'value': 14
-  },{
-    'name':"Node Graphs", 'value': 23
-  },{
-    'name':"Tree Graphs",'value': 8
-  },{
-    'name':"Stream Graphs",'value': 11
-  },{
-    'name':"Voronoi Diagrams",'value': 14
-  }];
-  
-  
-  // Set the dimensions of our chart to be displayed 
-  var barsWidth = 500,
-      barsHeight = 400,
-      axisMargin = 100;
-  
-  var chartHeight = barsHeight+axisMargin,
-      chartWidth = barsWidth+axisMargin;
-  
-  
-  // Select the chart element on the page so we can reference it in code
-  // Also set the width and height attributes of the chart SVG 
-  var chart = d3.select('#chart')
-      .attr('width', chartWidth+100)
-      .attr('height', chartHeight);
-  
-  // Create a linear scale for our y-axis to map datapoint values to pixel heights of bars
-  var yScale = d3.scaleLinear()
-      .domain([0,d3.max(data, function(d){
-      // return the value property of each datapoint so the max function can compare
-          return d.value;
-      })])
-      .rangeRound([barsHeight, 0]);
-  
-  // Create a scale that returns the bands each bar should be in along the x-axis
-  let xScale = d3.scaleBand()
-      .domain(
-          data.map(
-              function(d){
-          // For each datapoint in our data array
-          // Return the name property into our new domain array
-                  return d.name;
-              }
-          )
-      )
-      .rangeRound([0,barsWidth])
-      .padding(0.1);
-  
-  // Create an SVG group that we will add the individual bar elements of our chart to
-  var bars = chart.append('g')
-      .attr('id', "bars-container");
-  
-  // Bind the data to our .bars svg elements
-  // Create a rectangle for each data point and set position and dimensions using scales
-  bars.selectAll('.bar')
-      .data(data)
-      .enter().append("rect")
-          .attr('class', "bar")
-          .attr('x', function(d){
-              return xScale(d.name);
-          })
-          .attr('y', function(d){
-              return yScale(d.value); 
-          })
-          .attr('width', xScale.bandwidth())
-          .attr('height', function(d){return barsHeight-yScale(d.value);});
-  
-  // Move the bars so that there is space on the left for the y-axis
-  bars.attr('transform', 'translate('+axisMargin+',0)');
-  
-  // Create a new SVG group for the y-axis elements
-  // Generate the y-axis with 10 ticks and move into position
-  yAxis = chart.append('g')
-      .attr('id','y-axis')
-      .call(d3.axisLeft(yScale).ticks(10))
-          .attr('transform', 'translate('+axisMargin+',0)');
-  
-  // Create another group for the x-axis elements
-  // Generate the x-axis using the our x scale and move into positon
-  // Select the text elements and rotate by 45 degrees
-  xAxis = chart.append('g')
-      .attr('id', 'x-axis')
-      .call(d3.axisBottom(xScale))
-      .attr('transform', 'translate('+axisMargin+','+barsHeight+')')
-      .selectAll("text")
-          .style("text-anchor",'start')
-          .attr('transform', 'rotate(45)');
-  
-          
-  
+
+    // Set the dimensions of the bars in the bar chart  
+    let barsHeight = vh / 2,
+        barsWidth = vw * (1 / 3)
+
+    // Set the dimensions of the bar chart and the margin around it for the bands (תגיות) to be seen  
+    let axisMargin = 100,
+        chartHeight = vh / 2 + axisMargin,
+        chartWidth = vw * (1 / 3) + axisMargin
+
+
+    // Select the chart bar element and set the width and height attributes of the chart SVG 
+    let chart = d3.select('#chart')
+        .attr('width', chartWidth + 100)
+        .attr('height', chartHeight)
+
+    // Create a scale for the y-axis to map dataPoint values to pixel heights of the bars
+    let yScale = d3.scaleLinear()
+        // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
+        // Max returns the maximum value out of values from data array
+        .domain([0, d3.max(data, dataPoint => dataPoint.value)])
+        // rangRound sets the scale's range to the specified array of values ( in y-axis: [end, start]), and setting round (the numbers) to true
+        .rangeRound([barsHeight, 0])
+
+    // Create a scale for the x-axis that returns the bands (תגיות) and their places 
+    let xScale = d3.scaleBand()
+        // Domain defines the range of values that the scale will accept (in our case: the name of each dataPoint)
+        .domain(
+            // For each dataPointatapoint in our data array return the name 
+            data.map(dataPoint => dataPoint.name)
+        )
+        // rangRound sets the scale's range to the specified array of values (in x-axis: [start, end])
+        .rangeRound([0, barsWidth])
+        // Adds padding between each band (תגית)
+        .padding(0.1)
+
+
+    // Create an SVG group to which we will add the bar elements 
+    var bars = chart.append('g')
+        // Give the g tag the id: "bars-container"
+        .attr('id', "bars-container")
+
+    // Bind the data to our .bars svg elements
+    // Create a rectangle for each data point and set position and dimensions using scales
+    bars.selectAll('.bar')
+        // enter() creates the initial join of data to elements, 
+        // creating one rect element for every dataPoint in the array
+        .data(data).enter().append("rect")
+        // Give each bar a class bar
+        .attr('class', "bar")
+        // Start the x poistion of each bar at the x-axis value (the start of the band)
+        .attr('x', d => xScale(d.name))
+        // Start the y poistion of each bar at the y-axis value which is the opposite value than what we expect 
+        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
+        .attr('y', d => yScale(d.value))
+        // Give each bar the width of the band (תגית) 
+        .attr('width', xScale.bandwidth())
+        // Give each bar a height (position starts at value given, 
+        // then we add the tallest bar height which makes the bar seem below the x-axis,
+        // and then we remove the y-axis value, which is the opposite value than what we expect 
+        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
+        .attr('height', dataPoint => barsHeight - yScale(dataPoint.value))
+
+    // Move the bars right, so that there is space on the left for the y-axis scale
+    bars.attr('transform', 'translate(' + axisMargin + ',0)')
+
+    // Create a new SVG group for the y-axis elements
+    yAxis = chart.append('g')
+        .attr('id', 'y-axis')
+        // Generate the y-axis with 10 ticks (using the values from yScale)
+        .call(d3.axisLeft(yScale).ticks(10))
+        // Move the y-axis into position (left from the bars container)
+        .attr('transform', 'translate(' + axisMargin + ',0)')
+
+    // Create another group for the x-axis elements
+    xAxis = chart.append('g')
+        .attr('id', 'x-axis')
+        // Generate the x-axis using the values from the xScale 
+        .call(d3.axisBottom(xScale))
+        // Move the x-axis into position (from top of graph add highest bar val that will get us down 
+        // and add the margin to go lower. This will be the position where the text of the scale will end)
+        .attr('transform', 'translate(' + axisMargin + ',' + barsHeight + ')')
+        // Select the text elements 
+        .selectAll("text")
+        // Rotate by 45 degrees (from position of the start of the text)
+        .style("text-anchor", 'start')
+        .attr('transform', 'rotate(45)')
 
 
 
@@ -243,220 +123,148 @@ var data = [{
 
 
 
-//           var width = 400;
-// var height = 400;
-// var radius = 200;
-// // var colors = d3.schemeCategory20;
-// var colors = d3.scaleOrdinal(d3.schemeCategory20c);
+    // Fake data
+    var data = [
+        {
+            year: 2000,
+            popularity: 50
+        },
+        {
+            year: 2001,
+            popularity: 150
+        },
+        {
+            year: 2002,
+            popularity: 200
+        },
+        {
+            year: 2003,
+            popularity: 130
+        },
+        {
+            year: 2004,
+            popularity: 240
+        },
+        {
+            year: 2005,
+            popularity: 380
+        },
+        {
+            year: 2006,
+            popularity: 420
+        }
+    ]
 
-// var pieData = [
-//   {
-//     console:'PS4',
-//     purchases: 2500
-//   },
-//   {
-//     console:'XBox One',
-//     purchases: 2100
-//   },
-//   {
-//     console:'PS3',
-//     purchases: 1800
-//   },
-//   {
-//     console:'XBox 360',
-//     purchases: 1900
-//   },
-//   {
-//     console:'Wii',
-//     purchases: 1300
-//   }
-// ]
+    // Create SVG and padding for the graph
+    const padding = { top: 30, bottom: 20, left: 30, right: 20 }
+    const svg = d3
+        .select("#graph")
+        // Add an SVG element
+        .append("svg")
+        // Give the SVG element height and width
+        .attr("height", (vh - padding.top - padding.bottom) / 2)
+        .attr("width", vw * (6 / 9) - padding.left - padding.right)
 
-// var pie = d3.pie()
-//   .value(function(d){
-//     return d.purchases;
-//   })
+    // Add an SVG group (g tag) to act as a container for the graph
+    const graph = svg
+        .append("g")
+        // Move the container right, so the y-axis will have space (it will start from here and go left)
+        .attr("transform", `translate(${padding.left},0)`)
 
-// var arc = d3.arc()
-//   .outerRadius(radius) 
+    // Save width and height vars for the scales (leaving out the padding area for the numbers to be shown)
+    const width = +svg.attr("width") - padding.left - padding.right
+    const height = +svg.attr("height") - padding.top - padding.bottom
 
-// var chart = d3.select('#chart').append('svg')
-//   .attr('width', width)
-//   .attr('height', height)
-//   .append('g')
-//     .attr('transform', 'translate('+(width - radius)+','+(height - radius)+')')
-//     .selectAll('path')
-//     .data(pie(pieData))
-//     .enter()
-//     .append('g')
-//       .attr('class', 'slice')
+    // Create a g tag to act as a path container
+    const pathConatiner = graph.append("g")
+    // Add empty SVG groups for the scales (x-axis and y-axis)
+    graph.append("g").attr("class", "x-axis")
+    graph.append("g").attr("class", "y-axis")
 
-// var slices = d3.selectAll('g.slice')
-//   .append('path')
-//     .attr('fill', function(d, i){
-//       return colors(i);
-//     })
-//     .attr('d', arc)
-
-// var text = d3.selectAll('g.slice')
-//   .append('text')
-//   .text(function(d,i){
-//     return d.data.console;
-//   })
-//   .attr('text-anchor', 'middle')
-//   .attr('fill', 'white')
-//   .attr('transform', function(d){
-//     d.innerRadius = 0;
-//     d.outerRadius = radius;
-//     return 'translate('+arc.centroid(d)+')';
-//   })
-
-
-
-
-
-
+    // Create an empty path
+    pathConatiner
+        .append("path")
+        // .attr("transform", `translate(${padding.left},0)`)
+        .attr("fill", "none")
+        // Add a color to the path
+        .attr("stroke", "steelblue")
+        // stroke-linejoin sets the shape of the corners where two lines meet
+        .attr("stroke-linejoin", "round")
+        // stroke-linecap sets the shape of the end-lines for a line or open path
+        .attr("stroke-linecap", "round")
+        // Give the path the following width
+        .attr("stroke-width", 1.5)
 
 
+    // Make the graph visible using the data saved up until now, 
+    // and using the following funcs (below)
+    updategraph(data)
 
-
-
-
-
-
-
-
-
-
-
-// Fake data
-var data = [
-    {
-      year: 2000,
-      popularity: 50
-    },
-    {
-      year: 2001,
-      popularity: 150
-    },
-    {
-      year: 2002,
-      popularity: 200
-    },
-    {
-      year: 2003,
-      popularity: 130
-    },
-    {
-      year: 2004,
-      popularity: 240
-    },
-    {
-      year: 2005,
-      popularity: 380
-    },
-    {
-      year: 2006,
-      popularity: 420
+    function updategraph(data) {
+        // Save data of scales
+        const { yScale, xScale } = updateScales(data)
+        // Shoe scale data on axes
+        updateAxes(data, graph, xScale, yScale)
+        // Save data of line
+        const line = createLine(xScale, yScale)
+        // Show the line
+        updatePath(data, line)
     }
-  ];
-  
-  // Create SVG and padding for the graph
-  const svg = d3
-    .select("#graph")
-    .append("svg")
-    .attr("height", 300)
-    .attr("width", 600);
-  const margin = { top: 0, bottom: 20, left: 30, right: 20 };
-  const graph = svg.append("g").attr("transform", `translate(${margin.left},0)`);
-  const width = +svg.attr("width") - margin.left - margin.right;
-  const height = +svg.attr("height") - margin.top - margin.bottom;
-  const grp = graph
-    .append("g")
-    .attr("transform", `translate(-${margin.left},-${margin.top})`);
-  
-  // Add empty scales group for the scales to be attatched to on update 
-  graph.append("g").attr("class", "x-axis");
-  graph.append("g").attr("class", "y-axis");
-  
-  // Add empty path
-  const path = grp
-    .append("path")
-    .attr("transform", `translate(${margin.left},0)`)
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5);
-  
-  function updateScales(data) {
-    // Create scales
-    const yScale = d3
-      .scaleLinear()
-      .range([height, 0])
-      .domain([0, d3.max(data, dataPoint => dataPoint.popularity)]);
-    const xScale = d3
-      .scaleLinear()    
-      .range([0, width])
-      .domain(d3.extent(data, dataPoint => dataPoint.year));
-    return { yScale, xScale };
-  }
-  
-  function createLine(xScale, yScale) {
-    return line = d3
-    .line()
-    .x(dataPoint => xScale(dataPoint.year))
-    .y(dataPoint => yScale(dataPoint.popularity));
-  }
-  
-  function updateAxes(data, graph, xScale, yScale) {
-    graph
-      .select(".x-axis")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(xScale).ticks(data.length));
-    graph
-      .select(".y-axis")
-      .attr("transform", `translate(0, 0)`)
-      .call(d3.axisLeft(yScale));
-  }
-  
-  function updatePath(data, line) {
-    const updatedPath = d3
-      .select("path")
-      .interrupt()
-      .datum(data)
-      .attr("d", line);
-  
-    const pathLength = updatedPath.node().getTotalLength();
-    // D3 provides lots of transition options, have a play around here:
-    // https://github.com/d3/d3-transition
-    const transitionPath = d3
-      .transition()
-      .ease(d3.easeSin)
-      .duration(2500);
-    updatedPath
-      .attr("stroke-dashoffset", pathLength)
-      .attr("stroke-dasharray", pathLength)
-      .transition(transitionPath)
-      .attr("stroke-dashoffset", 0);
-  }
-  
-  function updategraph(data) {
-      const { yScale, xScale } = updateScales(data);
-      const line = createLine(xScale, yScale);
-      updateAxes(data, graph, xScale, yScale);
-      updatePath(data, line);
-  }
-  
-  updategraph(data);
-  // Update graph when button is clicked
-  d3.select("button").on("click", () => {
-    // Create new fake data
-    const newData = data.map(row => {
-      return { ...row, popularity: row.popularity * Math.random() };
-    });
-    updategraph(newData);
-  });
+
+    function updateScales(data) {
+        // Create scales
+        const yScale = d3
+            // Create a scale for the y-axis to map dataPoint values to pixel heights 
+            .scaleLinear()
+            // rang sets the scale's range to the specified array of values ( in y-axis: [end, start])
+            .range([height, 0])
+            // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
+            // Max returns the maximum value out of values
+            .domain([0, d3.max(data, dataPoint => dataPoint.popularity)])
+        const xScale = d3
+            // Create a scale for the x-axis to map dataPoint values to pixel heights 
+            .scaleLinear()
+            // rang sets the scale's range to the specified array of values ( in x-axis: [start, end])
+            .range([0, width])
+            // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
+            // extent() is used to return the min and max value in an array from the given array
+            .domain(d3.extent(data, dataPoint => dataPoint.year))
+        return { yScale, xScale }
+    }
+
+    function updateAxes(data, graph, xScale, yScale) {
+        graph
+            .select(".x-axis")
+            // Move x-axis to bottom (because in d3 the direction is from top left corner)
+            .attr("transform", `translate(0,${height})`)
+            // Generate the x-axis with ticks (using the values from xScale and the amount of dataPoints)
+            .call(d3.axisBottom(xScale).ticks(data.length))
+
+        graph
+            .select(".y-axis")
+            // Generate the y-axis with ticks (using the values from yScale and the amount of dataPoints)
+            .call(d3.axisLeft(yScale))
+    }
+
+    function createLine(xScale, yScale) {
+        return line = d3
+            // constructs a new line generator with the default settings
+            .line()
+            // Sets x vals according to data 
+            .x(dataPoint => xScale(dataPoint.year))
+            // Sets y vals according to data 
+            .y(dataPoint => yScale(dataPoint.popularity))
+    }
+
+    function updatePath(data, line) {
+        d3.select("path")
+            // creates one large svg element with the data instead of multiple elements
+            .datum(data)
+            // defines a path to be drawn
+            .attr("d", line)
+    }
+
+}
 
 
 
@@ -483,4 +291,3 @@ var data = [
 
 
 
-  

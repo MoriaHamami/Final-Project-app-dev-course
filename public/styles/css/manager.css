@@ -23,6 +23,28 @@
     font-weight: 600;
 }
 
+.manager {
+    background-color: var(--almost-white);
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.manager section {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--card-bsh);
+    /* Prevent articles from being smeared unnecessarily */
+    height: min-content;
+    width: min-content;
+}
+
 .manager .personal-info {
     width: max-content;
 }
@@ -46,10 +68,22 @@
     cursor: pointer;
 }
 
-.manager .shops ul {}
+.manager .shops p {
+    margin: 0;
+}
+
+.manager .shops li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .manager .analytics {}
 
+.manager svg{
+    /* height: 100px;
+    width: 100px; */
+}
 
 
 /* body {
