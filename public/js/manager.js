@@ -1,127 +1,20 @@
-// TODO: When changing viewport size, change the vh and vw accordingly
+// Create the graphs
 updateGraphs()
+
+// With every viewport change, create the graphs again
 window.addEventListener("resize", updateGraphs)
+
 function updateGraphs() {
 
+    // Create a new graph after every viewport resize
     $('#chart').empty()
     $('#graph').empty()
 
-
+    // Update the vh and vw after every viewport resize
     let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-    // The Data that we wish to display on our graph, an array of Javascript Objects
-    var data = [{
-        'name': "Bar Charts", 'value': 7
-    }, {
-        'name': "Pie Charts", 'value': 19
-    }, {
-        'name': "Scatterplots", 'value': 12
-    }, {
-        'name': "Timelines", 'value': 14
-    }, {
-        'name': "Node Graphs", 'value': 23
-    }, {
-        'name': "Tree Graphs", 'value': 8
-    }, {
-        'name': "Stream Graphs", 'value': 11
-    }, {
-        'name': "Voronoi Diagrams", 'value': 14
-    }]
-
-
-    // Set the dimensions of the bars in the bar chart  
-    let barsHeight = vh / 2,
-        barsWidth = vw * (1 / 3)
-
-    // Set the dimensions of the bar chart and the margin around it for the bands (תגיות) to be seen  
-    let axisMargin = 100,
-        chartHeight = vh / 2 + axisMargin,
-        chartWidth = vw * (1 / 3) + axisMargin
-
-
-    // Select the chart bar element and set the width and height attributes of the chart SVG 
-    let chart = d3.select('#chart')
-        .attr('width', chartWidth + 100)
-        .attr('height', chartHeight)
-
-    // Create a scale for the y-axis to map dataPoint values to pixel heights of the bars
-    let yScale = d3.scaleLinear()
-        // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
-        // Max returns the maximum value out of values from data array
-        .domain([0, d3.max(data, dataPoint => dataPoint.value)])
-        // rangRound sets the scale's range to the specified array of values ( in y-axis: [end, start]), and setting round (the numbers) to true
-        .rangeRound([barsHeight, 0])
-
-    // Create a scale for the x-axis that returns the bands (תגיות) and their places 
-    let xScale = d3.scaleBand()
-        // Domain defines the range of values that the scale will accept (in our case: the name of each dataPoint)
-        .domain(
-            // For each dataPointatapoint in our data array return the name 
-            data.map(dataPoint => dataPoint.name)
-        )
-        // rangRound sets the scale's range to the specified array of values (in x-axis: [start, end])
-        .rangeRound([0, barsWidth])
-        // Adds padding between each band (תגית)
-        .padding(0.1)
-
-
-    // Create an SVG group to which we will add the bar elements 
-    var bars = chart.append('g')
-        // Give the g tag the id: "bars-container"
-        .attr('id', "bars-container")
-
-    // Bind the data to our .bars svg elements
-    // Create a rectangle for each data point and set position and dimensions using scales
-    bars.selectAll('.bar')
-        // enter() creates the initial join of data to elements, 
-        // creating one rect element for every dataPoint in the array
-        .data(data).enter().append("rect")
-        // Give each bar a class bar
-        .attr('class', "bar")
-        // Start the x poistion of each bar at the x-axis value (the start of the band)
-        .attr('x', d => xScale(d.name))
-        // Start the y poistion of each bar at the y-axis value which is the opposite value than what we expect 
-        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
-        .attr('y', d => yScale(d.value))
-        // Give each bar the width of the band (תגית) 
-        .attr('width', xScale.bandwidth())
-        // Give each bar a height (position starts at value given, 
-        // then we add the tallest bar height which makes the bar seem below the x-axis,
-        // and then we remove the y-axis value, which is the opposite value than what we expect 
-        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
-        .attr('height', dataPoint => barsHeight - yScale(dataPoint.value))
-
-    // Move the bars right, so that there is space on the left for the y-axis scale
-    bars.attr('transform', 'translate(' + axisMargin + ',0)')
-
-    // Create a new SVG group for the y-axis elements
-    yAxis = chart.append('g')
-        .attr('id', 'y-axis')
-        // Generate the y-axis with 10 ticks (using the values from yScale)
-        .call(d3.axisLeft(yScale).ticks(10))
-        // Move the y-axis into position (left from the bars container)
-        .attr('transform', 'translate(' + axisMargin + ',0)')
-
-    // Create another group for the x-axis elements
-    xAxis = chart.append('g')
-        .attr('id', 'x-axis')
-        // Generate the x-axis using the values from the xScale 
-        .call(d3.axisBottom(xScale))
-        // Move the x-axis into position (from top of graph add highest bar val that will get us down 
-        // and add the margin to go lower. This will be the position where the text of the scale will end)
-        .attr('transform', 'translate(' + axisMargin + ',' + barsHeight + ')')
-        // Select the text elements 
-        .selectAll("text")
-        // Rotate by 45 degrees (from position of the start of the text)
-        .style("text-anchor", 'start')
-        .attr('transform', 'rotate(45)')
-
-
-
-
-
-
+    //////////////////// LINE GRAPH ///////////////////////////
 
     // Fake data
     var data = [
@@ -263,6 +156,114 @@ function updateGraphs() {
             // defines a path to be drawn
             .attr("d", line)
     }
+
+    //////////////////// BAR GRAPH ///////////////////////////
+
+    // The Data that we wish to display on our graph, an array of Javascript Objects
+    var data = [{
+        'name': "Bar Charts", 'value': 7
+    }, {
+        'name': "Pie Charts", 'value': 19
+    }, {
+        'name': "Scatterplots", 'value': 12
+    }, {
+        'name': "Timelines", 'value': 14
+    }, {
+        'name': "Node Graphs", 'value': 23
+    }, {
+        'name': "Tree Graphs", 'value': 8
+    }, {
+        'name': "Stream Graphs", 'value': 11
+    }, {
+        'name': "Voronoi Diagrams", 'value': 14
+    }]
+
+    // Set the dimensions of the bars in the bar chart  
+    let barsHeight = vh / 2,
+        barsWidth = vw * (1 / 3)
+
+    // Set the dimensions of the bar chart and the margin around it for the bands (תגיות) to be seen  
+    let axisMargin = 100,
+        chartHeight = vh / 2 + axisMargin,
+        chartWidth = vw * (1 / 3) + axisMargin
+
+
+    // Select the chart bar element and set the width and height attributes of the chart SVG 
+    let chart = d3.select('#chart')
+        .attr('width', chartWidth + 100)
+        .attr('height', chartHeight)
+
+    // Create a scale for the y-axis to map dataPoint values to pixel heights of the bars
+    let yScale = d3.scaleLinear()
+        // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
+        // Max returns the maximum value out of values from data array
+        .domain([0, d3.max(data, dataPoint => dataPoint.value)])
+        // rangRound sets the scale's range to the specified array of values ( in y-axis: [end, start]), and setting round (the numbers) to true
+        .rangeRound([barsHeight, 0])
+
+    // Create a scale for the x-axis that returns the bands (תגיות) and their places 
+    let xScale = d3.scaleBand()
+        // Domain defines the range of values that the scale will accept (in our case: the name of each dataPoint)
+        .domain(
+            // For each dataPointatapoint in our data array return the name 
+            data.map(dataPoint => dataPoint.name)
+        )
+        // rangRound sets the scale's range to the specified array of values (in x-axis: [start, end])
+        .rangeRound([0, barsWidth])
+        // Adds padding between each band (תגית)
+        .padding(0.1)
+
+
+    // Create an SVG group to which we will add the bar elements 
+    var bars = chart.append('g')
+        // Give the g tag the id: "bars-container"
+        .attr('id', "bars-container")
+
+    // Bind the data to our .bars svg elements
+    // Create a rectangle for each data point and set position and dimensions using scales
+    bars.selectAll('.bar')
+        // enter() creates the initial join of data to elements, 
+        // creating one rect element for every dataPoint in the array
+        .data(data).enter().append("rect")
+        // Give each bar a class bar
+        .attr('class', "bar")
+        // Start the x poistion of each bar at the x-axis value (the start of the band)
+        .attr('x', d => xScale(d.name))
+        // Start the y poistion of each bar at the y-axis value which is the opposite value than what we expect 
+        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
+        .attr('y', d => yScale(d.value))
+        // Give each bar the width of the band (תגית) 
+        .attr('width', xScale.bandwidth())
+        // Give each bar a height (position starts at value given, 
+        // then we add the tallest bar height which makes the bar seem below the x-axis,
+        // and then we remove the y-axis value, which is the opposite value than what we expect 
+        // because with D3 we are working from the top left corner, meaning the values start at top and end at the bottom)
+        .attr('height', dataPoint => barsHeight - yScale(dataPoint.value))
+
+    // Move the bars right, so that there is space on the left for the y-axis scale
+    bars.attr('transform', 'translate(' + axisMargin + ',0)')
+
+    // Create a new SVG group for the y-axis elements
+    yAxis = chart.append('g')
+        .attr('id', 'y-axis')
+        // Generate the y-axis with 10 ticks (using the values from yScale)
+        .call(d3.axisLeft(yScale).ticks(10))
+        // Move the y-axis into position (left from the bars container)
+        .attr('transform', 'translate(' + axisMargin + ',0)')
+
+    // Create another group for the x-axis elements
+    xAxis = chart.append('g')
+        .attr('id', 'x-axis')
+        // Generate the x-axis using the values from the xScale 
+        .call(d3.axisBottom(xScale))
+        // Move the x-axis into position (from top of graph add highest bar val that will get us down 
+        // and add the margin to go lower. This will be the position where the text of the scale will end)
+        .attr('transform', 'translate(' + axisMargin + ',' + barsHeight + ')')
+        // Select the text elements 
+        .selectAll("text")
+        // Rotate by 45 degrees (from position of the start of the text)
+        .style("text-anchor", 'start')
+        .attr('transform', 'rotate(45)')
 
 }
 
