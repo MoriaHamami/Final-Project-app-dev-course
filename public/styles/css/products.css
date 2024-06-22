@@ -52,9 +52,9 @@
     /* תתן לכל תא רוחב של 186 פיקסל, ואם הוא צריך יותר מזה
      (תמתח מעט את התאים עד שלבסוף תעלה תא אחד מלמטה לשורה זו (כאשר יהיה מקום לתא נוסף */
     grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
-    gap: 20px;
     /* רווח בין התמונות */
-    margin-top: 800px;
+    gap: 20px;
+    
 }
 
 .image-container {
