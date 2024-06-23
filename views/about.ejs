@@ -148,13 +148,15 @@
                 </div>
             </div>
         </section>
+
         <section class="map">
-            <h3>Our branches</h3>
+            <h3>Our stores</h3>
             <!--The div element for the map -->
-            <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID" >
-                <!-- Markers for the google maps -->
-                    <gmp-advanced-marker position="37.4220656,-122.0840897" title="Mountain View, CA"></gmp-advanced-marker>
-                    <gmp-advanced-marker position="47.648994,-122.3503845" title="Seattle, WA"></gmp-advanced-marker>
+            <gmp-map center="<%= coords.center.lat %>,<%= coords.center.long %>" zoom="5" map-id="branchesMap" >
+                    <!-- Go over all the coords and add markers for them on map -->
+                    <% for(let i=0; i< coords.data.length; i++) { %>                      
+                        <gmp-advanced-marker position="<%= coords.data[i].lat %>,<%= coords.data[i].long %>" title="<%= coords.data[i].address %>"></gmp-advanced-marker>                  
+                        <% } %>
             </gmp-map>
         </section>
 

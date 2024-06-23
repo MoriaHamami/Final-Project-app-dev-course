@@ -2,7 +2,7 @@
 // from a .env file into the process.env object.
 require("dotenv").config()
 // Specify which .env file path to use via the path option 
-require('custom-env').env(process.env.NODE_ENV, './config')
+require('custom-env').env(process.env.NODE_ENV, './configurations')
 
 // Mongoose is a MongoDB object modeling tool that works in an async env. 
 // Mongoose supports Node.js

@@ -8,10 +8,13 @@ const subSchema = new mongoose.Schema({
 })
 
 const About = new mongoose.Schema({
-    coords: [subSchema]
+    data: [subSchema]
+},{
+    // Without this line mongoose creates a new empty collection of "abouts"  
+    collection:"about"
 })
 
-module.exports = mongoose.model("about", subSchema)
+module.exports = mongoose.model("about", About)
 
 
 
