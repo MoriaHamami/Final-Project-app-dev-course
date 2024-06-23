@@ -21,9 +21,7 @@
 
 
         <main class="edit-product">
-
-            <!-- <form method="<%= (product !=null) ? 'PATCH' : 'POST'%>" id="editProduct" action="<%= (product !=null) ? ('/products/edit/'+product._id+'?_method=PUT') : ('/products/edit')%>"> -->
-            <form method="POST" id="editProduct" action="<%= (product !=null) ? '' : '/products/edit'%>">
+            <form id="editProduct">
                 <article class="edit-imgs">
                     <h3>Images</h3>
                     <ul>
@@ -32,13 +30,14 @@
                                 <li id="<%=i%>">
                                     <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                         class="srcImg-<%=i%>">
-                                    <!-- <img src="/styles/imgs/products/<%= product.srcImg[i] %>" class="srcImg-<%=i%>"> -->
-                                    <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)"
+                                    <input type="file" accept="image/*" name="srcImg"
+                                        onchange="onChangeImg(event.target)"
                                         src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                         id="<%=i%>">
                                     <button type="button">UPDATE</button>
                                     </input>
-                                    <button type="button" id="<%=i%>" class="deleteImg">DELETE</button>
+                                    <button type="button" id="<%=i%>" class="deleteImg"
+                                        onclick="onDeleteImg('<%=i%>')">DELETE</button>
                                 </li>
                                 <%}%>
 
@@ -46,13 +45,15 @@
                                         <li id="0">
                                             <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
                                             <input type="file" accept="image/*" name="srcImg"
-                                                src="/styles/imgs/products/shirt.png" id="0">
-                                            <button type="button" id="0" class="deleteImg">DELETE</button>
+                                                src="/styles/imgs/products/shirt.png" id="0"
+                                                onchange="onChangeImg(event.target)">
+                                            <button type="button" id="0" class="deleteImg"
+                                                onclick="onDeleteImg(0)">DELETE</button>
                                         </li>
                                         <%}%>
                     </ul>
                     <button>
-                        <input type="file" accept="image/*" name="addImg">
+                        <input type="file" accept="image/*" name="addImg" onchange="onAddImg(event.target)">
                         <i class="bi bi-plus"></i>
                         Add another image
                     </button>
@@ -93,23 +94,25 @@
 
                         <label>
                             Title
-                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title">
+                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title"
+                                onchange="onChangeTitle(event.target.value)">
                         </label>
                         <label>
                             Color
-                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color">
+                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color"
+                                onchange="onChangeColor(event.target.value)">
                         </label>
 
                         <label>
                             Price
-                            <input id="price" type="number" value="<%= (product !=null) ? product.price : '' %>"
-                                name="price">
+                            <input id="price" type="number" value="<%= (product !=null) ? product.price : 0 %>"
+                                name="price" onchange="onChangePrice(event.target.value)">
                         </label>
 
                         <label>
                             Favorite Player
                             <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
-                                name="favePlayer">
+                                name="favePlayer" onchange="onChangeFavePlayer(event.target.value)">
                         </label>
                     </section>
                 </article>
@@ -124,22 +127,21 @@
                     </label>
 
                     <%if(product !=null){%>
-                        <button type="button" id="updateButton" value="<%=product._id%>">
-                            <!-- <button type="button" onclick="updateProduct('<%=product._id%>')" id="updateButton" value="<%=product._id%>"> -->
+                        <button type="button" id="updateButton" value="<%=product._id%>"
+                            onclick="onUpdateProduct(event)">
                             Save Changes
                         </button>
-                        <button type="button" id="deleteButton" value="<%=product._id%>">
+                        <button type="button" id="deleteButton" onclick="onDeleteProduct('<%=product._id%>')">
                             Delete Item
                         </button>
                         <% }else{ %>
-                            <button type="button" for="editProduct" id="addButton">
+                            <button id="addButton" onclick="onAddProduct(event)">
                                 Add Item
                             </button>
                             <% } %>
                 </article>
             </form>
 
-            
         </main>
 
         <%- include('footer.ejs') -%>

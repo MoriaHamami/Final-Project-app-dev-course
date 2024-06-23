@@ -4,8 +4,6 @@
     justify-content: center;
     /* Make background on whole page that is seen */
     background-color: var(--almost-white);
-    height: 100vh;
-    overflow-y: scroll;
 }
 
 .edit-product h3:not(.edit-actions) {
@@ -40,8 +38,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0;
-    margin: 0;
+    /* padding: 0;
+    margin: 0; */
 }
 
 .edit-product button {
@@ -55,7 +53,8 @@
     background-color: var(--ll-gray);
 }
 
-.edit-product form {
+.edit-product form,
+.edit-product .info {
     display: flex;
     flex-direction: column;
 }

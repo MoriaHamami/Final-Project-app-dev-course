@@ -1,0 +1,144 @@
+.manager {
+    /* Add background color for page */
+    background-color: var(--almost-white);
+    display: flex;
+    justify-content: center;
+    /* When there is no space for an elemnt, let it wrap (go down a row) */
+    flex-wrap: wrap;
+}
+
+.manager section {
+    display: flex;
+    flex-direction: column;
+    /* Give each section a white background */
+    background-color: white;
+    /* Let each section have space around it */
+    margin: 10px;
+    padding: 30px;
+    /* Make the edges rounded in each section */
+    border-radius: 10px;
+    /* Make each section have a shadow to make it seem 3D */
+    box-shadow: var(--card-bsh);
+    /* Prevent articles from being smeared unnecessarily */
+    height: min-content;
+    width: min-content;
+}
+
+.manager ul {
+    /* Remove dots from every ul */
+    list-style-type: none;
+    /* Remove default padding from every ul in page */
+    padding: 0;
+}
+
+/* Remove default margin from p tags */
+.manager p {
+    margin: 0;
+}
+
+.manager i {
+    /* Make every icon seem clickable */
+    cursor: pointer;
+}
+
+.manager .personal-info {
+    /* Let each p in this section have its own row, 
+    and not be broken into a couple of rows */
+    width: max-content;
+}
+
+.manager .personal-info article {
+    /* Make the pencil icon and text be on different ends (spaced between) */
+    display: flex;
+    justify-content: space-between;
+}
+
+.manager .personal-info p {
+    /* Make a space between the pencil icon and the text */
+    padding-inline-end: 20px;
+    /* Make space between the rows in this section */
+    padding-block: 5px;
+}
+
+.manager .add-options ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.manager .add-options li,
+.manager .shops button {
+    /* Give the buttons a border */
+    border: 1px solid var(--l-gray);
+    /* Give the buttons a background */
+    background-color: var(--lll-gray);
+    /* Give the button text the ability to be in one line (without breaking to a new line) */
+    width: max-content;
+    /* Give the buttons more space in them */
+    padding: 8px;
+    /* Give the buttons more space around them */
+    margin: 8px;
+    /* Give the buttons circled edges */
+    border-radius: 5px;
+    /* Make the buttons seem clickable */
+    cursor: pointer;
+}
+
+/* When hovering above buttons make their color change */
+.manager .add-options li:hover,
+.manager .shops button:hover {
+    background-color: var(--ll-gray);
+}
+
+/* Let the text not break in the shop section */
+.manager .shops ul {
+    width: max-content;
+}
+
+.manager .shops li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manager .shops i {
+    /* Make a space between the trash icon and the text */
+    padding-inline-start: 20px;
+    /* Make a space between the the lines in shops section */
+    padding-block: 5px;
+}
+
+.manager .shops button {
+    margin: 0;
+}
+
+/* BAR GRAPH STYLING */
+.manager .bar {
+    /* Color the bars */
+    fill: #5a90c0;
+}
+
+/* Lighten the axis lines */
+.manager #x-axis path,
+#y-axis line,
+#y-axis path {
+    stroke: #666;
+}
+
+/* Remove the tick marks on the x-axis */
+.manager #x-axis .tick line {
+    visibility: hidden;
+}
+
+.manager text {
+    /* Lighten the bands (תגיות) on the scales */
+    fill: #666;
+    /* Make bands larger */
+    font-size: 12px;
+}
+
+.manager #x-axis text {
+    /* Make the bands (תגיות) on the x-axis bold */
+    font-weight: 600;
+}
