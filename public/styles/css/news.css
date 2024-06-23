@@ -43,6 +43,7 @@ main {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
+    flex-direction: column
 }
 
 section {
@@ -83,3 +84,64 @@ footer {
     border-radius: 10px; 
 }
 
+.lates_updates > article
+{
+   font-size: 150%;
+   align-items: center;
+   text-align: center;
+   background-color: #f1f3ed6d;
+} 
+
+.lates_updates h3
+{
+    margin-top: 0;
+    color: #424242; 
+    text-shadow: none;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.lates_updates footer
+{
+    background-color: #e5ec9483; 
+    
+    color: #030202; 
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
+    font-size: 35px; 
+    text-shadow: none
+}
+
+.update_content
+{
+    display: flex;
+    
+}
+
+.vertical-line {
+    border-right: 2px solid rgba(182, 177, 177, 0.197); /* קו אנכי שחור ברוחב 1 פיקסל */
+    height: 100px; /* גובה של הקו בפיקסלים */
+    display: flex;
+    
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.lateup
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    width: 100%;
+}
+
+.api_articles
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
