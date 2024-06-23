@@ -2,6 +2,7 @@
     /* colors */
     --almost-white: whitesmoke;
     /* --l-gray: rgb(219, 219, 219); */
+    --lll-gray:rgb(238, 238, 238);
     --ll-gray:rgb(224, 224, 224);
     --l-gray:rgb(207, 207, 207);
     --m-gray: rgb(235, 235, 235);
@@ -12,6 +13,7 @@
 
     /* shadows */
     --bsh: 1px 1px 4px 0px #00000028;
+    --card-bsh: 1px 1px 4px 0px #b8b8b838;
     --txtsh: 0px 0px 2px #00000032;
     --dark-txtsh: 0px 0px 2px #00000192;
 }

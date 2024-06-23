@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/css/setup/vars.css">
     <link rel="stylesheet" href="../styles/css/edit-product.css">
 
 </head>
@@ -17,8 +18,104 @@
 <body>
 
     <main class="edit-product">
+        <article class="edit-imgs">
+            <h3>Images</h3>
+            <ul>
+                <li>
+                    <img src="../styles/imgs/products/shirt.png">
+                    <button>UPDATE</button>
+                    <button>DELETE</button>
+                </li>
+                <li>
+                    <img src="../styles/imgs/products/shirt.png">
+                    <button>UPDATE</button>
+                    <button>DELETE</button>
+                </li>
+                <li>
+                    <img src="../styles/imgs/products/shirt.png">
+                    <button>UPDATE</button>
+                    <button>DELETE</button>
+                </li>
+            </ul>
+            <button>
+                <i class="bi bi-plus"></i>
+                Add another image
+            </button>
+        </article>
+
+        <article class="edit-sizes">
+            <h3>Sizes</h3>
+
+            <section>
+                <input value="XL">
+                <button><i class="bi bi-trash"></i>
+                </button>
+            </section>
+            <section>
+                <input value="L">
+                <button><i class="bi bi-trash"></i>
+                </button>
+            </section>
+            <section>
+                <input value="M">
+                <button><i class="bi bi-trash"></i>
+                </button>
+            </section>
+            <section>
+                <input value="S">
+                <button><i class="bi bi-trash"></i>
+                </button>
+            </section>
+            <section>
+                <input value="XS">
+                <button><i class="bi bi-trash"></i>
+                </button>
+            </section>
+
+            <button>
+                <i class="bi bi-plus"></i>
+                Add size
+            </button>
+        </article>
+
+        <article class="edit-txt">
+            <h3>Info</h3>
+
+            <form>
+
+                <label>
+                    Title
+                    <input id="title" value="adidas Mens Pro UCL Training Shorts 23/24 Black">
+                </label>
+                <label>
+                    Color
+                    <input id="color" value="Black">
+                </label>
+
+                <label>
+                    Price
+                    <input id="price" type="number" value="110">
+                </label>
+
+                <label>
+                    Fave Player
+                    <input id="favePlayer" value="Courtois">
+                </label>
+            </form>
+        </article>
 
 
+        <article class="edit-actions">
+            <h3>Options</h3>
+
+            <label>
+                Is sold out?
+                <input id="soldOut" type="checkbox">
+            </label>
+
+            <button>Save Item</button>
+            <button>Delete Item</button>
+        </article>
 
     </main>
 
