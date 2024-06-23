@@ -45,6 +45,7 @@ app.use(express.json({ limit: '50mb' }))
 // For each route, send to the relevant file (which will handle the req/res)
 app.use("/", require("./routes/home"))
 app.use("/login", require("./routes/login"))
+app.use("/about", require("./routes/about"))
 app.use("/products", require("./routes/products"))
 app.use(express.static('public'))
 
