@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/Users/zivelgrabli/Desktop/Final-Project-app-dev-course/public/styles/imgs/news/realMadridLogo - news .jpeg'); /* קישור לתמונת הרקע */
+    background-size: cover; /* מקטין את התמונה למקרא הגדול ביותר */
+    background-position: center; /* מיושר את התמונה למרכז העמוד */
+    background-repeat: no-repeat; /* אין חזרות של התמונה */
+
+}
+
+
+
+header, footer {
+    background-color: #1f21a5; 
+    color: #fff; 
+    text-align: center;
+    padding: 20px 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
+    font-size: 20px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    
+}
+
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    flex-direction: column
+}
+
+section {
+    flex: 0 0 calc(50% - 20px);
+    margin-bottom: 100px; 
+}
+
+section h2 {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    color: rgb(255, 255, 2);
+    padding: 10px; 
+}
+
+
+article {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px; 
+    border-radius: 15px; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+article h3 {
+    margin-top: 0;
+    color: #424242; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    font-weight: bold;
+}
+
+footer {
+    background-color: #1f21a5;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    border-radius: 10px; 
+}
+
+.lates_updates > article
+{
+   font-size: 150%;
+   align-items: center;
+   text-align: center;
+   background-color: #f1f3ed6d;
+} 
+
+.lates_updates h3
+{
+    margin-top: 0;
+    color: #424242; 
+    text-shadow: none;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.lates_updates footer
+{
+    background-color: #e5ec9483; 
+    
+    color: #030202; 
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
+    font-size: 35px; 
+    text-shadow: none
+}
+
+.update_content
+{
+    display: flex;
+    
+}
+
+.vertical-line {
+    border-right: 2px solid rgba(182, 177, 177, 0.197); /* קו אנכי שחור ברוחב 1 פיקסל */
+    height: 100px; /* גובה של הקו בפיקסלים */
+    display: flex;
+    
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.lateup
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    width: 100%;
+}
+
+.api_articles
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Proj</title>
+
+    <!-- Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/css/setup/vars.css">
+    <link rel="stylesheet" href="../styles/css/edit-ticket.css">
+
+</head>
+
+<body>
+
+    <%- include('header.ejs', {page:'edit-ticket'}) -%>
+
+    <main class="edit-ticket">
+        <form method="POST" id="edit-ticket" action="<%= (Ticket !=null) ? '' : '/tickets/edit'%>">
+        <article class="edit-img">
+            <h3>opponent Image</h3>
+            <% if (Ticket != null) { %>
+                <li id="<%= i %>">
+                    <input type="file" accept="image/*" name="srcImg" onchange="(ev)=>updateImg(ev)">
+                    <img src="<%= filteredTickets[i].opImg?.includes('data:') ? filteredTickets[i].opImg : ('/styles/imgs/tickets/' + filteredTickets[i].opImg) %>" alt="opponent-img">
+                    <button type="button">UPDATE</button>
+                    <button type="button" id="<%= i %>" class="deleteImg">DELETE</button>
+                </li>
+                <% } else { %>
+                    <li id="0">
+                        <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
+                        <input type="file" accept="image/*" name="srcImg" src="/styles/imgs/tickets/background-image" id="0">
+                        <button type="button" id="0" class="deleteImg">DELETE</button>
+                    </li>
+                <% } %>
+        </article>
+
+        <article class="edit-txt">
+            <h3>Info</h3>
+
+            <form>
+                <label>
+                    Title
+                    <input id="title" value="<%= (Ticket != null) ? Ticket.title : '' %>" name="title">
+                </label>
+
+                <label>
+                    Opposing team
+                    <input id="opponent" value="<%= (Ticket != null) ? Ticket.opponent : '' %>" name="opponent">
+                </label>
+
+                <label>
+                    Stadium
+                    <input id="stadium" value="<%= (Ticket != null) ? Ticket.stadium : '' %>" name="stadium">
+                </label>
+                <label>
+                    Price
+                    <input id="price" type="number" value="<%= (Ticket != null) ? Ticket.price : '' %>" name="price">
+                </label>
+                <label>
+                    Date
+                    <input id="date" type="date" value="<%= (Ticket != null) ? Ticket.date : '' %>" name="date">
+                </label>
+            </form>
+        </article>
+
+
+        <article class="edit-actions">
+            <h3>Options</h3>
+
+            <label>
+                Is sold out?
+                <input id="soldOut" type="checkbox">
+            </label>
+
+            <button>Save Event</button>
+            <button>Delete Event</button>
+        </article>
+    </form>
+    </main>
+
+    <%- include('footer.ejs') -%>
+    
+    <!-- Libraries  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/edit-ticket.js"></script>
+
+</body>
+
+</html>

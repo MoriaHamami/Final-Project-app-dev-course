@@ -1,9 +1,12 @@
 .edit-ticket {
+    margin-top: 100px;;
     display: flex;
     flex-wrap: wrap;
+    /* flex-direction: row; */
     justify-content: center;
     /* Make background on whole page that is seen */
     background-color: var(--almost-white);
+    align-content: center;
     height: 100vh;
     overflow-y: scroll;
 }
@@ -37,7 +40,7 @@
 
 .edit-ticket form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .edit-ticket label {
@@ -62,11 +65,12 @@
     flex-direction: column;
     list-style-type: none;
     margin: 5px;
+    align-items: center;
 }
 
 .edit-ticket img {
     height: 170px;
-    border-radius: 50%;
+    border-radius: 5%;
 }
 .edit-ticket .edit-txt #date{
     width: 64%;
