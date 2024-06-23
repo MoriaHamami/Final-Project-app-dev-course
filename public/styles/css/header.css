@@ -1,5 +1,5 @@
 header {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
 
@@ -19,10 +19,10 @@ header {
 }
 
 /* Remove a tags default styling */
-header nav a {
+/* header nav a {
   text-decoration: none;
   color: inherit;
-}
+} */
 
 /* Remove a tags default styling */
 header nav a:hover {
