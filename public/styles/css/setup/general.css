@@ -8,13 +8,43 @@ p {
 }
 
 /* Remove a tags default styling */
-nav a {
+a {
     text-decoration: none;
     color: inherit;
+}
+a:hover {
+    text-decoration: none;
+    color: inherit;
+opacity: 0.8;
 }
 
 ul {
     padding: 0;
+    margin: 0;
+}
+
+button{
+        /* Give the buttons a border */
+        border: 1px solid var(--l-gray);
+        /* Give the buttons a background */
+        background-color: var(--lll-gray);
+        /* Give the button text the ability to be in one line (without breaking to a new line) */
+        width: max-content;
+        /* Give the buttons more space in them */
+        padding: 8px;
+        /* Give the buttons more space around them */
+        margin: 8px;
+        /* Give the buttons circled edges */
+        border-radius: 5px;
+        /* Make the buttons seem clickable */
+        cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--ll-gray);
+}
+
+label{
     margin: 0;
 }
 
