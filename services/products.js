@@ -21,35 +21,49 @@ const createProduct = async (title = "", color = "", cat = "", price = 0, gender
     }
 }
 
+const getDistinctCats = async () => {
+    try {
+        return await Product.find({}).distinct("cat")
+        
+    } catch (e) {
+        console.log('e:', e)
+    }
+}
 const getProductById = async (id) => {
-    return await Product.findById(id)
+
+    try {
+return await Product.findById(id)
+
+    } catch (e) {
+        console.log('e:', e)
+    }
 }
 
-const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', sortVal='', isAsc) => {
+const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', sortVal = '', isAsc) => {
     // try{
 
     // }catch(e){
 
     // }
     const filter = {}
-    if (priceFilter&& priceFilter != "null" && priceFilter>0) {
-        filter.price = {$lt : priceFilter}
+    if (priceFilter && priceFilter != "null" && priceFilter > 0) {
+        filter.price = { $lt: priceFilter }
     }
-    if (titleFilter && titleFilter!="null") {
-        filter.title = new RegExp(titleFilter, 'i') 
+    if (titleFilter && titleFilter != "null") {
+        filter.title = new RegExp(titleFilter, 'i')
     }
-    if (catFilter && catFilter!="null") {
-        filter.cat = {$in : catFilter}
+    if (catFilter && catFilter != "null") {
+        filter.cat = { $in: catFilter }
     }
     // console.log('filter:', filter)
-    let products =[]
-    if(sortVal && sortVal!="null"){
-        
+    let products = []
+    if (sortVal && sortVal != "null") {
+
         isAsc = isAsc == "true" ? 1 : -1
         const sortObj = {}
         sortObj[sortVal] = isAsc
         products = await Product.find(filter).sort(sortObj)
-    } else{
+    } else {
         products = await Product.find(filter)
     }
     // console.log('products:', products)
@@ -73,7 +87,7 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     const productMinPrice = await Product.find({}).sort({ "price": 1 }).limit(1)
     const minPrice = productMinPrice ? productMinPrice[0].price : 0
     // console.log('minPrice:', minPrice)
-    const cat = await Product.find({}).distinct("cat")
+    const cat = await getDistinctCats()
     // console.log('cat:', cat)
     const res = { maxPrice, minPrice, cat, products }
     return res
@@ -84,11 +98,11 @@ const updateProduct = async (id, title = "", color = "", cat = "", price = 0, ge
     // console.log('here:', product)
     if (!product)
         return null
-    console.log('srcImg.length:', srcImg.length)
     if (title) product.title = title
     if (color) product.color = color
     if (price) product.price = price
     if (gender) product.gender = gender
+    if (cat) product.cat = cat
     if (favePlayer) product.favePlayer = favePlayer
     if (srcImg.length !== 0) product.srcImg = srcImg
     if (sizes.length !== 0) product.sizes = sizes
@@ -119,6 +133,7 @@ module.exports = {
     getProductById,
     getProducts,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getDistinctCats
 }
 

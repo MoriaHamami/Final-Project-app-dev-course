@@ -2,11 +2,13 @@
 let gTitle = ''
 let gColor = ''
 let gFavePlayer = ''
+let gCat = ''
 let gPrice = 0
 let gSizes = []
 let gSrcImgs = []
 // Initialize the amount of images according to the DOM
 let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0
+let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0
 
 // Functions to update global vars when changes occur in inputs
 function onChangeTitle(newTitle) {
@@ -20,6 +22,20 @@ function onChangePrice(newPrice) {
 }
 function onChangeFavePlayer(newFavePlayer) {
     gFavePlayer = newFavePlayer
+}
+function onChangeCat(inputType) {
+    if(inputType === "select"){
+        const elSelect = $('.edit-product .edit-cat select')
+        if(elSelect.find(":selected").val() === "other") {
+            elSelect.after(`<input placeholder="Type a category for product" onchange="onChangeCat('input')">`)
+            elSelect.hide()
+        }else{
+            gCat = elSelect.find(":selected").val()
+        }
+    }else{
+        const elInput = $('.edit-product .edit-cat input')
+        gCat = elInput.val()
+    }
 }
 function addTogSrcImgs(imgSrc) {
     if (imgSrc.includes('data:')) {
@@ -40,7 +56,7 @@ function addTogSrcImgs(imgSrc) {
 function updateImgsSrc() {
     // Get all the imgs in DOM
     const imgs = $('.edit-product .edit-imgs li img')
-    if(!imgs) return gSrcImgs = []
+    if (!imgs) return gSrcImgs = []
     else imgs.map((_, { src }) => addTogSrcImgs(src)) // extract src and add to gSrcImgs var
 }
 
@@ -93,10 +109,8 @@ function onDeleteImg(id) {
     // Update local var
     gNumOfImgs--
     // Remove from DOM the image selected to be deleted
-    $(`.edit-product li#${id}`).remove()
+    $(`.edit-product .edit-imgs li#${id}`).remove()
 }
-
-
 // Get img source from data recieved in input and update in DOM
 async function readChangedURL(input) {
     // Check if file is recieved
@@ -121,6 +135,50 @@ async function readChangedURL(input) {
     }
 }
 
+function onAddSize() {
+    if (gNumOfSizes != 0) {
+        // If there are other sizes, add size input section in DOM after the last input
+        const elLastSize = $('.edit-product .edit-sizes li:last-child')
+        elLastSize.after(
+            `<li id=${gNumOfSizes}>
+                <input value="" name="sizes">
+                <button type="button" onclick="onDeleteSize(${gNumOfSizes})">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </li>`
+        )
+    } else {
+        // If there are no sizes, add the size in DOM inside ul
+        $('.edit-product .edit-sizes ul').append(
+            `<li id="0">
+                <input value="S" name="sizes">
+                <button type="button" onclick="onDeleteSize(0)"> 
+                    <i class="bi bi-trash"></i>
+                </button>
+            </li>`
+        )
+    }
+    // Update local var
+    ++gNumOfSizes
+}
+function updateSizes() {
+    // Get all the sizes in DOM
+    const sizes = $('.edit-product .edit-sizes li input')
+    if (!sizes) return gSizes = []
+    else sizes.map((_, { value }) => value ? gSizes.push(value) : '') // extract values and add to gSizes var
+    console.log('gSizes:', gSizes)
+}
+function onDeleteSize(id) {
+    // Update local var
+    gNumOfSizes--
+    // Remove from DOM the size selected to be deleted
+    $(`.edit-product .edit-sizes li#${id}`).remove()
+}
+
+
+
+
+
 
 async function onAddProduct(ev) {
     // Prevent refresh after the user submits the form
@@ -131,6 +189,8 @@ async function onAddProduct(ev) {
     //     gSizes.push($(this).val())
     // })
     updateImgsSrc()
+    updateSizes()
+
     try {
         // Send a post request using ajax, and send on the body the data from the form
         const newProduct = await $.ajax({
@@ -140,12 +200,12 @@ async function onAddProduct(ev) {
             data: JSON.stringify({
                 title: gTitle,
                 color: gColor,
-                // cat,
+                cat: gCat,
                 srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
                 // gender,
-                // sizes
+                sizes: gSizes
             }),
         })
         // Leave edit mode and show the product page 
@@ -165,6 +225,7 @@ async function onUpdateProduct(ev) {
     // })
 
     updateImgsSrc()
+updateSizes()
 
     try {
         // Send a put (update) request using ajax, and send on the body the data from the form
@@ -175,12 +236,12 @@ async function onUpdateProduct(ev) {
             data: JSON.stringify({
                 title: gTitle,
                 color: gColor,
-                // cat,
+                cat: gCat,
                 srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
                 // gender,
-                // sizes
+                sizes: gSizes
             }),
         })
 
@@ -205,6 +266,8 @@ async function onDeleteProduct(id) {
         console.log('e:', e)
     }
 }
+
+
 
 
 
