@@ -82,5 +82,43 @@
     text-shadow: var(--dark-txtsh);
     color: black;
     background-color: #ffffffb9;
+    border-radius: 20px; 
+} 
+#weather-container {
+    border: 2px solid #ccc;
     border-radius: 20px;
+    padding: 20px;
+    width: 300px; 
+    background-color: var(--ll-gray); 
+}  
+
+#weather-container h2 {
+    font-size: 30px; /* שים את הגודל הרצוי כאן */
+    margin-bottom: 10px; /* שים את הרווח התחתון הרצוי כאן */ 
+    
+}
+.daily-forecast {
+    border-top: 1px solid #ccc;
+    margin-top: 5px; /* רווח למעלה */
+    margin-bottom: 5px; /* רווח למטה */
+    padding-top: 5px; /* רווח למעלה */
+    padding-bottom: 5px; /* רווח למטה */
+}
+
+
+.daily-forecast:first-child {
+    margin-top: 0; 
+}
+
+
+.forecast-title {
+    font-weight: bold; 
+}
+
+.forecast-details {
+    display: none; 
+}
+
+.daily-forecast:hover .forecast-details {
+    display: block; 
 }
