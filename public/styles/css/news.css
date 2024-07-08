@@ -11,7 +11,7 @@ body {
 
 
 
-header, footer {
+ .footer {
     background-color: #1f21a5; 
     color: #fff; 
     text-align: center;
@@ -75,7 +75,7 @@ article h3 {
     font-weight: bold;
 }
 
-footer {
+.footer {
     background-color: #1f21a5;
     color: #fff;
     text-align: center;

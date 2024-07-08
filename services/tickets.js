@@ -1,180 +1,111 @@
 const Ticket = require('../models/tickets');
 
-const createTicket = async (title = "", price = 0, stadium = "",opImg = "", opponent = "", date = "") => {
-    const Ticket = new Ticket({
-        title,
-        price,
-        stadium,
-        opImg,
-        opponent,
-        date
-    })
-    try {
-        return await Ticket.save()
-    } catch (e) {
-        return e
-    }
-}
-
-const getTicketById = async (id) => {
-    return await Ticket.findById(id)
-}
-
-// const getTicketsbymonth = async (month) => {
-//     // בדיקה אם החודש מוגדר
-//     if (!month) {
-//         // אם לא מוגדר, השתמש בחודש נובמבר
-//         month = 'Nov';
-//     }
-
-//     // יצירת תאריך התחלה וסיום לחודש המבוקש
-//     const startDate = new Date(`2024-${month}-01`);
-//     const endDate = new Date(`2024-${month}-31`);
-
-//     // מציאת כרטיסים שהתאריך בינהם נמצא בחודש המבוקש
-//     const Tickets = await Ticket.find({
-//         date: {
-//             $gte: startDate,
-//             $lte: endDate
-//         }
-//     });
-
-//     // אם אין תוצאות לחודש המבוקש, החזר את הכרטיסים של נובמבר
-//     if (Tickets.length === 0) {
-//         const NovTickets = await Ticket.find({
-//             date: {
-//                 $gte: new Date(`2024-Nov-01`),
-//                 $lte: new Date(`2024-Nov-31`)
-//             }
-//         });
-//         return NovTickets;
-//     }
-
-//     return Tickets;
-// }
-
-// const getTicketsbymonth = async () => {
-
-//        const Tickets = await Ticket.find({})
-
-//     return Tickets
-// }
-
-
+const createTicket = async (title, price, stadium, opImg, opponent, date) => { /* 8 */
+  const newTicket = new Ticket({
+    title,
+    price,
+    stadium,
+    opImg,
+    opponent,
+    date
+  });
+  try {
+    return await newTicket.save();
+  } catch (e) {
+    return e;
+  }
+};
 
 const getTickets = async () => {
-    // try{
+  return await Ticket.find({});
+};
 
-    // }catch(e){
+const getTicketsByMonth = async (month) => {
+  if (!month) {
+    // If no month is provided, return all tickets
+    const allTickets = await Ticket.find({});
+    return allTickets;
+  }
 
-    // }
-    const getTickets = await Ticket.find({})
-    return getTickets
-}
+  const monthTickets = [];
+  for (let year = 2023; year <= 2026; year++) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0);
 
-// const getTicketsbymonth = async () => {
-//     const aprilTickets = [];
+    const tickets = await Ticket.find({
+      date: {
+        $gte: startDate,
+        $lte: endDate
+      }
+    });
 
-//     for (let year = 2023; year <= 2026; year++) {
-//         // יצירת תאריך התחלה לחודש אפריל בשנת הנוכחית בלולאה
-//         const startDate = new Date(year, 0, 1); // כל חודש זה מינוס אחד
-//         // יצירת תאריך סיום לחודש אפריל בשנת הנוכחית בלולאה (היום האחרון של החודש)
-//         const endDate = new Date(year, 0, 30); // 30 באפריל
+    monthTickets.push(...tickets);
+  }
 
-//         console.log(`Start Date for April ${year}: ${startDate}`);
-//         console.log(`End Date for April ${year}: ${endDate}`);
-
-//         // מציאת כל הכרטיסים שמתאימים לחודש אפריל בשנת הנוכחית בלולאה
-//         const tickets = await Ticket.find({
-//             date: {
-//                 $gte: startDate,
-//                 $lte: endDate
-//             }
-//         });
-
-//         console.log(`Tickets found for April ${year}: ${tickets.length}`);
-
-//         // הוספת הכרטיסים שנמצאו למערך הכולל
-//         aprilTickets.push(...tickets);
-//     }
-
-//     return aprilTickets;
-// }
+  return monthTickets;
+};
 
 
+const updateTicket = async (id, title, price, stadium, opImg, opponent, date) => {
+  const ticket = await getTicketById(id);
 
+  if (!ticket)
+    return null;
 
+  if (title) ticket.title = title;
+  if (price) ticket.price = price;
+  if (stadium) ticket.stadium = stadium;
+  if (opImg) ticket.opImg = opImg;
+  if (opponent) ticket.opponent = opponent;
+  if (date) ticket.date = date;
 
-
-
-
-
-
-
-const updateTicket = async (title = "", price = 0, stadium = "",opImg = "", opponent = "", date = "") => {
-    const Ticket = await getTicketById(id)
-    
-    if (!Ticket)
-        return null
-
-    if (title) Ticket.title = title
-    if (price) Ticket.price = price
-    if (stadium) Ticket.stadium = stadium
-    if (opImg) Ticket.opImg = opImg
-    if (opponent) Ticket.opponent = opponent
-    if (date) Ticket.date = date
-
-    try {
-        await Ticket.save()
-        return Ticket
-    } catch (e) {
-        return e
-    }
-}
+  try {
+    await ticket.save();
+    return ticket;
+  } catch (e) {
+    return e;
+  }
+};
 
 const deleteTicket = async (id) => {
-    try {
-        const Ticket = await getTicketById(id)
-        if (!Ticket)
-            return null
-
-        await Ticket.remove()
-        return Ticket
-    } catch (e) {
-        return e
+  try {
+    const ticket = await Ticket.findById(id);
+    if (!ticket) {
+      return null;
     }
-}
+
+    await ticket.deleteOne();
+    console.log(ticket);
+    return ticket;
+  } catch (e) {
+    return e;
+  }
+};
 
 
-//אולי 
-const filterTicketsByMonth = async (month) => {
-    try {
-        // הבאת כל הכרטיסים מהמסד נתונים
-        const tickets = await Ticket.find({});
+// const getTicketById = async (id) => {
+//   return await Ticket.findById(id)
+// };
 
-        // סינון הכרטיסים לפי חודש מסוים
-        const filteredTickets = tickets.filter(ticket => {
-            // קבלת החודש מתאריך הכרטיס
-            const ticketMonth = ticket.date.getMonth();
-            // השוואה בין החודשים
-            return ticketMonth === month;
-        });
+// // const getProductById = async (id) => {
+// //   return await Product.findById(id)
+// // }
 
-        // החזרת הכרטיסים שעברו את סינון החודש
-        return filteredTickets;
-    } catch (error) {
-        console.error("Error filtering tickets by month:", error);
-        throw error;
-    }
-}
+const getTicketById = async (id) => {
+  try {
+    return await Ticket.findById(id);
+  } catch (error) {
+    console.error('Error fetching ticket by id:', error);
+    throw error; // אפשר לטפל בשגיאה אם רצינו
+  }
+};
 
 
 module.exports = {
-    createTicket, 
-    getTicketById,
-    getTickets,
-    updateTicket,
-    deleteTicket,
-    filterTicketsByMonth
-}
-
+  createTicket,
+  getTickets,
+  getTicketsByMonth,
+  updateTicket,
+  deleteTicket,
+  getTicketById
+};

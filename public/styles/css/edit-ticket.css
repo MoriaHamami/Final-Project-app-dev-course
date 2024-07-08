@@ -71,6 +71,7 @@
 .edit-ticket img {
     height: 170px;
     border-radius: 5%;
+    display: flex;
 }
 .edit-ticket .edit-txt #date{
     width: 64%;

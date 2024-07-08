@@ -1,92 +1,80 @@
-// // async function getTicketsByMonth(month) {
-// //     const monthTickets = [];
-// //     console.log(`hi`);
+let gMonth = 0;
 
-// //     for (let year = 2023; year <= 2026; year++) {
-// //         const startDate = new Date(year, month - 1, 1);
-// //         const endDate = new Date(year, month - 1, 30); // or any other appropriate end date for the month
+window.setMonth = function(newMonth = '') {
+    gMonth = newMonth;
+    const amount = document.getElementById('amount').value;
+    
+    // Validate amount range before proceeding
+    if (amount < 1 || amount > 10) {
+        alert('Please enter a number between 1 and 10 for ticket quantity.');
+        return; // Stop further execution if validation fails
+    }
+    
+    getTicketsByMonth(gMonth);
+};
 
-// //         console.log(`Start Date for Month ${month} in ${year}: ${startDate}`);
-// //         console.log(`End Date for Month ${month} in ${year}: ${endDate}`);
+async function getTicketsByMonth(month = '') {
+    try {
+        // Sending GET request with the selected month parameter
+        const tickets = await $.ajax({
+            url: `/tickets/date?date=${month}`,
+            method: 'GET',
+            contentType: 'application/json',
+        });
 
-// //         const tickets = await Ticket.find({
-// //             date: {
-// //                 $gte: startDate,
-// //                 $lte: endDate
-// //             }
-// //         });
+        // Creating HTML to display the tickets
+        let str = '';
+        for (let i = 0; i < tickets.length; i++) {
+            str += `<div class="card" style="width: 18rem;">
+                <div class="battle">
+                    <div class="team">
+                        <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
+                        <span>Real Madrid<br></span>
+                    </div>
+                    <div>
+                        <img src="https://assets.realmadrid.com/is/content/realmadrid/4oogyu6o156iphvdvphwpck10-logo?$Mobile$&wid=144&hei=144"
+                            class="card-img-top" alt="championleague">
+                    </div>
+                    <div class="team">
+                        <img src="/styles/imgs/tickets/${tickets[i].opImg}" id="byren" alt="byren">
+                        <span>${tickets[i].opponent}<br></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">${tickets[i].title}</h4>
+                    <div class="icon-text-container">
+                        <div>
+                            <i class="bi bi-calendar3"></i>
+                            <span>${new Date(tickets[i].date).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                    <div class="icon-text-container">
+                        <div>
+                            <i class="bi bi-geo-alt"></i>
+                            <span>${tickets[i].stadium}</span>
+                        </div>
+                    </div>
+                    <div class="icon-text-container">
+                        <div>
+                            <i class="bi bi-ticket-detailed"></i>
+                            <span id="priceof_tic">${tickets[i].price}€</span>
+                        </div>
+                    </div>
+                    <label>
+                        add more tickets here
+                        <input id="amount" type="number" value="1" name="add more tickets here">
+                    </label>
+                    <ul class="list-group list-group-flush">
+                        <a href="#" class="btn btn-primary"><i class="bi bi-gem"></i>Buy ticket NOW</a>
+                    </ul>
+                </div>
+            </div>`;
+        }
 
-// //         console.log(`Tickets found for Month ${month} in ${year}: ${tickets.length}`);
-
-// //         monthTickets.push(...tickets);
-// //     }
-
-// //     return monthTickets;
-// // }
-
-
-// async function getTicketsByMonth2(month) {
-//     const monthTickets = [];
-//     console.log(`hi`);
-
-//     for (let year = 2023; year <= 2026; year++) {
-//         const startDate = new Date(year, month - 1, 1);
-//         const endDate = new Date(year, month - 1, 30); // or any other appropriate end date for the month
-
-//         console.log(`Start Date for Month ${month} in ${year}: ${startDate}`);
-//         console.log(`End Date for Month ${month} in ${year}: ${endDate}`);
-
-//         $.ajax({
-//             url: '/tickets?filter= ${month} ', // או כל נתיב אחר לקובץ השרת שלך
-//             method: 'GET',
-//             data: {
-//                 month: month,
-//                 year: year
-//             },
-//             success: function(response) {
-//                 console.log(`Tickets found for Month ${month} in ${year}: ${response.length}`);
-//                 monthTickets.push(...response);
-//             },
-//             error: function(error) {
-//                 console.error('Error fetching tickets:', error);
-//             }
-//         });
-//     }
-
-//     return monthTickets;
-// }
-
-
-// const Ticket = require('../models/tickets');
-                
-// async function getTicketsByMonth3(month) {
-//     const monthTickets = [];
-
-//     const aprilTickets = [];
-
-//     for (let year = 2023; year <= 2026; year++) {
-//         // יצירת תאריך התחלה לחודש אפריל בשנת הנוכחית בלולאה
-//         const startDate = new Date(year, month-1, 1); // כל חודש זה מינוס אחד
-//         // יצירת תאריך סיום לחודש אפריל בשנת הנוכחית בלולאה (היום האחרון של החודש)
-//         const endDate = new Date(year, month-1, 30); // 30 באפריל
-
-//         console.log(`Start Date for April ${year}: ${startDate}`);
-//         console.log(`End Date for April ${year}: ${endDate}`);
-
-//         // מציאת כל הכרטיסים שמתאימים לחודש אפריל בשנת הנוכחית בלולאה
-//         const tickets = await Ticket.find({
-//             date: {
-//                 $gte: startDate,
-//                 $lte: endDate
-//             }
-//         });
-
-//         console.log(`Tickets found for April ${year}: ${tickets.length}`);
-
-//         // הוספת הכרטיסים שנמצאו למערך הכולל
-//         aprilTickets.push(...tickets);
-//     }
-
-//     return aprilTickets;
-// }
-// </script>
+        // Displaying the tickets in HTML
+        $('#tickets').html(str);
+    } catch (e) {
+        console.log('e:', e);
+        // Displaying an error message if needed
+    }
+}
