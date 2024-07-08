@@ -14,7 +14,9 @@
 </head>
 
 <body>
-
+<h1> 
+  <%=cartItems%> 
+</h1>
     <main class="clients">
         <div class="manager-area">
             <div class="table-container">
@@ -71,17 +73,16 @@
                         <h2>Date | <%= client.purchases.dateCreated %> </h2>
                         <h2>Status | <%= client.purchaseStatus %> </h2>
                         <span class="product-container">
-                            <% client.purchases.forEach(purchase => { %>
+                            <% client.orders.forEach(order => { %>
                             <div class="product"> 
-                                <img src="<%= purchase.srcImg %>" alt="Product Image" class="product-image">
+                                <img src="<%= order.srcImg %>" alt="Product Image" class="product-image">
                                 <div class="product-info">
-                                    <span class="product-name"><b><%= purchase.name %></b></span>
-                                    <span class="product-Quantity">Quantity <%= purchase.quantity %> </span>
-                                    <span class="product-Size">Size: <%= purchase.size %> </span>
+                                    <span class="product-name"><b><%= order.name %></b></span>
+                                    <span class="product-Size">Size: <%= order.size %> </span>
                                     <span class="product-name&num"><b>Name and number</b></span>
-                                    <span class="product-playerName">Player Name : <%= purchase.favePlayer %>, <%= purchase.playerNumber %> </span>
+                                    <span class="product-playerName">Player Name : <%= order.favePlayer %>, <%= order.playerNumber %> </span>
                                     <hr>
-                                    <span class="product-Price"><%= purchase.price %>$</span>
+                                    <span class="product-Price"><%= order.price %>$</span>
                                 </div>
                             </div>
                             <% }) %>

@@ -14,7 +14,7 @@ const clientSchema = new mongoose.Schema({
     spent: Number,
     faveItems: [Number],
     orders: [[Number]], // סוג נתונים של מערך של מערכים של מזהה מוצר
-    cartItems: [Number],
+    cartItems: [mongoose.Schema.Types.ObjectId],
     isBanned: Boolean,
     dateCreated: { type: Date, default: Date.now },
     isManager: { type: Boolean, default: false }
