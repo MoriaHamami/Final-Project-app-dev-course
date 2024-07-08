@@ -64,6 +64,7 @@ app.use("/facebook", require("./routes/facebook"))
 app.use("/products", require("./routes/products"))
 app.use("/Tickets", require("./routes/tickets"))
 app.use("/news", require("./routes/news"))
+app.use("/clients", require("./routes/clients"))
 app.use(express.static('public'))
 
 app.listen(process.env.PORT);
