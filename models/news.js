@@ -1,9 +1,9 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const News = new mongoose.Schema({
-  genre:String,
-  txt:String,
-  date:Date
-})
+const NewsSchema = new mongoose.Schema({
+  genre: { type: String, required: true },
+  txt: { type: String, required: true },
+  date: { type: Date, default: Date.now }
+});
 
-module.exports = mongoose.model("news", News)
+module.exports = mongoose.model("News", NewsSchema);

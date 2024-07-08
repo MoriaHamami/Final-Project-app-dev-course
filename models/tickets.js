@@ -1,12 +1,12 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const Ticket = new mongoose.Schema({
-  title:String,
-  price:Number,
-  stadium:String,
-  opImg:String,
-  opponent:String,
-  date:Date
-})
+const TicketSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  price: { type: Number, required: true },
+  stadium: { type: String, required: true },
+  opImg: { type: String, required: true },
+  opponent: { type: String, required: true },
+  date: { type: Date, required: true }
+});
 
-module.exports = mongoose.model("tickets", Ticket)
+module.exports = mongoose.model("Ticket", TicketSchema);
