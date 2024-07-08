@@ -1,5 +1,8 @@
-require("dotenv").config();
-require('custom-env').env(process.env.NODE_ENV, './configurations');
+// DotEnv is a lightweight npm package that automatically loads environment variables 
+// from a .env file into the process.env object.
+require("dotenv").config()
+// Specify which .env file path to use via the path option 
+require('custom-env').env(process.env.NODE_ENV, './configurations')
 
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
@@ -65,5 +68,7 @@ app.use("/products", require("./routes/products"))
 app.use("/Tickets", require("./routes/tickets"))
 app.use("/news", require("./routes/news"))
 app.use(express.static('public'))
+app.use("/cart", require("./routes/cart"))
+app.use("/clients", require("./routes/clients"))
 
 app.listen(process.env.PORT);
