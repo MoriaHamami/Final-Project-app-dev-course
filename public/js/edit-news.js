@@ -16,6 +16,11 @@ function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
 
+// הוספת כתובת מקור של תמונה ל-gopImg (לא רלוונטי לעריכת כתבות)
+function addTogSrcImgs(opImg) {
+    // כאן תוכל להוסיף פונקציות נוספות לעריכת תמונה אם יהיה צורך
+}
+
 // שליחת עדכון של כתבה קיימת
 async function onUpdateArticle(ev) {
     ev.preventDefault();

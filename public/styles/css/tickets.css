@@ -4,7 +4,7 @@ body {
 .background-image {
     background-color: rgba(208, 206, 206, 0.18);
     background-image: url('../imgs/tickets/backround.png');
-    width: 100%; /* רוחב כללי */
+    width: 90%; /* רוחב כללי */
     height: 150px;
     border-radius: 20px; /* רינוע מעגלי */
     padding: 20px; /* שוליים פנימיים */
@@ -46,11 +46,12 @@ body {
 }
 
 .card {
-    border-radius: 20px;
+    border-radius: 50px;
     top:50px;
     left: 40px;
     height: auto;
     margin-bottom: 20px;
+    /* border: no bor; */
 }
 
 .battle {
@@ -58,7 +59,6 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: rgb(14, 38, 59);
-    border-radius: 20px;
     text-align: end;
 }
 
@@ -145,7 +145,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
   justify-content: space-between;
-    padding: 20px;
+    padding: 70px;
 }
 
 .card-body
@@ -160,4 +160,20 @@ h1 {
 {
     font-size: 20px;
     text-align: center;
+}
+
+.btn.btn-primary
+{
+    display: flex;
+    justify-content: center;
+}
+
+.bi-gem
+{
+   margin-right: 5px;
+}
+
+.btn-group me-2
+{
+    border-radius: 20px;
 }
