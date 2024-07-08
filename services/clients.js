@@ -1,15 +1,21 @@
-const About = require('../models/about')
+const clients = require('../models/clients');
 
-const getCoords = async () => {
+const getClientsFromDB = async () => {
     try {
-        const param = 'coords'
-        const coords = await About.findOne({param})
-        return coords
+        const clientsFromDB = await clients.find({});
+        console.log(clientsFromDB); 
+        return clientsFromDB; 
     } catch (e) {
-        console.log('e:', e)
+        console.error('Error fetching clients from DB:', e);
     }
 }
 
 module.exports = {
-    getCoords,
+    getClientsFromDB,
+};
+
+// getOrdersById  : id --- fun servive 
+
+const getOrdersById = async (id) => {
+    return await orders.findById(id)
 }

@@ -5,4 +5,4 @@ function getHomePage(req, res) {
 
 module.exports = {
     getHomePage
-}
+} 

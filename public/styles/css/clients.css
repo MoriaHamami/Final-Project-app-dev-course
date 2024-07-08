@@ -10,8 +10,8 @@
 .clients .table-container {
     overflow-x: hidden;
     border: 1px solid black;
-    width: 60%;
-    height: 550px;
+    width: 80%;
+    height: 600px;
 }
 
 .clients table {
@@ -78,8 +78,8 @@
 
 /* עגלת קניות - מועתק מהקוד של נועה עם התאמות */
 .clients .shopping-cart {
-    width: 500px;
-    height: 550px;
+    width: 350px;
+    height: 600px;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Proj</title>
+
+    <!-- Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/styles/css/clients.css">
+</head>
+
+<body>
+
+    <main class="clients">
+        <div class="manager-area">
+            <div class="table-container">
+                <ul class="nav nav-pills">
+                    <table class="table">
+                        <caption>
+                            <h2>Manager area - Account list</h2>
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>Client's photo</th>
+                                <th>Name</th>
+                                <th>Total cart items</th>
+                                <th>Total favorite items</th>
+                                <th>Delete account</th>
+                                <th>Total amount</th>
+                                <th>Reservations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through the list of clients -->
+                            <% clients.forEach((client, i) => { %>
+                            <tr>
+                                <td>
+                                    <% if (client.imgURL) { %>
+                                    <img class="client-photo" src="<%= client.imgURL.includes('data:') ? client.imgURL : ('/styles/imgs/clients/' + client.imgURL)%>"
+                                        class="imgURL-<%=i%>">
+                                    <% } else { %>
+                                    <img class="client-photo" src="/styles/imgs/clients/p-25.png" alt="Default photo">
+                                    <% } %>
+                                  </td>
+                                  <td><%= client.fullname %></td>
+                                  <td><%= client.cartItems ? client.cartItems.length : 0 %></td>
+                                  <td><%= client.faveItems ? client.faveItems.length : 0 %></td>
+                                  <td><button class="delete-acc-btn"><i class="bi bi-x-circle-fill"></i></button></td>
+                                  <td><%= client.spent %>$</td>
+                                  <td>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#client<%= client.id %>"><i
+                                                class="bi bi-bag-check-fill"></i>See last reservation</a> </li>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </ul>
+            </div>
+
+            <div class="tab-content mt-0 mt-md-5" id="top-shopping-cart">
+                <% clients.forEach(client => { %>
+                <div class="tab-pane fade <%= client.id === clients[0].id ? 'show active' : '' %>" id="client<%= client.id %>">
+                    <div class="shopping-cart">
+                        <% if (client.purchases && client.purchases.length > 0) { %>
+                        <h2>Items | <%= client.purchases.length %> </h2>
+                        <h2>Date | <%= client.purchases.dateCreated %> </h2>
+                        <h2>Status | <%= client.purchaseStatus %> </h2>
+                        <span class="product-container">
+                            <% client.purchases.forEach(purchase => { %>
+                            <div class="product"> 
+                                <img src="<%= purchase.srcImg %>" alt="Product Image" class="product-image">
+                                <div class="product-info">
+                                    <span class="product-name"><b><%= purchase.name %></b></span>
+                                    <span class="product-Quantity">Quantity <%= purchase.quantity %> </span>
+                                    <span class="product-Size">Size: <%= purchase.size %> </span>
+                                    <span class="product-name&num"><b>Name and number</b></span>
+                                    <span class="product-playerName">Player Name : <%= purchase.favePlayer %>, <%= purchase.playerNumber %> </span>
+                                    <hr>
+                                    <span class="product-Price"><%= purchase.price %>$</span>
+                                </div>
+                            </div>
+                            <% }) %>
+                        </span>
+                        <% } else { %>
+                        <div class="shopping-cart">
+                            No purchases yet
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+
+    <!-- Libraries  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="/js/clients.js"></script>
+
+</body>
+
+</html>
