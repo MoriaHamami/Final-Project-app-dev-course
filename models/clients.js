@@ -24,7 +24,7 @@ const Client = new mongoose.Schema({
    subSchema
   ],
   // EX: [[0,2,5], [1, 2, 7]]
-  cartItems:[Number],
+  cartItems:[mongoose.Schema.Types.ObjectId],
   isBanned:Boolean,
   dateCreated:{ type: Date, default: Date.now },
   isManager:{type:Boolean, default: false}

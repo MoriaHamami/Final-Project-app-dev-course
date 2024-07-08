@@ -92,7 +92,9 @@ async function register(req, res) {
 function funcExampleForShowingSecretPage(req, res) {
     res.render("manager", { username: req.session.username })
 }
-
+async function getUsername(){
+    return req.session.username
+}
 module.exports = {
     login,
     loginForm,
@@ -101,5 +103,6 @@ module.exports = {
     logout,
     isLoggedIn,
     funcExampleForShowingSecretPage,
-    isManagerLoggedIn
+    isManagerLoggedIn,
+    getUsername
 }

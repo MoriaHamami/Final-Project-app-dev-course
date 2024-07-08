@@ -2,7 +2,7 @@
 // from a .env file into the process.env object.
 require("dotenv").config()
 // Specify which .env file path to use via the path option 
-require('custom-env').env(process.env.NODE_ENV, './config')
+require('custom-env').env(process.env.NODE_ENV, './configurations')
 
 // Mongoose is a MongoDB object modeling tool that works in an async env. 
 // Mongoose supports Node.js
@@ -47,6 +47,8 @@ app.use("/", require("./routes/home"))
 app.use("/login", require("./routes/login"))
 app.use("/products", require("./routes/products"))
 app.use(express.static('public'))
+app.use("/cart", require("./routes/cart"))
+app.use("/clients", require("./routes/clients"))
 
 // Start listening for visitors on our specific port (shown in config file)
 app.listen(process.env.PORT)
