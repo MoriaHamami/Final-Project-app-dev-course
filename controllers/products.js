@@ -2,16 +2,17 @@ const productService = require('../services/products');
 
 const getProducts = async (req, res) => {
   try {
-    
+
     // Get products from DB using service file
     const productsInfo = await productService.getProducts()
     // Render products page and send the products from DB to it
-      res.render('products.ejs', {
-        products: productsInfo.products,
-        maxPrice: productsInfo.maxPrice,
-        minPrice: productsInfo.minPrice,
-        cat: productsInfo.cat
-      })    
+    res.render('products.ejs', {
+      products: productsInfo.products,
+      maxPrice: productsInfo.maxPrice,
+      minPrice: productsInfo.minPrice,
+      cats: productsInfo.cat,
+      sizes: productsInfo.sizes
+    })
   } catch (e) {
     console.log('e:', e)
   }
@@ -31,8 +32,8 @@ const getProductsByFilter = async (req, res) => {
     // Get products from DB using service file
     const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter, sortVal, isAsc)
     // Render products page and send the products from DB to it
-      res.json( productsInfo.products)
-    
+    res.json(productsInfo.products)
+
   } catch (e) {
     console.log('e:', e)
   }
@@ -40,8 +41,16 @@ const getProductsByFilter = async (req, res) => {
 
 const getProduct = async (req, res) => {
   let product = null
-  // If the params in the path dont have and id, show the create new product page (dont send it a product)
-  if (!req.params.id) return res.render('edit-product.ejs', { product })
+  let cats = []
+  try {
+    // Get the list of categories, in order to let manager select which category the new or existing product will have
+    cats = await productService.getDistinctCats()
+  }
+  catch (e) {
+    console.log('e:', e)
+  }
+  // If the params in the path dont have and id, show the create new product page ( send an empty product)
+  if (!req.params.id) return res.render('edit-product.ejs', { product, cats })
   // Otherwise get the product from the DB using the id in the params
   try {
     product = await productService.getProductById(req.params.id)
@@ -55,7 +64,7 @@ const getProduct = async (req, res) => {
   }
   else if (req.path.includes('edit'))
     // If a product exists in DB, and the path includes the word "edit", render the product's edit page
-    res.render('edit-product.ejs', { product })
+    res.render('edit-product.ejs', { product, cats })
   else
     // If a product exists in DB, and the path doesnt include the word edit, render a single product view page
     res.render('product.ejs', { product })
@@ -96,7 +105,7 @@ const deleteProduct = async (req, res) => {
     // If the product wasnt found in DB show an error
     if (!product) {
       res.status(404).json({ errors: ['Product not found'] })
-    }else{
+    } else {
       res.json(product)
     }
   } catch (e) {

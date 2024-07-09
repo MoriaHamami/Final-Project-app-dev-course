@@ -63,29 +63,49 @@
                 <article class="edit-sizes">
                     <h3>Sizes</h3>
                     <%if(product !=null){%>
-                        <% for(let i=0; i< product.sizes.length; i++) { %>
+                        <ul>
 
-                            <section>
-                                <input value="<%= product.sizes[i] %>" name="sizes">
-                                <button><i class="bi bi-trash"></i>
+                            <% for(let i=0; i< product.sizes.length; i++) { %>
+
+                                <li id="<%= i %>">
+                                    <input value="<%= product.sizes[i] %>" name="sizes">
+                                    <button type="button" onclick="onDeleteSize(i)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </li>
+                                <%}%>
+                        </ul>
+
+                        <%}else{%>
+                            <ul>
+
+                                <li id="0">
+                                    <input value="S">
+                                    <button type="button" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                            <% } %>
+
+                                <button onclick="onAddSize(event.target)" type="button">
+                                    <i class="bi bi-plus"></i>
+                                    Add size
                                 </button>
-                            </section>
-                            <%}%>
-
-                                <%}else{%>
-
-                                    <section>
-                                        <input value="S">
-                                        <button><i class="bi bi-trash"></i>
-                                        </button>
-                                    </section>
-                                    <% } %>
-
-                                        <button>
-                                            <i class="bi bi-plus"></i>
-                                            Add size
-                                        </button>
                 </article>
+
+
+                <article class="edit-cat">
+                    <h3>Category</h3>
+                    <select onchange="onChangeCat('select')">
+                        <% for(let i=0; i< cats.length; i++) { %>
+                            <option id="<%= i %>" value="<%= cats[i] %>" <%=product?.cat===cats[i] ? "selected" : "" %>
+                                ><%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
+                            </option>
+                            <%}%>
+                                <option value="other" >Other</option>
+                    </select>
+                </article>
+
 
                 <article class="edit-txt">
                     <h3>Info</h3>
