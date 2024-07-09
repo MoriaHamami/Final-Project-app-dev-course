@@ -67,20 +67,19 @@
             <div class="product-container">
                 <% cartItems.forEach((item, index) => { %>
                 <div class="product">
-                    <img src="/public/styles/imgs/products/<%= item?.srcImg[0] %>" alt="מוצר" class="product-image">
+                    <img src="<%= item?.srcImg[0] ? (item?.srcImg[0]?.includes('data:') ? item?.srcImg[0] : ('/styles/imgs/products/' + item?.srcImg[0])) : ''%>" alt="מוצר" class="product-image">
                     <div class="product-info">
                         <span class="product-name"><b><%= item?.title %></b></span>
                         <span class="product-Size">Size: <%= item?.size %></span>
-                        <span class="product-name&num"><b>Name and number</b></span>
-                        <span class="product-playerName">Player Name : <%= item?.playerName %>, <%= item?.playerNumber %> </span>
+                        <span class="product-playerName">Player Name : <%= item?.favePlayer %>, </span>
                         <hr>
                         <span class="product-Price"><%= item?.price %>$</span>
                     </div>
                 </div>
                 <div class="input-group">
-                    <button class="btn btn-outline-secondary" type="button" id="minus-btn" onclick="updateQuantity( index, -1)">-</button>
-                    <input type="text" class="form-control text-center" value="<%= item?.quantity %>" id="counter-display">
-                    <button class="btn btn-outline-secondary" type="button" id="plus-btn" onclick="updateQuantity(index, 1)">+</button>
+                    <!-- <button class="btn btn-outline-secondary" type="button" id="minus-btn" onclick="updateQuantity( index, -1)">-</button>
+                    <input type="text" class="form-control text-center" value="" id="counter-display">
+                    <button class="btn btn-outline-secondary" type="button" id="plus-btn" onclick="updateQuantity(index, 1)">+</button> -->
                     <div class="icon-container">
                         <span class="icon-text">Remove</span>
                         <i class="bi-trash3" onclick="removeItem( index )"></i>

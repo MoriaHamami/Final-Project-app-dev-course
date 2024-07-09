@@ -9,6 +9,17 @@ const getClientsFromDB = async () => {
     }
 }
 
+async function getCartItemsFromDB(username) { 
+    try{
+        const  client = await clients.findOne({username})
+        console.log('client:', client)
+       return client?.cartItems
+    } 
+    catch(e){ 
+
+    }
+} 
+
 module.exports = {
     getClientsFromDB, getCartItemsFromDB
 };
@@ -19,12 +30,4 @@ module.exports = {
 //     return await orders.findById(id)
 // }
  
-async function getCartItemsFromDB(username) { 
-    try{
-        const  client = await clients.findOne({username})
-       return client?.cartItems
-    } 
-    catch(e){ 
 
-    }
-} 

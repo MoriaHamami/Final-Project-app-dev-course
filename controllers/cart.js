@@ -5,12 +5,13 @@ const clientsService = require('../services/clients');
 
 async function getCartPage(req, res) {
     try {
-        const cartItemIds = await getCartItems(req, res)
+        const cartItemsInfo = await getCartItems(req, res)
 
         let sum = 0
         let cartItems = []
-        for (let i = 0; i < cartItemIds.length; i++) {
-            itemId = cartItemIds[i]
+        console.log('cartItems:', cartItemsInfo)
+        for (let i = 0; i < cartItemsInfo?.length; i++) {
+            itemId = cartItemsInfo[i]?.id
             const item = await productsService.getProductById(itemId)
             console.log("test",item)
             cartItems.push(item)
