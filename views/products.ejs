@@ -49,9 +49,9 @@
                         Select Category
                         <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
                             <!-- <option value="">Select Category</option> -->
-                            <% for(let i=0; i< cat.length; i++) { %>
-                                <option value="<%= cat[i]%>">
-                                    <%= cat[i]%>
+                            <% for(let i=0; i< cats.length; i++) { %>
+                                <option value="<%= cats[i]%>">
+                                    <%= cats[i]%>
                                 </option>
                                 <% } %>
                         </select>

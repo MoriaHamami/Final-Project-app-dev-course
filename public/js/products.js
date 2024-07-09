@@ -63,7 +63,7 @@ async function getProductsBy(sortVal = '', isAsc = true) {
             </a>`
         }
         // Inside the products area in the HTML, show all the products
-        $('.products #products').html(str)
+        $('.products #productsList').html(str)
     } catch (e) {
         console.log('e:', e)
         // TODO: Later show an error modal
