@@ -2,17 +2,16 @@ const clients = require('../models/clients');
 
 const getClientsFromDB = async () => {
     try {
-        const clientsFromDB = await clients.find({});
-        return clientsFromDB; 
+        const clientsFromDB = await clients.find({})
+        return clientsFromDB 
     } catch (e) {
-        console.error('Error fetching clients from DB:', e);
+        console.error('Error fetching clients from DB:', e)
     }
 }
 
 async function getCartItemsFromDB(username) { 
     try{
         const  client = await clients.findOne({username})
-        console.log('client:', client)
        return client?.cartItems
     } 
     catch(e){ 

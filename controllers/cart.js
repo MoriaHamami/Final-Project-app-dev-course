@@ -9,7 +9,6 @@ async function getCartPage(req, res) {
 
         let sum = 0
         let cartItems = []
-        console.log('cartItems:', cartItemsInfo)
         for (let i = 0; i < cartItemsInfo?.length; i++) {
             itemId = cartItemsInfo[i]?.id
             const item = await productsService.getProductById(itemId)
