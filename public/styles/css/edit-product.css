@@ -26,11 +26,11 @@
     height: min-content;
 }
 
-.edit-product .edit-sizes section {
+.edit-product .edit-sizes li {
     margin: 5px;
 }
 
-.edit-product .edit-sizes button {
+.edit-product .edit-sizes button{
     margin: 10px;
 }
 
