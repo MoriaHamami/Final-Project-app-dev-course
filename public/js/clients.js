@@ -31,35 +31,38 @@ $('.orders-btn').click(function () {
 })
 
 async function getOrdersById(id) {
+    $('.shopping-cart').html('<div class="container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;"></div>')
     try {
-        const products = await $.ajax({
+        const orders = await $.ajax({
             url: `/clients/${id}`,
             method: 'GET',
             contentType: 'application/json',
         })
         // Create a long string that represents the HTML of products we want to be shown after we got the products from the DB 
         let str = ''
-        if (products?.length > 0) {
-            str += `   <h2>Items | ${products.length} </h2>
-                        <h2>Date | ${products.dateCreated} </h2>
-                        <h2>Status | ${products.Status} </h2>
-                        <span class="product-container">`
-            for (let i = 0; i < products.length; i++) {
-                order = products[i]
-                str += `<div class="product"> 
-                                <img src="${order.srcImg[0]}" alt="Product Image" class="product-image">
-                                <div class="product-info">
-                                    <span class="product-name"><b>${order.title}</b></span>
-                                    <span class="product-Size">Size: ${order.size} </span>
-                                    <span class="product-name&num"><b>Name and number</b></span>
-                                    <span class="product-playerName">Player Name : ${order.favePlayer} </span>
-                                    <hr>
-                                    <span class="product-Price">${order.price}$</span>
-                                </div>
-                            </div>
-                        `
+        if (orders?.length > 0) {
+            for (let j = 0; j < orders.length; j++) {
+                let order = orders[j]
+                str += `   <h2>Items | ${order.length} </h2>
+                            <span class="product-container">`
+                for (let i = 0; i < order.length; i++) {
+                    product = order[i].productInfo
+                    console.log('here:')
+                    str += `<div class="product"> 
+                                                <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
+                                                <div class="product-info">
+                                                    <span class="product-name"><b>${product.title}</b></span>
+                                                    <span class="product-Size">Size: ${order[i].size} </span>
+                                                    <span class="product-name&num"><b>Name and number</b></span>
+                                                    <span class="product-playerName">Player Name : ${product.favePlayer} </span>
+                                                    <hr>
+                                                    <span class="product-Price">${product.price}$</span>
+                                                </div>
+                                            </div>
+                                        `
+                }
+                str += "</span>"
             }
-            str += "</span>"
         } else {
             str += `<div class="shopping-cart">
                             No purchases yet
@@ -71,4 +74,10 @@ async function getOrdersById(id) {
         console.log('e:', e)
         // TODO: Later show an error modal
     }
+}
+
+function getImgURL(srcImg, folder){
+    console.log('srcImg:', srcImg)
+    if(!srcImg) return ""
+        return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg)
 }
