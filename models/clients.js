@@ -19,8 +19,14 @@ const clientSchema = new mongoose.Schema({
     imgURL: String,
     spent: Number,
     faveItems: [Number],
-    orders: [[subSchema]], // סוג נתונים של מערך של מערכים של מזהה מוצר
-    cartItems: [subSchema],
+    orders: [[
+        subSchema
+]], // סוג נתונים של מערך של מערכים של מזהה מוצר
+    cartItems: [{
+        id: mongoose.Schema.Types.ObjectId,
+        type: String,
+        size: String
+    }],
     // orders: [[Number]], // סוג נתונים של מערך של מערכים של מזהה מוצר
     // cartItems: [mongoose.Schema.Types.ObjectId],
     isBanned: Boolean,

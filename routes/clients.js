@@ -4,5 +4,7 @@ const clientsController = require("../controllers/clients");
 
 router.route('/')
     .get(clientsController.getClientsPage);
+router.route('/:id')
+    .get(clientsController.getClientOrders);
 
 module.exports = router;

@@ -19,8 +19,18 @@ async function getCartItemsFromDB(username) {
     }
 } 
 
+async function getOrdersFromDB(id) { 
+    try{
+        const client = await clients.findById(id)
+       return client?.orders
+    } 
+    catch(e){ 
+
+    }
+} 
+
 module.exports = {
-    getClientsFromDB, getCartItemsFromDB
+    getClientsFromDB, getCartItemsFromDB,getOrdersFromDB
 };
 
 // getOrdersById  : id --- fun servive 
