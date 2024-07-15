@@ -1,21 +1,78 @@
-body {
+.edit-shirt-page {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    height: 70vh;
-    margin: 0;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-canvas {
-    border: 1px solid black;
+
+
+
+.edit-shirt {
+    /* width: 50vw; */
+    /* height: 70vh; */
+    /* position: relative; */
+     display: flex; 
+     flex-direction: column;
+align-items: center;
+justify-content: center; 
+
 }
+
+.shirt-template {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#myCanvas {
+    /* z-index: 1000; */
+    /* width: 100px; 
+    height: 100px;  */
+    width: 500px;
+    height: 500px;
+    /* background-image: url('../imgs/general/shirt.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;  */
+    /* border:1px solid #000; */
+}
+
+.remark {
+    margin: 5px;
+    color: gray;
+}
+.buttons-container button,.buttons-container select, .buttons-container input {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid lightgray;
+    margin: 5px;
+
+}
+.buttons-container button{
+    cursor: pointer;
+}
+.buttons-container button:hover{
+    background: rgb(239, 239, 239);
+
+}
+.text-container{
+    display: flex;
+}
+
 .color {
-    width: 30px; /* Increase the width */
-    height: 30px; /* Increase the height */
-    border: none; /* Remove button border */
-    margin: 5px; /* Spacing between buttons */
+    width: 30px;
+    /* Increase the width */
+    height: 30px;
+    /* Increase the height */
+    border: none;
+    /* Remove button border */
+    margin: 5px;
+    /* Spacing between buttons */
     cursor: pointer;
     outline: none;
 }
+
 .color-button {
     width: 30px;
     height: 30px;
@@ -24,8 +81,10 @@ canvas {
     cursor: pointer;
     text-align: center;
     line-height: 30px;
-    color: white; /* לשים צבע לטקסט שמתאים לרקע */
+    color: white;
+    /* לשים צבע לטקסט שמתאים לרקע */
 }
+
 .color-palette {
     display: flex;
     flex-direction: column;
@@ -39,87 +98,65 @@ canvas {
     margin: 5px;
     cursor: pointer;
     outline: none;
-} 
- 
-#colorPicker {
-    display: none;
-    position: absolute;
-    left: 50px;
-    bottom: 0;
-    flex-direction: column;
-    align-items: center;
 }
 
-#colorPicker .color {
-    width: 30px;
-    height: 30px;
-    margin: 5px;
-    display: block;
-}
+#colorPicker,
 #colorShirtPicker {
-    display: none;
-    position: absolute;
-    left: 0; /* שינוי הערך של left ל-0 כדי להציב את האלמנט בקצה השמאלי של הכפתור */
-    right: calc(100% + 10px); /* הוספת מרווח מימין כדי להפריד את האלמנט מהכפתור */
-    bottom: 0;
-    flex-direction: column;
-    align-items: center;
+    display: flex;
 }
 
+#colorPicker .color:hover,
+#colorShirtPicker .color:hover {
+    opacity: 0.7;
+}
+
+#colorPicker .color,
 #colorShirtPicker .color {
     width: 30px;
     height: 30px;
     margin: 5px;
-    display: block;
+    /* display: block; */
+    border-radius: 50%;
+    outline: 1px solid lightgray;
+
 }
+
+
 
 .color-palette .color:hover {
-    opacity: 0.7; 
+    opacity: 0.7;
 
-} 
-#myCanvas {
-    border: none;
-    width: 500px; /* גודל ה-Canvas */
-    height: 500px; /* גובה ה-Canvas */ 
-    background-image: url('public/מסגרת לתמונה.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center; 
-    
 }
+
 #saveBtn,
 #undoBtn,
 #redoBtn,
 #clearBtn,
 #colorBtn,
 #colorShirt,
-#addTextBtn , 
+#addTextBtn,
 #textInput {
     width: 100px;
     height: 30px;
-    margin-bottom: 5px; 
-    margin-left: -700px; 
+    margin-bottom: 5px;
+}
 
-} 
 .btn-custom {
-    font-size: 18px; /* גודל פונט */
-    padding: 10px 20px; /* גודל הכפתור */
-    margin: 5px; /* מרווח בין הכפתורים */
-} .container {
-    display: flex;
-    align-items: center;
+    font-size: 18px;
+    /* גודל פונט */
+    padding: 10px 20px;
+    /* גודל הכפתור */
+    margin: 5px;
+    /* מרווח בין הכפתורים */
 }
 
-.edit-shirt {
-    width: 300px;
-    height: 300px;
-    background-color: white; /* ללא גרשים סביב white */
-}
 
 .buttons-container {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    /* align-items: start;
+    justify-content: start; */
+    /* margin-left: 20px; */
 }
 
 .edit-button {

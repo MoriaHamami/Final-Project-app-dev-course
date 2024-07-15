@@ -12,7 +12,7 @@ async function getCartPage(req, res) {
         for (let i = 0; i < cartItemsInfo?.length; i++) {
             itemId = cartItemsInfo[i]?.id
             const item = await productsService.getProductById(itemId)
-            console.log("test",item)
+            console.log("test", item)
             cartItems.push(item)
             sum += item?.price || 0
         }
@@ -38,7 +38,24 @@ async function getCartItems(req, res) {
 }
 
 
+async function addEditShirtToCart(req, res) {
+    try {
+        const imgSrc = req.body.dataURL
+        const color = req.body.color
+        
+        const product = await productsService.createProduct("My creation", color, "", 50, "both", "", [imgSrc], [], false)
+        // TODO: Add Item to cart with function noa wrote
+        // await clientsService.addItemToCart(product._id)
+        console.log('product:', product)
+        res.send('Image saved to database');
+    } catch (error) {
+        console.error('Error saving image:', error);
+        res.status(500).send('Internal Server Error');
+    }
+
+}
 
 module.exports = {
-    getCartPage
+    getCartPage,
+    addEditShirtToCart
 }

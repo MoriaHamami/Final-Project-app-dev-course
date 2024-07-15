@@ -1,6 +1,6 @@
 const Product = require('../models/products');
 
-const createProduct = async (title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = []) => {
+const createProduct = async (title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay=true) => {
     // Product.init() // Document gets generated (and gets an id)
     // console.log('srcImg:', srcImg)
     const product = new Product({
@@ -11,7 +11,8 @@ const createProduct = async (title = "", color = "", cat = "", price = 0, gender
         favePlayer,
         price,
         gender,
-        sizes
+        sizes,
+        toDisplay
     })
     // console.log('product:', product)
     try {
@@ -45,7 +46,7 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     // }catch(e){
 
     // }
-    const filter = {}
+    const filter = {toDisplay: { $ne: false }}
     if (priceFilter && priceFilter != "null" && priceFilter > 0) {
         filter.price = { $lt: priceFilter }
     }
@@ -93,7 +94,7 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     return res
 }
 
-const updateProduct = async (id, title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = []) => {
+const updateProduct = async (id, title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay=true) => {
     const product = await getProductById(id)
     // console.log('here:', product)
     if (!product)
@@ -106,6 +107,7 @@ const updateProduct = async (id, title = "", color = "", cat = "", price = 0, ge
     if (favePlayer) product.favePlayer = favePlayer
     if (srcImg.length !== 0) product.srcImg = srcImg
     if (sizes.length !== 0) product.sizes = sizes
+    product.toDisplay = toDisplay
     //   console.log('here2:')
     try {
         await product.save()

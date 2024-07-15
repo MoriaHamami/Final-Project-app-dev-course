@@ -6,7 +6,8 @@ const cartController = require("../controllers/cart");
 // Handle routes for '/tickets'
 router.route('/')
     .get(cartController.getCartPage)
-
+    router.route('/canvas-edit')
+    .post(cartController.addEditShirtToCart)
 
 
 module.exports = router;

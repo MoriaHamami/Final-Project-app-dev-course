@@ -85,8 +85,8 @@ async function getClientOrders(req, res) {
 // } 
 
 
-
 module.exports = {
     getClientsPage,
-    getClientOrders
+    getClientOrders,
+
 };
