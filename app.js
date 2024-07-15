@@ -48,6 +48,7 @@ passport.serializeUser(function (user, cb) {
       }
     ));
 
+
 // Set EJS as the view engine for the Express application
 app.set("view engine", "ejs")
 app.use(express.urlencoded({
