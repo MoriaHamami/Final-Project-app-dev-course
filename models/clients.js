@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const subSchema = new mongoose.Schema({
-    id: mongoose.Schema.Types.ObjectId, 
-    type: String, 
+    id: mongoose.Schema.Types.ObjectId,
+    type: String,
     size: String
-})
+});
 
 const clientSchema = new mongoose.Schema({
     fullname: String,
@@ -13,22 +13,17 @@ const clientSchema = new mongoose.Schema({
         required: true
     },
     pass: {
-        type: Number,
+        type: String,
         required: true
     },
     imgURL: String,
     spent: Number,
-    faveItems: [Number],
-    orders: [[
-        subSchema
-]], // סוג נתונים של מערך של מערכים של מזהה מוצר
-    cartItems: [{
-        id: mongoose.Schema.Types.ObjectId,
-        type: String,
-        size: String
+    faveItems: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
     }],
-    // orders: [[Number]], // סוג נתונים של מערך של מערכים של מזהה מוצר
-    // cartItems: [mongoose.Schema.Types.ObjectId],
+    orders: [[subSchema]], // מערך של מערכים של אובייקטים מסוג subSchema
+    cartItems: [subSchema],
     isBanned: Boolean,
     dateCreated: { type: Date, default: Date.now },
     isManager: { type: Boolean, default: false }
