@@ -1,18 +1,27 @@
 .edit-ticket {
-    margin-top: 100px;;
+    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: row; */
     justify-content: center;
-    /* Make background on whole page that is seen */
     background-color: var(--almost-white);
     align-content: center;
     height: 100vh;
     overflow-y: scroll;
 }
 
-.edit-ticket h3:not(.edit-actions) {
-    margin: 5px;
+.edit-ticket h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: -100px; /* שנה את הערך לערך שלילי יותר */
+    font-size: 2em;
+    color: var(--primary-color); /* שנה את זה לצבע העיקרי של האתר שלך */
+}
+
+.edit-ticket h3 {
+    margin: 10px 0;
+    text-align: center;
+    color: var(--secondary-color); /* שנה את זה לצבע המשני של האתר שלך */
 }
 
 .edit-ticket article {
@@ -23,34 +32,53 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--card-bsh);
-    /* Prevent articles from being smeared unnecessarily */
-    height: min-content;
+    min-width: 300px; /* קבע רוחב מינימלי */
+    max-width: 400px; /* קבע רוחב מקסימלי חדש */
+    min-height: 300px; /* קבע גובה מינימלי */
+    height: 100%; /* גובה אחיד לכל המאמרים */
+    flex: 1; /* מאפשר למאמרים לגדול ביחס שווה */
+    box-sizing: border-box; /* לוודא ש-padding נלקח בחשבון בחישוב הגובה והרוחב */
 }
 
 .edit-ticket button {
     background-color: white;
     border: 1px solid var(--l-gray);
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 3px 2px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .edit-ticket button:hover {
     background-color: var(--ll-gray);
+    transform: scale(1.10);
 }
 
 .edit-ticket form {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.edit-ticket .edit-txt {
+    width: 100%;
 }
 
 .edit-ticket label {
     display: flex;
-    justify-content: space-between;
-    margin: 5px;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.edit-ticket label span {
+    flex: 0 0 150px; /* קבע רוחב קבוע עבור הלייבלים */
 }
 
 .edit-ticket input {
-    margin-inline-start: 10px;
+    flex: 1;
     border: 1px solid var(--l-gray);
     border-radius: 10px;
     padding: 5px 15px;
@@ -58,6 +86,10 @@
 
 .edit-ticket input:focus {
     outline: none;
+}
+
+.edit-ticket input:hover {
+    transform: scale(1.05); /* הגדלת ה-input ב-5% כאשר עוברים עם העכבר מעליו */
 }
 
 .edit-ticket li {
@@ -73,6 +105,7 @@
     border-radius: 5%;
     display: flex;
 }
-.edit-ticket .edit-txt #date{
-    width: 64%;
+
+.edit-ticket .edit-txt #date {
+    width: calc(108.4% - 160px); /* Adjust the width to match other inputs */
 }

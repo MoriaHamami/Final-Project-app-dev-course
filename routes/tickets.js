@@ -1,25 +1,15 @@
-// Import necessary modules
 const express = require("express");
 const router = express.Router();
 const ticketsController = require("../controllers/tickets");
 
-// Handle routes for '/tickets'
-router.route('/')
-    .get(ticketsController.getTickets)
+router.get('/', ticketsController.getTickets);
+router.get('/filter', ticketsController.getTicketssByFilter);
+router.get('/edit', ticketsController.getTicket);
+router.post('/edit', ticketsController.createTicket);
+router.get('/edit/:id', ticketsController.getTicket);
+router.put('/edit/:id', ticketsController.updateTicket);
+router.delete('/edit/:id', ticketsController.deleteTicket);
+router.get('/date', ticketsController.getTicketsByDate);
 
-// Handle routes for '/tickets/edit'
-router.route('/edit') /* 5 */
-    .get(ticketsController.getTicket)
-    .post(ticketsController.createTicket)
-
-// Handle routes for '/tickets/edit/:id'
-router.route('/edit/:id')
-    .get(ticketsController.getTicket)
-    .put(ticketsController.updateTicket)
-    .delete(ticketsController.deleteTicket)
-
-// Handle routes for '/tickets/date'
-router.route('/date')
-    .get(ticketsController.getTicketsByDate)
 
 module.exports = router;

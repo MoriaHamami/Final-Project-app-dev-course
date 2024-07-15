@@ -16,6 +16,16 @@ async function addCartItemToDB(username, productId, size) {
         console.error('Client not found:', username);
         throw new Error('Client not found');
     }
+}
+
+async function getCartItemsFromDB(username) { 
+    try{
+        const client = await clients.findOne({username})
+       return client?.cartItems
+    } 
+    catch(e){ 
+
+    }
 
     if (!mongoose.Types.ObjectId.isValid(productId)) {
         throw new Error('Invalid product ID');
@@ -45,8 +55,28 @@ async function removeCartItemFromDB(username, productId) {
     console.log('Item removed from cart successfully');
 }
 
+async function getOrdersFromDB(id) { 
+    try{
+        const client = await clients.findById(id)
+       return client?.orders
+    } 
+    catch(e){ 
+
+    }
+} 
+
 module.exports = {
     getCartItemsFromDB,
     addCartItemToDB,
-    removeCartItemFromDB
+    removeCartItemFromDB,
+    getOrdersFromDB
 };
+
+
+// getOrdersById  : id --- fun servive 
+
+// const getOrdersById = async (id) => {
+//     return await orders.findById(id)
+// }
+ 
+
