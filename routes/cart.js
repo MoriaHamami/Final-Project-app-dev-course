@@ -1,12 +1,14 @@
-// Import necessary modules
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const cartController = require("../controllers/cart");
+const cartController = require('../controllers/cart');
 
-// Handle routes for '/tickets'
 router.route('/')
-    .get(cartController.getCartPage)
+    .get(cartController.getCartPage);
 
+router.route('/add')
+    .post(cartController.addCartItem);
 
+router.route('/remove')
+    .post(cartController.removeCartItem);
 
 module.exports = router;

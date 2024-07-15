@@ -31,7 +31,9 @@
                                 <th>Total favorite items</th>
                                 <th>Delete account</th>
                                 <th>Total amount</th>
-                                <th>Reservations</th>
+                                <th>Reservations</th> 
+                                <th>Block</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +56,14 @@
                                   <td>
                                     <li class="nav-item"><a class="nav-link orders-btn" data-bs-toggle="pill" href="#client<%= client.id %>" id="<%=client._id%>">
                                         <i class="bi bi-bag-check-fill"></i>See orders</a> </li>
+                                </td> 
+                                <td>
+                                    <button class="block-btn ban-btn" data-client-id="<%= client._id %>">
+                                        <i class="bi bi-x-circle-fill text-danger"></i> 
+                                    </button>
+                                    <button class="block-btn unban-btn" data-client-id="<%= client._id %>">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                    </button> 
                                 </td>
                             </tr>
                             <% }) %>
