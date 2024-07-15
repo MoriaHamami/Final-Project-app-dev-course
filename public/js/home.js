@@ -1,6 +1,6 @@
-const apiKey = '54e5fa763dd39a887729e98f2ca75202';
+const weatherApiKey = '54e5fa763dd39a887729e98f2ca75202';
 const city = 'Madrid'; // העיר שתרצה להציג את מזג האוויר שלה
-const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`;
 
 function displayWeather(data) {
     const weatherElement = document.getElementById('weather-container');
@@ -33,7 +33,7 @@ function findWeatherForDate(weatherList, date) {
     return weatherList.find(weather => weather.dt_txt.includes(targetDate));
 }
 
-fetch(apiUrl)
+fetch(weatherApiUrl)
     .then(response => response.json())
     .then(data => {
         displayWeather(data);
@@ -41,3 +41,4 @@ fetch(apiUrl)
     .catch(error => {
         console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
     }); 
+

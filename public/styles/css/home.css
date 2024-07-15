@@ -1,4 +1,3 @@
-
 .home {
     background-color: var(--almost-white);
 }
@@ -18,9 +17,7 @@
 
 .home .welcome button {
     display: flex;
-    /* Make the button relative to the whole big image in the background */
     position: relative;
-    /* Position the button in the lower part of the image in the bg */
     top: 70vh;
     height: fit-content;
     padding: 10px 20px;
@@ -41,22 +38,43 @@
 
 /* SLIDER STYLING */
 
-.home .carousel{
-    width: 500px;
+.home .carousel {
+    width: 430px; /* שמירה על רוחב הקרוסלה המקורי */
+    margin-left: -50%; /* הזזת הקארוסלה שמאלה */
+    background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%); /* רקע גרדיאנט */
+    border-radius: 20px; /* עיגול פינות */
+    padding: 20px; /* ריווח פנימי */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל */
 }
 
-/* Center the slider */
 .home .slider {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+}
+
+/* Players title styling */
+.players-title {
+    font-size: 36px;
+    text-align: center;
+    color: #1d428a; /* כחול כהה של ריאל מדריד */
+    margin: 40px 0 20px; /* מרווחים מעל ומתחת לכותרת */
+    margin-left: -50%;
+    font-weight: bold;
+    text-transform: uppercase; /* אותיות גדולות */
+    letter-spacing: 2px; /* ריווח בין אותיות */
+    background: linear-gradient(45deg, #1d428a, #ffd700); /* מעבר צבעים לכותרת: כחול וזהב */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* הוספת צל לכותרת */
 }
 
 /* Give a height to each slider img */
 .home .carousel-inner img {
-    height: 500px;
+    height: 500px; /* שמירה על גובה התמונות המקורי */
+    width: auto; /* שמירה על יחס רוחב-גובה */
+    border-radius: 20px; /* עיגול פינות לתמונות */
 }
 
 /* Style side buttons in slider */
@@ -69,56 +87,300 @@
     background-color: var(--l-gray);
 }
 
-/* Style bottom navigation buttons in slider */
-.home .carousel-indicators{
-    position: absolute;
-    bottom: -40px;
-    background-color: var(--ll-gray);
-    border-radius: 30px;
-}
-
 /* Style text in slider */
-.home .carousel-caption{
+.home .carousel-caption {
     text-shadow: var(--dark-txtsh);
     color: black;
     background-color: #ffffffb9;
-    border-radius: 20px; 
-} 
+    border-radius: 20px;
+    padding: 10px;
+}
 #weather-container {
-    border: 2px solid #ccc;
+    border: 2px solid #1d428a; /* כחול כהה של ריאל מדריד */
     border-radius: 20px;
     padding: 20px;
-    width: 300px; 
-    background-color: var(--ll-gray); 
-}  
+    width: 90%; /* מתפרס לרוחב המסך */
+    background-color: #ffffff; /* לבן */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל */
+    margin: 20px auto; /* מרכז את הקונטיינר */
+    display: flex; /* שימוש ב-Flexbox */
+    justify-content: space-around; /* מרווח בין התחזיות */
+    align-items: center; /* ממרכז את התחזיות אנכית */
+    transition: transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
+    flex-wrap: wrap; /* עוטף שורות אם יש צורך */
+    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
+}
+
+#weather-container:hover {
+    transform: scale(1.02); /* הגדלת הקונטיינר מעט בעת ריחוף */
+}
 
 #weather-container h2 {
-    font-size: 30px; /* שים את הגודל הרצוי כאן */
-    margin-bottom: 10px; /* שים את הרווח התחתון הרצוי כאן */ 
-    
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #1d428a; /* כחול כהה של ריאל מדריד */
+    text-align: center;
+    width: 100%; /* מרחיב את הכותרת לכל רוחב הקונטיינר */
+    background: linear-gradient(45deg, #1d428a, #ffd700); /* מעבר צבעים לכותרת: כחול וזהב */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
 .daily-forecast {
-    border-top: 1px solid #ccc;
-    margin-top: 5px; /* רווח למעלה */
-    margin-bottom: 5px; /* רווח למטה */
-    padding-top: 5px; /* רווח למעלה */
-    padding-bottom: 5px; /* רווח למטה */
+    border: 1px solid #1d428a; /* כחול כהה */
+    margin: 10px;
+    padding: 10px; /* הקטנת הפדינג */
+    background-color: #ffffff; /* לבן */
+    border-radius: 10px; /* עיגול פינות של כל תחזית */
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
+    flex: 1; /* כל תחזית תופסת חלק שווה מהשורה */
+    min-width: 150px; /* מינימום רוחב לתחזית */
+    max-width: 180px; /* מקסימום רוחב לתחזית */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל לתחזיות */
 }
 
-
-.daily-forecast:first-child {
-    margin-top: 0; 
+.daily-forecast:hover {
+    background-color: #ffd700; /* רקע זהב בעת ריחוף */
+    transform: scale(1.05); /* הגדלת התחזית מעט בעת ריחוף */
 }
-
 
 .forecast-title {
-    font-weight: bold; 
+    font-weight: bold;
+    font-size: 18px; /* הקטנת גודל הטקסט */
+    color: #1d428a; /* כחול כהה */
+    margin-bottom: 5px; /* הקטנת המרווח התחתון */
 }
 
 .forecast-details {
-    display: none; 
+    display: none;
+    font-size: 14px;
+    color: var(--gray);
 }
 
 .daily-forecast:hover .forecast-details {
-    display: block; 
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.widget {
+    width: 40%; /* רוחב הווידג'ט */
+    height: 545px; /* גובה הווידג'ט תואם לגובה הקרוסלה */
+    background-color: white; /* צבע רקע לווידג'ט */
+    border: 1px solid #ccc; /* גבול לווידג'ט */
+    float: right; /* מיקום הווידג'ט בצד ימין */
+    margin-bottom: 20px;
+    margin-top: -540px;
+    margin-right: 100px;
+    border-radius: 10px;
+    overflow-y: auto; /* הוספת גלילה אנכית */
+}
+:root {
+    --font: "Raleway", sans-serif;
+
+    --background-color: #fff;
+    --background-color-header: #e9ecef;
+    --color-text: #000;
+    --color-text-header: #000;
+    --color-green: #01d099;
+    --color-red: #f64e60;
+    --color-yellow: #ffa800;
+
+    --primary-font-size: 5px; /* הוקטן יותר */
+    --secondary-font-size: 4px; /* הוקטן יותר */
+    --header-font-size: 5px; /* הוקטן יותר */
+    --svg-font-size: 3px; /* הוקטן יותר */
+
+    --border-bottom: 0.5px solid var(--background-color-header);
+    --primary-padding: 0.5px 0.5px; /* הוקטן יותר */
+    --primary-line-height: 6px; /* הוקטן יותר */
+    --secondary-padding: 0.05rem; /* הוקטן יותר */
+
+    --button-info-font-size: 4px; /* הוקטן יותר */
+    --button-info-line-height: 6px; /* הוקטן יותר */
+
+    /* LIVESCORE, FIXTURES & FIXTURE WIDGETS ONLY */
+    --modale-background-overlay: rgba(0,0,0,0.4);
+    --modale-close-size: 10px; /* הוקטן יותר */
+    --modale-elapsed-time: 5px; /* הוקטן יותר */
+    --modale-teams-name: 7px; /* הוקטן יותר */
+    --modale-teams-name-small: 6px; /* הוקטן יותר */
+    --modale-teams-name-line-height: 8px; /* הוקטן יותר */
+    --modale-score: 10px; /* הוקטן יותר */
+    --modale-score-small: 8px; /* הוקטן יותר */
+    --modale-players-grid-line-height: 6px; /* הוקטן יותר */
+    --modale-players-grid-line-height-small: 5px; /* הוקטן יותר */
+    --modale-players-grid-line-height-large: 7px; /* הוקטן יותר */
+
+    /* STANDINGS WIDGET ONLY */
+    --standings-team-form-font-size: 4px; /* הוקטן יותר */
+    --standings-team-form-line-height: 5px; /* הוקטן יותר */
+
+    /* LOGOS / FLAGS / PHOTOS */
+    --flags-size: 5px; /* הוקטן יותר */
+    --teams-logo-size: 5px; /* הוקטן יותר */
+    --teams-logo-size-large: 20px; /* הוקטן יותר */
+    --teams-logo-size-medium: 10px; /* הוקטן יותר */
+    --teams-logo-border: 1px solid var(--background-color-header);
+    --player-photo: 5px; /* הוקטן יותר */
+    --player-photo-large: 7px; /* הוקטן יותר */
+}
+
+#wg-api-football-livescore, #wg-api-football-standings, #wg-api-football-fixtures, #wg-api-football-fixture, #wg-api-football-fixture-modal {
+    width: 50%; /* חצי רוחב המסך */
+    max-height: 550px; /* גובה מקסימלי הוגדל */
+    overflow-y: auto; /* גלילה אנכית */
+    box-sizing: border-box; /* הגדרה של חישוב הרוחב הכולל גבולות */
+}
+#livescore, #standings, #fixtures, #fixture, #fixture-modal, #fixture_events, #fixture_statistics, #fixture_lineups, #fixture_players {
+    font-family: var(--font);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: var(--primary-padding);
+    font-size: var(--primary-font-size);
+    letter-spacing: 0px;
+    line-height: var(--primary-line-height);
+    vertical-align: middle;
+    background: var(--background-color);
+    color: var(--color-text);
+    border-bottom: var(--border-bottom);
+}
+
+td > span {
+    vertical-align: middle;
+}
+
+.api_football_div_table {
+    padding: var(--primary-padding);
+    font-size: var(--primary-font-size);
+    letter-spacing: 0px;
+    line-height: var(--primary-line-height);
+    vertical-align: middle;
+}
+
+.api_football_no_data {
+    padding: var(--secondary-padding);
+    font-size: var(--primary-font-size);
+    letter-spacing: 0px;
+    line-height: var(--primary-line-height);
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 600;
+    background: var(--background-color-header);
+    color: var(--color-text);
+}
+
+.api_football_header {
+    padding: var(--secondary-padding);
+    font-size: var(--header-font-size);
+    font-weight: 600;
+    background: var(--background-color-header);
+    color: var(--color-text-header);
+}
+
+.api_football_header > span {
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.api_football_team_xl {
+    font-size: var(--modale-teams-name);
+    line-height: var(--modale-teams-name-line-height);
+}
+
+.api_football_score_xl {
+    font-size: var(--modale-score);
+    font-weight: 600;
+}
+
+.api_football_elasped_xl {
+    margin-top: 20px;
+    font-size: var(--modale-elapsed-time);
+}
+
+.api_football_logo {
+    width: var(--teams-logo-size);
+    vertical-align: middle;
+}
+
+.api_football_photo {
+    width: var(--player-photo);
+    vertical-align: middle;
+}
+
+.api_football_photo_xl {
+    margin: 10px;
+    width: var(--player-photo-large);
+    vertical-align: middle;
+}
+
+.api_football_logo_xl {
+    height: var(--teams-logo-size-large);
+    border: var(--teams-logo-border);
+    padding: 10px;
+    margin: 10px;
+    vertical-align: middle;
+}
+
+.api_football_flag {
+    width: var(--flags-size);
+    vertical-align: middle;
+}
+
+.api_football_no_border {
+    border: 0px;
+}
+
+.api_football_text_right {
+    text-align: right;
+}
+
+.api_football_text_center {
+    text-align: center;
+}
+
+.api_football_bolder {
+    font-weight: bold;
+}
+
+.api_football_bolder_600 {
+    font-weight: 600;
+}
+
+.api_football_font_size_10 {
+    font-size: var(--secondary-font-size);
+}
+
+.api_football_progress_bar {
+    margin-top: -5px;
+    width: 100%;
+    background: var(--background-color-header);
+}
+
+.api_football_progress_bar_green {
+    height: 6px;
+    background-color: var(--color-green);
+}
+
+.api_football_progress_bar_red {
+    height: 6px;
+    background-color: var(--color-red);
+}
+
+.api_football_progress_bar_home {
+    transform: scaleX(-1);
+}
+
+.api_football_progress {
+    animation: tilt 2s linear infinite;
+    font-weight:​⬤
 }

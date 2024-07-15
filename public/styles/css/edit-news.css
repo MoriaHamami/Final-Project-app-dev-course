@@ -1,0 +1,15 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.edit-txt label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.edit-txt input, .edit-txt textarea {
+    width: 100%;
+    border-radius: 5px;
+}

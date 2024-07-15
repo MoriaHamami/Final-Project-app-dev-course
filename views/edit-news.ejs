@@ -11,49 +11,52 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
     <link rel="stylesheet" href="/styles/css/edit-news.css">
+    <link rel="stylesheet" href="/styles/css/custom.css">
 </head>
 <body>
 
     <%- include('header.ejs', { page: 'edit-news' }) -%>
 
     <main class="edit-news">
-        <form id="editArticle">
-            <article class="edit-txt">
-                <h3>Article Information</h3>
+        <div class="container">
+            <form id="editArticle">
+                <article class="edit-txt">
+                    <h3>Article Information</h3>
 
-                <label>
-                    Genre
-                    <input id="genre" value="<%= article != null ? article.genre : '' %>" name="genre" onchange="onChangeGenre(event.target.value)">
-                </label>
+                    <label>
+                        Genre
+                        <input id="genre" value="<%= article != null ? article.genre : '' %>" name="genre" onchange="onChangeGenre(event.target.value)">
+                    </label>
 
-                <label>
-                    Text
-                    <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"><%= article != null ? article.txt : '' %></textarea>
-                </label>
-                
-                <label>
-                    Date and Time
-                    <input id="date" type="datetime-local" value="<%= article != null ? new Date(article.date).toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
-                </label>
-            </article>
+                    <label>
+                        Text
+                        <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"><%= article != null ? article.txt : '' %></textarea>
+                    </label>
+                    
+                    <label>
+                        Date and Time
+                        <input id="date" type="datetime-local" value="<%= article != null ? new Date(article.date).toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
+                    </label>
+                </article>
 
-            <article class="edit-actions">
-                <h3>Options</h3>
+                <article class="edit-actions">
+                    <h3>Options</h3>
 
-                <% if (article != null) { %>
-                    <button type="button" id="updateButton" value="<%= article._id %>" onclick="onUpdateArticle(event)">
-                        Save Changes
-                    </button>
-                    <button type="button" id="deleteButton" onclick="onDeleteArticle('<%= article._id %>')">
-                        Delete Article
-                    </button>
-                <% } else { %>
-                    <button type="button" id="addButton" onclick="onAddArticle(event)">
-                        Add Article
-                    </button>
-                <% } %>
-            </article>
-        </form>
+                    <% if (article != null) { %>
+                        <button type="button" id="updateButton" value="<%= article._id %>" onclick="onUpdateArticle(event)">
+                            Save Changes
+                        </button>
+                        <button type="button" id="deleteButton" onclick="onDeleteArticle('<%= article._id %>')">
+                            Delete Article
+                        </button>
+                    <% } else { %>
+                        <button type="button" id="addButton" onclick="onAddArticle(event)">
+                            Add Article
+                        </button>
+                    <% } %>
+                </article>
+            </form>
+        </div>
     </main>
 
     <%- include('footer.ejs') -%>
