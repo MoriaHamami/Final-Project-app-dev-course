@@ -116,3 +116,17 @@ hr {
 margin-top: -18px;
 }
 
+.userDetails
+{
+    background-color: #edeff2;
+    width: 394px;
+    height: 64px;
+    margin: 0 auto;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+
+}
+

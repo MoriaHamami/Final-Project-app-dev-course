@@ -1,105 +1,53 @@
 const Ticket = require('../models/tickets');
 
-const createTicket = async (title, price, stadium, opImg, opponent, date) => { /* 8 */
+const createTicket = async (title, price, stadium, opImg, opponent, date) => {
   const newTicket = new Ticket({
-    title,
-    price,
-    stadium,
-    opImg,
-    opponent,
-    date
+    title, price, stadium, opImg, opponent, date
   });
-  try {
-    return await newTicket.save();
-  } catch (e) {
-    return e;
-  }
+  return await newTicket.save();
 };
 
-const getTickets = async () => {
-  return await Ticket.find({});
+const getTickets = async (filter = {}) => {
+  return await Ticket.find(filter);
 };
 
 const getTicketsByMonth = async (month) => {
+  let monthTickets = [];
   if (!month) {
-    // If no month is provided, return all tickets
-    const allTickets = await Ticket.find({});
-    return allTickets;
+    return await Ticket.find({});
   }
-
-  const monthTickets = [];
   for (let year = 2023; year <= 2026; year++) {
     const startDate = new Date(year, month - 1, 1);
     const endDate = new Date(year, month, 0);
-
     const tickets = await Ticket.find({
-      date: {
-        $gte: startDate,
-        $lte: endDate
-      }
+      date: { $gte: startDate, $lte: endDate }
     });
-
     monthTickets.push(...tickets);
   }
-
   return monthTickets;
 };
 
-
 const updateTicket = async (id, title, price, stadium, opImg, opponent, date) => {
-  const ticket = await getTicketById(id);
-
-  if (!ticket)
-    return null;
-
-  if (title) ticket.title = title;
-  if (price) ticket.price = price;
-  if (stadium) ticket.stadium = stadium;
-  if (opImg) ticket.opImg = opImg;
-  if (opponent) ticket.opponent = opponent;
-  if (date) ticket.date = date;
-
-  try {
-    await ticket.save();
-    return ticket;
-  } catch (e) {
-    return e;
-  }
+  const ticket = await Ticket.findById(id);
+  if (!ticket) return null;
+  
+  ticket.title = title ?? ticket.title;
+  ticket.price = price ?? ticket.price;
+  ticket.stadium = stadium ?? ticket.stadium;
+  ticket.opImg = opImg ?? ticket.opImg;
+  ticket.opponent = opponent ?? ticket.opponent;
+  ticket.date = date ?? ticket.date;
+  
+  return await ticket.save();
 };
 
 const deleteTicket = async (id) => {
-  try {
-    const ticket = await Ticket.findById(id);
-    if (!ticket) {
-      return null;
-    }
-
-    await ticket.deleteOne();
-    console.log(ticket);
-    return ticket;
-  } catch (e) {
-    return e;
-  }
+  return await Ticket.findByIdAndDelete(id);
 };
-
-
-// const getTicketById = async (id) => {
-//   return await Ticket.findById(id)
-// };
-
-// // const getProductById = async (id) => {
-// //   return await Product.findById(id)
-// // }
 
 const getTicketById = async (id) => {
-  try {
-    return await Ticket.findById(id);
-  } catch (error) {
-    console.error('Error fetching ticket by id:', error);
-    throw error; // אפשר לטפל בשגיאה אם רצינו
-  }
+  return await Ticket.findById(id);
 };
-
 
 module.exports = {
   createTicket,
