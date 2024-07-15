@@ -17,6 +17,22 @@
     <%- include('header.ejs', {page:'news'}) -%>
 
     <main>
+        <section class="filter">
+            <form>
+                <label>
+                    Date
+                    <input type="date" id="dateFilter" name="dateFilter" onchange="filterNews()">
+                </label>
+                <label>
+                    Author
+                    <input name="authorFilter" id="authorFilter" onkeyup="filterNews()" placeholder="Search by author">
+                </label>
+                <button onclick="sortNewsBy('date')" class="sortByDateBtn" type="button"><i class="bi bi-caret-up"></i> Sort By Date</button>
+                <button onclick="sortNewsBy('author')" class="sortByAuthorBtn" type="button"><i class="bi bi-caret-up"></i> Sort By Author</button>
+            </form>
+        </section>
+
+
         <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <% if (news && news.length > 0) { %>
