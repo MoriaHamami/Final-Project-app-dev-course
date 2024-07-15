@@ -6,12 +6,9 @@ body {
     background-size: cover; /* מקטין את התמונה למקרא הגדול ביותר */
     background-position: center; /* מיושר את התמונה למרכז העמוד */
     background-repeat: no-repeat; /* אין חזרות של התמונה */
-
 }
 
-
-
- .footer {
+.footer {
     background-color: #1f21a5; 
     color: #fff; 
     text-align: center;
@@ -19,17 +16,19 @@ body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
     font-size: 20px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-    
+    position: relative; /* תיקון מיקום ה-footer */
+    border-radius: 10px; /* נוספה הגדרת border-radius */
 }
-
 
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0; /* נוספה הגדרה להסרת המרווחים בין רכיבי ה-nav */
+    display: flex; /* שימוש ב-flexbox ליישור האלמנטים */
+    justify-content: center; /* יישור למרכז */
 }
 
 nav ul li {
-    display: inline;
     margin-right: 20px;
 }
 
@@ -40,15 +39,15 @@ nav ul li a {
 
 main {
     display: flex;
+    flex-direction: column; /* הגדרה נכונה של flex-direction */
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
-    flex-direction: column
 }
 
 section {
     flex: 0 0 calc(50% - 20px);
-    margin-bottom: 100px; 
+    margin-bottom: 20px; /* שינוי ערך המרווח למטה */
 }
 
 section h2 {
@@ -57,7 +56,6 @@ section h2 {
     color: rgb(255, 255, 2);
     padding: 10px; 
 }
-
 
 article {
     background-color: #fff;
@@ -75,25 +73,14 @@ article h3 {
     font-weight: bold;
 }
 
-.footer {
-    background-color: #1f21a5;
-    color: #fff;
+.lates_updates > article {
+    font-size: 150%;
+    align-items: center;
     text-align: center;
-    padding: 10px 0;
-    position: relative;
-    border-radius: 10px; 
-}
-
-.lates_updates > article
-{
-   font-size: 150%;
-   align-items: center;
-   text-align: center;
-   background-color: #f1f3ed6d;
+    background-color: #f1f3ed6d;
 } 
 
-.lates_updates h3
-{
+.lates_updates h3 {
     margin-top: 0;
     color: #424242; 
     text-shadow: none;
@@ -101,36 +88,30 @@ article h3 {
     font-size: larger;
 }
 
-.lates_updates footer
-{
+.lates_updates footer {
     background-color: #e5ec9483; 
-    
     color: #030202; 
     text-align: center;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
     font-size: 35px; 
-    text-shadow: none
+    text-shadow: none;
 }
 
-.update_content
-{
+.update_content {
     display: flex;
-    
 }
 
 .vertical-line {
-    border-right: 2px solid rgba(182, 177, 177, 0.197); /* קו אנכי שחור ברוחב 1 פיקסל */
+    border-right: 2px solid rgba(182, 177, 177, 0.197); /* קו אנכי ברוחב 2 פיקסל */
     height: 100px; /* גובה של הקו בפיקסלים */
     display: flex;
-    
     align-items: start;
     justify-content: center;
     flex-direction: column;
     padding: 8px;
 }
 
-.lateup
-{
+.lateup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,10 +119,43 @@ article h3 {
     width: 100%;
 }
 
-.api_articles
-{
+.api_articles {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
+}
+
+#newsCarousel {
+    position: relative;
+    width: 100%;
+    margin: 0 auto; 
+    overflow: hidden;
+    border-radius: 10px; 
+}
+
+#newsCarousel .carousel-item .update_content h3,
+#newsCarousel .carousel-item .update_content p {
+    margin: 0;
+    line-height: 2.3;
+}
+
+#newsCarousel .carousel-item .update_content h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+#newsCarousel .carousel-item .update_content p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    margin-left: 2%;
+}
+
+#newsCarousel .carousel-item footer {
+    font-size: 0.9em;
+    color: #161515;
+    text-align: left;
+    margin-top: 5px;
 }

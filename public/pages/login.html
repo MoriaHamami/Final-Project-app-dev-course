@@ -23,32 +23,48 @@
             </div>
             <h1>Welcome!</h1>
             <h5>Sign in or create your account</h5>
-            <div class="userDetails">
-                <input type="email" placeholder="Email">
-            </div>
-            <div class="btn">
-                <a href="#"  class="btn btn-primary" role="button" data-bs-toggle="button">Continue</a>
-            </div>
-
-            <a id="cant">Can't log in?</a>
+            <form action="/login" method="post">
+                <div class="userDetails">
+                    <input name="username" placeholder="Email">
+                </div>
+                <div class="userDetails">
+                    <input name="password" type="password" placeholder="password">
+                </div>
+                <input type="submit">
+                <div class="btn">
+                    <a href="#" class="btn btn-primary" role="button" data-bs-toggle="button">Continue</a>
+                </div>
+            </form>
+            
 
             <h4>Or</h4>
-            
+
 
             <div class="btn-container">
                 <div>
-                    <a href="#"  id="google" class="btn btn-primary" role="button" data-bs-toggle="button"><i class="bi bi-google"> Continue with Google</i></a>
+                    <a href="#" id="google" class="btn btn-primary" role="button" data-bs-toggle="button"><i
+                            class="bi bi-google"> Continue with Google</i></a>
                 </div>
-        
+
             </div>
 
             <hr>
             <div class="text-box">
-                <p>We will use your email address to check if you already have an account. You can exercise your rights at oposicion@corp.realmadrid.com and get more information here.</p>
+                <p>We will use your email address to check if you already have an account. You can exercise your rights
+                    at oposicion@corp.realmadrid.com and get more information here.</p>
             </div>
-            
+
         </div>
     </main>
+    <!-- or login with facebook -->
+    <a href="/facebook/auth/facebook" class="waves-effect waves-light btn social facebook">
+        <i class="fa fa-facebook"></i> Sign in with facebook
+      </a>
+
+<!-- In order to register, the client will be sent to the register page -->
+<a href="/login/register">Register</a>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 
     <!-- Libraries  -->
