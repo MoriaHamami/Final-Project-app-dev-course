@@ -11,8 +11,6 @@ async function getCartPage(req, res) {
             return res.status(404).send("Cart items not found");
         }
 
-        console.log('Cart Items Info:', cartItemsInfo);
-
         let sum = 0;
         let cartItems = await Promise.all(cartItemsInfo.map(async (itemInfo) => {
             console.log('Fetching product details for item:', itemInfo.id);
