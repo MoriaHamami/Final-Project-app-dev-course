@@ -13,7 +13,6 @@ async function getCartPage(req, res) {
 
         let sum = 0;
         let cartItems = await Promise.all(cartItemsInfo.map(async (itemInfo) => {
-            console.log('Fetching product details for item:', itemInfo.id);
             const item = await productsService.getProductById(itemInfo.id);
             if (item) {
                 item.size = itemInfo.size;
@@ -26,10 +25,8 @@ async function getCartPage(req, res) {
         }));
 
         cartItems = cartItems.filter(item => item !== null);
-        console.log('Filtered Cart Items:', cartItems);
         cartItems.totalAmount = sum;
 
-        console.log('Rendering cart page with cartItems:', cartItems);
         res.render('cart', { cartItems });
     } catch (e) {
         console.error('Error fetching cart items:', e.message); // Changed to e.message for more concise error
@@ -46,7 +43,6 @@ async function getCartItems(req, res) {
             throw new Error('User not logged in');
         }
         const cartItems = await clientsService.getCartItemsFromDB(username);
-        console.log('Fetched Cart Items from DB:', cartItems);
         return cartItems;
     } catch (e) {
         console.error('Error fetching cart items:', e.message); // Changed to e.message for more concise error
@@ -56,7 +52,6 @@ async function getCartItems(req, res) {
 
 async function addCartItem(req, res) {
     try {
-        console.log('Request body:', req.body);
         const { productId, size } = req.body;
         const username = req.session.username; // Assuming you have session management
         console.log('Username:', username);
@@ -75,10 +70,8 @@ async function addCartItem(req, res) {
 
 async function removeCartItem(req, res) {
     try {
-        console.log('Request body:', req.body);
         const { productId } = req.body;
         const username = req.session.username; // Assuming you have session management
-        console.log('Username:', username);
 
         if (!username) {
             throw new Error('User not logged in');
@@ -95,11 +88,16 @@ async function addEditShirtToCart(req, res) {
     try {
         const imgSrc = req.body.dataURL
         const color = req.body.color
+        const size = req.body.size
         
         const product = await productsService.createProduct("My creation", color, "", 50, "both", "", [imgSrc], [], false)
-        // TODO: Add Item to cart with function noa wrote
+        const username = req.session.username; 
+        if (!username) {
+            throw new Error('User not logged in');
+        }
+        await clientsService.addCartItemToDB(username, product._id, size);
+
         // await clientsService.addItemToCart(product._id)
-        console.log('product:', product)
         res.send('Image saved to database');
     } catch (error) {
         console.error('Error saving image:', error);

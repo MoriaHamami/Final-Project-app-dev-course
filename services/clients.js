@@ -16,7 +16,6 @@ async function getCartItemsFromDB(username) {
         if (!client) {
             throw new Error('Client not found');
         }
-        console.log('Client cart items:', client.cartItems);
         return client.cartItems;
     } catch (e) {
         console.error('Error fetching cart items from DB:', e);
@@ -34,10 +33,8 @@ async function getCartItemsFromDB(username) {
 // }
 async function addCartItemToDB(username, productId, size) {
     try {
-        console.log('Adding item to cart for user:', username);
         const client = await Client.findOne({ username });
         if (!client) {
-            console.error('Client not found:', username);
             throw new Error('Client not found');
         }
 
@@ -46,6 +43,7 @@ async function addCartItemToDB(username, productId, size) {
         }
 
         const productObjectId = mongoose.Types.ObjectId(productId);
+        console.log('productObjectId:', productObjectId)
         client.cartItems.push({ id: productObjectId, size, type: 'product' });
         await client.save();
         console.log('Item added to cart successfully');
@@ -63,7 +61,6 @@ async function addCartItemToDB(username, productId, size) {
 // getOrdersById  : id --- fun servive 
 async function removeCartItemFromDB(username, productId) {
     try {
-        console.log('Removing item from cart for user:', username);
         const client = await Client.findOne({ username });
         if (!client) {
             console.error('Client not found:', username);

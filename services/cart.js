@@ -4,7 +4,6 @@ const Product = require('../models/products');
 async function getProductById(id) {
     try {
         const product = await Product.findById(id);
-        console.log('Product found:', product);
         return product;
     } catch (e) {
         console.error('Error fetching product by ID:', e);
@@ -12,9 +11,6 @@ async function getProductById(id) {
     }
 }
 
-module.exports = {
-    getProductById
-};
 
 // services/clients.js
 const Client = require('../models/clients');
@@ -33,6 +29,10 @@ async function getCartItemsFromDB(username) {
     }
 }
 
+
 module.exports = {
+    getProductById,
     getCartItemsFromDB
 };
+
+

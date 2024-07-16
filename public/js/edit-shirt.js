@@ -3,7 +3,7 @@ var ctx = canvas.getContext('2d')
 var painting = false
 var currentColor = 'black' // הגדרת צבע ברירת מחדל
 var toolbarOpen = false // האם הסרגל כלים פתוח או סגור
-var size = "XS"
+var gSize = "XS"
 var img = new Image()
 
 // מתייחסים לאירוע onload כדי לוודא שהתמונה נטענה לגמרי לפני ביצוע כל פעולה עליה
@@ -69,10 +69,10 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
             url: '/cart/canvas-edit',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({dataURL, color:currentColor})
+            data: JSON.stringify({dataURL, color:currentColor, size: gSize})
         })
-        alert(response)
-    } catch (error) {
+        window.location.assign('/cart');
+        } catch (error) {
         console.error('Error:', error)
         alert('Error saving image: ' + error.message)
     }
@@ -82,6 +82,9 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
 // הוספת אירוע לחיצה על הכפתור "התחל מחדש"
 document.getElementById('clearBtn').addEventListener('click', clearCanvas)
 
+function updateSize(ev){
+    gSize =ev.target.value
+}
 
 // פונקציה לשינוי צבע המסגרת
 function changeFrameColor(color) {

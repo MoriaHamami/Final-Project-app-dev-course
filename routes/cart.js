@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cart');
+const loginController = require('../controllers/login');
 
 // Log to check if routes are being initialized
 console.log("Initializing /cart routes...");
@@ -16,6 +17,7 @@ router.route('/add')
     // .get(cartController.getCartPage)
     router.route('/canvas-edit')
     .post(cartController.addEditShirtToCart)
+    // .post(loginController.isLoggedIn, cartController.addEditShirtToCart)
 
 router.route('/remove')
     .post(cartController.removeCartItem);

@@ -77,14 +77,14 @@
                 <input type="text" id="textInput" placeholder="Type text">
                 <button id="addTextBtn">Add text</button>
             </span>
-            <select name="size" id="">
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
+            <select name="size" id="" onchange="updateSize(event)">
+                <option value="XS" >XS</option>
+                <option value="S" >S</option>
+                <option value="M" >M</option>
+                <option value="L" >L</option>
+                <option value="XL" >XL</option>
             </select>
-            <button id="clearBtn">restart</button>
+            <button id="clearBtn">Restart</button>
             <button id="saveBtn">Add to cart</button>
         </div>
 

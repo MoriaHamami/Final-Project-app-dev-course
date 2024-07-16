@@ -33,7 +33,6 @@ const getDistinctCats = async () => {
 async function getProductById(id) {
     try {
         const product = await Product.findById(id);
-        console.log('Product found:', product);
         return product;
     } catch (e) {
         console.error('Error fetching product by ID:', e);
