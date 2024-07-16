@@ -63,15 +63,15 @@ async function removeCartItemFromDB(username, productId) {
     console.log('Item removed from cart successfully');
 }
 
-async function getOrdersFromDB(id) { 
-    try{
+async function getOrdersFromDB(id) {
+    try {
         const client = await Client.findById(id)
-       return client?.orders
-    } 
-    catch(e){ 
-console.log('e:', e)
+        return client?.orders
     }
-} 
+    catch (e) {
+        console.log('e:', e)
+    }
+}
 
 module.exports = {
     getCartItemsFromDB,
