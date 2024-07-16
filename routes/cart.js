@@ -13,6 +13,9 @@ router.route('/')
 
 router.route('/add')
     .post(cartController.addCartItem);
+    // .get(cartController.getCartPage)
+    router.route('/canvas-edit')
+    .post(cartController.addEditShirtToCart)
 
 router.route('/remove')
     .post(cartController.removeCartItem);

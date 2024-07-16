@@ -93,10 +93,29 @@ async function removeCartItem(req, res) {
         res.status(500).json({ message: `Error removing item from cart: ${e.message}` });
     }
 }
+async function addEditShirtToCart(req, res) {
+    try {
+        const imgSrc = req.body.dataURL
+        const color = req.body.color
+        
+        const product = await productsService.createProduct("My creation", color, "", 50, "both", "", [imgSrc], [], false)
+        // TODO: Add Item to cart with function noa wrote
+        // await clientsService.addItemToCart(product._id)
+        console.log('product:', product)
+        res.send('Image saved to database');
+    } catch (error) {
+        console.error('Error saving image:', error);
+        res.status(500).send('Internal Server Error');
+    }
+
+}
 
 module.exports = {
     getCartPage,
     getCartItems,
     addCartItem,
-    removeCartItem
+    removeCartItem,
+    addEditShirtToCart
 };
+ 
+

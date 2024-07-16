@@ -8,7 +8,11 @@ const Product = new mongoose.Schema({
   favePlayer:String,
   price:Number,
   gender:String,
-  sizes:[String]
+  sizes:[String],
+  toDisplay:{
+    default:true,
+    type:Boolean
+  }
 })
 
 module.exports = mongoose.model("products", Product)

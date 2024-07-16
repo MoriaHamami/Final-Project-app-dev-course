@@ -69,7 +69,6 @@
 
                 <!-- Go over all the products recieved and show each one in a card -->
                 <% for(let i=0; i< products.length; i++) { %>
-
                     <a class="image-container" href="/products/product/<%= products[i]._id %>">
                         <!-- If the path of the products image has data recieved from an input put it as source, otherwise show image from loclal path -->
                         <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>"
