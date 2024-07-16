@@ -29,13 +29,14 @@ const getDistinctCats = async () => {
         console.log('e:', e)
     }
 }
-const getProductById = async (id) => {
-
+async function getProductById(id) {
     try {
-return await Product.findById(id)
-
+        const product = await Product.findById(id);
+        console.log('Product found:', product);
+        return product;
     } catch (e) {
-        console.log('e:', e)
+        console.error('Error fetching product by ID:', e);
+        throw e;
     }
 }
 

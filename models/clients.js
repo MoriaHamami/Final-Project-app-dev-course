@@ -22,7 +22,7 @@ const clientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }],
-    orders: [[subSchema]], // מערך של מערכים של אובייקטים מסוג subSchema
+    orders: [[subSchema]],
     cartItems: [subSchema],
     isBanned: Boolean,
     dateCreated: { type: Date, default: Date.now },

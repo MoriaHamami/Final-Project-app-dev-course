@@ -1,19 +1,38 @@
-const Client = require('../models/clients');
+// services/products.js
+const Product = require('../models/products');
 
-async function getCartItemsFromDB(username) {
-    const client = await Client.findOne({ username });
-    return client.cartItems;
-}
-
-async function addCartItemToDB(username, productId, size) {
-    const client = await Client.findOne({ username });
-    if (!client) throw new Error('Client not found');
-
-    client.cartItems.push({ id: productId, size });
-    await client.save();
+async function getProductById(id) {
+    try {
+        const product = await Product.findById(id);
+        console.log('Product found:', product);
+        return product;
+    } catch (e) {
+        console.error('Error fetching product by ID:', e);
+        throw e;
+    }
 }
 
 module.exports = {
-    getCartItemsFromDB,
-    addCartItemToDB
+    getProductById
+};
+
+// services/clients.js
+const Client = require('../models/clients');
+
+async function getCartItemsFromDB(username) {
+    try {
+        const client = await Client.findOne({ username });
+        if (!client) {
+            throw new Error('Client not found');
+        }
+        console.log('Client cart items:', client.cartItems);
+        return client.cartItems;
+    } catch (e) {
+        console.error('Error fetching cart items from DB:', e);
+        throw e;
+    }
+}
+
+module.exports = {
+    getCartItemsFromDB
 };
