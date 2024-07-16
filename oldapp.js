@@ -59,6 +59,7 @@ app.use(express.urlencoded({
 app.use(express.json({ limit: '50mb' }))
 
 // For each route, send to the relevant file (which will handle the req/res)
+app.use(express.static('public'))
 app.use("/", require("./routes/home"))
 app.use("/login", require("./routes/login"))
 app.use("/facebook", require("./routes/facebook"))
@@ -67,9 +68,11 @@ app.use("/client", require("./routes/client"))
 app.use("/products", require("./routes/products"))
 app.use("/tickets", require("./routes/tickets"))
 app.use("/news", require("./routes/news"))
+
+
 app.use("/clients", require("./routes/clients"))
 app.use("/cart", require("./routes/cart"))
-app.use(express.static('public'))
+
 
 const port = process.env.PORT || 8084;
 app.listen(port, () => {
