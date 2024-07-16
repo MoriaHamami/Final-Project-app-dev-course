@@ -7,7 +7,6 @@ async function getClientsPage(req, res) {
     try {
 
         const clientsInfo = await clientsService.getClientsFromDB()
-        // console.log('clientsInfo:', clientsInfo)
         // const cartItems = await getCartItems(req,res) 
         // res.render('clients.ejs', { clients: clientsInfo, cartItems })
 
@@ -31,6 +30,7 @@ async function getClientOrders(req, res) {
     try {
         // Send the client id to the client service, and get back the orders
         const ordersFromDB = await clientsService.getOrdersFromDB(id)
+        console.log('ordersFromDB:', ordersFromDB)
         
         let sum = 0
         let orders = []

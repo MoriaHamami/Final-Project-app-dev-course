@@ -47,7 +47,6 @@ async function getOrdersById(id) {
                             <span class="product-container">`
                 for (let i = 0; i < order.length; i++) {
                     product = order[i].productInfo
-                    console.log('here:')
                     str += `<div class="product"> 
                                                 <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
                                                 <div class="product-info">
