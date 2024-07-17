@@ -1,6 +1,6 @@
 const Product = require('../models/products');
 
-const createProduct = async (title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay=true) => {
+const createProduct = async (title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay = true) => {
     // Product.init() // Document gets generated (and gets an id)
     // console.log('srcImg:', srcImg)
     const product = new Product({
@@ -25,7 +25,7 @@ const createProduct = async (title = "", color = "", cat = "", price = 0, gender
 const getDistinctCats = async () => {
     try {
         return await Product.find({}).distinct("cat")
-        
+
     } catch (e) {
         console.log('e:', e)
     }
@@ -46,7 +46,7 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     // }catch(e){
 
     // }
-    const filter = {toDisplay: { $ne: false }}
+    const filter = { toDisplay: { $ne: false } }
     if (priceFilter && priceFilter != "null" && priceFilter > 0) {
         filter.price = { $lt: priceFilter }
     }
@@ -94,7 +94,7 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     return res
 }
 
-const updateProduct = async (id, title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay=true) => {
+const updateProduct = async (id, title = "", color = "", cat = "", price = 0, gender = "", favePlayer = "", srcImg = [], sizes = [], toDisplay = true) => {
     const product = await getProductById(id)
     // console.log('here:', product)
     if (!product)
@@ -130,12 +130,46 @@ const deleteProduct = async (id) => {
     }
 }
 
+
+async function getStats() {
+    try {
+        // const sortObj[count] = 1
+
+        const data = await Product.aggregate([
+            {
+                $match: {
+                    "cat": {
+                        $exists: true,
+                        $ne: null
+                    }
+                }
+            }, 
+            {
+                $group: {
+                    _id: '$cat',
+                    count: { $sum: 1 } // this means that the count will increment by 1
+                }
+            },
+            {
+                $sort: { "_id": 1 }
+            }
+        ])
+
+
+        console.log('data2:', data)
+        return data
+    } catch (e) {
+        console.log('e:', e)
+    }
+}
+
 module.exports = {
     createProduct,
     getProductById,
     getProducts,
     updateProduct,
     deleteProduct,
-    getDistinctCats
+    getDistinctCats,
+    getStats
 }
 

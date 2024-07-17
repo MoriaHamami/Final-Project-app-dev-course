@@ -7,16 +7,6 @@ async function getClientsPage(req, res) {
     try {
 
         const clientsInfo = await clientsService.getClientsFromDB()
-        // const cartItems = await getCartItems(req,res) 
-        // res.render('clients.ejs', { clients: clientsInfo, cartItems })
-
-        // clientsInfo.forEach(client => {
-        //     // console.log('client:', client)
-        //     return client.orders?.forEach(order => {
-        //         console.log('order:', order)
-        //         return order?.forEach(item=> productsService.getProductById(item.id))
-        // })
-        // })
 
         res.render('clients.ejs', { clients: clientsInfo })
     } catch (e) {
@@ -46,18 +36,20 @@ async function getClientOrders(req, res) {
                 let item = {}
                 if(itemType === "ticket"){
                     item.productInfo = await ticketsService.getTicketById(itemId)
-                    item.imgs = [item.productInfo.opImg]
+                    item.imgs = [item.productInfo?.opImg]
                 } else{
                     item.productInfo = await productsService.getProductById(itemId)
-                    item.imgs = item.productInfo.srcImg
+                    item.imgs = item.productInfo?.srcImg
                     // console.log('here2:')
                 }
-                // console.log(' orderFromDB[j]?.size:',  orderFromDB[j].size)
-                item.size = orderFromDB[j]?.size
-                item.type = orderFromDB[j]?.type + 's'
-                // console.log('item:', item)
-                order.push(item)
-                sum += item?.price || 0
+                if(item.productInfo){
+                    // console.log(' orderFromDB[j]?.size:',  orderFromDB[j].size)
+                    item.size = orderFromDB[j]?.size
+                    item.type = orderFromDB[j]?.type + 's'
+                    // console.log('item:', item)
+                    order.push(item)
+                    sum += item?.price || 0
+                }
             }
             orders.push(order)
         }

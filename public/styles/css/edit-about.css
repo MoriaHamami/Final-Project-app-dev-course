@@ -1,0 +1,54 @@
+.edit-about {
+    background-color: var(--almost-white);
+}
+
+.edit-about h3{
+    padding: 10px 10px 0 10px;
+    margin: 0;
+}
+
+/* Let the text not break in the shop section */
+.edit-about .edit-shops ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.edit-about .edit-shops li {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--card-bsh);
+    /* Prevent articles from being smeared unnecessarily */
+    height: min-content;
+    width: max-content;
+}
+
+.edit-about .edit-shops input {
+    margin-block: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--ll-gray);
+    outline: none;
+}
+
+.edit-about .edit-shops button {
+    margin: 5px 0 0 0;
+}
+
+.edit-about .edit-shops button:hover {
+    background-color: var(--ll-gray);
+}
+.edit-about .edit-shops .add-btn {
+    margin: 10px;
+}
+.edit-about .edit-shops .save-btn {
+    background-color: var(--ll-gray);
+}
+
+.edit-about .edit-shops .save-btn:hover {
+    background-color: var(--lll-gray);
+}

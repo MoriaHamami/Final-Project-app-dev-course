@@ -42,3 +42,19 @@ async function addToCart(productId, size) {
       alert('Error adding product to cart');
   }
 }
+
+async function getEditProductPage( id) {
+    try {
+        // Prevents product to be shown. Only editor will be opened.
+        // ev.stopPropagation()
+        window.location.assign('/products/edit/' + id)
+        // await $.ajax({
+        //     url: `/products/edit/${id}`,
+        //     method: 'GET',
+        //     contentType: 'application/json',
+        //     params: id
+        // })
+    } catch (e) {
+        console.log("Could not get edit page")
+    }
+}

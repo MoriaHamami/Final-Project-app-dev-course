@@ -40,5 +40,7 @@ fetch(weatherApiUrl)
     })
     .catch(error => {
         console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
-    }); 
+    });
+
+    
 

@@ -54,7 +54,6 @@ async function addCartItem(req, res) {
     try {
         const { productId, size } = req.body;
         const username = req.session.username; // Assuming you have session management
-        console.log('Username:', username);
 
         if (!username) {
             throw new Error('User not logged in');

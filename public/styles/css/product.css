@@ -70,7 +70,7 @@
 }
 
 /* כפתורי קניות  */
-.product .addTOcart {
+.product .addTOcart,.product .editProduct {
   display: flex;
   justify-content: center;
   align-items: center;

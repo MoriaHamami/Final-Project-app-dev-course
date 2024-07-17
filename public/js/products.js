@@ -7,14 +7,30 @@ let gSortIsAsc = {
     title: true
 }
 
+var timeOutFunctionId
+
+
+// Resize is triggered continuously while we are resizing the window 
+// clearTimeOut() resets the setTimeOut() timer 
+// so that the function will be fired after we are done resizing 
+
+
 // Update the values of the global variables according to the changes in the input
+function updateOutput(newPrice) {
+    // When the slider moves, show in output the value
+    $("output").text(newPrice)
+}
 function setCat(newCat) {
-    gCat= newCat
+    gCat = newCat
     getProductsBy()
 }
 function setTitle(newTitle) {
     gTitle = newTitle
-    getProductsBy()
+    // clearTimeOut to reset the timer 
+    clearTimeout(timeOutFunctionId)
+    // Updates the products only after the user finished typing
+    timeOutFunctionId = setTimeout(getProductsBy, 200)
+
 }
 function setPrice(newPrice) {
     gPrice = newPrice
@@ -23,7 +39,7 @@ function setPrice(newPrice) {
 
 // When clicking on the sort buttons, do the following:
 async function sortProductsBy(sortVal) {
-    try{
+    try {
         // Send the sort value (price or title) and if we want the sort to ascend or descend
         await getProductsBy(sortVal, gSortIsAsc[sortVal])
         // After the products are sorted and shown, change the isAsc value for next time use
@@ -35,13 +51,15 @@ async function sortProductsBy(sortVal) {
         <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
         Sort By ${capSortVal}
         `)
-    }catch(e){
+    } catch (e) {
         console.log('Products were not sorted succesfully')
     }
 }
 
 async function getProductsBy(sortVal = '', isAsc = true) {
     try {
+        // Show loader until loaded
+        $('.products #productsList').html('<div class="container" style="width:100vw;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;padding:40px"></div>')
         // Send a get request with the param and sort values from the updated global variables
         const products = await $.ajax({
             url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sort[sortVal]=${sortVal}&sort[isAsc]=${isAsc}`,
@@ -60,7 +78,8 @@ async function getProductsBy(sortVal = '', isAsc = true) {
                 <div class="price">
                     ${products[i].price}$
                 </div>
-            </a>`
+                 </a >`
+
         }
         // Inside the products area in the HTML, show all the products
         $('.products #productsList').html(str)

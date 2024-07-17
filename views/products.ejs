@@ -38,7 +38,8 @@
                     <label>
                         Max Price
                         <input type="range" max="<%= maxPrice%>" min="<%= minPrice%>" name="priceFilter"
-                            value="<%= maxPrice%>" onchange="setPrice(event.target.value)">
+                            value="<%= maxPrice%>" onchange="setPrice(event.target.value)" oninput="updateOutput(event.target.value)">
+                            <output><%= maxPrice%></output>
                     </label>
                     <label>
                         Product Name
@@ -48,7 +49,7 @@
                     <label for="catFilter">
                         Select Category
                         <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
-                            <!-- <option value="">Select Category</option> -->
+                            <option value="">All</option>
                             <% for(let i=0; i< cats.length; i++) { %>
                                 <option value="<%= cats[i]%>">
                                     <%= cats[i]%>
