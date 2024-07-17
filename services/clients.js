@@ -98,10 +98,23 @@ async function getOrdersFromDB(id) {
     }
 }
 
+const deleteClient = async (id) => {
+    try {
+        const client = await getClientById(id)
+        if (!client)
+            return null
+
+        await client.remove()
+        return client
+    } catch (e) {
+        return e
+    }
+}
 module.exports = {
     getCartItemsFromDB,
     getClientsFromDB,
     removeCartItemFromDB,
     addCartItemToDB,
-    getOrdersFromDB
+    getOrdersFromDB, 
+    deleteClient
 }

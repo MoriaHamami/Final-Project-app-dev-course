@@ -6,6 +6,6 @@ router.route('/')
     .get(clientsController.getClientsPage);
 router.route('/:id')
     .get(clientsController.getClientOrders);
-
-
+router.route('/edit/:id')
+    .delete( clientsController.deleteClient)
 module.exports = router;

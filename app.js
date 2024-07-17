@@ -72,6 +72,7 @@ app.use("/news", require("./routes/news"))
 
 app.use("/clients", require("./routes/clients"))
 app.use("/cart", require("./routes/cart"))
+app.use("/fave", require("./routes/fave"))
 
 
 const port = process.env.PORT || 8084;

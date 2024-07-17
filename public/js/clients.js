@@ -5,25 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const row = this.closest('tr')
             if (row) {
-                const confirmation = confirm("האם אתה בטוח שאתה רוצה למחוק?")
+                const confirmation = confirm("Are you sure you want to remove the client from the list?")
                 if (confirmation) {
                     row.remove()
                 }
             }
         })
     })
-})
-$(document).ready(function () {
-    // מאזין ללחיצה על כפתורי מחיקה
-    $(".delete-acc-btn").on("click", function () {
-        // הצגת הודעת אישור
-        if (confirm("האם אתה בטוח שאתה רוצה למחוק?")) {
-            // מחיקת השורה
-            const row = $(this).closest("tr")
-            row.remove()
-        }
-    })
-})
+}) 
 // TO DO MAKE THIS WORK
 $('.orders-btn').click(function () {
     var id = $(this).attr('id')
@@ -80,3 +69,66 @@ function getImgURL(srcImg, folder){
     if(!srcImg) return ""
         return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg)
 }
+
+ 
+async function onDeleteClient(id) {
+    try {
+        // Send a delete request using ajax, and send on the body the id of the product to delete
+        const res = await $.ajax({
+            url: '/clients/edit/' + id,
+            method: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify({ id }),
+        })
+        if (res.status !== 404) window.location.assign('/clients')
+    } catch (e) {
+        console.log('e:', e)
+    }
+} 
+ 
+function confirmBlock(event) {
+    if (confirm("האם לחסום?")) {
+        // המשך פעולת החסימה כאן
+        console.log("הלקוח נחסם בהצלחה!");
+        event.target.style.backgroundColor = 'gray'; // שינוי צבע הרקע לאפור
+        // שינוי צבע הרקע של הכפתור השני ללבן
+        let otherButton = event.target.nextElementSibling;
+        if (otherButton) {
+            otherButton.style.backgroundColor = '';
+        }
+    } else {
+        // ביטול חסימת הלקוח
+        console.log("ביטול חסימת הלקוח.");
+    }
+}
+
+ 
+
+function confirmUnblock(event) {
+    if (confirm("האם לשחרר את החסימה?")) {
+        // כאן תוכל להוסיף את קוד שחרור החסימה
+        console.log("החסימה שוחררה בהצלחה!"); 
+        event.target.style.backgroundColor = 'gray'; // שינוי צבע הרקע לאפור
+    // שינוי צבע הרקע של הכפתור השני ללבן
+    let otherButton = event.target.previousElementSibling;
+    if (otherButton) {
+        otherButton.style.backgroundColor = '';
+    }
+} else {
+    // ביטול שחרור החסימה
+    console.log("ביטול שחרור החסימה.");
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

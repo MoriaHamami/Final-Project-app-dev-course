@@ -18,10 +18,12 @@
     <main class="clients">
         <div class="manager-area">
             <div class="table-container">
+                <!-- חיפוש משתמשים -->
+                <input type="text" id="searchInput" placeholder="Enter username" class="form-control mb-3">
                 <ul class="nav nav-pills">
                     <table class="table">
                         <caption>
-                            <h2>Manager area - Account list</h2>
+                            <h2>Manager area - Accounts</h2>
                         </caption>
                         <thead>
                             <tr>
@@ -33,10 +35,9 @@
                                 <th>Total amount</th>
                                 <th>Reservations</th> 
                                 <th>Block</th>
-
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="clientTableBody">
                             <!-- Loop through the list of clients -->
                             <% clients.forEach((client, i) => { %>
                             <tr>
@@ -48,22 +49,27 @@
                                     <img class="client-photo" src="/styles/imgs/clients/p-25.png" alt="Default photo">
                                     <% } %>
                                   </td>
-                                  <td><%= client.fullname %></td>
+                                  <td class="client-username"><%= client.fullname %></td>
                                   <td><%= client.cartItems ? client.cartItems.length : 0 %></td>
                                   <td><%= client.faveItems ? client.faveItems.length : 0 %></td>
-                                  <td><button class="delete-acc-btn"><i class="bi bi-x-circle-fill"></i></button></td>
-                                  <td><%= client.spent %>$</td>
+                                  <td>
+                                    <button class="delete-acc-btn" data-client-id="<%= client._id %>" onclick="confirmDelete(event)">
+                                        Delete
+                                    </button>
+                                </td>
+                                     <td><%= client.spent %>$</td>
                                   <td>
                                     <li class="nav-item"><a class="nav-link orders-btn" data-bs-toggle="pill" href="#client<%= client.id %>" id="<%=client._id%>">
                                         <i class="bi bi-bag-check-fill"></i>See orders</a> </li>
                                 </td> 
                                 <td>
-                                    <button class="block-btn ban-btn" data-client-id="<%= client._id %>">
-                                        <i class="bi bi-x-circle-fill text-danger"></i> 
+                                    <button class="block-btn ban-btn" data-client-id="<%= client._id %>" onclick="confirmBlock(event)">
+                                        <i class="bi bi-x-circle-fill text-danger"></i> Block
                                     </button>
-                                    <button class="block-btn unban-btn" data-client-id="<%= client._id %>">
-                                        <i class="bi bi-check-circle-fill text-success"></i> 
-                                    </button> 
+                                    <button class="block-btn unban-btn" data-client-id="<%= client._id %>" onclick="confirmUnblock(event)">
+                                        <i class="bi bi-check-circle-fill text-success"></i> Unblock
+                                    </button>
+                                    
                                 </td>
                             </tr>
                             <% }) %>
@@ -113,6 +119,16 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/clients.js"></script>
+
+    <!-- סקריפט לחיפוש משתמשים -->
+    <script>
+        $('#searchInput').on('input', function() {
+            const searchValue = $(this).val().toLowerCase();
+            $('#clientTableBody tr').filter(function() {
+                $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
+            });
+        });
+    </script>
 
 </body>
 

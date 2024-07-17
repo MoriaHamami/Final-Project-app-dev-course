@@ -1,0 +1,192 @@
+header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+  
+    background-color: var(--almost-white);
+    border-bottom: 1px solid rgba(140, 140, 140, 0.384);
+  
+    height: 73px;
+    width: 100%;
+    padding: 30px;
+  
+    /* Stay at the top always */
+    position: fixed;
+    top: 0;
+  
+    /* Make the header appear above all elemnts */
+    z-index: 16;
+  }
+  
+  /* Remove a tags default styling */
+  /* header nav a {
+    text-decoration: none;
+    color: inherit;
+  } */
+  
+  /* Remove a tags default styling */
+  header nav a:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  /* For the page we are on, make the a tag in the header seem unclickable */
+  header nav a.active {
+    cursor: default;
+  }
+  
+  header .start-icons,
+  header .end-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .logo {
+    cursor: pointer;
+    height: 50px;
+    border-radius: 50%;
+    margin-inline-end: 10px;
+  }
+  
+  /* Remove default margin in p tag */
+  header .signin-btn p,
+  header .cart-btn p {
+    margin: 0;
+  }
+  
+  header .signin-btn i {
+    font-size: 20px;
+  }
+  header .fave-btn,
+  header .signin-btn,
+  header .cart-btn {
+    cursor: pointer;
+    text-align: center;
+    margin-inline-end: 10px;
+    padding: 3px 10px;
+    background: none;
+    /* Remove a tag default styling */
+    color: inherit;
+    text-decoration: none;
+  } 
+  
+  header .fave-btn:hover,
+  header .signin-btn:hover,
+  header .cart-btn:hover {
+    text-shadow: var(--txtsh);
+    color: var(--blue);
+  }
+  
+  /* SMALL SCREENS */
+  @media (max-width: 600px) {
+  
+    /* Make the height of the header bigger in small screens */
+    header {
+      padding: 0;
+      height: 100px;
+    }
+  
+    /* Menu icon styling */
+    .menu-toggle-btn {
+      background: none;
+      border: none;
+      font-size: 30px;
+    }
+  
+    .menu-toggle-btn:hover {
+      color: var(--blue);
+    }
+  
+    /* In small screens create a dropdown effect */
+    header nav {
+      /* Start the dropdown below the header */
+      position: absolute;
+      top: 100px;
+      /* Position the items in the dropdown */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: center;
+      width: 100%;
+      /* Give dropdown no height at first for later transition */
+      max-height: 0;
+      /* When the height changes, change it slowly and gradually */
+      transition: max-height 0.6s;
+      /* Dont show the dropdown hidden over the header */
+      overflow: hidden;
+    }
+  
+    body.menu-open nav {
+      /* When dropdown is selected to open, change gradually the height */
+      transition: max-height 0.6s;
+      max-height: 100vh;
+    }
+  
+    header nav a {
+      padding: 16px 0;
+      border: none;
+      background-color: var(--almost-white);
+      border-bottom: 1px solid rgb(218, 218, 218);
+    }
+  
+    /* For each page (except the one we are on), give darker background on hover */
+    header nav a:hover:not(.active) {
+      background-color: var(--m-gray);
+    }
+  
+    /* The page we are on must have a darker background in dropdown, to seem selected */
+    header nav a.active {
+      background-color: var(--l-gray);
+    }
+  
+    /* Remove text in sign in and cart buttons for minimal display */
+    header .signin-btn p,
+    header .cart-btn p {
+      display: none;
+    }
+  
+    .dark-screen {
+      position: fixed;
+      cursor: pointer;
+      /* Center the dark screen (= top: 0, bottom: 0, left: 0, right: 0) */
+      inset: 0;
+      background-color: black;
+      /* Change opacity gradually when appearing and disappearing */
+      opacity: 0;
+      transition: opacity 0.6s;
+      /* Show infront of everything (except the header) */
+      z-index: 16;
+      /* When the darkscreen isnt seen, dont trigger its pointer events */
+      pointer-events: none;
+    }
+  
+    /* Make the dark screen seen when the menu is open and trigger its pointer events */
+    body.menu-open .dark-screen {
+      pointer-events: auto;
+      opacity: 1;
+    }
+  }
+  
+  /* WIDE SCREENS */
+  @media (min-width: 600px) {
+  
+    /* Underline the page we are on in the header */
+    header nav a.active {
+      border-bottom: 1px solid black;
+    }
+  
+    /* Space the a tags in the header nav */
+    header nav a {
+      margin: 0 10px;
+    }
+  
+    header .header-btn:not(.active):hover {
+      text-shadow: var(--dark-txtsh);
+    }
+  
+    /* Dont show the dark screen in wide screens */
+    .menu-toggle-btn,
+    .dark-screen {
+      display: none;
+    }
+  }
