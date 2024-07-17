@@ -34,7 +34,6 @@ async function getCartItemsFromDB(username) {
 // }
 async function addCartItemToDB(username, productId, size) {
     try {
-        console.log('Adding item to cart for user:', username);
         const client = await Client.findOne({ username });
         if (!client) {
             console.error('Client not found:', username);
@@ -70,13 +69,13 @@ async function removeCartItemFromDB(username, productId) {
             throw new Error('Client not found');
         }
 
-    // const getOrdersById = async (id) => {
-    //     return await orders.findById(id)
-    // }
+        // const getOrdersById = async (id) => {
+        //     return await orders.findById(id)
+        // }
 
-    if (!mongoose.Types.ObjectId.isValid(productId)) {
-        throw new Error('Invalid product ID');
-    }
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            throw new Error('Invalid product ID');
+        }
 
         const productObjectId = mongoose.Types.ObjectId(productId);
         client.cartItems = client.cartItems.filter(item => !item.id.equals(productObjectId));
@@ -98,10 +97,89 @@ async function getOrdersFromDB(id) {
     }
 }
 
+// async function getCartItemsFromDB(username) {
+//     try {
+//         const client = await Client.findOne({ username })
+//         if (!client) {
+//             throw new Error('Client not found')
+//         }
+//         console.log('Client cart items:', client.cartItems)
+//         return client.cartItems;
+//     } catch (e) {
+//         console.error('Error fetching cart items from DB:', e);
+//         throw e;
+//     }
+// }
+
+async function getClientByUsername(username) {
+    try {
+        const client = await Client.findOne({ username });
+        return client
+    } catch (e) {
+        console.error('Error fetching client by ID:', e);
+        throw e
+    }
+}
+
+async function getStats() {
+    try {
+        // Client.aggregate([{
+        //     $match : { $and : [ {owner: userId}, {date: { $gte: start, $lt: end } }] },
+        // },{
+        //     $group : {
+        //         _id : null,
+        //         total : {
+        //             $sum : "$amount"
+        //         }
+        //     }
+        // }],callback)
+
+        // const data = await Client.aggregate([
+        //     {
+        //       $group: {
+        //         _id: '$category',
+        //         count: { $sum: 1 } // this means that the count will increment by 1
+        //       }
+        //     }
+        //   ]);
+
+
+        const data = await Client.aggregate(
+            [
+                {
+                    $match: {
+                        "dateCreated": {
+                            $exists: true,
+                            $ne: null
+                        }
+                    }
+                },
+                {
+                    $group:
+                    {
+                        _id: { year: { $year: "$dateCreated" } },
+                        count: { $sum: 1 }
+                    }
+
+                }
+                , {
+                    $sort: { "_id.year": -1 }
+                }
+            ]
+        )
+        console.log('data clients:', data)
+        return data
+    } catch (e) {
+        console.log('e:', e)
+    }
+}
+
 module.exports = {
     getCartItemsFromDB,
     getClientsFromDB,
     removeCartItemFromDB,
     addCartItemToDB,
-    getOrdersFromDB
+    getOrdersFromDB,
+    getClientByUsername,
+    getStats
 }

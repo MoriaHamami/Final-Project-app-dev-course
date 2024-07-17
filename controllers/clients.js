@@ -7,16 +7,6 @@ async function getClientsPage(req, res) {
     try {
 
         const clientsInfo = await clientsService.getClientsFromDB()
-        // const cartItems = await getCartItems(req,res) 
-        // res.render('clients.ejs', { clients: clientsInfo, cartItems })
-
-        // clientsInfo.forEach(client => {
-        //     // console.log('client:', client)
-        //     return client.orders?.forEach(order => {
-        //         console.log('order:', order)
-        //         return order?.forEach(item=> productsService.getProductById(item.id))
-        // })
-        // })
 
         res.render('clients.ejs', { clients: clientsInfo })
     } catch (e) {

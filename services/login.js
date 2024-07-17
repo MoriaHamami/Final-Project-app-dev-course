@@ -4,7 +4,6 @@ async function login(username, password) {
     try {
 
         const user = await Client.findOne({ username, password })
-        console.log('user:', user)
         return user != null  //if the user correct it will be diffrent than null and return true
         // await user.save()
     } catch (e) {

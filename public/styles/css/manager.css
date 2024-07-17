@@ -45,12 +45,24 @@
     /* Let each p in this section have its own row, 
     and not be broken into a couple of rows */
     width: max-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.manager .userImg {
+    width: 30px;
+    border-radius: 50%;
+    margin-inline-end: 20px;
 }
 
 .manager .personal-info article {
     /* Make the pencil icon and text be on different ends (spaced between) */
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .manager .personal-info p {
@@ -60,10 +72,13 @@
     padding-block: 5px;
 }
 
+.manager .add-options {
+    width: max-content;
+}
+
 .manager .add-options ul {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     margin: 0;
 }
 
@@ -86,31 +101,17 @@
 }
 
 /* When hovering above buttons make their color change */
-.manager .add-options li:hover,
-.manager .shops button:hover {
+.manager .add-options li:hover {
     background-color: var(--ll-gray);
 }
 
-/* Let the text not break in the shop section */
-.manager .shops ul {
-    width: max-content;
+.manager .bar-graph-head {
+    margin-block: 10px 20px;
 }
 
-.manager .shops li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.manager .shops i {
-    /* Make a space between the trash icon and the text */
-    padding-inline-start: 20px;
-    /* Make a space between the the lines in shops section */
-    padding-block: 5px;
-}
-
-.manager .shops button {
-    margin: 0;
+/* LINE GRAPH STYLING */
+.manager #graph {
+    margin-inline-start: 50px;
 }
 
 /* BAR GRAPH STYLING */
@@ -141,4 +142,8 @@
 .manager #x-axis text {
     /* Make the bands (תגיות) on the x-axis bold */
     font-weight: 600;
+}
+
+.manager .orders {
+    width: 100%;
 }

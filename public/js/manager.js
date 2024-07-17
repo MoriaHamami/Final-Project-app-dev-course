@@ -1,11 +1,59 @@
+function onAddTicket() {
+    window.location.assign('/tickets/edit')
+}
+
+function onAddNews() {
+    window.location.assign('/news/edit')
+}
+
+function onAddProduct() {
+    window.location.assign('/products/edit')
+}
+
+function onEditAbout() {
+    window.location.assign('/about/edit')
+}
+
+function onGetClientsPage() {
+    window.location.assign('/clients')
+}
+
+
+async function getStats() {
+    try {
+        const ordersCount = await $.ajax({
+            url: '/manager/getStats',
+            method: 'GET',
+            contentType: 'application/json',
+        })
+        return ordersCount
+
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
 // Create the graphs
 updateGraphs()
 
+// timeOutFunctionId stores a numeric ID which is  
+// used by clearTimeOut to reset timer 
+var timeOutFunctionId
+
 // With every viewport change, create the graphs again
-window.addEventListener("resize", updateGraphs)
+window.addEventListener("resize", function () {
+    
+    // Resize is triggered continuously while we are resizing the window 
+    // clearTimeOut() resets the setTimeOut() timer 
+    // so that the function will be fired after we are done resizing 
+    clearTimeout(timeOutFunctionId);
+    
+    // setTimeout returns the numeric ID which is used by 
+    // clearTimeOut to reset the timer 
+    timeOutFunctionId = setTimeout(updateGraphs, 500);
+})
 
-function updateGraphs() {
-
+async function updateGraphs() {
     // Create a new graph after every viewport resize
     $('#chart').empty()
     $('#graph').empty()
@@ -15,38 +63,12 @@ function updateGraphs() {
     let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
     //////////////////// LINE GRAPH ///////////////////////////
-
-    // Fake data
-    var data = [
-        {
-            year: 2000,
-            popularity: 50
-        },
-        {
-            year: 2001,
-            popularity: 150
-        },
-        {
-            year: 2002,
-            popularity: 200
-        },
-        {
-            year: 2003,
-            popularity: 130
-        },
-        {
-            year: 2004,
-            popularity: 240
-        },
-        {
-            year: 2005,
-            popularity: 380
-        },
-        {
-            year: 2006,
-            popularity: 420
-        }
-    ]
+    var dataFromDB = await getStats()
+    var clientsData = dataFromDB.clientStats
+    var data = clientsData.map(datapoint => {
+        const newDataPoint = { year: datapoint._id.year, count: datapoint.count }
+        return newDataPoint
+    })
 
     // Create SVG and padding for the graph
     const padding = { top: 30, bottom: 20, left: 30, right: 20 }
@@ -62,7 +84,7 @@ function updateGraphs() {
     const graph = svg
         .append("g")
         // Move the container right, so the y-axis will have space (it will start from here and go left)
-        .attr("transform", `translate(${padding.left},0)`)
+        .attr("transform", `translate(${padding.left},${padding.top})`)
 
     // Save width and height vars for the scales (leaving out the padding area for the numbers to be shown)
     const width = +svg.attr("width") - padding.left - padding.right
@@ -113,7 +135,7 @@ function updateGraphs() {
             .range([height, 0])
             // Domain defines the range of values that the scale will accept (in our case: from zero until max point)
             // Max returns the maximum value out of values
-            .domain([0, d3.max(data, dataPoint => dataPoint.popularity)])
+            .domain([0, d3.max(data, dataPoint => dataPoint.count)])
         const xScale = d3
             // Create a scale for the x-axis to map dataPoint values to pixel heights 
             .scaleLinear()
@@ -131,7 +153,7 @@ function updateGraphs() {
             // Move x-axis to bottom (because in d3 the direction is from top left corner)
             .attr("transform", `translate(0,${height})`)
             // Generate the x-axis with ticks (using the values from xScale and the amount of dataPoints)
-            .call(d3.axisBottom(xScale).ticks(data.length))
+            .call(d3.axisBottom(xScale).ticks(data.length).tickFormat(d3.format("d"))) // tickFormat(d3.format("d") - removes comma delimiters for thousands
 
         graph
             .select(".y-axis")
@@ -146,7 +168,7 @@ function updateGraphs() {
             // Sets x vals according to data 
             .x(dataPoint => xScale(dataPoint.year))
             // Sets y vals according to data 
-            .y(dataPoint => yScale(dataPoint.popularity))
+            .y(dataPoint => yScale(dataPoint.count))
     }
 
     function updatePath(data, line) {
@@ -160,23 +182,29 @@ function updateGraphs() {
     //////////////////// BAR GRAPH ///////////////////////////
 
     // The Data that we wish to display on our graph, an array of Javascript Objects
-    var data = [{
-        'name': "Bar Charts", 'value': 7
-    }, {
-        'name': "Pie Charts", 'value': 19
-    }, {
-        'name': "Scatterplots", 'value': 12
-    }, {
-        'name': "Timelines", 'value': 14
-    }, {
-        'name': "Node Graphs", 'value': 23
-    }, {
-        'name': "Tree Graphs", 'value': 8
-    }, {
-        'name': "Stream Graphs", 'value': 11
-    }, {
-        'name': "Voronoi Diagrams", 'value': 14
-    }]
+
+    var productsData = dataFromDB.productStats
+    var data = productsData.map(datapoint => {
+        const newDataPoint = { name: datapoint._id, value: datapoint.count }
+        return newDataPoint
+    })
+    // var data = [{
+    //     'name': "Bar Charts", 'value': 7
+    // }, {
+    //     'name': "Pie Charts", 'value': 19
+    // }, {
+    //     'name': "Scatterplots", 'value': 12
+    // }, {
+    //     'name': "Timelines", 'value': 14
+    // }, {
+    //     'name': "Node Graphs", 'value': 23
+    // }, {
+    //     'name': "Tree Graphs", 'value': 8
+    // }, {
+    //     'name': "Stream Graphs", 'value': 11
+    // }, {
+    //     'name': "Voronoi Diagrams", 'value': 14
+    // }]
 
     // Set the dimensions of the bars in the bar chart  
     let barsHeight = vh / 2,

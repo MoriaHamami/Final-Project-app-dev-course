@@ -105,5 +105,5 @@ module.exports = {
     funcExampleForShowingSecretPage,
     isManagerLoggedIn, 
     isManagerLoggedIn,
-    getUsername
+    getUsername,
 }
