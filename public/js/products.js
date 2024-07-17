@@ -7,16 +7,30 @@ let gSortIsAsc = {
     title: true
 }
 
+var timeOutFunctionId
+
+
+// Resize is triggered continuously while we are resizing the window 
+// clearTimeOut() resets the setTimeOut() timer 
+// so that the function will be fired after we are done resizing 
 
 
 // Update the values of the global variables according to the changes in the input
+function updateOutput(newPrice) {
+    // When the slider moves, show in output the value
+    $("output").text(newPrice)
+}
 function setCat(newCat) {
     gCat = newCat
     getProductsBy()
 }
 function setTitle(newTitle) {
     gTitle = newTitle
-    getProductsBy()
+    // clearTimeOut to reset the timer 
+    clearTimeout(timeOutFunctionId)
+    // Updates the products only after the user finished typing
+    timeOutFunctionId = setTimeout(getProductsBy, 200)
+
 }
 function setPrice(newPrice) {
     gPrice = newPrice
@@ -44,6 +58,8 @@ async function sortProductsBy(sortVal) {
 
 async function getProductsBy(sortVal = '', isAsc = true) {
     try {
+        // Show loader until loaded
+        $('.products #productsList').html('<div class="container" style="width:100vw;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;padding:40px"></div>')
         // Send a get request with the param and sort values from the updated global variables
         const products = await $.ajax({
             url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sort[sortVal]=${sortVal}&sort[isAsc]=${isAsc}`,
