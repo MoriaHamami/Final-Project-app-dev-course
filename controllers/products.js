@@ -1,8 +1,8 @@
 const productService = require('../services/products');
+const loginController = require('./login');
 
 const getProducts = async (req, res) => {
   try {
-
     // Get products from DB using service file
     const productsInfo = await productService.getProducts()
     // Render products page and send the products from DB to it
@@ -11,7 +11,7 @@ const getProducts = async (req, res) => {
       maxPrice: productsInfo.maxPrice,
       minPrice: productsInfo.minPrice,
       cats: productsInfo.cat,
-      sizes: productsInfo.sizes
+      sizes: productsInfo.sizes,
     })
   } catch (e) {
     console.log('e:', e)
@@ -45,6 +45,7 @@ const getProduct = async (req, res) => {
   try {
     // Get the list of categories, in order to let manager select which category the new or existing product will have
     cats = await productService.getDistinctCats()
+
   }
   catch (e) {
     console.log('e:', e)
@@ -58,16 +59,26 @@ const getProduct = async (req, res) => {
   catch (e) {
     console.log('e:', e)
   }
+  console.log('req.path:', req.path)
   if (!product) {
     // If no product was found in the DB, return error
     return res.status(404).json({ errors: ['Product not found'] })
   }
-  else if (req.path.includes('edit'))
+  else if (req.path.includes('edit')){
+console.log('here:')
     // If a product exists in DB, and the path includes the word "edit", render the product's edit page
     res.render('edit-product.ejs', { product, cats })
-  else
-    // If a product exists in DB, and the path doesnt include the word edit, render a single product view page
-    res.render('product.ejs', { product })
+  }
+  else {
+    try {
+      // Check if manager is logged in for edit product option
+      const isManager = await loginController.getIsManager(req, res)
+      // If a product exists in DB, and the path doesnt include the word edit, render a single product view page
+      res.render('product.ejs', { product, isManager })
+    } catch (e) {
+      console.log('e:', e)
+    }
+  }
 }
 
 const createProduct = async (req, res) => {

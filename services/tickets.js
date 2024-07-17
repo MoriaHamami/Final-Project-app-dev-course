@@ -8,7 +8,13 @@ const createTicket = async (title, price, stadium, opImg, opponent, date) => {
 };
 
 const getTickets = async (filter = {}) => {
-  return await Ticket.find(filter);
+  try {
+
+    const tickets = await Ticket.find(filter)
+    return tickets
+  } catch (e) {
+    console.log('e:', e)
+  }
 };
 
 const getTicketsByMonth = async (month) => {
@@ -30,14 +36,14 @@ const getTicketsByMonth = async (month) => {
 const updateTicket = async (id, title, price, stadium, opImg, opponent, date) => {
   const ticket = await Ticket.findById(id);
   if (!ticket) return null;
-  
+
   ticket.title = title ?? ticket.title;
   ticket.price = price ?? ticket.price;
   ticket.stadium = stadium ?? ticket.stadium;
   ticket.opImg = opImg ?? ticket.opImg;
   ticket.opponent = opponent ?? ticket.opponent;
   ticket.date = date ?? ticket.date;
-  
+
   return await ticket.save();
 };
 

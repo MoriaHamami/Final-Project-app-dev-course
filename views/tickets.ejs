@@ -20,22 +20,22 @@
             <h1>Tickets</h1>
         </div>
 
-        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)" placeholder="Title">
+        <input name="titleFilter" value="" onkeyup="setTitle('<%=isManager%>', event.target.value)" placeholder="Title">
         <hr>
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <button type="button" class="btn btn-secondary" onclick="setMonth()">All Tickets</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(1)">Jan</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(2)">Feb</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(3)">Mar</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(4)">Apr</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(5)">May</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(6)">Jun</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(7)">Jul</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(8)">Aug</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(9)">Sep</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(10)">Oct</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(11)">Nov</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(12)">Dec</button>
+        <div class="btn-group btn-group-lg" role="group" aria-label=".">
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', )">All Tickets</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 1)">Jan</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 2)">Feb</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 3)">Mar</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 4)">Apr</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 5)">May</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 6)">Jun</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 7)">Jul</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 8)">Aug</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 9)">Sep</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 10)">Oct</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 11)">Nov</button>
+            <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 12)">Dec</button>
         </div>
 
         <div class="cards-container" id="tickets">
@@ -44,7 +44,7 @@
                 <div class="card" style="width: 18rem;">
                     <div class="battle">
                         <div class="team">
-                            <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
+                            <img src="/styles/imgs/tickets/real.webp" id="real" alt="real">
                             <span>Real Madrid<br></span>
                         </div>
                         <div>
@@ -63,6 +63,12 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <%if(isManager) {%>
+                            <div class="edit-icon" onclick="getEditTicketPage('<%= ALLTickets[i]._id %>')">
+                                <i class="bi bi-pencil"></i>
+                            </div>
+                            <%}%>
+
                         <h4 class="card-title">
                             <%= ALLTickets[i].title %>
                         </h4>

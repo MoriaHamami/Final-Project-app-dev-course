@@ -37,6 +37,7 @@ async function register(username, password) {
 
 async function getIsManager(username) {
     try {
+        if(!username) return null
         const user = await Client.findOne({ username })
         return user?.isManager 
         // await user.save()

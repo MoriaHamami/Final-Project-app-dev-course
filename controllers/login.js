@@ -92,9 +92,22 @@ async function register(req, res) {
 function funcExampleForShowingSecretPage(req, res) {
     res.render("manager", { username: req.session.username })
 }
-async function getUsername(req, res){
+async function getUsername(req, res) {
     return req.session.username
 }
+
+async function getIsManager(req, res) {
+    try {
+        // Check if the manager is logged in by key isManager in DB
+        const isManager = await loginService.getIsManager(req.session?.username)
+        // If the user is a manager, 
+        // go on to the next func asked in the routes file
+        return isManager
+    } catch (e) {
+        console.log('e:', e)
+    }
+}
+
 module.exports = {
     login,
     loginForm,
@@ -103,7 +116,8 @@ module.exports = {
     logout,
     isLoggedIn,
     funcExampleForShowingSecretPage,
-    isManagerLoggedIn, 
+    isManagerLoggedIn,
     isManagerLoggedIn,
     getUsername,
+    getIsManager
 }

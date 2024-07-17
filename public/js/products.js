@@ -7,9 +7,11 @@ let gSortIsAsc = {
     title: true
 }
 
+
+
 // Update the values of the global variables according to the changes in the input
 function setCat(newCat) {
-    gCat= newCat
+    gCat = newCat
     getProductsBy()
 }
 function setTitle(newTitle) {
@@ -23,7 +25,7 @@ function setPrice(newPrice) {
 
 // When clicking on the sort buttons, do the following:
 async function sortProductsBy(sortVal) {
-    try{
+    try {
         // Send the sort value (price or title) and if we want the sort to ascend or descend
         await getProductsBy(sortVal, gSortIsAsc[sortVal])
         // After the products are sorted and shown, change the isAsc value for next time use
@@ -35,7 +37,7 @@ async function sortProductsBy(sortVal) {
         <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
         Sort By ${capSortVal}
         `)
-    }catch(e){
+    } catch (e) {
         console.log('Products were not sorted succesfully')
     }
 }
@@ -60,7 +62,8 @@ async function getProductsBy(sortVal = '', isAsc = true) {
                 <div class="price">
                     ${products[i].price}$
                 </div>
-            </a>`
+                 </a >`
+
         }
         // Inside the products area in the HTML, show all the products
         $('.products #productsList').html(str)

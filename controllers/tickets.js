@@ -1,9 +1,12 @@
 const ticketsService = require('../services/tickets');
+const loginController = require('./login');
 
 const getTickets = async (req, res) => {
   try {
     const ALLTickets = await ticketsService.getTickets();
-    res.render('tickets.ejs', { ALLTickets });
+        // Check if manager is logged in for edit product option
+        const isManager = await loginController.getIsManager(req, res)
+    res.render('tickets.ejs', { ALLTickets, isManager });
   } catch (e) {
     res.status(500).json({ error: 'Error fetching tickets' });
   }
