@@ -98,7 +98,8 @@ async function getOrdersFromDB(id) {
     }
 }
 
-const deleteClient = async (id) => {
+const deleteClient = async (id) => { 
+    console.log("in service") 
     try {
         const client = await getClientById(id)
         if (!client)

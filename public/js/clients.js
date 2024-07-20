@@ -71,7 +71,9 @@ function getImgURL(srcImg, folder){
 }
 
  
-async function onDeleteClient(id) {
+async function onDeleteClient(id) { 
+    console.log("in js") 
+
     try {
         // Send a delete request using ajax, and send on the body the id of the product to delete
         const res = await $.ajax({

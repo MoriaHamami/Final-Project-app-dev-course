@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 const loginController = require("../controllers/login")
-const User = require('../models/user'); // ניתן לשנות את השם לפי הקובץ שלך
+// const User = require('../models/user'); // ניתן לשנות את השם לפי הקובץ שלך
 
 //  For each route recieved, check method requested and send to relevant controller
 router.route('/register')

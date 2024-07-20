@@ -56,24 +56,24 @@ async function getFaveItems(req, res) {
     }
 }
 
-// async function addFaveItem(req, res) {
-//     try {
-//         console.log('Request body:', req.body);
-//         const { productId, size } = req.body;
-//         const username = req.session.username; // Assuming you have session management
-//         console.log('Username:', username);
+async function addFaveItem(req, res) {
+    try {
+        console.log('Request body:', req.body);
+        const { productId, size } = req.body;
+        const username = req.session.username; // Assuming you have session management
+        console.log('Username:', username);
 
-//         if (!username) {
-//             throw new Error('User not logged in');
-//         }
+        if (!username) {
+            throw new Error('User not logged in');
+        }
 
-//         await clientsService.addFaveItemToDB(username, productId, size);
-//         res.status(200).json({ message: "Product added to fave successfully" });
-//     } catch (e) {
-//         console.error('Error adding item to fave:', e.message);
-//         res.status(500).json({ message: `Error adding item to fave: ${e.message}` });
-//     }
-// }
+        await clientsService.addFaveItemToDB(username, productId, size);
+        res.status(200).json({ message: "Product added to fave successfully" });
+    } catch (e) {
+        console.error('Error adding item to fave:', e.message);
+        res.status(500).json({ message: `Error adding item to fave: ${e.message}` });
+    }
+}
 
 async function removeFaveItem(req, res) {
     try {

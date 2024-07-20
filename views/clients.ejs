@@ -53,7 +53,7 @@
                                   <td><%= client.cartItems ? client.cartItems.length : 0 %></td>
                                   <td><%= client.faveItems ? client.faveItems.length : 0 %></td>
                                   <td>
-                                    <button class="delete-acc-btn" data-client-id="<%= client._id %>" onclick="confirmDelete(event)">
+                                    <button class="delete-acc-btn" data-client-id="<%= client._id %>" onclick="onDeleteClient('<%= client._id %>')">
                                         Delete
                                     </button>
                                 </td>

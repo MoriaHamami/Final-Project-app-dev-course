@@ -86,10 +86,12 @@ async function getClientOrders(req, res) {
 
 
 const deleteClient = async (req, res) => {
-    try {
+    try { 
+        console.log("in controller") 
+
       // Get the products id from the params in the web path 
       // and send it to the service file 9there it will delete the product in DB)
-      const client = await productService.deleteClient(req.params.id)
+      const client = await clientsService.deleteClient(req.params.id)
       // If the product wasnt found in DB show an error
       if (!client) {
         res.status(404).json({ errors: ['client not found'] })

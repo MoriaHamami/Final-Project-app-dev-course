@@ -12,10 +12,10 @@ router.route('/')
     }, faveController.getFavePage);
 
 router.route('/add')
-    .post(FaveController.addFaveItem);
+    .post(faveController.addFaveItem);
     // .get(faveController.getFavePage)
     router.route('/canvas-edit')
-    .post(FaveController.addEditShirtToFave)
+    .post(faveController.addEditShirtToFave)
 
 router.route('/remove')
     .post(faveController.removeFaveItem);
