@@ -20,28 +20,46 @@
             <h1>Tickets</h1>
         </div>
 
-        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)" placeholder="Title">
-        <hr>
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <button type="button" class="btn btn-secondary" onclick="setMonth()">All Tickets</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(1)">Jan</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(2)">Feb</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(3)">Mar</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(4)">Apr</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(5)">May</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(6)">Jun</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(7)">Jul</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(8)">Aug</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(9)">Sep</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(10)">Oct</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(11)">Nov</button>
-            <button type="button" class="btn btn-secondary" onclick="setMonth(12)">Dec</button>
+        <div class="filters mb-4">
+            <span class="me-3">
+                <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)" class="form-control" placeholder="Title">
+            </span>  
+
+            <span class="me-3">
+                <select id="stadiumFilter" onchange="filterByStadium(event.target.value)" class="form-select" aria-label="Stadium Filter">
+                    <option value="">Select Stadium</option>
+                    <% 
+                    const uniqueStadiums = new Set();
+                    ALLTickets.forEach(ticket => {
+                        uniqueStadiums.add(ticket.stadium);
+                    });
+                    uniqueStadiums.forEach(stadium => { %>
+                        <option value="<%= stadium %>"><%= stadium %></option>
+                    <% }); %>
+                </select>
+            </span>
+
+            <span class="btn-group btn-group-lg" role="group" aria-label="...">
+                <button type="button" class="btn btn-secondary" onclick="setMonth()">All Tickets</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(1)">Jan</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(2)">Feb</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(3)">Mar</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(4)">Apr</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(5)">May</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(6)">Jun</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(7)">Jul</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(8)">Aug</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(9)">Sep</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(10)">Oct</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(11)">Nov</button>
+                <button type="button" class="btn btn-secondary" onclick="setMonth(12)">Dec</button>
+            </span>
         </div>
 
         <div class="cards-container" id="tickets">
             <% if (ALLTickets.length > 0) { %>
                 <% for (let i = 0; i < ALLTickets.length; i++) { %>
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 18rem;" data-stadium="<%= ALLTickets[i].stadium %>">
                     <div class="battle">
                         <div class="team">
                             <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
@@ -116,6 +134,18 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/tickets.js"></script>
+    <script>
+        function filterByStadium(stadium) {
+            var cards = document.querySelectorAll('.cards-container .card');
+            cards.forEach(card => {
+                if (stadium === "" || card.getAttribute('data-stadium') === stadium) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

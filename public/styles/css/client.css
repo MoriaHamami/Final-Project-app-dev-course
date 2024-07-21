@@ -1,13 +1,11 @@
-/* כללי  */
+/* כללי */
 .client {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 10px;
- 
     flex-direction: row;
     flex-basis: auto;
-    
 } 
 
 /* personal data card */
@@ -64,66 +62,9 @@
 }
 
 .client .history-line {
-    margin-top: 30px;
+    margin-top: 45px;
 }
 
-/* מועדפים */
-.client .favorite_list {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-flow: row wrap;
-}
-
-.client .card_product, .card_history {
-    flex: 1 1 20%;
-    padding: 3px;
-    border: 1px solid #736b6b;
-    border-radius: 10px;
-    overflow: hidden;
-    font-size: 1em;
-    background-color: white;
-    margin: 2% 1%;
-}
-
-.client .card-body {
-    display: inline-block;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.client .card-body i {
-    font-size: 16px;
-}
-
-.client .btn-primary, .see_product {
-    display: inline-block;
-    height: 10%;
-    font-size: 0.9em;
-}
-
-.client .product_btn {
-    padding: 2px;
-    display: flex;
-    align-items: center;
-    flex-direction: column-reverse;
-}
-
-.client .see_product {
-    height: 2%;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 100%;
-    overflow: hidden;
-}
-
-.client i.bi.bi-heart-fill {
-    padding: 0;
-    cursor: pointer;
-}
-
-/* היסטוריית הזמנות  */
 .client .yourhistory {
     display: flex;
     justify-content: flex-start;
@@ -138,52 +79,19 @@
     width: 62%;
 }
 
-.client .res_history {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    overflow: hidden;
-    width: 80%;
-}
-
-
-.client .shopping-cart {
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-x: hidden;
-    margin: 2% 0;
-}
-
-.client .product-container {
-    max-height: 350px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin-bottom: 40px;
-}
-
 .client .product {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     margin-bottom: 20px;
     border: 1px solid #989696;
     border-radius: 16px;
-}
-
-.client .product-Price {
-    margin-top: -6px;
-    margin-right: 10px;
-    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .client .product img {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
+    width: 55%;
 }
 
 .client .product-info {
@@ -193,8 +101,35 @@
     padding: 10px;
 }
 
-.client .product-info+.product-info {
-    border-top: 1px solid #ccc;
+.favorite_list, .order {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; /* או כל מרווח אחר שאתה רוצה בין הפריטים */
+    padding: 20px;
+}
+
+.order-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.items-header, .order-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product {
+    margin: 10px 10px;
+}
+
+.product-name {
+    font-size: 20px;
+    text-align: center;
+}
+
+.no-favorite-items, .no-orders {
+    text-align: center;
     margin-top: 20px;
-    padding-top: 20px;
 }

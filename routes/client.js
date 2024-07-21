@@ -1,11 +1,9 @@
-const express = require("express")
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const { getClientPage, getClientOrders } = require('../controllers/client');
+const { isLoggedIn } = require('../controllers/login');
 
-const clientController = require("../controllers/client")
-const loginController = require("../controllers/login");
+router.get('/', isLoggedIn, getClientPage);
+router.get('/:id', isLoggedIn, getClientOrders);
 
-router.route('/')
-    // TODO: Later only let client with the relevant id enter this page
-    .get(clientController.getClientPage)
-
-module.exports = router
+module.exports = router;

@@ -49,7 +49,16 @@ passport.serializeUser(function (user, cb) {
     ));
 
 // Set EJS as the view engine for the Express application
+const ejs = require('ejs');
 app.set("view engine", "ejs")
+
+//tal add
+const path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+
+
+
+
 app.use(express.urlencoded({
     extended: false,
     // Increase the request size limit
@@ -60,18 +69,16 @@ app.use(express.json({ limit: '50mb' }))
 
 // For each route, send to the relevant file (which will handle the req/res)
 app.use(express.static('public'))
-app.use("/", require("./routes/home"))
-app.use("/login", require("./routes/login"))
-app.use("/facebook", require("./routes/facebook"))
-app.use("/about", require("./routes/about"))
-app.use("/client", require("./routes/client"))
-app.use("/products", require("./routes/products"))
-app.use("/tickets", require("./routes/tickets"))
-app.use("/news", require("./routes/news"))
-
-
-app.use("/clients", require("./routes/clients"))
-app.use("/cart", require("./routes/cart"))
+app.use("/", require("./routes/home"));
+app.use("/login", require("./routes/login"));
+app.use("/facebook", require("./routes/facebook"));
+app.use("/about", require("./routes/about"));
+app.use('/client', require('./routes/client'));
+app.use("/products", require("./routes/products"));
+app.use("/tickets", require("./routes/tickets"));
+app.use("/news", require("./routes/news"));
+app.use("/clients", require("./routes/clients"));
+app.use("/cart", require("./routes/cart"));
 
 
 const port = process.env.PORT || 8084;
