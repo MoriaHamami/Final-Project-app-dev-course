@@ -3,62 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Proj</title>
+    <title> Cart | איך ניגשים לשם </title>
+    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
     <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/styles/css/cart.css">
 </head>
 <body>
-    <header>
-        <img src="/styles/imgs/cart/logo.webp" alt="logo" style="width: 132px; height: 59.61px;">
-    </header>
+    <%- include('header.ejs', {page:'cart'}) -%>
     <main class="cart">
-        <div class="col-8">
-            <div class="orderDetails">
-                <div class="customerD">
-                    <h4>Your details</h4>
-                    <span class="login">Do you already have an account? Log in</span>
-                    <div class="fullName">
-                        <input type="text" placeholder="Full Name *">
+        <div class="orderDetails">
+            <div class="customerD">
+                <h4>Your details</h4>
+                <hr>
+                <div class="fullName">
+                    <input type="text" placeholder="Full Name *">
+                </div>
+                <div class="contact-info">
+                    <input type="email" placeholder="Email *">
+                    <input type="tel" placeholder="Phone Number *">
+                </div>
+                <hr>
+                <div class="shipmentD">
+                    <h4>Shipping Address</h4>
+                    <input type="text" placeholder="Country *">
+                    <input type="text" placeholder="Address *">
+                    <input type="text" placeholder="Apartment, suite, etc. (optional)">
+                    <div class="house-info">
+                        <input type="text" placeholder="Postal code *">
+                        <input type="text" placeholder="City *">
                     </div>
-                    <div class="contact-info">
-                        <div class="e">
-                            <input type="email" placeholder="Email *">
-                        </div>
-                        <div class="tel">
-                            <input type="tel" placeholder="Phone Number *">
-                        </div>
+                    <div class="btn-container">
+                        <a href="#" class="btn btn-light text-dark" role="button" data-bs-toggle="button" onclick="goToProductsPage()">Back to shopping</a>
+                        <a href="#" class="btn btn-primary" role="button" data-bs-toggle="button" onclick="proceedToShipping()">Continue to shipping</a>
                     </div>
-                    <hr>
-                    <div class="shipmentD">
-                        <h4>Shipping Address</h4>
-                        <div class="country">
-                            <input type="text" placeholder="Country *" />
-                        </div>
-                        <div class="adress">
-                            <input type="text" placeholder="Adress *">
-                        </div>
-                        <div class="houseType">
-                            <input type="text" placeholder="Apartment, suite, etc. (optional)">
-                        </div>
-                        <div class="house-info">
-                            <div class="code">
-                                <input type="text" placeholder="Postal code *">
-                            </div>
-                            <div class="city">
-                                <input type="text" placeholder="City *">
-                            </div>
-                        </div>
-                        <div class="btn-container">
-                            <a href="#" class="btn btn-primary" role="button" data-bs-toggle="button">Continue to shipping</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
+        
         <div class="shopping-cart">
-            <h2>Your basket | <%= cartItems.length %></h2> 
+            <h2>Your basket | <%= cartItems.length %></h2>
             <div class="product-container">
                 <% cartItems.forEach((item, index) => { %>
                 <div class="product">
@@ -70,17 +56,15 @@
                         <hr>
                         <span class="product-Price"><%= item?.price %>$</span>
                     </div>
-                </div>
-                <div class="input-group">
-                    <div class="icon-container">
-                        <span class="icon-text">Remove</span>
-                        <i class="bi-trash3" onclick="removeItem('<%= item._id %>')"></i>
+                    <div class="input-group">
+                        <div class="icon-container">
+                            <span class="icon-text">Remove</span>
+                            <i class="bi-trash3" onclick="removeItem('<%= item._id %>')"></i>
+                        </div>
                     </div>
                 </div>
                 <% }); %>
-                <!-- More products here -->
             </div>
-
             <div class="checkout">
                 <div class="container">
                     <div class="row">
@@ -96,8 +80,17 @@
             </div>
         </div>
     </main>
+    <%- include('footer.ejs') -%>
+    <script>
+        // מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה
+        var cartItems = <%- JSON.stringify(cartItems || []) %>;
+        
+        function goToProductsPage() {
+            window.location.assign('/products');
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/cart.js"></script>
-</body>
-</html>
+    <!-- תיבת הודעה להצגת ההודעות -->
+    <div class="modal fade" id="

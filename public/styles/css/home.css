@@ -3,36 +3,117 @@
 }
 
 /* Align a large centered intro image in home page */
-.home .welcome {
+/* Style for the welcome section */
+/* Style for the welcome section */
+/* Style for the welcome section */
+.welcome {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
-    background-image: url('../imgs/home/bg.png');
+    /* background-image: url('../imgs/home/bg.png'); */
+    background-image: url('../imgs/home/real.gif');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
-.home .welcome button {
+.welcome .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     position: relative;
-    top: 70vh;
+    top: 50vh;
     height: fit-content;
     padding: 10px 20px;
     color: var(--almost-white);
     background-color: var(--gold);
     border-radius: 10px;
     border: 1px solid var(--almost-white);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background for better readability */
+    text-align: center;
+    
 }
 
-.home .welcome button:hover {
-    background-color: var(--l-gold);
+
+.welcome h1 {
+    color: white; /* Adjust the color for better visibility */
+    font-size: 3.5em; /* Adjust the font size as needed */
+    padding: 20px; /* Add some padding if needed */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: -50px;
+    text-shadow: 0 0 10px rgba(251, 255, 0, 0.8); /* Add white glowing shadow */
+}
+
+.welcome h1 .line {
+    display: block;
+    text-align: left; /* Align text to the left */
+    padding-left: calc(var(--i, 0) * 1em); /* Add left padding based on index */
+    opacity: 0; /* Initially hidden */
+    transform: translateX(-100%); /* Initially positioned off-screen to the left */
+    animation: slideIn 1s ease-in-out forwards; /* Add slide-in animation */
+    animation-delay: calc(var(--i, 0) * 0.5s); /* Delay based on index */
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1; /* Fade to fully visible */
+        transform: translateX(0); /* Move to original position */
+    }
+}
+
+.welcome h1 .line:nth-child(1) {
+    --i: -1;
+}
+
+.welcome h1 .line:nth-child(2) {
+    --i: 1;
+}
+
+.welcome h1 .line:nth-child(3) {
+    --i: 6;
+}
+
+.welcome a{
+    margin-top: 170px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #fff; /* Adjust button background color */
+    color: #000; /* Adjust button text color */
+    border: none;
+    border-radius: 8px;
+    z-index: 1; /* Ensure the button stays above the background */
+    background-color: goldenrod;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+.welcome a p {
+    display: inline; /* Ensure p inside button is inline */
+    margin: 0; /* Remove default margin */
+    font-weight: bold;
+}
+
+.welcome a p {
+    display: inline; /* Ensure p inside button is inline */
+    margin: 0; /* Remove default margin */
+}
+.home .welcome a:hover {
+    background-color: gold;
+    transform: scale(1.2);
 }
 
 /* Remove default p tag margin */
-.home .welcome button p {
+.home .welcome a p {
     margin: 0;
 }
 
@@ -109,6 +190,7 @@
     transition: transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
     flex-wrap: wrap; /* עוטף שורות אם יש צורך */
     background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #weather-container:hover {
@@ -179,208 +261,4 @@
     margin-right: 100px;
     border-radius: 10px;
     overflow-y: auto; /* הוספת גלילה אנכית */
-}
-:root {
-    --font: "Raleway", sans-serif;
-
-    --background-color: #fff;
-    --background-color-header: #e9ecef;
-    --color-text: #000;
-    --color-text-header: #000;
-    --color-green: #01d099;
-    --color-red: #f64e60;
-    --color-yellow: #ffa800;
-
-    --primary-font-size: 5px; /* הוקטן יותר */
-    --secondary-font-size: 4px; /* הוקטן יותר */
-    --header-font-size: 5px; /* הוקטן יותר */
-    --svg-font-size: 3px; /* הוקטן יותר */
-
-    --border-bottom: 0.5px solid var(--background-color-header);
-    --primary-padding: 0.5px 0.5px; /* הוקטן יותר */
-    --primary-line-height: 6px; /* הוקטן יותר */
-    --secondary-padding: 0.05rem; /* הוקטן יותר */
-
-    --button-info-font-size: 4px; /* הוקטן יותר */
-    --button-info-line-height: 6px; /* הוקטן יותר */
-
-    /* LIVESCORE, FIXTURES & FIXTURE WIDGETS ONLY */
-    --modale-background-overlay: rgba(0,0,0,0.4);
-    --modale-close-size: 10px; /* הוקטן יותר */
-    --modale-elapsed-time: 5px; /* הוקטן יותר */
-    --modale-teams-name: 7px; /* הוקטן יותר */
-    --modale-teams-name-small: 6px; /* הוקטן יותר */
-    --modale-teams-name-line-height: 8px; /* הוקטן יותר */
-    --modale-score: 10px; /* הוקטן יותר */
-    --modale-score-small: 8px; /* הוקטן יותר */
-    --modale-players-grid-line-height: 6px; /* הוקטן יותר */
-    --modale-players-grid-line-height-small: 5px; /* הוקטן יותר */
-    --modale-players-grid-line-height-large: 7px; /* הוקטן יותר */
-
-    /* STANDINGS WIDGET ONLY */
-    --standings-team-form-font-size: 4px; /* הוקטן יותר */
-    --standings-team-form-line-height: 5px; /* הוקטן יותר */
-
-    /* LOGOS / FLAGS / PHOTOS */
-    --flags-size: 5px; /* הוקטן יותר */
-    --teams-logo-size: 5px; /* הוקטן יותר */
-    --teams-logo-size-large: 20px; /* הוקטן יותר */
-    --teams-logo-size-medium: 10px; /* הוקטן יותר */
-    --teams-logo-border: 1px solid var(--background-color-header);
-    --player-photo: 5px; /* הוקטן יותר */
-    --player-photo-large: 7px; /* הוקטן יותר */
-}
-
-#wg-api-football-livescore, #wg-api-football-standings, #wg-api-football-fixtures, #wg-api-football-fixture, #wg-api-football-fixture-modal {
-    width: 50%; /* חצי רוחב המסך */
-    max-height: 550px; /* גובה מקסימלי הוגדל */
-    overflow-y: auto; /* גלילה אנכית */
-    box-sizing: border-box; /* הגדרה של חישוב הרוחב הכולל גבולות */
-}
-#livescore, #standings, #fixtures, #fixture, #fixture-modal, #fixture_events, #fixture_statistics, #fixture_lineups, #fixture_players {
-    font-family: var(--font);
-    width: 100%;
-    border-collapse: collapse;
-}
-
-td {
-    padding: var(--primary-padding);
-    font-size: var(--primary-font-size);
-    letter-spacing: 0px;
-    line-height: var(--primary-line-height);
-    vertical-align: middle;
-    background: var(--background-color);
-    color: var(--color-text);
-    border-bottom: var(--border-bottom);
-}
-
-td > span {
-    vertical-align: middle;
-}
-
-.api_football_div_table {
-    padding: var(--primary-padding);
-    font-size: var(--primary-font-size);
-    letter-spacing: 0px;
-    line-height: var(--primary-line-height);
-    vertical-align: middle;
-}
-
-.api_football_no_data {
-    padding: var(--secondary-padding);
-    font-size: var(--primary-font-size);
-    letter-spacing: 0px;
-    line-height: var(--primary-line-height);
-    margin: auto;
-    vertical-align: middle;
-    text-align: center;
-    font-weight: 600;
-    background: var(--background-color-header);
-    color: var(--color-text);
-}
-
-.api_football_header {
-    padding: var(--secondary-padding);
-    font-size: var(--header-font-size);
-    font-weight: 600;
-    background: var(--background-color-header);
-    color: var(--color-text-header);
-}
-
-.api_football_header > span {
-    padding-left: 5px;
-    vertical-align: middle;
-}
-
-.api_football_team_xl {
-    font-size: var(--modale-teams-name);
-    line-height: var(--modale-teams-name-line-height);
-}
-
-.api_football_score_xl {
-    font-size: var(--modale-score);
-    font-weight: 600;
-}
-
-.api_football_elasped_xl {
-    margin-top: 20px;
-    font-size: var(--modale-elapsed-time);
-}
-
-.api_football_logo {
-    width: var(--teams-logo-size);
-    vertical-align: middle;
-}
-
-.api_football_photo {
-    width: var(--player-photo);
-    vertical-align: middle;
-}
-
-.api_football_photo_xl {
-    margin: 10px;
-    width: var(--player-photo-large);
-    vertical-align: middle;
-}
-
-.api_football_logo_xl {
-    height: var(--teams-logo-size-large);
-    border: var(--teams-logo-border);
-    padding: 10px;
-    margin: 10px;
-    vertical-align: middle;
-}
-
-.api_football_flag {
-    width: var(--flags-size);
-    vertical-align: middle;
-}
-
-.api_football_no_border {
-    border: 0px;
-}
-
-.api_football_text_right {
-    text-align: right;
-}
-
-.api_football_text_center {
-    text-align: center;
-}
-
-.api_football_bolder {
-    font-weight: bold;
-}
-
-.api_football_bolder_600 {
-    font-weight: 600;
-}
-
-.api_football_font_size_10 {
-    font-size: var(--secondary-font-size);
-}
-
-.api_football_progress_bar {
-    margin-top: -5px;
-    width: 100%;
-    background: var(--background-color-header);
-}
-
-.api_football_progress_bar_green {
-    height: 6px;
-    background-color: var(--color-green);
-}
-
-.api_football_progress_bar_red {
-    height: 6px;
-    background-color: var(--color-red);
-}
-
-.api_football_progress_bar_home {
-    transform: scaleX(-1);
-}
-
-.api_football_progress {
-    animation: tilt 2s linear infinite;
-    font-weight:​⬤
 }

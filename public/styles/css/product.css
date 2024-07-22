@@ -219,4 +219,52 @@
   justify-content: center;
   align-items: center;
 
+
+  
+}
+/* עיצוב מודל */
+.modal.fade .modal-dialog {
+  transform: translate(0, -50%);
+  top: 0%;
+  margin: 0 auto;
+  transition: transform 0.3s ease-out;
+}
+
+.modal-content {
+  border-radius: 20px; /* עיגול פינות */
+  border: 1px solid #989696;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* צל כללי */
+  background-color: white;
+  position: relative; /* כדי להוסיף צל נוסף */
+  overflow: hidden; /* למנוע גלילה פנימית */
+}
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* התמקמות הצל מתחתית המודל */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.1); /* צל קל מתחתית המודל */
+  border-radius: 50%; /* עיגול הצל */
+  filter: blur(8px); /* טשטוש הצל */
+  z-index: -1; /* הצל יופיע מאחורי המודל */
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-body {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.modal-footer {
+  border-top: none;
+  display: flex;
+  justify-content: center;
 }

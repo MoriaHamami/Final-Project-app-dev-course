@@ -133,3 +133,15 @@
     margin-top: 0rem !important;
 }
 
+.block-btn {
+    background-color: white; /* צבע רקע לבן */
+    border: 1px solid #ccc; /* מסגרת */
+    padding: 5px 10px; /* גודל פנים */
+    border-radius: 3px; /* רענון לבן */
+    transition: background-color 0.3s ease; /* אפקט המעבר */
+}
+
+.block-btn:active,
+.block-btn.clicked {
+    background-color: #ccc; /* רקע כהה יותר בלחיצה */
+}

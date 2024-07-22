@@ -77,8 +77,42 @@ async function getClientOrders(req, res) {
 // } 
 
 
+const deleteClient = async (req, res) => {
+    try { 
+
+      // Get the products id from the params in the web path 
+      // and send it to the service file 9there it will delete the product in DB)
+      const client = await clientsService.deleteClient(req.params.id)
+      // If the product wasnt found in DB show an error
+      if (!client) {
+        res.status(404).json({ errors: ['client not found'] })
+      } else {
+        res.json(client)
+      }
+    } catch (e) {
+      res.json("Client wasn't deleted successfully" + e)
+    }
+  }
+
+const blockClient = async (req, res) => { 
+    console.log("in cont")
+    try {
+        const id = req.params.id;
+        const { isBanned } = req.body;
+
+        await clientsService.blockClient(id , isBanned)
+
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
 module.exports = {
     getClientsPage,
-    getClientOrders,
+    getClientOrders, 
+    deleteClient, 
+    blockClient 
 
 };

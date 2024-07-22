@@ -2,38 +2,47 @@ const Client = require("../models/clients");
 
 async function login(username, password) {
     try {
-
-        const user = await Client.findOne({ username, password })
-        return user != null  //if the user correct it will be diffrent than null and return true
-        // await user.save()
+        const user = await Client.findOne({ username, pass: password });
+        console.log('user:', user);
+        return user != null;  // אם המשתמש קיים והסיסמה נכונה, נחזיר true
     } catch (e) {
-        return e
+        console.error('Login error:', e);
+        return false;
     }
 }
 
-async function register(username, password) {
-    // בדיקת תקינות האימייל
-    // if (!isValidEmail(email)) {
-    //     throw new Error("Invalid email address");
-    // }
-    if (!username || !password) {
-        throw new Error("Missing username or password")
+async function register(fullname, username, password, imgURL) {
+    if (!fullname || !username || !password) {
+        throw new Error("Missing fullname, username, or password");
     }
-    
-    // Check if you can login the user
-    // if(login(username)) throw new Error("User already exists")
+
+    // בדיקה אם המשתמש כבר קיים
+    const existingUser = await Client.findOne({ username });
+    if (existingUser) {
+        throw new Error("User already exists");
+    }
 
     const user = new Client({
+        fullname,
         username,
-        pass: password
-    })
+        pass: password,
+        imgURL,
+        spent: 0,
+        faveItems: [],
+        orders: [],
+        cartItems: [],
+        isBanned: false,
+        isManager: false
+    });
 
     try {
-        await user.save()
+        await user.save();
     } catch (e) {
-        return e
+        console.error('Registration error:', e);
+        throw new Error('Error saving user');
     }
 }
+
 
 async function getIsManager(username) {
     try {
@@ -42,7 +51,8 @@ async function getIsManager(username) {
         return user?.isManager 
         // await user.save()
     } catch (e) {
-        return e
+        console.error('Error fetching manager status:', e);
+        return false;
     }
 }
 
@@ -51,4 +61,4 @@ function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
 }
 
-module.exports = { login, register, getIsManager }
+module.exports = { login, register, getIsManager };

@@ -1,41 +1,49 @@
-header {
-    margin-bottom: 20px;
-    left: 20px;
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-.cart .orderDetails {
-    position: fixed;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    width: calc(100% - 320px);
-    height: calc(100% - 120px);
-    max-height: 150vh;
+header {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cart .orderDetails,
+.cart .shopping-cart {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 48%;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    padding-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 .cart .customerD {
-    position: relative;
-    top: 70%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 700px;
-    height: 150%;
+    width: 100%;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-bottom: 80px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
 }
 
 .cart .customerD h4 {
@@ -45,7 +53,7 @@ header {
 .cart .customerD .login {
     margin-top: 5px;
     margin-left: auto;
-    color:  rgb(62 49 250);
+    color: rgb(62 49 250);
     font-size: 12px;
     right: 5px;
 }
@@ -54,112 +62,100 @@ header {
     text-decoration: underline;
 }
 
-.cart .customerD input {
-    margin-top: 10px;
+/* General input styles */
+.cart input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add margin-bottom for equal spacing */
 }
 
-.cart .customerD input:focus {
+.cart input:focus {
     border-color: rgb(62, 49, 250);
-    box-shadow: 0 0 5px  rgb(62, 49, 250);
+    box-shadow: 0 0 5px rgb(62, 49, 250);
+    background-color: #ffffff;
 }
 
+/* Full Name section */
+.cart .fullName {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cart .fullName input {
+    width: 100%;
+}
+
+/* Contact Info section */
 .cart .contact-info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
 }
 
-.cart .contact-info input[type="email"],
-.cart .contact-info input[type="tel"]{
-    margin-left: -88px;
-    width: calc(250% - 5px);
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
+.cart .contact-info input {
+    flex: 1;
 }
 
-.cart .contact-info input[type="email"]:focus,
-.cart .contact-info input[type="tel"]:focus {
-    border-color: rgb(62, 49, 250);
-    box-shadow: 0 0 5px  rgb(62, 49, 250);
-}
-
-.cart .orderDetails hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 20px 0;
-}
-
+/* House Info section */
 .cart .house-info {
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .cart .house-info > div {
     flex: 1;
-    margin-right: 10px;
+    margin-top: 10px;
 }
 
-.cart .house-info input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-}
-
-.cart .house-info input[type="text"]:focus {
-    border-color: rgb(62, 49, 250);
-    box-shadow: 0 0 5px  rgb(62, 49, 250);
-}
-
+/* Button container */
 .cart .btn-container {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    position: relative;
-    right: -450px;
-    color: #ffffff;
-    width: auto;
-    box-shadow: 0 2px;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
 }
 
-.cart .btn-primary {
-    background-color: rgb(62 49 250);
+.cart .btn-primary,
+.cart .btn-light {
     border-radius: 16px;
-    width: auto;
+    width: 100%;
     font-size: 18px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cart .shopping-cart {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 500px;
-    height: calc(100% - 120px);
+.cart .btn-primary {
+    background-color: rgb(62 49 250);
+    color: #ffffff;
+}
+
+.cart .btn-light {
     background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-bottom: 80px;
+    color: rgb(62, 49, 250);
+    border: 1px solid rgb(62, 49, 250);
+}
+
+.cart .btn-light:hover {
+    background-color: rgba(73, 62, 228, 0.726);
+    color: #ffffff;
 }
 
 .cart .product-container {
-    max-height: 350px;
+    max-height: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
     margin-bottom: 40px;
+    flex-grow: 1;
 }
 
 .cart .product {
@@ -169,12 +165,8 @@ header {
     margin-bottom: 20px;
     border: 1px solid #989696;
     border-radius: 16px;
-}
-
-.cart .product-Price {
-    margin-top: -6px;
-    margin-right: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+    position: relative;
 }
 
 .cart .product img {
@@ -190,10 +182,19 @@ header {
     padding: 10px;
 }
 
-.cart .product-info + .product-info {
+.cart .product-info hr {
+    width: 100%;
+    border: none;
     border-top: 1px solid #ccc;
-    margin-top: 20px;
-    padding-top: 20px;
+}
+
+.cart .input-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 15px;
 }
 
 .cart .input-group .btn {
@@ -214,16 +215,6 @@ header {
     background-color: #ccc;
 }
 
-.cart .input-group {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    width: fit-content;
-    height: fit-content;
-    font-size: 15px;
-    margin-bottom: 20px;
-}
-
 .cart .input-group input {
     max-width: 30px;
     height: 30px;
@@ -231,15 +222,15 @@ header {
     padding: 0;
     margin: 0 5px;
     border: none;
-    text-decoration: none;
 }
 
 .cart .icon-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: absolute;
-    left: 350px;
+    right: 10px;
+    bottom: 5px;
 }
 
 .cart .icon-container i {
@@ -252,47 +243,58 @@ header {
     color: black;
 }
 
+.cart .icon-text {
+    margin-right: 5px;
+}
+
 .cart .icon-text:hover {
     text-decoration: underline;
 }
 
 .cart .checkout {
-    position: fixed;
-    top: 430px;
-    right: 0;
     width: 100%;
-    height: 200px;
+    height: auto;
     background-color: #ffffff;
     border-radius: 20px;
     padding: 20px;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-/* .btn {
-    border: none;
-    margin-top: 13px;
-    color: rgb(95, 33, 171);
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .cart {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cart .orderDetails,
+    .cart .shopping-cart {
+        width: 90%;
+    }
+
+    .cart .btn-container {
+        text-align: center;
+    }
 }
 
-.btn:hover {
-    text-decoration: underline;
-}
+@media (max-width: 767px) {
+    .cart .contact-info {
+        flex-direction: column;
+    }
 
-.btn.btn-primary {
-    width: 40%;
-    padding: 10px;
-    background-color: rgb(95, 33, 171);
-    color: white;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 32px;
-    margin-top: 10px;
-}
+    .cart .contact-info input[type="email"],
+    .cart .contact-info input[type="tel"] {
+        margin-bottom: 10px;
+    }
 
-.btn.btn-primary:hover {
-    background-color: rgb(86, 26, 160);
-    text-decoration: none;
-} */
- 
+    .cart .house-info {
+        flex-direction: column;
+    }
+
+    .cart .house-info > div {
+        margin-bottom: 10px;
+    }
+}
