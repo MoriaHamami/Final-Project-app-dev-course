@@ -27,15 +27,24 @@
 <body>
 
     <!-- Adds header code here and send to it page val as "home" -->
-    <%- include('header.ejs',{page:'home'}) -%>
+    <%- include('header.ejs', {page: 'home'}) %>
 
     <main class="home">
 
         <!-- Welcome section in home -->
         <section class="welcome">
-            <button>
-                <p>SHOP NOW</p> <i class="bi bi-arrow-right"></i>
-            </button>
+            <div class="overlay">
+                <h1 id="headline">
+                    <span class="line" style="--i: 0;">In Every Match, Step Into The Realm Of Football Greatness,</span><br>
+                    <span class="line" style="--i: 2;">Where Passion Meets Excellence,</span><br>
+                    <span class="line" style="--i: 4;">And Every Moment Becomes Legendary!</span>
+                </h1>
+                <a href="/products" class="shop-now-button">
+                    <p>SHOP NOW</p>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </section>
         </section>
         <!-- Bootstrap carousel section in home -->
         <h2 class="players-title">Our Players</h2>
