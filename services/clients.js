@@ -99,7 +99,6 @@ async function getOrdersFromDB(id) {
 }
 
 const deleteClient = async (id) => { 
-    console.log("in service") 
     try {
         const client = await Client.findById(id)
         if (!client)
@@ -110,12 +109,36 @@ const deleteClient = async (id) => {
     } catch (e) {
         return e
     }
+} 
+
+const blockClient = async (id, isBanned) => {
+    console.log("in service")
+ 
+    try {
+        // חיפוש הלקוח לפי מזהה
+        const client = await Client.findById(id);
+        if (!client) {
+            return { success: false, message: 'Client not found' };
+        }
+
+        // עדכון סטטוס החסימה
+        client.isBanned = isBanned;
+        await client.save();
+
+        return { success: true, message: 'Client status updated successfully', client };
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Server error', error: e };
+    }
 }
+
+
 module.exports = {
     getCartItemsFromDB,
     getClientsFromDB,
     removeCartItemFromDB,
     addCartItemToDB,
     getOrdersFromDB, 
-    deleteClient
+    deleteClient, 
+    blockClient
 }

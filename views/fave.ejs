@@ -23,38 +23,12 @@
 
 <body>
 
-    <!-- Dark screen during header dropdown -->
-    <div class="dark-screen" onclick="onToggleMenu()"></div>
-
     <!-- Header section -->
-    <header>
-        <section class="start-icons">
-            <a href="/"><img class="logo" src="/styles/imgs/header/real-madrid-logo.png"></a>
-            <nav>
-                <a href="/" class="header-btn home-btn <%=page === 'home' ? 'active': ''%>" onclick="onToggleMenu()">Home</a>
-                <a href="/products" class="header-btn products-btn <%=page === 'products' ? 'active': ''%>" onclick="onToggleMenu()">Shop</a>
-                <a href="/tickets" class="header-btn products-btn <%=page === 'tickets' ? 'active': ''%>" onclick="onToggleMenu()">Tickets</a>
-                <a href="/about" class="header-btn about-btn <%=page === 'about' ? 'active': ''%>" onclick="onToggleMenu()">About</a>
-            </nav>
-        </section>
-
-        <section class="end-icons"> 
-            <a class="fave-btn" href="/fave"><i class="bi bi-heart"></i>
-                <p><i>Wishlist</i></p>
-            </a> 
-            <a class="cart-btn" href="/cart"><i class="bi bi-bag"></i>
-                <p>Cart</p>
-            </a> 
-            <a class="signin-btn" href="/login"><i class="bi bi-person"></i>
-                <p>Sign in</p>
-            </a>
-            <!-- Menu icon -->
-            <button class="menu-toggle-btn" onclick="onToggleMenu()"><i class="bi bi-list"></i>
-            </button>
-        </section>
-    </header>
-
-    <div class="container mt-5">
+    <%- include('header.ejs', {page:'fave'}) -%>
+<main class = "fave">  
+    
+    <div class="container mt-5"> 
+        <hr> <hr> <hr> 
         <h1 class="text-center">WISHLIST</h1>
         <div class="row mt-4">
             <!-- Template for images -->
@@ -65,7 +39,7 @@
                         <h5 class="card-title">Men's Home White T-Shirt 23/24</h5>
                         <p class="card-text">Player Name : Bellingham, 5 </p> 
                         <a href="#" class="btn btn-primary">View</a> 
-                        <button class="btn btn-success" onclick="moveToCart('<%= product._id %>')">Move to Cart</button>
+                        <button class="btn btn-success" onclick="moveToCart('<product._id %>')">Move to Cart</button>
  
                     </div>
                 </div>
@@ -76,7 +50,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Men's Home White T-Shirt 23/24</h5>
                         <p class="card-text">Player Name : Bellingham, 5 </p> 
-                        <a href="#" class="btn btn-primary">View</a>
+                        <a href="#" class="btn btn-primary">View</a> 
+                        <button class="btn btn-success" onclick="moveToCart('<product._id %>')">Move to Cart</button>
+
                     </div>
                 </div>
             </div>
@@ -86,14 +62,16 @@
                     <div class="card-body">
                         <h5 class="card-title">Men's Home White T-Shirt 23/24</h5>
                         <p class="card-text">Player Name : Bellingham, 5 </p> 
-                        <a href="#" class="btn btn-primary">View</a>
+                        <a href="#" class="btn btn-primary">View</a> 
+                        <button class="btn btn-success" onclick="moveToCart('<product._id %>')">Move to Cart</button>
+
                     </div>
                 </div> 
             </div>
             <!-- Add more image templates as needed -->
         </div>
     </div>
-
+</main>
     <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

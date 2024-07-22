@@ -143,5 +143,5 @@
 
 .block-btn:active,
 .block-btn.clicked {
-    background-color: #f0f0f0; /* רקע כהה יותר בלחיצה */
+    background-color: #ccc; /* רקע כהה יותר בלחיצה */
 }

@@ -87,7 +87,6 @@ async function getClientOrders(req, res) {
 
 const deleteClient = async (req, res) => {
     try { 
-        console.log("in controller") 
 
       // Get the products id from the params in the web path 
       // and send it to the service file 9there it will delete the product in DB)
@@ -102,11 +101,26 @@ const deleteClient = async (req, res) => {
       res.json("Client wasn't deleted successfully" + e)
     }
   }
-  
+
+const blockClient = async (req, res) => { 
+    console.log("in cont")
+    try {
+        const id = req.params.id;
+        const { isBanned } = req.body;
+
+        await clientsService.blockClient(id , isBanned)
+
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 
 module.exports = {
     getClientsPage,
     getClientOrders, 
-    deleteClient
+    deleteClient, 
+    blockClient 
 
 };

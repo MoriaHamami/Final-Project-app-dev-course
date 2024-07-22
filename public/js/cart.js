@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('.shopping-cart').fadeOut();
     });
 });
-
+zz
 async function removeItem(productId) {
     try {
         const response = await $.ajax({

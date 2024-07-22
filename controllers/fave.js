@@ -29,13 +29,15 @@ async function getFavePage(req, res) {
 
         faveItems = faveItems.filter(item => item !== null);
         console.log('Filtered Fave Items:', faveItems);
-        faveItems.totalAmount = sum;
+        // faveItems.totalAmount = sum;
 
         console.log('Rendering cart page with faveItems:', faveItems);
-        res.render('fave', { faveItems });
+        res.render('fave', { faveItems }); 
+        res.render('fave');
+
     } catch (e) {
         console.error('Error fetching fave items:', e.message); // Changed to e.message for more concise error
-        res.status(500).send("Error retrieving fave page.");
+        res.status(500).send("Error retrieving fave page."); 
     }
 }
 

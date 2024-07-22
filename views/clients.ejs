@@ -63,13 +63,7 @@
                                         <i class="bi bi-bag-check-fill"></i>See orders</a> </li>
                                 </td> 
                                 <td>
-                                    <button class="block-btn ban-btn" data-client-id="<%= client._id %>" onclick="confirmBlock(event)">
-                                        <i class="bi bi-x-circle-fill text-danger"></i> Block
-                                    </button>
-                                    <button class="block-btn unban-btn" data-client-id="<%= client._id %>" onclick="confirmUnblock(event)">
-                                        <i class="bi bi-check-circle-fill text-success"></i> Unblock
-                                    </button>
-                                    
+                                    <input type="checkbox" class="block-checkbox" data-client-id="<%= client._id %>" <%= client.isBanned ? 'checked' : '' %> onclick="onBlockClient('<%= client._id %>', this.checked)">
                                 </td>
                             </tr>
                             <% }) %>
@@ -128,6 +122,7 @@
                 $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
             });
         });
+
     </script>
 
 </body>

@@ -37,16 +37,16 @@ async function getOrdersById(id) {
                 for (let i = 0; i < order.length; i++) {
                     product = order[i].productInfo
                     str += `<div class="product"> 
-                                                <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
-                                                <div class="product-info">
-                                                    <span class="product-name"><b>${product.title}</b></span>
-                                                    <span class="product-Size">Size: ${order[i].size} </span>
-                                                    <span class="product-name&num"><b>Name and number</b></span>
-                                                    <span class="product-playerName">Player Name : ${product.favePlayer} </span>
-                                                    <hr>
-                                                    <span class="product-Price">${product.price}$</span>
-                                                </div>
-                                            </div>
+                        <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
+                        <div class="product-info">
+                        <span class="product-name"><b>${product.title}</b></span>
+                        <span class="product-Size">Size: ${order[i].size} </span>
+                        <span class="product-name&num"><b>Name and number</b></span>
+                        <span class="product-playerName">Player Name : ${product.favePlayer} </span>
+                        <hr>
+                        <span class="product-Price">${product.price}$</span>
+                        </div>
+                        </div>
                                         `
                 }
                 str += "</span>"
@@ -72,8 +72,6 @@ function getImgURL(srcImg, folder){
 
  
 async function onDeleteClient(id) { 
-    console.log("in js") 
-
     try {
         // Send a delete request using ajax, and send on the body the id of the product to delete
         const res = await $.ajax({
@@ -85,52 +83,27 @@ async function onDeleteClient(id) {
         if (res.status !== 404) window.location.assign('/clients')
     } catch (e) {
         console.log('e:', e)
-    }
-} 
- 
-function confirmBlock(event) {
-    if (confirm("האם לחסום?")) {
-        // המשך פעולת החסימה כאן
-        console.log("הלקוח נחסם בהצלחה!");
-        event.target.style.backgroundColor = 'gray'; // שינוי צבע הרקע לאפור
-        // שינוי צבע הרקע של הכפתור השני ללבן
-        let otherButton = event.target.nextElementSibling;
-        if (otherButton) {
-            otherButton.style.backgroundColor = '';
+    } 
+} async function onBlockClient(id, isBanned) { 
+    console.log("in js")
+
+    try {
+        // Send a PATCH request to update the block status
+        const res = await $.ajax({
+            url: '/clients/block/' + id,
+            method: 'PATCH',
+            contentType: 'application/json',
+            data: JSON.stringify({ isBanned }),
+        });
+
+        if (res.status !== 200) {
+            alert('Failed to update block status');
+        } else {
+            // Optionally, update the UI to reflect the change
+            console.log('Block status updated successfully');
         }
-    } else {
-        // ביטול חסימת הלקוח
-        console.log("ביטול חסימת הלקוח.");
+    } catch (e) {
+        console.log('Error:', e);
+        alert('Failed to update block status');
     }
 }
-
- 
-
-function confirmUnblock(event) {
-    if (confirm("האם לשחרר את החסימה?")) {
-        // כאן תוכל להוסיף את קוד שחרור החסימה
-        console.log("החסימה שוחררה בהצלחה!"); 
-        event.target.style.backgroundColor = 'gray'; // שינוי צבע הרקע לאפור
-    // שינוי צבע הרקע של הכפתור השני ללבן
-    let otherButton = event.target.previousElementSibling;
-    if (otherButton) {
-        otherButton.style.backgroundColor = '';
-    }
-} else {
-    // ביטול שחרור החסימה
-    console.log("ביטול שחרור החסימה.");
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-

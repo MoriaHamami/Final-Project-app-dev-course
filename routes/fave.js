@@ -11,13 +11,13 @@ router.route('/')
         next();
     }, faveController.getFavePage);
 
-router.route('/add')
-    .post(faveController.addFaveItem);
-    // .get(faveController.getFavePage)
-    router.route('/canvas-edit')
-    .post(faveController.addEditShirtToFave)
+// router.route('/add')
+//     .post(faveController.addFaveItem);
+//     // .get(faveController.getFavePage)
+//     router.route('/canvas-edit')
+//     .post(faveController.addEditShirtToFave)
 
-router.route('/remove')
-    .post(faveController.removeFaveItem);
+// router.route('/remove')
+//     .post(faveController.removeFaveItem);
 
 module.exports = router;

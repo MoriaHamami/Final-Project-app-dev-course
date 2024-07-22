@@ -56,10 +56,10 @@
         <div id="productsList">
 
             <!-- Go over all the products received and show each one in a card -->
-            <% for(let i=0; i< products.length; i++) { %>
+            <% for (let i = 0; i < products.length; i++) { %>
                 <div class="image-container">
                     <a href="/products/product/<%= products[i]._id %>">
-                        <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : '' %>"
+                        <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0].includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : '' %>"
                             alt="product">
                         <div class="image-name">
                             <%= products[i].title %>
@@ -68,12 +68,13 @@
                             <%= products[i].price %>$
                         </div>
                     </a>
-                    <!-- Heart icon for wishlist -->
-                    <button class="wishlist-btn" onclick="toggleWishlist(this)">
+                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, '<%= products[i]._id %>')">
                         <i class="bi bi-heart"></i>
-                    </button> 
+                    </button>
                 </div>
             <% } %>
+            
 
         </div>
     </main>
