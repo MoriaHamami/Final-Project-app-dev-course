@@ -3,7 +3,6 @@ const Client = require("../models/clients");
 async function login(username, password) {
     try {
         const user = await Client.findOne({ username, pass: password });
-        console.log('user:', user);
         return user != null;  // אם המשתמש קיים והסיסמה נכונה, נחזיר true
     } catch (e) {
         console.error('Login error:', e);

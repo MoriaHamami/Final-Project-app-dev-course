@@ -8,13 +8,12 @@ const clientController = require("../controllers/client")
 
 router.route('/')
     // TODO: Later only let client with the relevant id enter this page
-    .get(clientController.getClientPage)
-    router.route('/canvas-edit')
+    // .get(clientController.getClientPage)
+    .get(isLoggedIn, getClientPage)
 
+router.route('/canvas-edit')
     .get(clientController.getEditShirt);
- 
-
-
-router.get('/:id', isLoggedIn, getClientOrders);
+router.route('/:id')
+    .get(isLoggedIn, getClientOrders);
 
 module.exports = router;

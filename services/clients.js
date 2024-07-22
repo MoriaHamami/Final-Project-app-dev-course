@@ -245,15 +245,6 @@ const getClientByIdFromDB = async (clientId) => {
     }
 };
 
-const getClientByUsername = async (username) => {
-    try {
-        const client = await Client.findOne({ username: username });
-        return client;
-    } catch (e) {
-        console.error('Error fetching client by username from DB:', e);
-        throw e;
-    }
-};
 
 async function getClientWithFaveItemsAndOrders(username) {
     try {
@@ -307,7 +298,6 @@ async function getClientWithFaveItemsAndOrders(username) {
         client.orders = orders;
         client.cartItems = cartItems;
 
-        console.log('Client with all details:', JSON.stringify(client, null, 2));
         return client;
     } catch (e) {
         console.error('Error fetching client with favorite items and orders from DB:', e.message);
@@ -316,13 +306,29 @@ async function getClientWithFaveItemsAndOrders(username) {
 }
 
 
+
+// async function getFaveIetemsFromDB(username) {
+//     try {
+//         const client = await Client.findOne({ username });
+//         if (!client) {
+//             throw new Error('Client not found');
+//         }
+//         console.log('Client faveitems:', client.faveItems);
+//         return client.faveItems;
+//     } catch (e) {
+//         console.error('Error fetching fave items from DB:', e);
+//         throw e;
+//     }
+// }
+
+
 module.exports = {
+    // getFaveIetemsFromDB,
     getCartItemsFromDB,
     getClientsFromDB,
     removeCartItemFromDB,
     addCartItemToDB,
     getOrdersFromDB,
-    getClientByUsername,
     getStats,
     addCartToOrders, 
     deleteClient, 

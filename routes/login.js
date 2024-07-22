@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const loginController = require("../controllers/login");
 
-const loginController = require("../controllers/login")
 // const User = require('../models/user'); // ניתן לשנות את השם לפי הקובץ שלך
 
 //  For each route recieved, check method requested and send to relevant controller
@@ -27,5 +26,6 @@ router.get('/user/details', (req, res) => {
       res.status(401).json({ error: 'User is not authenticated' });
     }
   });
+  router.get('/isLogged', loginController.getPermissions)
   
 module.exports = router

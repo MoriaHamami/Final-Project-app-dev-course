@@ -2,13 +2,13 @@ const loginService = require("../services/login");
 const clientsService = require('../services/clients');
 
 // Render login page
-function loginForm(req, res) { 
-    res.render("login.ejs", { user: null }); 
+function loginForm(req, res) {
+    res.render("login.ejs", { user: null });
 }
 
 // Render register page
-function registerForm(req, res) { 
-    res.render("register.ejs", { user: null }); 
+function registerForm(req, res) {
+    res.render("register.ejs", { user: null });
 }
 
 // Check if a user is logged in
@@ -100,6 +100,21 @@ function funcExampleForShowingSecretPage(req, res) {
 async function getUsername(req, res) {
     return req.session.username
 }
+async function getPermissions(req, res) {
+    try {
+        if (!req.session.username) return res.json({ user: null })
+            else {
+        const isManager = await loginService.getIsManager(req.session.username)
+            const user = {
+                isManager
+            }
+            console.log('user:', user)
+            res.json(user) 
+        }
+    } catch (e) {
+        res.json({ user: null })
+    }
+}
 
 async function getIsManager(req, res) {
     try {
@@ -140,5 +155,6 @@ module.exports = {
     isManagerLoggedIn,
     getUsername,
     getIsManager,
-    getClientPage
+    getClientPage,
+    getPermissions
 };

@@ -153,6 +153,8 @@ body {
 
 .btn {
     border: 1px solid black;
+    /* display: inline;
+    height: 5px; */
 }
 
 h1 {

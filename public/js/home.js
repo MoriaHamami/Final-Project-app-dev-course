@@ -2,6 +2,11 @@ const weatherApiKey = '54e5fa763dd39a887729e98f2ca75202';
 const city = 'Madrid'; // העיר שתרצה להציג את מזג האוויר שלה
 const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`;
 
+
+function getShopPage() {
+    window.location.assign('/products')
+}
+
 function displayWeather(data) {
     const weatherElement = document.getElementById('weather-container');
     let weatherForecast = '<h2>Weekly Weather :</h2>';
