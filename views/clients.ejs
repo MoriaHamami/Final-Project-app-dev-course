@@ -4,140 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Page - <%= client.fullname %></title>
+    <title> Real Madrid | Manager Area </title>
+    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
+
     <!-- Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/css/client.css">
-    <link rel="stylesheet" href="/styles/css/setup/vars.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/styles/css/clients.css">
 </head>
 
 <body>
-    <main class="client">
-        <div class="client_details">
-            <div class="personal_data">
-                <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i> Personal Data</h1>
-                <hr>
-                <img class="user-image" src="/styles/imgs/clients/<%= client.imgURL %>" alt="User photo">
-                <hr>
-                <div class="information">
-                    <h3>Name</h3>
-                    <p><%= client.fullname %></p>
-                    <h3>User Name</h3>
-                    <p><%= client.username %></p>
-                    <h3>Total Spent</h3>
-                    <p>$<%= client.spent %></p>
-                    <hr>
-                </div>
-                <a href="/login/logout">
-                    <button class="btn_client">Logout <i class="bi bi-box-arrow-right"></i></button>
-                </a>
+
+    <main class="clients">
+        <div class="manager-area">
+            <div class="table-container">
+                <ul class="nav nav-pills">
+                    <table class="table">
+                        <caption>
+                            <h2>Manager area - Account list</h2>
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>Client's photo</th>
+                                <th>Name</th>
+                                <th>Total cart items</th>
+                                <th>Total favorite items</th>
+                                <th>Delete account</th>
+                                <th>Total amount</th>
+                                <th>Reservations</th> 
+                                <th>Block</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through the list of clients -->
+                            <% clients.forEach((client, i) => { %>
+                            <tr>
+                                <td>
+                                    <% if (client.imgURL) { %>
+                                    <img class="client-photo" src="<%= client.imgURL.includes('data:') ? client.imgURL : ('/styles/imgs/clients/' + client.imgURL)%>"
+                                        class="imgURL-<%=i%>">
+                                    <% } else { %>
+                                    <img class="client-photo" src="/styles/imgs/clients/p-25.png" alt="Default photo">
+                                    <% } %>
+                                  </td>
+                                  <td><%= client.fullname %></td>
+                                  <td><%= client.cartItems ? client.cartItems.length : 0 %></td>
+                                  <td><%= client.faveItems ? client.faveItems.length : 0 %></td>
+                                  <td><button class="delete-acc-btn"><i class="bi bi-x-circle-fill"></i></button></td>
+                                  <td><%= client.spent %>$</td>
+                                  <td>
+                                    <li class="nav-item"><a class="nav-link orders-btn" data-bs-toggle="pill" href="#client<%= client.id %>" id="<%=client._id%>">
+                                        <i class="bi bi-bag-check-fill"></i>See orders</a> </li>
+                                </td> 
+                                <td>
+                                    <button class="block-btn ban-btn" data-client-id="<%= client._id %>">
+                                        <i class="bi bi-x-circle-fill text-danger"></i> 
+                                    </button>
+                                    <button class="block-btn unban-btn" data-client-id="<%= client._id %>">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                    </button> 
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </ul>
             </div>
-        </div>
 
-        <div class="yourhistory">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tab3-1">Your Favorite Items</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tab3-2">Your Reservation History</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tab3-3">Your Cart</a></li>
-            </ul>
-            <hr class="history-line">
-            <div class="tab-content mt-0 mt-md-5" id="items-history">
-                <div class="tab-pane fade show active" id="tab3-1">
-                    <% if (client.faveItems && client.faveItems.length > 0) { %>
-                        <div class="items-header">
-                            <h2>Favorite Items | <%= client.faveItems.length %></h2>
-                        </div>
-                        <span class="favorite_list">
-                            <% client.faveItems.forEach(item => { %>
-                                <div class="product">
-                                    <img src="<%= item.srcImg && item.srcImg[0] && item.srcImg[0].startsWith('data:') ? item.srcImg[0] : '/styles/imgs/products/' + (item.srcImg ? item.srcImg[0] : 'default-image.png') %>"
-                                         alt="<%= item.title %> image" class="product-image">
-                                    <span class="product-name"><b>Product ID: <%= item._id %></b></span>
-                                    <span class="product-title"><b>Title: <%= item.title %></b></span>
-                                    <a href="/products/product/<%= item._id %>" class="btn btn-primary mt-2">See Product</a>
+            <div class="tab-content mt-0 mt-md-5" id="top-shopping-cart">
+                <!-- <% clients.forEach(client => { %> -->
+                <div class="tab-pane fade <%= client.id === clients[0].id ? 'show active' : '' %>" id="<%= client.id %>">
+                    <div class="shopping-cart">
+                        <!-- <% if (client.purchases && client.purchases.length > 0) { %> -->
+                        <h2>Items | <%= client.purchases.length %> </h2>
+                        <h2>Date | <%= client.purchases.dateCreated %> </h2>
+                        <h2>Status | <%= client.purchaseStatus %> </h2>
+                        <span class="product-container">
+                            <!-- <% client.orders.forEach(order => { %> -->
+                            <div class="product"> 
+                                <img src="<%= order.srcImg %>" alt="Product Image" class="product-image">
+                                <div class="product-info">
+                                    <span class="product-name"><b><%= order.name %></b></span>
+                                    <span class="product-Size">Size: <%= order.size %> </span>
+                                    <span class="product-name&num"><b>Name and number</b></span>
+                                    <span class="product-playerName">Player Name : <%= order.favePlayer %>, <%= order.playerNumber %> </span>
+                                    <hr>
+                                    <span class="product-Price"><%= order.price %>$</span>
                                 </div>
-                            <% }) %>
-                        </span>
-                    <% } else { %>
-                        <div class="no-favorite-items">
-                            <p>No favorite items yet</p>
-                        </div>
-                    <% } %>
-                </div>
-
-                <div class="tab-pane fade" id="tab3-2">
-                    <% if (client.orders && client.orders.length > 0) { %>
-                        <% client.orders.forEach((orderList, index) => { %>
-                            <div class="items-header">
-                                <h2>Order <%= index + 1 %> | Items: <%= orderList.length %></h2>
                             </div>
-                            <div class="order-list">
-                                <% orderList.forEach((order, orderIndex) => { %>
-                                    <% if (orderIndex % 4 === 0) { %>
-                                        <div class="row">
-                                    <% } %>
-                                    <div class="col-md-3">
-                                        <div class="product">
-                                            <img src="<%= order.details.srcImg && order.details.srcImg[0] && order.details.srcImg[0].startsWith('data:') ? order.details.srcImg[0] : '/styles/imgs/orders/' + (order.details.srcImg ? order.details.srcImg[0] : 'default-image.png') %>"
-                                                 alt="<%= order.details.title %> image" class="product-image">
-                                            <span class="product-name"><b><%= order.type.charAt(0).toUpperCase() + order.type.slice(1) %> ID: <%= order.id %></b></span>
-                                            <span class="product-title"><b>Title: <%= order.details.title %></b></span>
-                                            <a href="/<%= order.type %>s/<%= order.type %>/<%= order.id %>" class="btn btn-primary mt-2">See <%= order.type.charAt(0).toUpperCase() + order.type.slice(1) %></a>
-                                            <div class="product-details">
-                                                <p>Size: <%= order.size %></p>
-                                                <p>Price: $<%= order.details.price %></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% if ((orderIndex + 1) % 4 === 0 || orderIndex === orderList.length - 1) { %>
-                                        </div>
-                                    <% } %>
-                                <% }) %>
-                            </div>
-                        <% }) %>
-                    <% } else { %>
-                        <div class="no-orders">
-                            <p>No orders yet</p>
-                        </div>
-                    <% } %>
-                </div>
-
-                <div class="tab-pane fade" id="tab3-3">
-                    <% if (client.cartItems && client.cartItems.length > 0) { %>
-                        <div class="items-header">
-                            <h2>Cart Items | <%= client.cartItems.length %></h2>
-                        </div>
-                        <span class="cart_list">
-                            <% client.cartItems.forEach(item => { %>
-                                <div class="product">
-                                    <img src="<%= item.details.srcImg && item.details.srcImg[0] && item.details.srcImg[0].startsWith('data:') ? item.details.srcImg[0] : '/styles/imgs/cart/' + (item.details.srcImg ? item.details.srcImg[0] : 'default-image.png') %>"
-                                         alt="<%= item.details.title %> image" class="product-image">
-                                    <span class="product-name"><b><%= item.type.charAt(0).toUpperCase() + item.type.slice(1) %> ID: <%= item.id %></b></span>
-                                    <span class="product-title"><b>Title: <%= item.details.title %></b></span>
-                                    <a href="/<%= item.type %>s/<%= item.type %>/<%= item.id %>" class="btn btn-primary mt-2">See <%= item.type.charAt(0).toUpperCase() + item.type.slice(1) %></a>
-                                    <div class="product-details">
-                                        <p>Size: <%= item.size %></p>
-                                        <p>Price: $<%= item.details.price %></p>
-                                    </div>
-                                </div>
-                            <% }) %>
+                            <!-- <% }) %> -->
                         </span>
-                    <% } else { %>
-                        <div class="no-cart-items">
-                            <p>Your cart is empty</p>
+                        <!-- <% } else { %> -->
+                        <div class="shopping-cart">
+                            No purchases yet
                         </div>
-                    <% } %>
+                        <% } %>
+                    </div>
                 </div>
+                <!-- <% }) %> -->
             </div>
         </div>
     </main>
 
-    <!-- Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Libraries  -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="/js/client.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/clients.js"></script>
+
 </body>
 
 </html>

@@ -15,11 +15,11 @@ function registerForm(req, res) {
 function isLoggedIn(req, res, next) {
     // Check if a user is logged in on session storage   
     if (req.session.username != null) {
-        // If a user is logged in , 
+        // If a user is logged in, 
         // go on to the next func asked in the routes file
         return next();
     } else {
-        // If a user isnt logged in, send to login page
+        // If a user isn't logged in, send to login page
         res.redirect('/login');
     }
 }
@@ -33,7 +33,7 @@ async function isManagerLoggedIn(req, res, next) {
         if (isManager) {
             return next();
         } else {
-            // If the user isnt a manager, send to login page
+            // If the user isn't a manager, send to login page
             res.redirect('/login');
         }
     } catch (e) {
@@ -44,7 +44,7 @@ async function isManagerLoggedIn(req, res, next) {
 }
 
 function logout(req, res) {
-    // Delete the cookie, so the user wont be saved in session
+    // Delete the cookie, so the user won't be saved in session
     req.session.destroy(() => {
         // Then send the user to the login page
         res.redirect('/login');
@@ -76,11 +76,11 @@ async function login(req, res) {
 
 async function register(req, res) {
     // Get values from input in ejs file (save on body obj)
-    const { username, password } = req.body;
+    const { fullname, username, password, imgURL } = req.body;
 
     try {
         // Add user to DB
-        await loginService.register(username, password);
+        await loginService.register(fullname, username, password, imgURL);
         // Save in cookies the username 
         // (so that with each page refresh, the user will still be remembered)
         req.session.username = username;
@@ -89,7 +89,7 @@ async function register(req, res) {
     } catch (e) {
         console.log('e:', e);
         // TODO: Later make a route to an error page
-        // res.redirect('/register?error=1')
+        res.redirect('/register?error=1');
     }
 }
 
