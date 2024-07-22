@@ -20,17 +20,19 @@
     <main class="product">
         <div class="information_product">
             <input type="hidden" id="productId" value="<%= product.id %>">
-            <h5 class="catgory"><%= product.title %></h5>
+            <h5 class="category"><%= product.title %></h5>
             <h1 class="product_type"><%= product.cat %></h1>
             <text class="product_price"><%= product.price %></text>
-            <div class="product_sizes">
-                <hr>
-                <% product.sizes.forEach((size, index) => { %>
-                    <input type="radio" class="btn-check" name="options-base" id="<%= 'option' + index %>" autocomplete="off">
-                    <label class="btn" for="<%= 'option' + index %>"><%= size %></label>
-                <% }) %>
-                <hr>
-            </div>
+            <% if (product.sizes && product.sizes.length > 0) { %>
+                <div class="product_sizes">
+                    <hr>
+                    <% product.sizes.forEach((size, index) => { %>
+                        <input type="radio" class="btn-check" name="options-base" id="<%= 'option' + index %>" value="<%= size %>" autocomplete="off">
+                        <label class="btn" for="<%= 'option' + index %>"><%= size %></label>
+                    <% }) %>
+                    <hr>
+                </div>
+            <% } %>
             <select class="form-select" id="quantitySelect">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
@@ -38,10 +40,13 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <button class="addTOcart" onclick="addToCart('<%= product._id %>', '<%= product.sizes[0] %>')">
+            <button class="addTOcart" onclick="addToCart('<%= product._id %>')">
                 <i class="bi bi-cart-plus"></i> Add to shopping cart
             </button>
-            <button class="addTOcart"><i class="bi bi-cart-check"></i> Buy now</button>
+            <button class="addTOcart" onclick="buyNow('<%= product._id %>')">
+                <i class="bi bi-cart-check"></i> Buy now
+            </button>
+            
         </div>
         <div class="product_images">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -72,6 +77,20 @@
     <!-- Adds footer code here -->
     <%- include('footer.ejs') -%>
 
+    <!-- Notice Modal -->
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+                </div>
+                <div class="modal-body" id="noticeModalBody">
+                    <!-- The message will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -83,26 +102,6 @@
         crossorigin="anonymous"></script>
     <script src="/js/product.js"></script>
 
-    <script>
-        async function addToCart(productId, size) {
-            try {
-                const response = await $.ajax({
-                    url: '/cart/add',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        productId: productId,
-                        size: size
-                    })
-                });
-
-                alert('Product added to cart successfully');
-            } catch (e) {
-                console.log('Error:', e);
-                alert('Error adding product to cart');
-            }
-        }
-    </script>
 </body>
 
 </html>
