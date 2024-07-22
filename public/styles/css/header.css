@@ -75,6 +75,7 @@ header .signin-btn:hover,
 header .cart-btn:hover {
   text-shadow: var(--txtsh);
   color: var(--blue);
+
 }
 
 /* SMALL SCREENS */

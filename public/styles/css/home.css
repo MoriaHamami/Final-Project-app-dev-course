@@ -3,9 +3,13 @@
 }
 
 /* Align a large centered intro image in home page */
-.home .welcome {
+/* Style for the welcome section */
+/* Style for the welcome section */
+/* Style for the welcome section */
+.welcome {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
     height: 80vh;
     width: 100%;
@@ -16,7 +20,12 @@
     background-size: cover;
 }
 
-.home .welcome button {
+.welcome .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     position: relative;
     top: 50vh;
@@ -26,14 +35,85 @@
     background-color: var(--gold);
     border-radius: 10px;
     border: 1px solid var(--almost-white);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background for better readability */
+    text-align: center;
+    
 }
 
-.home .welcome button:hover {
-    background-color: var(--l-gold);
+
+.welcome h1 {
+    color: white; /* Adjust the color for better visibility */
+    font-size: 3.5em; /* Adjust the font size as needed */
+    padding: 20px; /* Add some padding if needed */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: -50px;
+    text-shadow: 0 0 10px rgba(251, 255, 0, 0.8); /* Add white glowing shadow */
+}
+
+.welcome h1 .line {
+    display: block;
+    text-align: left; /* Align text to the left */
+    padding-left: calc(var(--i, 0) * 1em); /* Add left padding based on index */
+    opacity: 0; /* Initially hidden */
+    transform: translateX(-100%); /* Initially positioned off-screen to the left */
+    animation: slideIn 1s ease-in-out forwards; /* Add slide-in animation */
+    animation-delay: calc(var(--i, 0) * 0.5s); /* Delay based on index */
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1; /* Fade to fully visible */
+        transform: translateX(0); /* Move to original position */
+    }
+}
+
+.welcome h1 .line:nth-child(1) {
+    --i: -1;
+}
+
+.welcome h1 .line:nth-child(2) {
+    --i: 1;
+}
+
+.welcome h1 .line:nth-child(3) {
+    --i: 6;
+}
+
+.welcome a{
+    margin-top: 170px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #fff; /* Adjust button background color */
+    color: #000; /* Adjust button text color */
+    border: none;
+    border-radius: 8px;
+    z-index: 1; /* Ensure the button stays above the background */
+    background-color: goldenrod;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+.welcome a p {
+    display: inline; /* Ensure p inside button is inline */
+    margin: 0; /* Remove default margin */
+    font-weight: bold;
+}
+
+.welcome a p {
+    display: inline; /* Ensure p inside button is inline */
+    margin: 0; /* Remove default margin */
+}
+.home .welcome a:hover {
+    background-color: gold;
+    transform: scale(1.2);
 }
 
 /* Remove default p tag margin */
-.home .welcome button p {
+.home .welcome a p {
     margin: 0;
 }
 
@@ -110,6 +190,7 @@
     transition: transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
     flex-wrap: wrap; /* עוטף שורות אם יש צורך */
     background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #weather-container:hover {
