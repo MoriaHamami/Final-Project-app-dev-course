@@ -3,7 +3,6 @@ const router = express.Router();
 const cartController = require('../controllers/cart');
 const loginController = require('../controllers/login');
 
-// Log to check if routes are being initialized
 console.log("Initializing /cart routes...");
 
 router.route('/')
