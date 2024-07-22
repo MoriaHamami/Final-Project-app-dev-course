@@ -5,25 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const row = this.closest('tr')
             if (row) {
-                const confirmation = confirm("האם אתה בטוח שאתה רוצה למחוק?")
+                const confirmation = confirm("Are you sure you want to remove the client from the list?")
                 if (confirmation) {
                     row.remove()
                 }
             }
         })
     })
-})
-$(document).ready(function () {
-    // מאזין ללחיצה על כפתורי מחיקה
-    $(".delete-acc-btn").on("click", function () {
-        // הצגת הודעת אישור
-        if (confirm("האם אתה בטוח שאתה רוצה למחוק?")) {
-            // מחיקת השורה
-            const row = $(this).closest("tr")
-            row.remove()
-        }
-    })
-})
+}) 
 // TO DO MAKE THIS WORK
 $('.orders-btn').click(function () {
     var id = $(this).attr('id')
@@ -48,16 +37,16 @@ async function getOrdersById(id) {
                 for (let i = 0; i < order.length; i++) {
                     product = order[i].productInfo
                     str += `<div class="product"> 
-                                                <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
-                                                <div class="product-info">
-                                                    <span class="product-name"><b>${product.title}</b></span>
-                                                    <span class="product-Size">Size: ${order[i].size} </span>
-                                                    <span class="product-name&num"><b>Name and number</b></span>
-                                                    <span class="product-playerName">Player Name : ${product.favePlayer} </span>
-                                                    <hr>
-                                                    <span class="product-Price">${product.price}$</span>
-                                                </div>
-                                            </div>
+                        <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
+                        <div class="product-info">
+                        <span class="product-name"><b>${product.title}</b></span>
+                        <span class="product-Size">Size: ${order[i].size} </span>
+                        <span class="product-name&num"><b>Name and number</b></span>
+                        <span class="product-playerName">Player Name : ${product.favePlayer} </span>
+                        <hr>
+                        <span class="product-Price">${product.price}$</span>
+                        </div>
+                        </div>
                                         `
                 }
                 str += "</span>"
@@ -79,4 +68,42 @@ function getImgURL(srcImg, folder){
     console.log('srcImg:', srcImg)
     if(!srcImg) return ""
         return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg)
+}
+
+ 
+async function onDeleteClient(id) { 
+    try {
+        // Send a delete request using ajax, and send on the body the id of the product to delete
+        const res = await $.ajax({
+            url: '/clients/edit/' + id,
+            method: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify({ id }),
+        })
+        if (res.status !== 404) window.location.assign('/clients')
+    } catch (e) {
+        console.log('e:', e)
+    } 
+} async function onBlockClient(id, isBanned) { 
+    console.log("in js")
+
+    try {
+        // Send a PATCH request to update the block status
+        const res = await $.ajax({
+            url: '/clients/block/' + id,
+            method: 'PATCH',
+            contentType: 'application/json',
+            data: JSON.stringify({ isBanned }),
+        });
+
+        if (res.status !== 200) {
+            alert('Failed to update block status');
+        } else {
+            // Optionally, update the UI to reflect the change
+            console.log('Block status updated successfully');
+        }
+    } catch (e) {
+        console.log('Error:', e);
+        alert('Failed to update block status');
+    }
 }

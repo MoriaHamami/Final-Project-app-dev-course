@@ -57,7 +57,7 @@ header .cart-btn p {
 header .signin-btn i {
   font-size: 20px;
 }
-
+header .fave-btn,
 header .signin-btn,
 header .cart-btn {
   cursor: pointer;
@@ -68,8 +68,9 @@ header .cart-btn {
   /* Remove a tag default styling */
   color: inherit;
   text-decoration: none;
-}
+} 
 
+header .fave-btn:hover,
 header .signin-btn:hover,
 header .cart-btn:hover {
   text-shadow: var(--txtsh);

@@ -75,6 +75,7 @@ app.use("/clients", require("./routes/clients"))
 app.use("/cart", require("./routes/cart"))
 app.use("/", require("./routes/home"));
 app.use("/orders", require("./routes/orders"));
+app.use("/fave", require("./routes/fave"))
 
 app._router.stack.forEach(function(r) {
   if (r.route && r.route.path) {

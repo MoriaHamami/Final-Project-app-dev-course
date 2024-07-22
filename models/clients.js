@@ -24,7 +24,7 @@ const clientSchema = new mongoose.Schema({
     }],
     orders: [[subSchema]],
     cartItems: [subSchema],
-    isBanned: Boolean,
+    isBanned: { type: Boolean, default: false },
     dateCreated: { type: Date, default: Date.now },
     isManager: { type: Boolean, default: false }
 });

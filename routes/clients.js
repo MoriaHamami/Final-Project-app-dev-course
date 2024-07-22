@@ -11,4 +11,8 @@ router.route('/:id')
     // .get(loginController.isManagerLoggedIn,clientsController.getClientOrders);
 
 
+router.route('/edit/:id')
+    .delete(clientsController.deleteClient) 
+  router.route('/block/:id')
+    .patch(clientsController.blockClient); // Change to PATCH for block status update
 module.exports = router;

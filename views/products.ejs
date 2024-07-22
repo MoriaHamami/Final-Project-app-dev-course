@@ -13,25 +13,47 @@
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/styles/css/products.css">
+
 </head>
 
 <body>
     <!-- Adds header code here and send to it page val as "products" -->
     <%- include('header.ejs', {page:'products'}) -%>
 
-        <main class="products">
+    <main class="products">
 
-            <!-- <div class="header">
-                <h1>products</h1>
-            </div>
-            <div class="header">
-                <div class="blue-part"></div>
-                <div class="image-part">
-                    <img src="/styles/imgs/products/model.jpeg" alt="../styles/imgs/products/model.jpeg">
-                    <span class="model-title">MAN</span>
-                </div>
+        <section class="filter">
+            <form>
+                <label>
+                    Max Price
+                    <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
+                        value="<%= maxPrice %>" onchange="setPrice(event.target.value)">
+                </label>
+                <label>
+                    Product Name
+                    <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
+                        placeholder="Search product name">
+                </label>
+                <label for="catFilter">
+                    Select Category
+                    <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
+                        <% for(let i=0; i< cats.length; i++) { %>
+                            <option value="<%= cats[i] %>">
+                                <%= cats[i] %>
+                            </option>
+                        <% } %>
+                    </select>
+                </label>
+                <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
+                        class="bi bi-caret-up"></i>
+                    Sort By Price</button>
+                <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
+                        class="bi bi-caret-up"></i>
+                    Sort By Title</button>
+            </form>
+        </section>
 
-            </div> -->
+        <div id="productsList">
 
             <section class="filter">
                 <form>
@@ -81,19 +103,32 @@
                             <%= products[i].price %>$
                         </div>
                     </a>
+                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, '<%= products[i]._id %>')">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                </div>
+            <% } %>
+            
 
-                    <% } %>
+        </div>
+    </main>
 
-            </div>
-        </main>
+    <!-- Adds footer code here -->
+    <%- include('footer.ejs') -%>
 
-        <!-- Adds footer code here -->
-        <%- include('footer.ejs') -%>
-
-            <!-- Libraries  -->
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-            <script src="/js/products.js"></script>
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/products.js"></script>
+    <script>
+        function toggleWishlist(button) {
+            const icon = button.querySelector('i');
+            icon.classList.toggle('bi-heart');
+            icon.classList.toggle('bi-heart-fill');
+            button.classList.toggle('wishlist-active');
+        }
+    </script>
 </body>
 
 </html>
