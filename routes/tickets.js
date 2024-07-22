@@ -7,7 +7,7 @@ router.get('/', ticketsController.getTickets);
 router.get('/filter', ticketsController.getTicketssByFilter);
 router.route('/edit')
 .get( ticketsController.getTicket)
-post( ticketsController.createTicket);
+.post( ticketsController.createTicket);
 // .get( loginController.isManagerLoggedIn,ticketsController.getTicket)
 // post(loginController.isManagerLoggedIn, ticketsController.createTicket);
 
