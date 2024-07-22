@@ -49,7 +49,16 @@ passport.use(new FacebookStrategy({
 ));
 
 // Set EJS as the view engine for the Express application
+const ejs = require('ejs');
 app.set("view engine", "ejs")
+
+//tal add
+const path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+
+
+
+
 app.use(express.urlencoded({
   extended: false,
   // Increase the request size limit

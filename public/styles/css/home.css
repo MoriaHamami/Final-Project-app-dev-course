@@ -7,9 +7,10 @@
     display: flex;
     justify-content: center;
     position: relative;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
-    background-image: url('../imgs/home/bg.png');
+    /* background-image: url('../imgs/home/bg.png'); */
+    background-image: url('../imgs/home/real.gif');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -18,7 +19,7 @@
 .home .welcome button {
     display: flex;
     position: relative;
-    top: 70vh;
+    top: 50vh;
     height: fit-content;
     padding: 10px 20px;
     color: var(--almost-white);

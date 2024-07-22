@@ -1,5 +1,7 @@
-const express = require("express")
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const { getClientPage, getClientOrders } = require('../controllers/client');
+const { isLoggedIn } = require('../controllers/login');
 
 const clientController = require("../controllers/client")
 // const loginController = require("../controllers/login");
@@ -12,4 +14,7 @@ router.route('/')
     .get(clientController.getEditShirt);
  
 
-module.exports = router
+
+router.get('/:id', isLoggedIn, getClientOrders);
+
+module.exports = router;
