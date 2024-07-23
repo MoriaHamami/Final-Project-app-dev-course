@@ -75,8 +75,7 @@
     width: 5%;
 }
 
-
-/* עגלת קניות - מועתק מהקוד של נועה עם התאמות */
+/* עגלת קניות */
 .clients .shopping-cart {
     width: 350px;
     height: 600px;
@@ -144,4 +143,16 @@
 .block-btn:active,
 .block-btn.clicked {
     background-color: #ccc; /* רקע כהה יותר בלחיצה */
+}
+
+.clients {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.search-input {
+    font-size: 1.2rem;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

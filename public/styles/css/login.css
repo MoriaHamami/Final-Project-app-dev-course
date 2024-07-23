@@ -130,3 +130,59 @@ margin-top: -18px;
 
 }
 
+#registerForm
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* ממרכז לרוחב */
+    align-items: center;
+    margin-bottom: 20px; /* רווח מתחת */
+}
+
+.image-upload img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px; /* רווח מתחת לתמונה */
+    border: 1px solid #ccc; /* גבול מסביב לתמונה */
+    border-radius: 10px; /* פינות מעוגלות */
+    padding: 5px; /* ריווח פנימי לתמונה */
+    background-color: #fff; /* רקע לבן לתמונה */
+}
+
+.image-upload input[type="file"] {
+    display: none;
+}
+
+.image-upload label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(62, 49, 250);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload .deleteImg {
+    margin-top: 10px; /* רווח מעל לכפתור מחיקה */
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

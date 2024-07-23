@@ -18,6 +18,21 @@ body {
     align-items: center;
 }
 
+.filters-container {
+    width: 90%; /* רוחב כללי */
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
 .tickets .edit-icon {
     position: absolute;
     top: 10px;
@@ -59,8 +74,6 @@ body {
 
 .card {
     border-radius: 50px;
-    top: 50px;
-    left: 40px;
     height: auto;
     margin-bottom: 20px;
 }
@@ -79,14 +92,6 @@ body {
     flex-direction: column;
     color: white;
     margin: 0 10px;
-}
-
-.filters {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
 }
 
 .team img {
@@ -166,11 +171,10 @@ h1 {
 .cards-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 70px;
+    justify-content: center;
+    padding: 30px;
     gap: 30px; /* מוסיף מרווח בין הכרטיסים */
 }
-
 
 .card-body {
     display: flex;
@@ -196,7 +200,6 @@ h1 {
 .btn-group.me-2 {
     border-radius: 20px;
 }
-
 
 body, html {
     margin: 0;

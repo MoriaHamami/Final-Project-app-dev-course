@@ -4,8 +4,7 @@ const loginController = require('./login');
 const getTickets = async (req, res) => {
   try {
     const ALLTickets = await ticketsService.getTickets();
-        // Check if manager is logged in for edit product option
-        const isManager = await loginController.getIsManager(req, res)
+    const isManager = await loginController.getIsManager(req, res);
     res.render('tickets.ejs', { ALLTickets, isManager });
   } catch (e) {
     res.status(500).json({ error: 'Error fetching tickets' });
@@ -14,10 +13,25 @@ const getTickets = async (req, res) => {
 
 const getTicketssByFilter = async (req, res) => {
   try {
-    const titleFilter = req.query.filters?.title;
+    const titleFilter = req.query.title;
+    const monthFilter = req.query.month;
+    const stadiumFilter = req.query.stadium;
 
     const filter = {};
-    if (titleFilter) filter.title = new RegExp(titleFilter, 'i');
+
+    if (titleFilter) {
+      filter.title = new RegExp(titleFilter, 'i');
+    }
+
+    if (monthFilter) {
+      const startDate = new Date(2023, monthFilter - 1, 1);
+      const endDate = new Date(2023, monthFilter, 0);
+      filter.date = { $gte: startDate, $lte: endDate };
+    }
+
+    if (stadiumFilter) {
+      filter.stadium = stadiumFilter;
+    }
 
     const tickets = await ticketsService.getTickets(filter);
     res.json(tickets);
@@ -25,6 +39,8 @@ const getTicketssByFilter = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+
 
 const getTicketsByDate = async (req, res) => {
   try {

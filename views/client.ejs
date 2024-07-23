@@ -18,12 +18,14 @@
 <body>
 
 
+
+
     <main class="client">
         <div class="client_details">
             <div class="personal_data">
                 <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i> Personal Data</h1>
                 <hr>
-                <img class="user-image" src="/styles/imgs/clients/<%= client.imgURL %>" alt="User photo">
+                <img class="user-image" src="<%= client.imgURL && client.imgURL.startsWith('data:') ? client.imgURL : client.imgURL ? '/styles/imgs/clients/' + client.imgURL : '/styles/imgs/clients/default-image.png' %>" alt="User photo">
                 <hr>
                 <div class="information">
                     <h3>Name</h3>
@@ -34,9 +36,6 @@
                     <p>$<%= client.spent %></p>
                     <hr>
                 </div>
-                <!-- <a class="fave-btn" href="/fave"><i class="bi bi-heart"></i>
-                    <p><i>Wishlist</i></p>
-                </a> -->
                 <a href="/login/logout">
                     <button class="btn_client">Logout <i class="bi bi-box-arrow-right"></i></button>
                 </a>
@@ -95,7 +94,6 @@
                                             <% } %>
                                             <span class="product-title"><%= order.details.title %></span>
                                             <span class="product-title">$<%= order.details.price %></span>
-                                           
                                         </div>
                                         <% if (order.type !== 'ticket') { %>
                                             <a href="/<%= order.type %>s/<%= order.type %>/<%= order.id %>" class="btn btn-primary mt-2">See Product</a>

@@ -55,41 +55,6 @@
             </form>
         </section>
 
-        <div id="productsList">
-
-            <section class="filter">
-                <form>
-                    <label>
-                        Max Price
-                        <input type="range" max="<%= maxPrice%>" min="<%= minPrice%>" name="priceFilter"
-                            value="<%= maxPrice%>" onchange="setPrice(event.target.value)" oninput="updateOutput(event.target.value)">
-                            <output><%= maxPrice%></output>
-                    </label>
-                    <label>
-                        Product Name
-                        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
-                            placeholder="Search product name">
-                    </label>
-                    <label for="catFilter">
-                        Select Category
-                        <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
-                            <option value="">All</option>
-                            <% for(let i=0; i< cats.length; i++) { %>
-                                <option value="<%= cats[i]%>">
-                                    <%= cats[i]%>
-                                </option>
-                                <% } %>
-                        </select>
-                    </label>
-                    <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
-                            class="bi bi-caret-up"></i>
-                        Sort By Price</button>
-                    <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
-                            class="bi bi-caret-up"></i>
-                        Sort By Title</button>
-                </form>
-            </section>
-
             <div id="productsList">
 
                 <!-- Go over all the products recieved and show each one in a card -->
@@ -109,11 +74,12 @@
                     <button class="wishlist-btn" onclick="toggleWishlist(this, '<%= products[i]._id %>')">
                         <i class="bi bi-heart"></i>
                     </button>
-                </div>
+                
             <% } %>
+
+            </div>
             
 
-        </div>
     </main>
 
     <!-- Adds footer code here -->
