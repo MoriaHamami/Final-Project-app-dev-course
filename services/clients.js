@@ -259,6 +259,20 @@ async function getClientWithFaveItemsAndOrders(username) {
     }
 }
 
+async function getFaveIetemsFromDB(username) {
+    try {
+        const client = await Client.findOne({ username });
+        if (!client) {
+            throw new Error('Client not found');
+        }
+        console.log('Client faveitems:', client.faveItems);
+        return client.faveItems;
+    } catch (e) {
+        console.error('Error fetching fave items from DB:', e);
+        throw e;
+    }
+}
+
 module.exports = {
     getCartItemsFromDB,
     getClientsFromDB,
@@ -271,5 +285,6 @@ module.exports = {
     blockClient,
     getClientByIdFromDB,
     getClientByUsername,
-    getClientWithFaveItemsAndOrders
+    getClientWithFaveItemsAndOrders,
+    getFaveIetemsFromDB
 };

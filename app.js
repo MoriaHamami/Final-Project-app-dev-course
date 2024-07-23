@@ -78,6 +78,7 @@ app.use("/products", require("./routes/products"))
 app.use("/tickets", require("./routes/tickets"))
 app.use("/news", require("./routes/news"))
 app.use("/manager", require("./routes/manager"))
+app.use("/fave", require("./routes/fave"))
 
 
 app.use("/clients", require("./routes/clients"))
