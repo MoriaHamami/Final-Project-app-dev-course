@@ -36,6 +36,10 @@
     margin: 0;
 }
 
+.manager .button {
+    margin-inline: 0;
+}
+
 .manager i {
     /* Make every icon seem clickable */
     cursor: pointer;

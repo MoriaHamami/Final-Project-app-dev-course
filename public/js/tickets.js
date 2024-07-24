@@ -1,44 +1,26 @@
 let gTitle = '';
 let gMonth = 0;
+let gStadium = '';
 
-window.setMonth = function (isManager, newMonth = '') {
+function setMonth(isManager, newMonth = '') {
     gMonth = newMonth;
-    const amount = document.getElementById('amount').value;
-
-    if (amount < 1 || amount > 10) {
-        alert('Please enter a number between 1 and 10 for ticket quantity.');
-        return;
-    }
-
-    getTicketsByMonth(isManager, gMonth);
-};
-
-function getEditTicketPage(id) {
-    window.location.assign('/tickets/edit/' + id)
+    filterTickets(isManager);
 }
 
 function setTitle(isManager, newTitle) {
     gTitle = newTitle;
-    getTicketsByTitle(isManager);
+    filterTickets(isManager);
 }
 
-async function getTicketsByTitle(isManager) {
-    try {
-        const tickets = await $.ajax({
-            url: `/tickets/filter?filters[title]=${gTitle}`,
-            method: 'GET',
-            contentType: 'application/json',
-        });
-        renderTickets(isManager, tickets);
-    } catch (error) {
-        console.error('Error fetching tickets:', error);
-    }
+function setStadiumFilter(newStadium) {
+    gStadium = newStadium;
+    filterTickets();
 }
 
-async function getTicketsByMonth(isManager, month = '') {
+async function filterTickets(isManager) {
     try {
         const tickets = await $.ajax({
-            url: `/tickets/date?date=${month}`,
+            url: `/tickets/filter?title=${gTitle}&month=${gMonth}&stadium=${gStadium}`,
             method: 'GET',
             contentType: 'application/json',
         });

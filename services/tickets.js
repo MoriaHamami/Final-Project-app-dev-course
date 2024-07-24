@@ -9,11 +9,10 @@ const createTicket = async (title, price, stadium, opImg, opponent, date) => {
 
 const getTickets = async (filter = {}) => {
   try {
-
-    const tickets = await Ticket.find(filter)
-    return tickets
+    const tickets = await Ticket.find(filter);
+    return tickets;
   } catch (e) {
-    console.log('e:', e)
+    console.log('e:', e);
   }
 };
 

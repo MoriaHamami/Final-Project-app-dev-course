@@ -17,7 +17,7 @@
 
 <body>
     <!-- Adds header code here and send to it page val as "home" -->
-    <%- include('header.ejs',{page:'home'}) -%>
+    <%- include('header.ejs',{page:'manager'}) -%>
         <main class="manager">
 
 
@@ -33,6 +33,10 @@
                     <p class="email">Member since: <%= manager.dateCreated.toLocaleDateString() %> at <%=
                                 manager.dateCreated.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
                     </p>
+                    <a href="/client" class="button">
+                            Personal area
+                    </a>
+
                 </article>
             </section>
 
@@ -94,10 +98,7 @@
 
 
 
-            <section class="orders">
-                <!-- Adds manager personal area code here -->
-                <%- include('client.ejs') -%>
-            </section>
+
 
         </main>
         <!-- Adds footer code here -->

@@ -23,7 +23,7 @@ ul {
     margin: 0;
 }
 
-button{
+.button,button{
         /* Give the buttons a border */
         border: 1px solid var(--l-gray);
         /* Give the buttons a background */
@@ -40,7 +40,7 @@ button{
         cursor: pointer;
 }
 
-button:hover{
+button:hover, .button:hover{
     background-color: var(--ll-gray);
 }
 

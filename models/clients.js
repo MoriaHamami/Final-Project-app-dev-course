@@ -20,11 +20,11 @@ const clientSchema = new mongoose.Schema({
     spent: Number,
     faveItems: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'products'
     }],
     orders: [[subSchema]],
     cartItems: [subSchema],
-    isBanned: Boolean,
+    isBanned: { type: Boolean, default: false },
     dateCreated: { type: Date, default: Date.now },
     isManager: { type: Boolean, default: false }
 });

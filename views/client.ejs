@@ -4,294 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Page | <%= client.fullname %></title>
+    <link rel="icon" href="/styles/imgs/header/logo.png" sizes="64x64">
 
     <!-- Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/css/client.css">
-
+    <link rel="stylesheet" href="/styles/css/setup/general.css">
+    <link rel="stylesheet" href="/styles/css/setup/vars.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+
     <main class="client">
-            <div class="client_details">
-                <div class="personal_data">
-                    <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i>personal data
-                        <hr>
-                    </h1>
-                    <img class="user-image" src="/styles/imgs/home/player1.png">
+        <div class="client_details">
+            <div class="personal_data">
+                <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i> Personal Data</h1>
+                <hr>
+                <img class="user-image" src="<%= client.imgURL && client.imgURL.startsWith('data:') ? client.imgURL : client.imgURL ? '/styles/imgs/clients/' + client.imgURL : '/styles/imgs/clients/default-image.png' %>" alt="User photo">
+                <hr>
+                <div class="information">
+                    <h3>Name</h3>
+                    <p><%= client.fullname %></p>
+                    <h3>User Name</h3>
+                    <p><%= client.username %></p>
+                    <h3>Total Spent</h3>
+                    <p>$<%= client.spent %></p>
                     <hr>
-
-                    <div class="information">
-
-                        <h3>Name</h3>
-                        <h>Tal mohaban</h>
-                        <h3>Email</h3>
-                        <h>Tal mohaban@gmail.com</h>
-                        <h3>Address</h3>
-                        <h>mishmar hayarden givaatayim</h>
-                        <h3>phone number</h3>
-                        <h>0504354352</h>
-                        <hr>
-                    </div>
-                    <a href="login/logout">
-                    <button class="btn_client">logout<i class="bi bi-box-arrow-right"></i></button>
-                    </a>
                 </div>
+                <a href="/login/logout">
+                    <button class="btn_client">Logout <i class="bi bi-box-arrow-right"></i></button>
+                </a>
             </div>
+        </div>
 
-            <div class="yourhistory">
-                <ul class="nav nav-pills">
-                    <li class="nav-item"> <a class="nav-link active" data-bs-toggle="pill" href="#tab3-1">Your Favorite
-                            Items</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-bs-toggle="pill" href="#tab3-2">Your Reservesion
-                            History</a> </li>
-                </ul>
-                <hr class="history-line">
-
-                  <div class="tab-content mt-0 mt-md-5">
-
-                    <div class="tab-pane fade show active" id="tab3-1">
+        <div class="yourhistory">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tab3-1">Your Favorite Items</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tab3-2">Your Reservation History</a></li>
+            </ul>
+            <hr class="history-line">
+            <div class="tab-content mt-0 mt-md-5" id="items-history">
+                <div class="tab-pane fade show active" id="tab3-1">
+                    <% if (client.faveItems && client.faveItems.length > 0) { %>
+                        <div class="items-header">
+                            <h2>Favorite Items | <%= client.faveItems.length %></h2>
+                        </div>
                         <div class="favorite_list">
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
+                            <% client.faveItems.forEach(item => { %>
+                                <div class="product">
+                                    <img src="<%= item.srcImg && item.srcImg[0] && item.srcImg[0].startsWith('data:') ? item.srcImg[0] : '/styles/imgs/products/' + (item.srcImg ? item.srcImg[0] : 'default-image.png') %>" alt="<%= item.title %> image" class="product-image">
+                                    <div class="product_dt">
+                                        <span class="product-title"><%= item.title %></span>
+                                        <span class="product-title">$<%= item.price %></span>
                                     </div>
+                                    <a href="/products/product/<%= item._id %>" class="btn btn-primary mt-2">See Product</a>
                                 </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card_product">
-                                <img src="/styles/imgs/cart/product1.webp" class="card-img-top" alt=".">
-                                <div class="card-body">
-                                    <h5 class="card-title">shirt</h5>
-                                    <h class="card-text">200$</h>
-                                    <div class="product_btn">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <a class="see_product">see product</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }) %>
                         </div>
-                    </div>
-                    
-                    <div class="tab-pane fade" id="tab3-2">
-                        <div class="shopping-cart">
-                            <h2>Items | 2 </h2>
-                            <h2>Date | 28.9.2023 </h2>
-                            <h2>status | deliverd </h2>
-                            <span class="product-container">
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-                            </span>
+                    <% } else { %>
+                        <div class="no-favorite-items">
+                            <p>No favorite items yet</p>
                         </div>
+                    <% } %>
+                </div>
 
-                        <div class="shopping-cart">
-                            <h2>Items | 2 </h2>
-                            <h2>Date | 28.9.2023 </h2>
-                            <h2>status | deliverd </h2>
-                            <span class="product-container">
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
+                <div class="tab-pane fade" id="tab3-2">
+                    <% if (client.orders && client.orders.length > 0) { %>
+                        <% client.orders.forEach((orderList, index) => { %>
+                            <div class="items-header">
+                                <h2>Order <%= index + 1 %> | Items: <%= orderList.length %></h2>
+                            </div>
+                            <div class="favorite_list">
+                                <% orderList.forEach(order => { %>
+                                    <div class="product">
+                                        <% if (order.type === 'ticket') { %>
+                                            <img src="<%= order.details.opImg && order.details.opImg.startsWith('data:') ? order.details.opImg : '/styles/imgs/tickets/' + (order.details.opImg ? order.details.opImg : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
+                                        <% } else { %>
+                                            <img src="<%= order.details.srcImg && order.details.srcImg[0] && order.details.srcImg[0].startsWith('data:') ? order.details.srcImg[0] : '/styles/imgs/products/' + (order.details.srcImg ? order.details.srcImg[0] : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
+                                        <% } %>
+                                        <div class="product_dt">
+                                            <% if (order.type === 'ticket') { %>
+                                                <span class="product-date">Date: <%= new Date(order.details.date).toLocaleDateString() %></span>
+                                                <span class="product-date">Opponent: <%= order.details.opponent %></span>
+                                            <% } %>
+                                            <span class="product-title"><%= order.details.title %></span>
+                                            <span class="product-title">$<%= order.details.price %></span>
+                                        </div>
+                                        <% if (order.type !== 'ticket') { %>
+                                            <a href="/<%= order.type %>s/<%= order.type %>/<%= order.id %>" class="btn btn-primary mt-2">See Product</a>
+                                        <% } %>
                                     </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-                            </span>
+                                <% }) %>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="no-orders">
+                            <p>No orders yet</p>
                         </div>
-
-                        <div class="shopping-cart">
-                            <h2>Items | 2 </h2>
-                            <h2>Date | 28.9.2023 </h2>
-                            <h2>status | deliverd </h2>
-                            <span class="product-container">
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-
-                                <div class="product">
-                                    <img src="/styles/imgs/cart/product1.webp" alt="מוצר" class="product-image">
-                                    <div class="product-info">
-                                        <span class="product-name"><b>Men's Home White T-Shirt 23/24</b></span>
-                                        <span class="product-Quantity">Quantity 1 </span>
-                                        <span class="product-Size">Size: XS </span>
-                                        <span class="product-name&num"><b>Name and number</b></span>
-                                        <span class="product-playerName">Player Name : Bellingham, 5 </span>
-                                        <hr>
-                                        <span class="product-Price">120$</span>
-                                    </div>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
+        </div>
     </main>
 
-    <!-- Libraries  -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
     <script src="/js/client.js"></script>
-
 </body>
 
 </html>

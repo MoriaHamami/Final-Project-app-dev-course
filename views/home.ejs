@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Proj</title>
+    <title> Real madrid | Home Page </title>
+    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
     <!-- LIBRARIES -->
 
@@ -27,15 +28,18 @@
 <body>
 
     <!-- Adds header code here and send to it page val as "home" -->
-    <%- include('header.ejs',{page:'home'}) -%>
+    <%- include('header.ejs', {page: 'home'}) %>
 
     <main class="home">
 
         <!-- Welcome section in home -->
         <section class="welcome">
-            <button>
-                <p>SHOP NOW</p> <i class="bi bi-arrow-right"></i>
-            </button>
+
+                <a href="/products" onclick="getShopPage()" class="shop-now-button">
+                    <p>SHOP NOW</p>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+        </section>
         </section>
         <!-- Bootstrap carousel section in home -->
         <h2 class="players-title">Our Players</h2>

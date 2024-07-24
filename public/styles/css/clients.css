@@ -75,8 +75,7 @@
     width: 5%;
 }
 
-
-/* עגלת קניות - מועתק מהקוד של נועה עם התאמות */
+/* עגלת קניות */
 .clients .shopping-cart {
     width: 350px;
     height: 600px;
@@ -133,3 +132,27 @@
     margin-top: 0rem !important;
 }
 
+.block-btn {
+    background-color: white; /* צבע רקע לבן */
+    border: 1px solid #ccc; /* מסגרת */
+    padding: 5px 10px; /* גודל פנים */
+    border-radius: 3px; /* רענון לבן */
+    transition: background-color 0.3s ease; /* אפקט המעבר */
+}
+
+.block-btn:active,
+.block-btn.clicked {
+    background-color: #ccc; /* רקע כהה יותר בלחיצה */
+}
+
+.clients {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.search-input {
+    font-size: 1.2rem;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
