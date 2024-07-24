@@ -59,8 +59,15 @@
             </div>
         </section>
         
-        <section class="located">
-            <p>Located In</p>
+        <section class="map">
+            <h3>Our stores</h3>
+            <!--The div element for the map -->
+            <gmp-map center="<%= coords.center.lat %>,<%= coords.center.long %>" zoom="5" map-id="branchesMap" >
+                    <!-- Go over all the coords and add markers for them on map -->
+                    <% for(let i=0; i< coords.data.length; i++) { %>                      
+                        <gmp-advanced-marker position="<%= coords.data[i].lat %>,<%= coords.data[i].long %>" title="<%= coords.data[i].address %>"></gmp-advanced-marker>                  
+                        <% } %>
+            </gmp-map>
         </section>
 
         <section class="contact-info">
@@ -228,6 +235,11 @@
             }
         }
     </script>
+    <!--The JS library for the google map -->
+    <script
+        src="<%='https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_KEY +'&loading=async&libraries=maps,marker&v=beta'%>"
+        defer>
+        </script>
 </body>
 
 </html>

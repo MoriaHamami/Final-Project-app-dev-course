@@ -34,7 +34,11 @@ function setTitle(newTitle) {
 }
 function setPrice(newPrice) {
     gPrice = newPrice
+    $('.price-val').text(newPrice)
     getProductsBy()
+}
+function updatePriceVal(newPrice) {
+    $('.price-val').text(newPrice)
 }
 
 // When clicking on the sort buttons, do the following:

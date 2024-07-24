@@ -22,38 +22,46 @@
     <!-- Adds header code here and send to it page val as "products" -->
     <%- include('header.ejs', {page:'products'}) -%>
 
-    <main class="products">
+        <main class="products">
 
-        <section class="filter">
-            <form>
-                <label>
-                    Max Price
-                    <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
-                        value="<%= maxPrice %>" onchange="setPrice(event.target.value)">
-                </label>
-                <label>
-                    Product Name
-                    <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
-                        placeholder="Search product name">
-                </label>
-                <label for="catFilter">
-                    Select Category
-                    <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
-                        <% for(let i=0; i< cats.length; i++) { %>
-                            <option value="<%= cats[i] %>">
-                                <%= cats[i] %>
+            <section class="filter">
+                <form>
+                    <label>
+                        Max Price
+                        <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
+                            value="<%= maxPrice %>" onchange="setPrice(event.target.value)"
+                            oninput="updatePriceVal(event.target.value)">
+                    </label>
+                    <p class="price-val">
+                        <%= maxPrice %>
+                    </p>
+                    <p>$</p> 
+                    <label>
+                        Product Name
+                        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
+                            placeholder="Search product name">
+                    </label>
+                    <label for="catFilter">
+                        Select Category
+                        <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
+                            <option value="">
+                                All
                             </option>
-                        <% } %>
-                    </select>
-                </label>
-                <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
-                        class="bi bi-caret-up"></i>
-                    Sort By Price</button>
-                <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
-                        class="bi bi-caret-up"></i>
-                    Sort By Title</button>
-            </form>
-        </section>
+                            <% for(let i=0; i< cats.length; i++) { %>
+                                <option value="<%= cats[i] %>">
+                                    <%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
+                                </option>
+                                <% } %>
+                        </select>
+                    </label>
+                    <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
+                            class="bi bi-caret-up"></i>
+                        Sort By Price</button>
+                    <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
+                            class="bi bi-caret-up"></i>
+                        Sort By Title</button>
+                </form>
+            </section>
 
             <div id="productsList">
 
@@ -74,29 +82,29 @@
                             <i class="bi bi-heart"></i>
                         </button>
                     </a>
-                
-            <% } %>
+
+                    <% } %>
 
             </div>
-            
 
-    </main>
 
-    <!-- Adds footer code here -->
-    <%- include('footer.ejs') -%>
+        </main>
 
-    <!-- Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="/js/products.js"></script>
-    <script>
-        function toggleWishlist(button) {
-            const icon = button.querySelector('i');
-            icon.classList.toggle('bi-heart');
-            icon.classList.toggle('bi-heart-fill');
-            button.classList.toggle('wishlist-active');
-        }
-    </script>
+        <!-- Adds footer code here -->
+        <%- include('footer.ejs') -%>
+
+            <!-- Libraries -->
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+            <script src="/js/products.js"></script>
+            <script>
+                function toggleWishlist(button) {
+                    const icon = button.querySelector('i');
+                    icon.classList.toggle('bi-heart');
+                    icon.classList.toggle('bi-heart-fill');
+                    button.classList.toggle('wishlist-active');
+                }
+            </script>
 </body>
 
 </html>

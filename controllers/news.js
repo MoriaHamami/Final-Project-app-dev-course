@@ -1,14 +1,42 @@
 const newsService = require('../services/news');
+const aboutService = require('../services/about');
 
 const getNews = async (req, res) => {
   try {
     const news = await newsService.getNew();
-    res.render('news.ejs', { news });
+    const coords = await aboutService.getCoords()
+    coords.center = getCenterCoords(coords.data)
+    res.render('news.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords });
   } catch (e) {
     console.log('שגיאה בשליפת חדשות:', e);
     res.status(500).json({ error: 'שגיאה בשליפת חדשות' });
   }
 };
+
+function getCenterCoords(coords) {
+  let lats = 0
+  let longs = 0
+  let latsLength = 0
+  let longsLength = 0
+  for (let i = 0; i < coords.length; i++) {
+      if(coords[i].lat) {
+          lats += coords[i].lat
+          latsLength++
+      }
+      if(coords[i].long) {
+          longs += coords[i].long
+          longsLength++
+      }
+  }
+
+  const avgLat = latsLength ? lats / latsLength : 37.4220656
+  const avgLong = longsLength ? longs / longsLength : -122.0840897
+
+  return {
+      lat: avgLat,
+      long: avgLong
+  }
+}
 
 const createNew = async (req, res) => {
   const { genre, txt, date } = req.body;
