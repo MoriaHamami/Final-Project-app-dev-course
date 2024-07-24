@@ -2,7 +2,7 @@
 <html>
 
 <head>  
-  <title>Facebook Node Authentication</title>
+  <title>User Profile</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -17,7 +17,7 @@
 <body>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Node Authentication</a>
+      <a id="logo-container" href="#" class="brand-logo">User Profile</a>
       <a href="/logout" class="right">Logout</a>
     </div>
   </nav>
@@ -37,6 +37,18 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
+        <h5>Wishlist</h5>
+        <% user.wishlist.forEach(function(productId) { %>
+          <!-- הצגת פרטי המוצר מתוך המזהה -->
+          <div class="card">
+            <div class="card-content">
+              <!-- ניתן להוסיף כאן קוד כדי לטעון ולציג את המוצר בפועל לפי מזהה המוצר -->
+              <p>Product ID: <%= productId %></p>
+            </div>
+          </div>
+        <% }); %>
       </div>
     </div>
   </div>

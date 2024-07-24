@@ -55,12 +55,12 @@
             </form>
         </section>
 
-            <div id="productsList">
-
-                <!-- Go over all the products recieved and show each one in a card -->
-                <% for(let i=0; i< products.length; i++) { %>
-                    <a class="image-container" href="/products/product/<%= products[i]._id %>">
-                        <!-- If the path of the products image has data recieved from an input put it as source, otherwise show image from loclal path -->
+        <div id="productsList">
+            <!-- Go over all the products received and show each one in a card -->
+            <% for(let i=0; i< products.length; i++) { %>
+                <div class="image-container">
+                    <a href="/products/product/<%= products[i]._id %>">
+                        <!-- If the path of the products image has data received from an input put it as source, otherwise show image from local path -->
                         <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>"
                             alt="product">
                         <div class="image-name">
@@ -69,16 +69,14 @@
                         <div class="price">
                             <%= products[i].price %>$
                         </div>
-                        <!-- כפתור הלב להוספת לרשימת המשאלות -->
-                        <button class="wishlist-btn" onclick="toggleWishlist(this, '<%= products[i]._id %>')">
-                            <i class="bi bi-heart"></i>
-                        </button>
                     </a>
-                
+                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+                    <button class="wishlist-btn" onclick="toggleWishlist(event, '<%= products[i]._id %>')">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                </div>
             <% } %>
-
-            </div>
-            
+        </div>
 
     </main>
 
@@ -90,11 +88,28 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/products.js"></script>
     <script>
-        function toggleWishlist(button) {
+        function toggleWishlist(event, productId) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const button = event.currentTarget;
             const icon = button.querySelector('i');
             icon.classList.toggle('bi-heart');
             icon.classList.toggle('bi-heart-fill');
             button.classList.toggle('wishlist-active');
+
+            // שליחת בקשה לשרת להוסיף את המוצר למועדפים
+            $.ajax({
+                url: '/wishlist/add',
+                method: 'POST',
+                data: { productId },
+                success: function(response) {
+                    console.log('Product added to wishlist');
+                },
+                error: function(error) {
+                    console.error('Error adding product to wishlist', error);
+                }
+            });
         }
     </script>
 </body>
