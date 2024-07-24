@@ -24,7 +24,7 @@
 
 .news .title {
     position: absolute;
-    top: 11%; /* מיקום אנכי מחזיק באמצע המסך */
+    top: 390px; /* מיקום אנכי מחזיק באמצע המסך */
     left: 8%; /* מיקום אופקי בצד שמאל */
     transform: translate(0, -50%);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -220,7 +220,7 @@
     width: 4%;
     height: auto;
     border-radius: 10px; 
-    margin-left: 97.5%; 
+    margin-left: 97.3%; 
     margin-top: -12px;
 }
 
@@ -261,7 +261,37 @@
     background: linear-gradient(90deg, #f9d976, #f1d180ba, #f1d180ba); 
     border-radius: 5px 5px; 
 }
+.carousel-control-prev, .carousel-control-next {
+    background-color: transparent;
+    margin: -60px;
+    margin-top: -80px; 
+    transition: transform 0.3s ease-in-out; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    transform: scale(1.15); 
+    background-color: transparent; 
+}
+
+/* כדי לוודא שהם לא משתנים יותר מדי ב-hover */
+.carousel-control-prev:not(:hover), .carousel-control-next:not(:hover) {
+    transform: scale(1);
+}
+
+/* סגנון לחצים עצמם */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-size: 100%, 100%; 
+    filter: brightness(1); 
+    transition: filter 0.3s ease-in-out; 
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon, 
+.carousel-control-next:hover .carousel-control-next-icon {
+    filter: brightness(0.5); /* כהות יותר של החצים ב-hover */
+}
 .located p {
     text-align: right;
     position: relative;
