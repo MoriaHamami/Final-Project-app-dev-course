@@ -69,10 +69,23 @@ const deleteNew = async (req, res) => {
   }
 };
 
+const searchNews = async (req, res) => {
+  const { genre, text } = req.query;
+
+  try {
+    const news = await newsService.searchNews(genre, text);
+    res.render('news.ejs', { news });
+  } catch (e) {
+    console.log('Error searching news:', e);
+    res.status(500).json({ error: 'Error searching news' });
+  }
+};
+
 module.exports = {
   getNews,
   createNew,
   getNew,
   updateNew,
-  deleteNew
+  deleteNew,
+  searchNews
 };

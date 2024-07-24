@@ -6,6 +6,64 @@ let gPrice = 0;
 let gDate = '';
 let gopImg = '';
 
+let originalTitle = '';
+let originalOpponent = '';
+let originalStadium = '';
+let originalPrice = 0;
+let originalDate = '';
+let originalOpImg = '';
+
+// Initialize original values on page load
+window.onload = function() {
+    const ticket = JSON.parse(document.getElementById('ticket-data').textContent);
+    if (ticket) {
+        originalTitle = ticket.title || '';
+        originalOpponent = ticket.opponent || '';
+        originalStadium = ticket.stadium || '';
+        originalPrice = ticket.price || 0;
+        originalDate = ticket.date ? new Date(ticket.date).toISOString().slice(0, 16) : '';
+        originalOpImg = ticket.opImg || '';
+        // Initialize the global variables with the original values
+        gTitle = originalTitle;
+        gOpponent = originalOpponent;
+        gStadium = originalStadium;
+        gPrice = originalPrice;
+        gDate = originalDate;
+        gopImg = originalOpImg;
+    }
+};
+
+async function onUpdateTicket(ev) {
+    ev.preventDefault();
+
+    const updatedFields = {};
+    if (gTitle !== originalTitle) updatedFields.title = gTitle;
+    if (gOpponent !== originalOpponent) updatedFields.opponent = gOpponent;
+    if (gStadium !== originalStadium) updatedFields.stadium = gStadium;
+    if (gPrice !== originalPrice) updatedFields.price = gPrice;
+    if (gDate !== originalDate) updatedFields.date = gDate;
+    if (gopImg !== originalOpImg) updatedFields.opImg = gopImg;
+
+    try {
+        const ticketId = $('#updateButton').val();
+        const response = await $.ajax({
+            url: '/tickets/edit/' + ticketId,
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(updatedFields),
+        });
+
+        if (response) {
+            alert('Ticket updated successfully.');
+            window.location.href = '/tickets';
+        }
+    } catch (e) {
+        console.log('Error:', e);
+        alert('Failed to update the ticket.');
+    }
+}
+
+
 // מאזינים לשינויים בקלטים
 function onChangeTitle(newTitle) {
     gTitle = newTitle;
@@ -33,6 +91,7 @@ function onChangePrice(newPrice) {
 function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
+
 
 // הוספת כתובת מקור של תמונה ל-gopImg
 function addTogSrcImgs(opImg) {
@@ -122,33 +181,8 @@ async function onAddTicket(ev) {
             }),
         });
 
-       // alert('New ticket added successfully.');
-       // window.location.href = '/tickets';
-    } catch (e) {
-        console.log('Error:', e);
-    }
-}
-
-// עדכון כרטיס קיים
-async function onUpdateTicket(ev) {
-    ev.preventDefault();
-
-    try {
-        await $.ajax({
-            url: '/tickets/edit/' + $('#updateButton').val(),
-            method: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                title: gTitle,
-                opponent: gOpponent,
-                stadium: gStadium,
-                price: gPrice,
-                date: gDate,
-                opImg: gopImg,
-            }),
-        });
-
-        alert('Ticket updated successfully.');
+       alert('New ticket added successfully.');
+       window.location.href = '/tickets';
     } catch (e) {
         console.log('Error:', e);
     }

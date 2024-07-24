@@ -26,4 +26,7 @@ router.route('/edit/:id')
   // .put(loginController.isManagerLoggedIn,newsController.updateNew)
   // .delete(loginController.isManagerLoggedIn,newsController.deleteNew);
 
+router.route('/search')
+  .get(newsController.searchNews);
+
 module.exports = router;

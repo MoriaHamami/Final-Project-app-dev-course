@@ -92,6 +92,11 @@ app._router.stack.forEach(function(r) {
   }
 });
 
+// const ticketsService = require('./services/tickets'); // הוספת ה-import
+// // קריאה לפונקציות הבדיקה
+// ticketsService.testTicketsByMonthRange(8); // בדיקה לאוגוסט
+// ticketsService.testTicketsByStadium('Municipal de Montilivi'); // בדיקה לאצטדיון
+
 const port = process.env.PORT || 8084;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);

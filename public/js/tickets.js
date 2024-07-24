@@ -2,38 +2,55 @@ let gTitle = '';
 let gMonth = 0;
 let gStadium = '';
 
-function setMonth(isManager, newMonth = '') {
+function setMonth(isManager, newMonth = 0) {
     gMonth = newMonth;
+    console.log(`Month set to: ${gMonth}`);
     filterTickets(isManager);
 }
 
-function setTitle(isManager, newTitle) {
+
+function setTitle(isManager, newTitle = '') {
     gTitle = newTitle;
+    console.log(`Title set to: ${gTitle}`);
     filterTickets(isManager);
 }
 
-function setStadiumFilter(newStadium) {
+function setStadiumFilter(newStadium = '') {
     gStadium = newStadium;
+    console.log(`Stadium set to: ${gStadium}`);
     filterTickets();
 }
 
 async function filterTickets(isManager) {
     try {
+        // בניית URL הבקשה על פי הערכים של gTitle, gMonth ו-gStadium
+        let url = `/tickets/filter?title=${gTitle}`;
+        
+        if (gMonth !== 0) {
+            url += `&month=${gMonth}`;
+        }
+        
+        if (gStadium) {
+            url += `&stadium=${gStadium}`;
+        }
+
         const tickets = await $.ajax({
-            url: `/tickets/filter?title=${gTitle}&month=${gMonth}&stadium=${gStadium}`,
+            url: url,
             method: 'GET',
             contentType: 'application/json',
         });
+        console.log('Filtered tickets:', tickets);
         renderTickets(isManager, tickets);
     } catch (error) {
         console.error('Error fetching tickets:', error);
     }
 }
 
+
 function renderTickets(isManager, tickets) {
     let str = '';
     for (let i = 0; i < tickets.length; i++) {
-        str += `<div class="card" style="width: 18rem;">
+        str += `<div class="card" style="width: 18rem;" data-stadium="${tickets[i].stadium}">
             <div class="battle">
                 <div class="team">
                     <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
@@ -76,12 +93,10 @@ function renderTickets(isManager, tickets) {
                         <span id="priceof_tic">${tickets[i].price}€</span>
                     </div>
                 </div>
-                <label>
-                    Add more tickets here
-                    <input id="amount" type="number" value="1" name="add more tickets here" min="1" max="10">
-                </label>
                 <ul class="list-group list-group-flush">
-                    <a href="#" class="btn btn-primary"><i class="bi bi-gem"></i>Buy ticket NOW</a>
+                    <a href="#" class="btn btn-primary" onclick="addToCart('${tickets[i]._id}')">
+                        <i class="bi bi-gem"></i> Buy ticket NOW
+                    </a>
                 </ul>
             </div>
         </div>`;

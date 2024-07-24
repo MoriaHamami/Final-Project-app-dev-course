@@ -43,7 +43,7 @@
                     </select>
                 </span>
                 <span role="group" aria-label=".">
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', )">All Tickets</button>
+                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 0)">All Tickets</button>
                     <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 1)">Jan</button>
                     <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 2)">Feb</button>
                     <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 3)">Mar</button>
@@ -144,64 +144,56 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/tickets.js"></script>
     <script>
-        function filterByStadium(stadium) {
-            var cards = document.querySelectorAll('.cards-container .card');
-            cards.forEach(card => {
-                if (stadium === "" || card.getAttribute('data-stadium') === stadium) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
         async function addToCart(ticketId) {
-    try {
-        const response = await fetch('/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': '*/*',
-                'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({
-                productId: ticketId,
-                quantity: 1  // כמות קבועה
-            }),
-            credentials: 'include'
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            if (result.success) {
-                showNotice('הכרטיס נוסף לעגלה בהצלחה', false);
-            } else {
+            try {
+                const response = await fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': '*/*',
+                        'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        productId: ticketId,
+                        quantity: 1  // כמות קבועה
+                    }),
+                    credentials: 'include'
+                });
+    
+                if (response.status === 401) {
+                    showNotice('צריך להתחבר קודם', true);
+                } else if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotice('הכרטיס נוסף לעגלה בהצלחה', false);
+                    } else {
+                        showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+                    }
+                } else {
+                    showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+                }
+            } catch (e) {
                 showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
             }
-        } else {
-            showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
         }
-    } catch (e) {
-        showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
-    }
-}
-
-
-        function showNotice(message, redirectToCart) {
+    
+        function showNotice(message, redirectToLogin) {
             document.getElementById('noticeModalBody').innerText = message;
             var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
             noticeModal.show();
-
+    
             setTimeout(function() {
-                if (redirectToCart) {
-                    window.location.href = '/cart';
+                if (redirectToLogin) {
+                    window.location.href = '/login';
                 } else {
                     noticeModal.hide();
                 }
             }, 3000); // Adjust the timeout as needed
         }
     </script>
+    
+    
 </body>
 
 </html>

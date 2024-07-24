@@ -1,9 +1,16 @@
+body
+{
+    background-color: var(--almost-white) !important;
+}
+
 .edit-product {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     /* Make background on whole page that is seen */
     background-color: var(--almost-white);
+    margin-top: 30px;
+
 }
 
 .edit-product h3:not(.edit-actions) {
@@ -28,6 +35,7 @@
 
 .edit-product .edit-sizes li {
     margin: 5px;
+    align-items: center;
 }
 
 .edit-product .edit-sizes button{
@@ -54,11 +62,18 @@
 }
 
 .edit-product form,
-.edit-product .info {
+.edit-product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: flex-start;
+}
+
+.info
+{
     display: flex;
     flex-direction: column;
 }
-
 .edit-product label {
     display: flex;
     justify-content: space-between;
@@ -81,6 +96,7 @@
     flex-direction: column;
     list-style-type: none;
     margin: 5px;
+    align-items: center;
 }
 
 .edit-product img {
@@ -92,4 +108,16 @@
     .edit-product .edit-imgs h3 {
         text-align: center;
     }
+}
+
+.tog
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-sizes
+{
+    display: flex;
+    align-items: center;
 }
