@@ -75,7 +75,7 @@ async function addCartItem(req, res) {
     const username = req.session.username;
     try {
         if (!username) {
-            return res.redirect('/login');
+            return res.status(401).json({ success: false, message: 'User not logged in' });
         }
 
         const result = await clientsService.addCartItemToDB(username, productId, quantity);
@@ -85,6 +85,7 @@ async function addCartItem(req, res) {
         res.status(500).json({ success: false, message: 'Error adding item to cart' });
     }
 }
+
 
 
 // Function to remove item from cart

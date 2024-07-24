@@ -11,7 +11,7 @@ const getTickets = async (req, res) => {
   }
 };
 
-const getTicketssByFilter = async (req, res) => {
+const getTicketsByFilter = async (req, res) => {
   try {
     const titleFilter = req.query.title;
     const monthFilter = req.query.month;
@@ -23,24 +23,33 @@ const getTicketssByFilter = async (req, res) => {
       filter.title = new RegExp(titleFilter, 'i');
     }
 
-    if (monthFilter) {
-      const startDate = new Date(2023, monthFilter - 1, 1);
-      const endDate = new Date(2023, monthFilter, 0);
-      filter.date = { $gte: startDate, $lte: endDate };
+    if (monthFilter && monthFilter !== "0") {
+      const month = parseInt(monthFilter) - 1;
+
+      const dateFilters = [];
+      for (let year = 2023; year <= 2026; year++) {
+        const startDate = new Date(year, month, 1);
+        const endDate = new Date(year, month + 1, 0, 23, 59, 59, 999);
+        dateFilters.push({ date: { $gte: startDate, $lt: endDate } });
+      }
+
+      filter.$or = dateFilters;
+      console.log(`Filtering by month: ${JSON.stringify(dateFilters)}`);
     }
 
     if (stadiumFilter) {
       filter.stadium = stadiumFilter;
+      console.log(`Filtering by stadium: ${stadiumFilter}`);
     }
 
+    console.log('Filter object:', filter);
     const tickets = await ticketsService.getTickets(filter);
+    console.log('Tickets found:', tickets);
     res.json(tickets);
   } catch (e) {
     res.status(500).send('Internal Server Error');
   }
 };
-
-
 
 const getTicketsByDate = async (req, res) => {
   try {
@@ -84,13 +93,25 @@ const getTicket = async (req, res) => {
 const updateTicket = async (req, res) => {
   const id = req.params.id;
   const { title, price, stadium, opImg, opponent, date } = req.body;
+
   try {
-    await ticketsService.updateTicket(id, title, price, stadium, opImg, opponent, date);
-    res.redirect('/tickets');
+    const ticket = await ticketsService.getTicketById(id);
+    if (!ticket) return res.status(404).json({ error: 'Ticket not found' });
+
+    ticket.title = title !== undefined ? title : ticket.title;
+    ticket.price = price !== undefined ? price : ticket.price;
+    ticket.stadium = stadium !== undefined ? stadium : ticket.stadium;
+    ticket.opImg = opImg !== undefined ? opImg : ticket.opImg;
+    ticket.opponent = opponent !== undefined ? opponent : ticket.opponent;
+    ticket.date = date !== undefined ? new Date(date) : ticket.date;
+
+    await ticket.save();
+    res.json(ticket);  // Send the updated ticket as a response
   } catch (e) {
     res.status(500).json({ error: "Ticket wasn't saved successfully", details: e });
   }
 };
+
 
 const deleteTicket = async (req, res) => {
   try {
@@ -107,7 +128,7 @@ const deleteTicket = async (req, res) => {
 module.exports = {
   getTickets,
   getTicketsByDate,
-  getTicketssByFilter,
+  getTicketsByFilter,
   createTicket,
   getTicket,
   updateTicket,

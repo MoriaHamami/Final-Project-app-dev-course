@@ -19,7 +19,6 @@ const getNew = async () => {
 
 const getNewsByMonth = async (month) => {
   if (!month) {
-    // If no month is provided, return all news
     const allNews = await News.find({});
     return allNews;
   }
@@ -67,7 +66,6 @@ const deleteArticle = async (id) => {
     }
 
     await article.deleteOne();
-    console.log(article);
     return article;
   } catch (e) {
     return e;
@@ -83,8 +81,19 @@ const getNewById = async (id) => {
   }
 };
 
-
-
+const searchNews = async (genre, text) => {
+  const query = {};
+  
+  if (genre) {
+    query.genre = { $regex: genre, $options: 'i' };
+  }
+  
+  if (text) {
+    query.txt = { $regex: text, $options: 'i' };
+  }
+  
+  return await News.find(query);
+};
 
 module.exports = {
   createNew,
@@ -92,5 +101,6 @@ module.exports = {
   getNewsByMonth,
   updateArticle,
   deleteArticle,
-  getNewById
+  getNewById,
+  searchNews
 };

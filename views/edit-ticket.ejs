@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Manager Area | Edit Tickets </title>
+    <title>Manager Area | Edit Tickets</title>
     <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
     <!-- Libraries -->
@@ -11,7 +11,6 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
-
     <link rel="stylesheet" href="/styles/css/edit-ticket.css">
 </head>
 <body>
@@ -20,69 +19,61 @@
 
     <main class="edit-ticket">
         <h1>Ticket Editor</h1>
+        <div class="edit_img_info">
+            <form id="editTicket">
+                <article class="edit-imgs">
+                    <h3>Add rival team image</h3>
+                    <ul>
+                        <% if (Ticket != null && Ticket.opImg) { %>
+                            <li id="0">
+                                <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
+                                     class="srcImg-0" id="image-preview" width="300">
+                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event.target)"
+                                       src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
+                                       id="0">
+                                <button type="button" class="deleteImg" onclick="onDeleteImg('0')">DELETE</button>
+                            </li>
+                        <% } else { %>
+                            <li id="0">
+                                <img src="/styles/imgs/products/placeholder.png" class="srcImg-0" id="image-preview">
+                                <input type="file" accept="image/*" name="opImg" src="/styles/imgs/products/shirt.png" onchange="onChangeImg(event)" id="0">
+                                <button type="button" class="deleteImg" onclick="onDeleteImg('0')">DELETE</button>
+                            </li>
+                        <% } %>
+                    </ul>
+                </article>
 
-        <form id="editTicket">
+                <article class="edit-txt">
+                    <h3>Game Information</h3>
 
-            <article class="edit-imgs">
-                <h3>Add rival team image</h3>
-                <ul>
-                    <% if (Ticket != null && Ticket.opImg) { %>
-                        <li id="0">
-                            <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
-                                 class="srcImg-0" id="image-preview" width="300">
+                    <label>
+                        Title
+                        <input id="title" value="<%= Ticket != null ? Ticket.title : '' %>" name="title" onchange="onChangeTitle(event.target.value)">
+                    </label>
 
-                            <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event.target)"
-                                   src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
-                                   id="0">
-                            <button type="button" class="deleteImg" onclick="onDeleteImg('0')">DELETE</button>
-                        </li>
-                    <% } else { %>
-                        <li id="0">
-                            <img src="/styles/imgs/products/placeholder.png" class="srcImg-0" id="image-preview">
-                            <input type="file" accept="image/*" name="opImg" src="/styles/imgs/products/shirt.png" onchange="onChangeImg(event)" id="0">
-                            <button type="button" class="deleteImg" onclick="onDeleteImg('0')">DELETE</button>
-                        </li>
-                    <% } %>
-                </ul>
-            </article>
+                    <label>
+                        Opposing team
+                        <input id="opponent" value="<%= Ticket != null ? Ticket.opponent : '' %>" name="opponent" onchange="onChangeOpponent(event.target.value)">
+                    </label>
 
-            <article class="edit-txt">
-                <h3>Game Information</h3>
+                    <label>
+                        Stadium
+                        <input id="stadium" value="<%= Ticket != null ? Ticket.stadium : '' %>" name="stadium" onchange="onChangeStadium(event.target.value)">
+                    </label>
+                    
+                    <label>
+                        Price
+                        <input id="price" type="number" value="<%= Ticket != null ? Ticket.price : '' %>" name="price" min="0" onchange="onChangePrice(event.target.value)">
+                    </label>
+                    
+                    <label>
+                        Date and Time
+                        <input id="date" type="datetime-local" value="<%= Ticket != null && Ticket.date ? Ticket.date.toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
+                    </label>
+                </article>
+            </div>
 
-                <label>
-                    Title
-                    <input id="title" value="<%= Ticket != null ? Ticket.title : '' %>" name="title" onchange="onChangeTitle(event.target.value)">
-                </label>
-
-                <label>
-                    Opposing team
-                    <input id="opponent" value="<%= Ticket != null ? Ticket.opponent : '' %>" name="opponent" onchange="onChangeOpponent(event.target.value)">
-                </label>
-
-                <label>
-                    Stadium
-                    <input id="stadium" value="<%= Ticket != null ? Ticket.stadium : '' %>" name="stadium" onchange="onChangeStadium(event.target.value)">
-                </label>
-                
-                <label>
-                    Price
-                    <input id="price" type="number" value="<%= Ticket != null ? Ticket.price : '' %>" name="price" min="0" onchange="onChangePrice(event.target.value)">
-                </label>
-                
-                <label>
-                    Date and Time
-                    <input id="date" type="datetime-local" value="<%= Ticket != null ? Ticket.date.toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
-                </label>
-            </article>
-
-            <article class="edit-actions">
-                <h3>Options</h3>
-
-                <label>
-                    Is sold out?
-                    <input id="soldOut" type="checkbox">
-                </label>
-
+            <div class="addBTN">
                 <% if (Ticket != null) { %>
                     <button type="button" id="updateButton" value="<%= Ticket._id %>" onclick="onUpdateTicket(event)">
                         Save Changes
@@ -95,16 +86,19 @@
                         Add Item
                     </button>
                 <% } %>
-            </article>
+            </div>
         </form>
     </main>
 
     <%- include('footer.ejs') -%>
 
-    <!-- Libraries  -->
+    <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script src="/js/edit-ticket.js"></script>
+    <script id="ticket-data" type="application/json">
+        <%= JSON.stringify(Ticket) %>
+    </script>
 </body>
 </html>

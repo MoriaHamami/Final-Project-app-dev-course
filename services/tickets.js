@@ -9,27 +9,45 @@ const createTicket = async (title, price, stadium, opImg, opponent, date) => {
 
 const getTickets = async (filter = {}) => {
   try {
-    const tickets = await Ticket.find(filter);
-    return tickets;
+      console.log('Filter in getTickets:', filter); // log the filter
+      const tickets = await Ticket.find(filter);
+      console.log('Tickets found:', tickets); // log the found tickets
+      return tickets;
   } catch (e) {
-    console.log('e:', e);
+      console.error('Error in getTickets:', e);
+      throw e;
   }
 };
 
 const getTicketsByMonth = async (month) => {
   let monthTickets = [];
-  if (!month) {
-    return await Ticket.find({});
-  }
   for (let year = 2023; year <= 2026; year++) {
     const startDate = new Date(year, month - 1, 1);
-    const endDate = new Date(year, month, 0);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
     const tickets = await Ticket.find({
-      date: { $gte: startDate, $lte: endDate }
+      date: { $gte: startDate, $lt: endDate }
     });
     monthTickets.push(...tickets);
   }
   return monthTickets;
+};
+
+const testTicketsByMonthRange = async (month) => {
+  let ticketsInRange = [];
+  for (let year = 2023; year <= 2026; year++) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    const tickets = await Ticket.find({
+      date: { $gte: startDate, $lt: endDate }
+    });
+    ticketsInRange.push(...tickets);
+  }
+  console.log(`Tickets for month ${month} from 2023 to 2026:`, ticketsInRange);
+};
+
+const testTicketsByStadium = async (stadium) => {
+  const tickets = await Ticket.find({ stadium: stadium });
+  console.log(`Tickets for stadium ${stadium}:`, tickets);
 };
 
 const updateTicket = async (id, title, price, stadium, opImg, opponent, date) => {
@@ -58,6 +76,8 @@ module.exports = {
   createTicket,
   getTickets,
   getTicketsByMonth,
+  testTicketsByMonthRange,
+  testTicketsByStadium,
   updateTicket,
   deleteTicket,
   getTicketById

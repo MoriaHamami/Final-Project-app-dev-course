@@ -1,12 +1,12 @@
 .edit-ticket {
-    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--almost-white);
     align-content: center;
-    height: 100vh;
     overflow-y: scroll;
+    flex-direction: column;
+align-items: center;
 }
 
 .edit-ticket h1 {
@@ -32,9 +32,8 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--card-bsh);
-    min-width: 300px; /* קבע רוחב מינימלי */
-    max-width: 400px; /* קבע רוחב מקסימלי חדש */
-    min-height: 300px; /* קבע גובה מינימלי */
+  
+    min-height: 400px; /* קבע גובה מינימלי */
     height: 100%; /* גובה אחיד לכל המאמרים */
     flex: 1; /* מאפשר למאמרים לגדול ביחס שווה */
     box-sizing: border-box; /* לוודא ש-padding נלקח בחשבון בחישוב הגובה והרוחב */
@@ -71,6 +70,7 @@
     align-items: center;
     margin: 10px 0;
     width: 100%;
+    padding: 5px;
 }
 
 .edit-ticket label span {
@@ -82,6 +82,9 @@
     border: 1px solid var(--l-gray);
     border-radius: 10px;
     padding: 5px 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+    min-width: 50px;
 }
 
 .edit-ticket input:focus {
@@ -108,4 +111,11 @@
 
 .edit-ticket .edit-txt #date {
     width: calc(108.4% - 160px); /* Adjust the width to match other inputs */
+}
+
+#addButton
+{
+    width: 500px;
+    height: 80px;
+    font-size: 30px;
 }
