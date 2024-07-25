@@ -1,27 +1,17 @@
 .edit-ticket {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     background-color: var(--almost-white);
-    align-content: center;
     overflow-y: scroll;
-    flex-direction: column;
-align-items: center;
 }
 
-.edit-ticket h1 {
+.edit-ticket form {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    text-align: center;
-    margin-bottom: 100px;
-    margin-top: -100px; /* שנה את הערך לערך שלילי יותר */
-    font-size: 2em;
-    color: var(--primary-color); /* שנה את זה לצבע העיקרי של האתר שלך */
-}
-
-.edit-ticket h3 {
-    margin: 10px 0;
-    text-align: center;
-    color: var(--secondary-color); /* שנה את זה לצבע המשני של האתר שלך */
+    justify-content: center;
 }
 
 .edit-ticket article {
@@ -32,11 +22,38 @@ align-items: center;
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--card-bsh);
-  
-    min-height: 400px; /* קבע גובה מינימלי */
-    height: 100%; /* גובה אחיד לכל המאמרים */
-    flex: 1; /* מאפשר למאמרים לגדול ביחס שווה */
-    box-sizing: border-box; /* לוודא ש-padding נלקח בחשבון בחישוב הגובה והרוחב */
+    min-height: 400px;
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid var(--l-gray); /* הוספת גבול בצבע אפור */
+}
+
+.edit-ticket .edit-img_info {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.edit-ticket .edit-imgs,
+.edit-ticket .edit-txt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-ticket h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: -100px;
+    font-size: 2em;
+    color: var(--primary-color);
+}
+
+.edit-ticket h3 {
+    margin: 10px 0;
+    text-align: center;
+    color: var(--secondary-color);
 }
 
 .edit-ticket button {
@@ -44,25 +61,12 @@ align-items: center;
     border: 1px solid var(--l-gray);
     border-radius: 10px;
     margin: 3px 2px;
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 5px 15px;
 }
 
 .edit-ticket button:hover {
     background-color: var(--ll-gray);
     transform: scale(1.10);
-}
-
-.edit-ticket form {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-
-.edit-ticket .edit-txt {
-    width: 100%;
 }
 
 .edit-ticket label {
@@ -71,10 +75,6 @@ align-items: center;
     margin: 10px 0;
     width: 100%;
     padding: 5px;
-}
-
-.edit-ticket label span {
-    flex: 0 0 150px; /* קבע רוחב קבוע עבור הלייבלים */
 }
 
 .edit-ticket input {
@@ -92,7 +92,7 @@ align-items: center;
 }
 
 .edit-ticket input:hover {
-    transform: scale(1.05); /* הגדלת ה-input ב-5% כאשר עוברים עם העכבר מעליו */
+    transform: scale(1.05);
 }
 
 .edit-ticket li {
@@ -106,15 +106,9 @@ align-items: center;
 .edit-ticket img {
     height: 170px;
     border-radius: 5%;
-    display: flex;
 }
 
-.edit-ticket .edit-txt #date {
-    width: calc(108.4% - 160px); /* Adjust the width to match other inputs */
-}
-
-#addButton
-{
+#addButton {
     width: 500px;
     height: 80px;
     font-size: 30px;

@@ -8,7 +8,6 @@ function setMonth(isManager, newMonth = 0) {
     filterTickets(isManager);
 }
 
-
 function setTitle(isManager, newTitle = '') {
     gTitle = newTitle;
     console.log(`Title set to: ${gTitle}`);
@@ -23,7 +22,6 @@ function setStadiumFilter(newStadium = '') {
 
 async function filterTickets(isManager) {
     try {
-        // בניית URL הבקשה על פי הערכים של gTitle, gMonth ו-gStadium
         let url = `/tickets/filter?title=${gTitle}`;
         
         if (gMonth !== 0) {
@@ -46,61 +44,68 @@ async function filterTickets(isManager) {
     }
 }
 
-
 function renderTickets(isManager, tickets) {
     let str = '';
-    for (let i = 0; i < tickets.length; i++) {
-        str += `<div class="card" style="width: 18rem;" data-stadium="${tickets[i].stadium}">
-            <div class="battle">
-                <div class="team">
-                    <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
-                    <span>Real Madrid<br></span>
-                </div>
-                <div>
-                    <img src="https://assets.realmadrid.com/is/content/realmadrid/4oogyu6o156iphvdvphwpck10-logo?$Mobile$&wid=144&hei=144"
-                        class="card-img-top" alt="championleague">
-                </div>
-                <div class="team">
-                    <img src="${tickets[i].opImg?.includes('data:') ? tickets[i].opImg : '/styles/imgs/tickets/' + tickets[i].opImg}"
-                        id="byren" alt="byren">
-                    <span>${tickets[i].opponent}<br></span>
-                </div>
-            </div>
-            <div class="card-body">
-             ${isManager ?
-                `<div class="edit-icon" onclick="getEditTicketPage('${tickets[i]._id}')">
-                    <i class="bi bi-pencil"></i>
-                </div>` : ""
-            }
-                <h4 class="card-title">${tickets[i].title}</h4>
-                <div>
-                    <i class="bi bi-calendar3"></i>
-                    <span>${new Date(tickets[i].date).toLocaleDateString()}</span>
-                </div>
-                <div>
-                    <i class="bi bi-clock"></i>
-                    <span>${new Date(tickets[i].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                </div>
-                <div class="icon-text-container">
+    if (tickets.length === 0) {
+        str = '<p>No tickets available</p>';
+    } else {
+        for (let i = 0; i < tickets.length; i++) {
+            str += `<div class="card" style="width: 18rem;" data-stadium="${tickets[i].stadium}">
+                <div class="battle">
+                    <div class="team">
+                        <img src="../styles/imgs/tickets/real.webp" id="real" alt="real">
+                        <span>Real Madrid<br></span>
+                    </div>
                     <div>
-                        <i class="bi bi-geo-alt"></i>
-                        <span>${tickets[i].stadium}</span>
+                        <img src="https://assets.realmadrid.com/is/content/realmadrid/4oogyu6o156iphvdvphwpck10-logo?$Mobile$&wid=144&hei=144"
+                            class="card-img-top" alt="championleague">
+                    </div>
+                    <div class="team">
+                        <img src="${tickets[i].opImg?.includes('data:') ? tickets[i].opImg : '/styles/imgs/tickets/' + tickets[i].opImg}"
+                            id="byren" alt="byren">
+                        <span>${tickets[i].opponent}<br></span>
                     </div>
                 </div>
-                <div class="icon-text-container">
+                <div class="card-body">
+                 ${isManager ?
+                    `<div class="edit-icon" onclick="getEditTicketPage('${tickets[i]._id}')">
+                        <i class="bi bi-pencil"></i>
+                    </div>` : ""
+                }
+                    <h4 class="card-title">${tickets[i].title}</h4>
                     <div>
-                        <i class="bi bi-ticket-detailed"></i>
-                        <span id="priceof_tic">${tickets[i].price}€</span>
+                        <i class="bi bi-calendar3"></i>
+                        <span>${new Date(tickets[i].date).toLocaleDateString()}</span>
                     </div>
+                    <div>
+                        <i class="bi bi-clock"></i>
+                        <span>${new Date(tickets[i].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    <div class="icon-text-container">
+                        <div>
+                            <i class="bi bi-geo-alt"></i>
+                            <span>${tickets[i].stadium}</span>
+                        </div>
+                    </div>
+                    <div class="icon-text-container">
+                        <div>
+                            <i class="bi bi-ticket-detailed"></i>
+                            <span id="priceof_tic">${tickets[i].price}€</span>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <a href="#" class="btn btn-primary" onclick="addToCart('${tickets[i]._id}')">
+                            <i class="bi bi-gem"></i> Buy ticket NOW
+                        </a>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <a href="#" class="btn btn-primary" onclick="addToCart('${tickets[i]._id}')">
-                        <i class="bi bi-gem"></i> Buy ticket NOW
-                    </a>
-                </ul>
-            </div>
-        </div>`;
+            </div>`;
+        }
     }
     const ticketContainer = document.getElementById('tickets');
     ticketContainer.innerHTML = str;
+}
+
+function getEditTicketPage(ticketId) {
+    window.location.href = `/tickets/edit/${ticketId}`;
 }

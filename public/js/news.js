@@ -33,8 +33,10 @@ async function onUpdateArticle(ev) {
         });
 
         alert('Article updated successfully.');
+        window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר עדכון מוצלח
     } catch (e) {
         console.log('Error:', e);
+        alert('An error occurred while updating the article.');
     }
 }
 
@@ -50,7 +52,7 @@ async function onDeleteArticle(id) {
 
         if (res.status !== 404) {
             alert('Article deleted successfully.');
-            window.location.assign('/news');
+            window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר מחיקה מוצלחת
         } else {
             alert('Article could not be deleted.');
         }
@@ -77,8 +79,9 @@ async function onAddArticle(ev) {
         });
 
         alert('New article added successfully.');
-        window.location.href = '/news'; // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
+        window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר הוספה מוצלחת
     } catch (e) {
         console.log('Error:', e);
+        alert('An error occurred while adding the article.');
     }
 }

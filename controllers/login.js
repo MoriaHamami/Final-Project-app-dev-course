@@ -3,7 +3,7 @@ const clientsService = require('../services/clients');
 
 // Render login page
 function loginForm(req, res) {
-    res.render("login.ejs", { user: null });
+    res.render("login.ejs", { user: null, error: null });
 }
 
 // Render register page
@@ -46,24 +46,35 @@ async function login(req, res) {
         if (result) {
             req.session.username = username;
             res.redirect('/');
+        } else {
+            res.render("login.ejs", { user: null, error: "שם משתמש או סיסמה לא נכונים" });
         }
     } catch (e) {
         console.log('e:', e);
+        res.render("login.ejs", { user: null, error: "שגיאה בהתחברות, נסה שוב מאוחר יותר" });
     }
 }
+
+
 
 async function register(req, res) {
     const { fullname, username, password, imgURL } = req.body;
 
     try {
+        const existingUser = await loginService.getUserByUsername(username);
+        if (existingUser) {
+            return res.status(400).json({ error: "שם משתמש זה כבר קיים. נסה שם משתמש אחר" });
+        }
+
         await loginService.register(fullname, username, password, imgURL);
         req.session.username = username;
-        res.redirect('/');
+        res.status(201).json({ message: "נרשמת בהצלחה!" });
     } catch (e) {
         console.log('e:', e);
-        res.redirect('/register?error=1');
+        res.status(500).json({ error: "שגיאה ברישום, נסה שוב מאוחר יותר" });
     }
 }
+
 
 
 // פונקציות נוספות שלא יימחקו
