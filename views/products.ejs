@@ -22,117 +22,83 @@
     <!-- Adds header code here and send to it page val as "products" -->
     <%- include('header.ejs', {page:'products'}) -%>
 
-        <main class="products">
+    <main class="products">
 
-            <section class="filter">
-                <form>
-                    <label>
-                        Max Price
-                        <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
-                            value="<%= maxPrice %>" onchange="setPrice(event.target.value)"
-                            oninput="updatePriceVal(event.target.value)">
-                    </label>
-                    <p class="price-val">
-                        <%= maxPrice %>
-                    </p>
-                    <p>$</p> 
-                    <label>
-                        Product Name
-                        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
-                            placeholder="Search product name">
-                    </label>
-                    <label for="catFilter">
-                        Select Category
-                        <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
-                            <option value="">
-                                All
+        <section class="filter">
+            <form>
+                <label>
+                    Max Price
+                    <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
+                        value="<%= maxPrice %>" onchange="setPrice(event.target.value)">
+                </label>
+                <label>
+                    Product Name
+                    <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
+                        placeholder="Search product name">
+                </label>
+                <label for="catFilter">
+                    Select Category
+                    <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
+                        <% for(let i=0; i< cats.length; i++) { %>
+                            <option value="<%= cats[i] %>">
+                                <%= cats[i] %>
                             </option>
-                            <% for(let i=0; i< cats.length; i++) { %>
-                                <option value="<%= cats[i] %>">
-                                    <%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
-                                </option>
-                                <% } %>
-                        </select>
-                    </label>
-                    <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
-                            class="bi bi-caret-up"></i>
-                        Sort By Price</button>
-                    <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
-                            class="bi bi-caret-up"></i>
-                        Sort By Title</button>
-                </form>
-            </section>
+                        <% } %>
+                    </select>
+                </label>
+                <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button"><i
+                        class="bi bi-caret-up"></i>
+                    Sort By Price</button>
+                <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button"><i
+                        class="bi bi-caret-up"></i>
+                    Sort By Title</button>
+            </form>
+        </section>
 
-            <section class="filter">
-                <form>
-                    <label>
-                        Price Range
-                        <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
-                            value="<%= maxPrice %>" onchange="setPrice(event.target.value)">
-                    </label>
-                    <label>
-                        Product Name
-                        <input name="titleFilter" value="" onkeyup="setTitle(event.target.value)"
-                            placeholder="Search product name">
-                    </label>
-                    <label for="catFilter">
-                        Select Category
-                        <select id="catFilter" name="catFilter" onchange="setCat(event.target.value)">
-                            <% for(let i=0; i< cats.length; i++) { %>
-                                <option value="<%= cats[i] %>">
-                                    <%= cats[i] %>
-                                </option>
-                            <% } %>
-                        </select>
-                    </label>
-                    <div class="button-container">
-                        <button onclick="sortProductsBy('price')" class="sortByPriceBtn" type="button">
-                            <i class="bi bi-tag"></i> Sort By Price
-                        </button>
-                        <button onclick="sortProductsBy('title')" class="sortByTitleBtn" type="button">
-                            <i class="bi bi-list-ul"></i> Sort By Title
-                        </button>
+        <div id="productsList">
+            <!-- Go over all the products received and show each one in a card -->
+            <% for(let i=0; i< products.length; i++) { %>
+                <a class="image-container" href="/products/product/<%= products[i]._id %>">
+                    <!-- If the path of the products image has data received from an input put it as source, otherwise show image from local path -->
+                    <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>"
+                        alt="product">
+                    <div class="image-name">
+                        <%= products[i].title %>
                     </div>
-                </form>
-            </section>
-            <div id="productsList">
+                    <div class="price">
+                        <%= products[i].price %>$
+                    </div>
+                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+                    <button class="wishlist-btn" onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                </a>
+            <% } %>
+        </div>
 
-                <!-- Go over all the products recieved and show each one in a card -->
-                <% for(let i=0; i< products.length; i++) { %>
-                    <a class="image-container" href="/products/product/<%= products[i]._id %>">
-                        <!-- If the path of the products image has data recieved from an input put it as source, otherwise show image from loclal path -->
-                        <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>"
-                            alt="product">
-                        <div class="image-name">
-                            <%= products[i].title %>
-                        </div>
-                        <div class="price">
-                            <%= products[i].price %>$
-                        </div>
-                    </a>
+    </main>
 
-                    <% } %>
+    <!-- Adds footer code here -->
+    <%- include('footer.ejs') -%>
 
-            </div>
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/products.js"></script>
+    <script>
+        function toggleWishlist(event, button, productId) {
+            // מניעת פעולת ברירת מחדל של הקישור
+            event.preventDefault();
+            event.stopPropagation();
 
+            const icon = button.querySelector('i');
+            icon.classList.toggle('bi-heart');
+            icon.classList.toggle('bi-heart-fill');
+            button.classList.toggle('wishlist-active');
 
-        </main>
-
-        <!-- Adds footer code here -->
-        <%- include('footer.ejs') -%>
-
-            <!-- Libraries -->
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-            <script src="/js/products.js"></script>
-            <script>
-                function toggleWishlist(button) {
-                    const icon = button.querySelector('i');
-                    icon.classList.toggle('bi-heart');
-                    icon.classList.toggle('bi-heart-fill');
-                    button.classList.toggle('wishlist-active');
-                }
-            </script>
+            // קוד נוסף להוספת המוצר לרשימת המשאלות יכול להיכנס כאן
+        }
+    </script>
 </body>
 
 </html>
