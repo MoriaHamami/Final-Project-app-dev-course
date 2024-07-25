@@ -25,10 +25,8 @@ async function getCartItemsFromDB(username) {
     }
 }
 
-async function addCartItemToDB(username, productId, quantity) {
+async function addCartItemToDB(username, productId, size, quantity) {
     try {
-        console.log('Adding item to cart for user:', username);
-        console.log('Quantity to add:', quantity);
         const client = await Client.findOne({ username });
         if (!client) {
             throw new Error('Client not found');
@@ -39,31 +37,37 @@ async function addCartItemToDB(username, productId, quantity) {
         }
 
         const productObjectId = mongoose.Types.ObjectId(productId);
-        console.log('productObjectId:', productObjectId)
 
-        // Fetch the product to check if it's a ticket
         const product = await Product.findById(productObjectId);
         const isTicket = await Ticket.exists({ _id: productObjectId });
 
         const type = isTicket ? 'ticket' : 'product';
-        const size = isTicket ? 1 : null;
 
+        if (!isTicket && !size) {
+            throw new Error('Size is required for non-ticket products');
+        }
+
+        // מצא מוצר זהה בעגלה
         const existingCartItem = client.cartItems.find(item => item.id.equals(productObjectId) && item.size === size);
 
         if (existingCartItem) {
+            // אם נמצא מוצר זהה, עדכן את הכמות
             existingCartItem.quantity += parseInt(quantity, 10);
         } else {
+            // אם לא נמצא מוצר זהה, הוסף מוצר חדש
             client.cartItems.push({ id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
         }
 
         await client.save();
-        console.log('Item added to cart successfully');
         return { success: true, message: 'Item added to cart successfully' };
     } catch (e) {
         console.error('Error adding item to cart:', e);
         return { success: false, message: 'Error adding item to cart' };
     }
 }
+
+
+
 
 async function removeCartItemFromDB(username, productId, size) {
     try {
@@ -78,7 +82,14 @@ async function removeCartItemFromDB(username, productId, size) {
         }
 
         const productObjectId = mongoose.Types.ObjectId(productId);
-        const cartItemIndex = client.cartItems.findIndex(item => item.id.equals(productObjectId) && item.size === size);
+        console.log('Searching for product in cart:', productId, size); // Debugging
+
+        // Find the cart item index based on the product ID and size
+        const cartItemIndex = client.cartItems.findIndex(item => 
+            item.id.equals(productObjectId) && (item.size === size || !size)
+        );
+
+        console.log('Found cartItemIndex:', cartItemIndex); // Debugging
 
         if (cartItemIndex > -1) {
             client.cartItems.splice(cartItemIndex, 1); // Remove the item
@@ -86,7 +97,7 @@ async function removeCartItemFromDB(username, productId, size) {
             console.log('Item removed from cart successfully');
             return { success: true, message: 'Product removed from cart successfully' };
         } else {
-            console.error('Item not found in cart:', productId);
+            console.error('Item not found in cart:', productId, size);
             return { success: false, message: 'Item not found in cart' };
         }
     } catch (e) {
@@ -94,6 +105,9 @@ async function removeCartItemFromDB(username, productId, size) {
         return { success: false, message: 'Error removing item from cart' };
     }
 }
+
+
+
 
 async function getOrdersFromDB(id) {
     try {

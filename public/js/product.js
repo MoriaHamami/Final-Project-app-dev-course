@@ -13,18 +13,9 @@ function nextSlide() {
     $('.carousel').carousel('pause');
 }
 
-async function addToCart(productId, redirectToCart = false) {
-    let selectedSize;
-    const sizeElement = document.querySelector('input[name="options-base"]:checked');
-    if (sizeElement) {
-        selectedSize = sizeElement.value;
-    } else {
-        selectedSize = null; // No size selected
-    }
-
+async function addToCart(productId) {
+    const selectedSize = document.querySelector('input[name="options-base"]:checked')?.value;
     const selectedQuantity = parseInt(document.getElementById('quantitySelect').value, 10);
-    console.log('Selected size:', selectedSize); // Debugging
-    console.log('Selected quantity:', selectedQuantity); // Debugging
 
     try {
         const response = await fetch('/cart/add', {
@@ -42,38 +33,21 @@ async function addToCart(productId, redirectToCart = false) {
             }),
             credentials: 'include'
         });
-        
 
-          // הוספת מאזין לאירוע הסגירה של המודאל
-          if (response.ok) {
-            $('#cartModal').on('hidden.bs.modal', function () {
-              window.location.href = '/products'; // הפניה לעמוד המוצרים לאחר סגירת המודאל
-            
-          });
-          try{
-            const result = await response.json();
-    
-            if (result.message === "Product added to cart successfully") {
-                console.log('Success message received'); // Debugging
-                showNotice('Product added to cart successfully', redirectToCart);
-            } else {
-                console.error('Unexpected response message:', result.message); // Debugging
-                showNotice('Error adding product to cart', false);
-            }
-        } catch (e) {
-            console.error('Error in try-catch block:', e); // Debugging
-            showNotice('Error adding product to cart', false);
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            showNotice('The product has been successfully added', false);
+        } else {
+            showNotice(result.message || 'Error adding product to cart', false);
         }
-      } 
-      else {
-          alert('Error adding product to cart');
-      }
-      
-  } catch (e) {
-      console.log('Error adding product to cart:', e);
-      alert('Error adding product to cart');
-  }
+    } catch (e) {
+        showNotice('Error adding product to cart', false);
+    }
 }
+
+
+
 
 async function getEditProductPage( id) {
     try {
@@ -105,7 +79,7 @@ function showNotice(message, redirectToCart) {
         } else {
             noticeModal.hide();
         }
-    }, 1000);
+    }, 2000);
 }
 
 function buyNow(productId) {

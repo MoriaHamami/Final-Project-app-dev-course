@@ -1,280 +1,196 @@
-
 /* כללי */
 .product {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  flex:1;
-  padding: 30px;
-  border: 3px solid #989696;
-  border-style: double;
+  flex: 1;
+  padding: 20px;
+  border: 3px solid #e0e0e0;
   border-radius: 20px;
   margin: 20px auto;
-  margin-right: 20px;
-  margin-left: 20px;
-  background-color: white;
-  width: 70%;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(88, 127, 249, 0.4);
+  width: 80%;
 }
-
-
 
 /* תיאור המוצר  */
 .product .information_product {
   flex: 1;
   border-radius: 20px;
-  border: 1px solid #989696;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-
+  padding: 15px;
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(119, 127, 233, 0.774);
 }
 
-
-.product .catgory
-{
-  background-color: white;
+.category {
+  color: #333;
+  font-size: 1em;
+  margin-bottom: 10px;
 }
 
-.category,
-.product_type,
-.product_price,
+.product_type {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #888;
+}
+
+.product_price {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 .product_sizes {
-    background-color: white;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-/* בחירת  מידות  */
-.product .btn 
-{
+.product_sizes hr {
+  border: none;
+  border-bottom: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.product_sizes .btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 10%;
-  height: 5%;
-  border: 1px solid #a8a3a3;
-  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid #d0d0d0;
+  border-radius: 50%;
   cursor: pointer;
   background-color: white;
+  transition: background-color 0.3s, border-color 0.3s;
+  font-size: 0.8em;
+  text-align: center;
 }
 
-.product .btn-check:checked+.btn {
-  border-color: soild #898677;
-  background-color: rgba(88, 155, 249, 0.338);
+.product_sizes .btn:hover {
+  border-color: #a0a0a0;
+}
+
+.product_sizes .btn-check:checked + .btn {
+  border-color: #587ff9;
+  background-color: #e0f0ff;
   font-weight: bold;
 }
 
 /* כפתורי קניות  */
-.product .addTOcart,.product .editProduct {
+.product .addTOcart, .product .editProduct {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  padding: 10px;
   width: 100%;
-  max-width: 400px;
-  height: 10%;
-  overflow:none;
-  border-color: #151515;
+  max-width: 350px;
+  border: none;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.63);
-  font-size: 1.2em;
-  margin-bottom: 2%;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
 }
 
-.product .addTOcart i {
-  font-size: 20px;
-  padding: 2px;
-  background-color: white;
+.product .addTOcart:hover, .product .editProduct:hover {
+  background-color: #3a5fb8;
+}
+
+.product .addTOcart i, .product .editProduct i {
+  font-size: 1em;
+  margin-right: 5px;
 }
 
 /* טופס בחירת כמות  */
 .product .form-select {
   width: 100%;
-  margin-bottom: 5%;
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  font-size: 0.9em;
 }
 
 /* תמונות של המוצר */
-
-.product .carousel-item.active{
-  display: flex;
-  flex: 1; 
+.product .product_images {
+  flex: 1;
   min-width: 50%;
-  align-items: stretch;
-  background-color: white;
-
-  width: 60%;
-  height: 450px;
-  margin-left: 10%;
-}
-
-.product img
-{
-  width: 80%;
+  margin-left: 10px;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
-  margin-bottom: 30px;
-  position:relative;
-}
-
-/* חצים */
-.product .carousel-control-prev,
-.product .carousel-control-next {
-    width: 10%;
-    overflow: hidden;
-    position: absolute;
-}
-
-.carousel-control-prev .carousel-control-prev-icon,
-    .carousel-control-next .carousel-control-next-icon {
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(186deg) brightness(100%) contrast(100%);
-}
-
-/* עיגולים של התמונות  */
-.product .carousel-indicators
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-
-.product .carousel-indicators li
-{
-  box-sizing: content-box;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  width: 30px;
-  height: 3px;
-  margin-right: 3px;
-  margin-left: 3px;
-  text-indent: -999px;
-  cursor: pointer;
-  background-color: #0c0b0b;
-  background-clip: padding-box;
-}
-
-.product .product_images 
-{
-  flex: 1; 
-  min-width: 50%; 
-  margin-left: 10px; 
-   background-color: transparent;
+  height: 100%;
 }
 
 .product .product_images img {
-  width: 40%; 
-  object-fit:fill;
-}
-
-/* מוצרים נוספים  */
-.product .other_ product
-{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between; /* Center the items horizontally */
-  align-items: center; /* Stretch items to equal height */
-  flex-wrap: wrap;
-  padding: 30px;
-
-  margin-top: 0; /* Remove top margin */
-  margin-bottom: 0; /* Remove bottom margin */
-  border: 1px solid #989696;
+  width: 80%;
+  object-fit: contain;
   border-radius: 20px;
-  margin: 20px auto;
-  margin-right: 20px;
-  margin-left: 20px;
-  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product .sugg_title
-{
-  font-size: 100%;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(186deg) brightness(100%) contrast(100%);
 }
 
-.product .other_product
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+.carousel-indicators li {
+  width: 20px;
+  height: 2px;
+  margin: 0 3px;
+  background-color: #0c0b0b;
 }
 
-.product .carousel-inner{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.product .carousel
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  
-}
 /* עיצוב מודל */
-.modal.fade .modal-dialog {
-  transform: translate(0, -50%);
-  top: 0%;
-  margin: 0 auto;
-  transition: transform 0.3s ease-out;
+.modal-dialog {
+  border-radius: 30px; /* Rounded corners for the modal container */
+  overflow: hidden; /* Ensures rounded corners are applied to content inside */
 }
 
 .modal-content {
-  border-radius: 20px; /* עיגול פינות */
-  border: 1px solid #989696;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* צל כללי */
-  background-color: white;
-  position: relative; /* כדי להוסיף צל נוסף */
-  overflow: hidden; /* למנוע גלילה פנימית */
+  border-radius: 30px; /* Rounded corners for the modal content */
+  border: none;
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  position: relative;
 }
 
-.modal-content::before {
-  content: "";
-  position: absolute;
-  bottom: -10px; /* התמקמות הצל מתחתית המודל */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 20px;
-  background: rgba(0, 0, 0, 0.1); /* צל קל מתחתית המודל */
-  border-radius: 50%; /* עיגול הצל */
-  filter: blur(8px); /* טשטוש הצל */
-  z-index: -1; /* הצל יופיע מאחורי המודל */
+.modal-header, .modal-footer {
+  border: none;
+  justify-content: center;
+  font-size: 1em;
+  padding: 20px; /* Adjusted padding for a balanced look */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
 }
 
 .modal-header {
-  border-bottom: none;
-}
-
-.modal-body {
-  padding: 20px;
-  text-align: center;
-  font-size: 1.2em;
+  border-top-left-radius: 30px; /* Rounded corners for the header */
+  border-top-right-radius: 30px; /* Rounded corners for the header */
 }
 
 .modal-footer {
-  border-top: none;
-  display: flex;
-  justify-content: center;
+  border-bottom-left-radius: 30px; /* Rounded corners for the footer */
+  border-bottom-right-radius: 30px; /* Rounded corners for the footer */
 }
 
-
-.carousel-item {
-  transition: transform 0.4s ease-in-out !important; /* קצב המעבר של הקרוסלה */
+.modal-body {
+  padding: 20px; /* Adjusted padding for a balanced look */
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-.clients
-{
-  margin-top: 20px;
-  gap:50px;
-}
