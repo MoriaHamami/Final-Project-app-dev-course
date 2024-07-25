@@ -52,4 +52,17 @@ async function getIsManager(username) {
     }
 }
 
-module.exports = { login, register, getIsManager };
+async function getUserByUsername(username) {
+    try {
+        const user = await Client.findOne({ username });
+        return user;
+    } catch (e) {
+        console.error('Error fetching user:', e);
+        return null;
+    }
+}
+
+module.exports = { login, register, getIsManager, getUserByUsername };
+
+
+

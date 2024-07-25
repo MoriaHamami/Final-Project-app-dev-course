@@ -191,9 +191,11 @@
                 }
             }, 3000); // Adjust the timeout as needed
         }
+        
+        function getEditTicketPage(ticketId) {
+            window.location.href = `/tickets/edit/${ticketId}`;
+        }
     </script>
-    
-    
 </body>
 
 </html>

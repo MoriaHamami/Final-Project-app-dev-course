@@ -1,20 +1,32 @@
 $(document).ready(function() {
+    // Open the shopping cart when the button is clicked
     $('.cart-btn').click(function(e) {
         e.preventDefault();
         $('.shopping-cart').fadeIn();
     });
 
+    // Close the shopping cart when the close button is clicked
     $('.shopping-cart .close-btn').click(function() {
         $('.shopping-cart').fadeOut();
     });
 
+    // Close the shopping cart when the dark screen is clicked
     $('.dark-screen').click(function() {
         $('.shopping-cart').fadeOut();
     });
+
+    // Handle click events on the "Remove" text and trash icon
+    $(document).on('click', '.icon-text, .bi-trash3', function() {
+        const productId = $(this).data('product-id');
+        const size = $(this).data('product-size');
+        removeItem(productId, size);
+    });
 });
+
 
 async function removeItem(productId, size) {
     try {
+        console.log('Removing item:', productId, size); // Debugging
         const response = await $.ajax({
             url: '/cart/remove',
             method: 'POST',
@@ -29,23 +41,13 @@ async function removeItem(productId, size) {
 
         if (response.success) {
             showNotice('Product removed from cart successfully');
-            const productElement = $(`.bi-trash3[data-product-id='${productId}'][data-product-size='${size}']`).closest('.product');
+            const productElement = $(`.product:has([data-product-id='${productId}'][data-product-size='${size}'])`);
             console.log('Product element:', productElement); // Debugging
 
-            const quantityElement = productElement.find('.product-quantity');
-            console.log('Quantity element:', quantityElement); // Debugging
-
-            const currentQuantity = parseInt(quantityElement.text());
-            console.log('Current quantity:', currentQuantity); // Debugging
-
-            if (currentQuantity > 1) {
-                quantityElement.text(currentQuantity - 1);
-            } else {
-                productElement.fadeOut(400, function() {
-                    $(this).remove();
-                    updateCartItemCount();
-                });
-            }
+            productElement.fadeOut(400, function() {
+                $(this).remove();
+                updateCartItemCount();
+            });
         } else {
             showNotice(response.message || 'Error removing product from cart');
         }
@@ -54,6 +56,10 @@ async function removeItem(productId, size) {
         showNotice('Error removing product from cart');
     }
 }
+
+ 
+
+
 
 // פונקציה להצגת הודעה קטנה
 function showNotice(message) {
@@ -67,11 +73,12 @@ function showNotice(message) {
         // סגירת המודל לאחר 2 שניות
         setTimeout(function() {
             noticeModal.hide();
-        }, 2000);
+        }, 3000);
     } else {
         console.error('Notice modal body not found');
     }
 }
+
 
 // פונקציה לעדכון סה"כ הפריטים בעגלה
 function updateCartItemCount() {

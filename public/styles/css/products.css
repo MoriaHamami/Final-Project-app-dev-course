@@ -8,6 +8,7 @@
     padding: 40px; /* מרווח פנימי */
     margin: 20px auto; /* מרווח חיצוני למעלה ולמטה, מרכז אוטומטית */
     opacity: 0; /* התחל עם שקיפות מלאה */
+    text-transform: capitalize;
     animation: fadeIn 2s ease-in-out forwards; /* הגדרת אנימציה */   
 }
 
@@ -28,19 +29,15 @@
     0 0 25px rgba(255, 215, 0, 0.6), 
     0 0 5px rgba(255, 215, 0, 0.7); 
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    font-size: 4em; 
+    font-size: 4.5em; 
     margin: 0; 
     padding: 20px; 
-    transition: transform 0.3s ease; 
 }
 
-.headline h1:hover {
-    transform: scale(1.17); 
-}
 
 .headline p{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    font-size: 1.6em;
+    font-size: 1.9em;
 }
 .products .filter {
     display: flex;
@@ -62,13 +59,19 @@
 
 .products .filter input,
 .products .filter select {
-    margin-left: 10px; /* רווח בין הכיתוב לשדות הקלט */
-    border-radius: 8px; /* פינות מעוגלות לשדות הקלט */
-    padding: 5px; /* ריווח פנימי לשדות הקלט */
+    margin-left: 10px; 
+    border-radius: 8px; 
     border: transparent;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     outline: none;
+    padding: 5px;
     cursor: pointer;
+    transition: transform .2s ease-in;
+}
+
+.products .filter input:hover,
+.products .filter select:hover{
+    transform: scale(1.1);
 }
 
 .products .filter input[type="range"] {
@@ -79,8 +82,45 @@
     background: #d3d3d3; /* צבע הרקע של הפס */
     outline: none;
     opacity: 0.7;
-    transition: opacity .2s;
+    transition: transform .2s ease-in; 
     margin-left: 10px; 
+}
+
+
+.products .filter input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 15px; 
+    height: 15px; 
+    border-radius: 50%; 
+    background: darkblue; 
+    cursor: pointer; 
+    transition: transform .2s ease-in; 
+}
+
+.products .filter input[type="range"]::-moz-range-thumb {
+    width: 15px; 
+    height: 15px; 
+    border-radius: 50%; 
+    background: #0000f2; 
+    cursor: pointer; 
+    transition: transform .3s ease-in; 
+}
+
+.products .filter input[type="range"]:hover {
+    transform: scale(1.1); 
+}
+
+
+.products .filter input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+
+
+
+.dollar-sign {
+    margin-left: -23px; 
 }
 
 .products .filter label {

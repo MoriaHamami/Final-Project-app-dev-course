@@ -1,30 +1,84 @@
+#head {
+  text-align: center;
+  margin: 20px auto; 
+  font-size: 2em; 
+  font-weight: bold; 
+  margin-bottom: -60px;
+  margin-top: 100px;
+  font-size: 4em;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 4px; 
+  background: linear-gradient(45deg, #aa9104, #ffd700); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 
-/* כללי */
+
+
+
 .product {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  flex:1;
-  padding: 30px;
+  flex: 1;
+  padding: 50px;
   border: 3px solid #989696;
   border-style: double;
   border-radius: 20px;
   margin: 20px auto;
-  margin-right: 20px;
-  margin-left: 20px;
   background-color: white;
   width: 70%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  animation: rotate-shadow 5s infinite linear;
 }
 
+@keyframes rotate-shadow {
+  0% {
+      box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8), 
+                  10px 0 10px 2px rgba(0, 0, 255, 0.8);
+  }
+  25% {
+      box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8), 
+                  0 10px 10px 2px rgba(255, 215, 0, 0.8);
+  }
+  50% {
+      box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8), 
+                  -10px 0 10px 2px rgba(0, 0, 255, 0.8);
+  }
+  75% {
+      box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8), 
+                  0 -10px 10px 2px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+      box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8), 
+                  10px 0 10px 2px rgba(0, 0, 255, 0.8);
+  }
+}
+
+@media (min-width: 768px) {
+  .product {
+    margin-left: calc(50% - 35%);
+  }
+}
+
+@media (max-width: 767px) {
+  .product {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
 
 
 /* תיאור המוצר  */
 .product .information_product {
   flex: 1;
   border-radius: 20px;
-  border: 1px solid #989696;
+  border: 3px solid darkblue;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
 
@@ -32,97 +86,217 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-
+   align-items: center; /* מרכז את התוכן */
+   text-align: center; /* מרכז את הכיתוב */
+   overflow: hidden;
 }
 
+.product_type {
+  font-size: 1.2em; /* גודל קטן יותר לכותרת */
+  margin-bottom: 25px; /* רווח מתחת לכותרת */
+  margin-left: -82%;
+  font-weight: bolder;
+  color: rgb(0, 39, 139);
+  text-shadow: 1px 1px 3px #666666;
+  text-transform:capitalize;
+}
 
 .product .catgory
 {
   background-color: white;
 }
 
+.category {
+  
+    font-size: 2.4em; 
+    animation: move-words 10s linear infinite;
+    white-space: nowrap; 
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform:capitalize;
+    text-shadow: 
+      2px 2px 4px rgba(0, 51, 153, 0.8), 
+      4px 4px 8px rgba(255, 215, 0, 0.8); 
+
+}
+
+@keyframes move-words {
+  0% {
+    transform: translateX(100%);
+  }
+  25% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 .category,
 .product_type,
 .product_price,
 .product_sizes {
-    background-color: white;
+    background-color: whie;
 }
 
-/* בחירת  מידות  */
+.product_price{
+  margin-bottom: 5%;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.product_sizes {
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow-x: auto; 
+  width: 90%;
+  padding: 10px 0; 
+  gap: 10px;
+}
+
+
+
 .product .btn 
 {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 10%;
-  height: 5%;
+  width: 17%;
+  height: 12%;
   border: 1px solid #a8a3a3;
   border-radius: 30px;
   cursor: pointer;
   background-color: white;
+  transition: background-color 0.3s, border-color 0.3s;
+  font-size: 0.8em;
+  text-align: center;
 }
 
-.product .btn-check:checked+.btn {
-  border-color: soild #898677;
-  background-color: rgba(88, 155, 249, 0.338);
+.product_sizes .btn:hover {
+  border-color: #a0a0a0;
+}
+
+.product_sizes .btn-check:checked + .btn {
+  border-color: #587ff9;
+  background-color: #e0f0ff;
   font-weight: bold;
 }
 
-/* כפתורי קניות  */
-.product .addTOcart,.product .editProduct {
+
+.product .addTOcart,
+.product .editProduct {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
   width: 100%;
-  max-width: 400px;
-  height: 10%;
-  overflow:none;
-  border-color: #151515;
-  border-radius: 10px;
+  max-width: 350px;
+  padding: 4px 12px;
+  height: auto;
+  border: 1px solid #2a2a2a; 
+  border-radius: 17px;
   background-color: rgba(255, 255, 255, 0.63);
   font-size: 1.2em;
   margin-bottom: 2%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  color: #2a2a2a; /* צבע טקסט צהוב */
+  text-transform: uppercase;
+  z-index: 1;
 }
 
-.product .addTOcart i {
+.product .addTOcart i,
+.product .editProduct i {
   font-size: 20px;
+  margin-right: 10px;
   padding: 2px;
   background-color: white;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-/* טופס בחירת כמות  */
-.product .form-select {
+.product .addTOcart::before,
+.product .editProduct::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-bottom: 5%;
+  height: 100%;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 }
 
-/* תמונות של המוצר */
+.product .addTOcart:hover::before,
+.product .editProduct:hover::before {
+  border-color: #FFD700; /* גבול צהוב בעת ריחוף */
+  transform: scale(1.1);
+}
+
+.product .addTOcart:hover,
+.product .editProduct:hover {
+  background-color: #FFD700; /* רקע צהוב בעת ריחוף */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color:#FFD700;
+}
+
+.product .addTOcart:hover i,
+.product .editProduct:hover i {
+  background-color: #FFD700; /* צבע רקע של האייקון בעת ריחוף */
+  color: #fff;
+}
+
+.product .form-select {
+  width: 20%;
+  border-radius: 15px;
+  margin-bottom: 8%;
+  margin-top: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s;
+}
+
+.product .form-select:focus,
+.product .form-select:active {
+  outline: none;
+}
+
+.product .form-select:hover {
+  transform: scale(1.1);
+  outline: none
+}
 
 .product .carousel-item.active{
   display: flex;
   flex: 1; 
   min-width: 50%;
-  align-items: stretch;
-  background-color: white;
-
-  width: 60%;
-  height: 450px;
-  margin-left: 10%;
-}
-
-.product img
-{
-  width: 80%;
+  margin-left: 10px;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px;
   margin-bottom: 30px;
   position:relative;
+  border-radius: 12px;
 }
 
-/* חצים */
+
 .product .carousel-control-prev,
 .product .carousel-control-next {
     width: 10%;
@@ -169,112 +343,98 @@
 }
 
 .product .product_images img {
-  width: 40%; 
-  object-fit:fill;
-}
-
-/* מוצרים נוספים  */
-.product .other_ product
-{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between; /* Center the items horizontally */
-  align-items: center; /* Stretch items to equal height */
-  flex-wrap: wrap;
-  padding: 30px;
-
-  margin-top: 0; /* Remove top margin */
-  margin-bottom: 0; /* Remove bottom margin */
-  border: 1px solid #989696;
+  width: 80%;
+  object-fit: contain;
   border-radius: 20px;
-  margin: 20px auto;
-  margin-right: 20px;
-  margin-left: 20px;
-  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product .sugg_title
-{
-  font-size: 100%;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(186deg) brightness(100%) contrast(100%);
 }
 
-.product .other_product
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+.carousel-indicators li {
+  width: 20px;
+  height: 2px;
+  margin: 0 3px;
+  background-color: #0c0b0b;
 }
 
-.product .carousel-inner{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.product .carousel
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  
-}
 /* עיצוב מודל */
-.modal.fade .modal-dialog {
-  transform: translate(0, -50%);
-  top: 0%;
-  margin: 0 auto;
-  transition: transform 0.3s ease-out;
+.modal-dialog {
+  border-radius: 30px; /* Rounded corners for the modal container */
+  overflow: hidden; /* Ensures rounded corners are applied to content inside */
 }
 
 .modal-content {
-  border-radius: 20px; /* עיגול פינות */
-  border: 1px solid #989696;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* צל כללי */
-  background-color: white;
-  position: relative; /* כדי להוסיף צל נוסף */
-  overflow: hidden; /* למנוע גלילה פנימית */
+  border-radius: 30px; /* Rounded corners for the modal content */
+  border: none;
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  position: relative;
 }
 
-.modal-content::before {
-  content: "";
-  position: absolute;
-  bottom: -10px; /* התמקמות הצל מתחתית המודל */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 20px;
-  background: rgba(0, 0, 0, 0.1); /* צל קל מתחתית המודל */
-  border-radius: 50%; /* עיגול הצל */
-  filter: blur(8px); /* טשטוש הצל */
-  z-index: -1; /* הצל יופיע מאחורי המודל */
+.modal-header, .modal-footer {
+  border: none;
+  justify-content: center;
+  font-size: 1em;
+  padding: 20px; /* Adjusted padding for a balanced look */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
 }
 
 .modal-header {
-  border-bottom: none;
-}
-
-.modal-body {
-  padding: 20px;
-  text-align: center;
-  font-size: 1.2em;
+  border-top-left-radius: 30px; /* Rounded corners for the header */
+  border-top-right-radius: 30px; /* Rounded corners for the header */
 }
 
 .modal-footer {
-  border-top: none;
-  display: flex;
-  justify-content: center;
+  border-bottom-left-radius: 30px; /* Rounded corners for the footer */
+  border-bottom-right-radius: 30px; /* Rounded corners for the footer */
 }
 
 
 .carousel-item {
-  transition: transform 0.4s ease-in-out !important; /* קצב המעבר של הקרוסלה */
+  transition: transform 0.4s ease-in-out !important;
 }
 
 .clients
 {
   margin-top: 20px;
   gap:50px;
+}
+
+.carousel-item {
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, filter 0.6s ease-in-out;
+  opacity: 0; /* תחילת המצב כשהתמונה בלתי נראית */
+}
+
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right,
+.carousel-item.active {
+  opacity: 1; /* התמונה הופכת לנראית */
+}
+
+.carousel-item-next,
+.carousel-item-prev {
+  transform: scale(0.8) rotateY(45deg);
+  filter: brightness(70%);
+}
+
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right {
+  transform: translateX(0);
+}
+
+.carousel-item.active {
+  transform: scale(1) rotateY(0deg);
+  filter: brightness(100%);
 }
