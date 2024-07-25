@@ -27,13 +27,17 @@
 <body>
     <!-- Adds header code here and send to it page val as "product" -->
     <%- include('header.ejs', {page:'product'}) -%>
+ 
+    <section id="head">
+        <h1>Selected Product</h1>
+    </section>
 
     <main class="product">
+       
         <div class="information_product">
             <input type="hidden" id="productId" value="<%= product.id %>">
-            <h5 class="category"><%= product.title %></h5>
             <h1 class="product_type"><%= product.cat %></h1>
-            <text class="product_price"><%= product.price %>$</text>
+            <h5 class="category"><%= product.title %></h5>
             <% if (product.sizes && product.sizes.length > 0) { %>
                 <div class="product_sizes">
                     <hr>
@@ -51,6 +55,7 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
+            <text class="product_price"><%= product.price %>$</text>
             <button class="addTOcart" onclick="addToCart('<%= product._id %>')">
                 <i class="bi bi-cart-plus"></i> Add to shopping cart
             </button>

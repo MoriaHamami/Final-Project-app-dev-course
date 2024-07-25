@@ -37,6 +37,7 @@ footer .words {
     position: relative;
     font-size: 800%;
     width: max-content;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     animation: move-words 20s linear infinite;
     margin: 0;
 
