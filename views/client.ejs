@@ -10,12 +10,39 @@
     <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/css/client.css">
+    <link rel="stylesheet" href="/styles/css/header.css">
+    <link rel="stylesheet" href="/styles/css/footer.css">
     <link rel="stylesheet" href="/styles/css/setup/general.css">
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+
+        <!-- Dark screen during header dropdown -->
+        <div class="dark-screen" onclick="onToggleMenu()"></div>
+
+        <!-- Header section -->
+        <header>
+            <section class="start-icons">
+                <a href="/"><img class="logo" src="/styles/imgs/header/real-madrid-logo.png"></a>
+                <nav>
+                    <a href="/" class="header-btn home-btn" onclick="onToggleMenu()">Home</a>
+                    <a href="/products" class="header-btn products-btn" onclick="onToggleMenu()">Shop</a>
+                    <a href="/tickets" class="header-btn products-btn" onclick="onToggleMenu()">Tickets</a>
+                    <a href="/news" class="header-btn about-btn" onclick="onToggleMenu()">About</a>
+                    
+            </section>
+    
+            <section class="end-icons">
+                <a class="cart-btn" onclick="getCartPage()"><i class="bi bi-bag"></i>
+                </a>
+                <a class="signin-btn" onclick="getLoggedInUser()"><i class="bi bi-person"></i>
+                </a>
+                <button class="menu-toggle-btn" onclick="onToggleMenu()"><i class="bi bi-list"></i>
+                </button>
+            </section>
+        </header>
 
     <main class="client">
         <div class="client_details">
@@ -109,11 +136,83 @@
         </div>
     </main>
 
+    <!-- Footer section -->
+    <footer>
+        <!-- Moving words on screen -->
+        <div class="words-border">
+        </div>
+        <h1 class="words">Hala Madrid, y nada más</h1>
+        <div class="words-border">
+        </div>
+        <!-- Pages list in footer -->
+        <nav class="pages">
+            <div class="start">
+                <a href="/">Home</a>
+                <a href="/products">Shop</a>
+                <a href="/tickets">Tickets</a>
+                <a href="/news">About Us</a>
+
+            </div>
+
+
+
+            </a>
+            <div class="end">
+                <a href="/cart">Cart</a>
+                <a href="/login">Log In</a>
+                <a href="/client">My Account</a>
+
+
+
+            </div>
+        </nav>
+        <!-- Sponsors icons in footer -->
+        <nav class="sponsors">
+            <a href="https://www.mahou.com/en/"><img src="/styles/imgs/footer/mahou-logo.png" alt="Mahou"></a>
+            <a href="https://www.bmw.com/en/index.html"><img src="/styles/imgs/footer/bmw-logo.png" alt="BMW"></a>
+            <a href="https://www.ea.com/"><img src="/styles/imgs/footer/ea-logo.png" alt="EA sports"></a>
+            <a href="https://www.abbott.com/"><img src="/styles/imgs/footer/abbot-logo.png" alt="Abbott"></a>
+            <a href="https://www.nivea.com/"><img src="/styles/imgs/footer/nivea-logo.png" alt="Nivea Men"></a>
+            <a href="https://get.adobe.com/reader/"><img src="/styles/imgs/footer/adobe-logo.svg" alt="Adobe"></a>
+            <a href="https://www.zegna.com/us-en/"><img src="/styles/imgs/footer/zegna-logo.png" alt="ZEGNA"></a>
+            <a href="https://www.zegna.com/us-en/"><img src="/styles/imgs/footer/canon-logo.png" alt="Canon"></a>
+        </nav>
+        <!-- Social Media icons in footer -->
+        <nav class="contact">
+            <a href="https://www.facebook.com/RealMadrid/" title="Facebook"><img
+                    src="/styles/imgs/footer/facebook-logo.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/realmadrid/" title="Instagram"><img
+                    src="/styles/imgs/footer/instagram-logo.png" alt="Instagram"></a>
+            <a href="https://twitter.com/realmadrid" title="X"><img src="/styles/imgs/footer/x-logo.png" alt="X"></a>
+            <a href="https://www.youtube.com/realmadrid" title="YouTube"><img src="/styles/imgs/footer/youtube-logo.png"
+                    alt="YouTube"></a>
+            <a href="https://onefootball.com/en/team/real-madrid-26" title="OneFootball"><img
+                    src="/styles/imgs/footer/onefootball-logo.png" alt="OneFootball"></a>
+            <a href="https://www.twitch.tv/realmadrid" title="Twitch"><img src="/styles/imgs/footer/twitch-logo.png"
+                    alt="Twitch"></a>
+            <a href="https://www.snapchat.com/add/realmadrid" title="Snapchat"><img
+                    src="/styles/imgs/footer/snapchat-logo.png" alt="Snapchat"></a>
+            <a href="https://www.tiktok.com/@realmadrid?lang=en" title="TikTok"><img
+                    src="/styles/imgs/footer/tiktok-logo.png" alt="TikTok"></a>
+        </nav>
+        <div class="logo">
+            <img src="/styles/imgs/footer/logo.png" src="logo">
+            <p>Real Madrid © 2024 All rights reserved</p>
+        </div>
+    </footer>
+
     <!-- Libraries -->
+       <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+    crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="/js/utils.js"></script>
     <script src="/js/client.js"></script>
+    <script src="/js/header.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 
 </html>
