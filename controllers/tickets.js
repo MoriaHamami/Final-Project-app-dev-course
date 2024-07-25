@@ -112,7 +112,6 @@ const updateTicket = async (req, res) => {
   }
 };
 
-
 const deleteTicket = async (req, res) => {
   try {
     const Ticket = await ticketsService.deleteTicket(req.params.id);
