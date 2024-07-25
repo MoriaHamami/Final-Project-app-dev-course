@@ -21,46 +21,6 @@
 }
 
 
-
-
-.welcome h1 {
-    color: white; /* Adjust the color for better visibility */
-    font-size: 3.5em; /* Adjust the font size as needed */
-    padding: 20px; /* Add some padding if needed */
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    margin-top: -50px;
-    text-shadow: 0 0 10px rgba(251, 255, 0, 0.8); /* Add white glowing shadow */
-}
-
-.welcome h1 .line {
-    display: block;
-    text-align: left; /* Align text to the left */
-    padding-left: calc(var(--i, 0) * 1em); /* Add left padding based on index */
-    opacity: 0; /* Initially hidden */
-    transform: translateX(-100%); /* Initially positioned off-screen to the left */
-    animation: slideIn 1s ease-in-out forwards; /* Add slide-in animation */
-    animation-delay: calc(var(--i, 0) * 0.5s); /* Delay based on index */
-}
-
-@keyframes slideIn {
-    to {
-        opacity: 1; /* Fade to fully visible */
-        transform: translateX(0); /* Move to original position */
-    }
-}
-
-.welcome h1 .line:nth-child(1) {
-    --i: -1;
-}
-
-.welcome h1 .line:nth-child(2) {
-    --i: 1;
-}
-
-.welcome h1 .line:nth-child(3) {
-    --i: 6;
-}
-
 .welcome a{
     margin-top: 170px;
     padding: 10px 20px;
@@ -114,27 +74,35 @@
     align-items: center;
 }
 
-/* Players title styling */
-.players-title {
-    font-size: 36px;
-    text-align: center;
-    color: #1d428a; /* כחול כהה של ריאל מדריד */
-    margin: 40px 0 20px; /* מרווחים מעל ומתחת לכותרת */
-    margin-left: -50%;
-    font-weight: bold;
-    text-transform: uppercase; /* אותיות גדולות */
-    letter-spacing: 2px; /* ריווח בין אותיות */
-    background: linear-gradient(45deg, #1d428a, #ffd700); /* מעבר צבעים לכותרת: כחול וזהב */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* הוספת צל לכותרת */
+
+.title-container {
+    display: flex;
+    justify-content: space-around; /* מבטיח ריווח אחיד בין הכותרות ובין הקצוות */
+    align-items: center; 
+    width: 100%; /* מאפשר לפלקסבוקס להשתמש בכל הרוחב */
+    padding: 20px 1%; /* מרווח פנימי מותאם */
+    box-sizing: border-box; /* מבטיח שה-padding ייכלל ברוחב הכולל */
 }
 
-/* Give a height to each slider img */
+.players-title, .score-title {
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase; 
+    letter-spacing: 4px; 
+    background: linear-gradient(45deg, #aa9104, #ffd700); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
+    margin-top: 15px; 
+    margin-bottom: 0px; 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
 .home .carousel-inner img {
-    height: 500px; /* שמירה על גובה התמונות המקורי */
-    width: auto; /* שמירה על יחס רוחב-גובה */
-    border-radius: 20px; /* עיגול פינות לתמונות */
+    height: 500px; 
+    width: auto; 
+    border-radius: 20px; 
 }
 
 /* Style side buttons in slider */
@@ -163,6 +131,7 @@
     background-color: #ffffff; /* לבן */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל */
     margin: 20px auto; /* מרכז את הקונטיינר */
+    margin-top: 110px;
     display: flex; /* שימוש ב-Flexbox */
     justify-content: space-around; /* מרווח בין התחזיות */
     align-items: center; /* ממרכז את התחזיות אנכית */
@@ -192,13 +161,13 @@
     margin: 10px;
     padding: 10px; /* הקטנת הפדינג */
     background-color: #ffffff; /* לבן */
-    border-radius: 10px; /* עיגול פינות של כל תחזית */
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
-    flex: 1; /* כל תחזית תופסת חלק שווה מהשורה */
-    min-width: 150px; /* מינימום רוחב לתחזית */
-    max-width: 180px; /* מקסימום רוחב לתחזית */
+    border-radius: 16px; /* עיגול פינות של כל תחזית */
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+    flex: 1; 
+    min-width: 150px; 
+    max-width: 180px; 
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל לתחזיות */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .daily-forecast:hover {
@@ -208,9 +177,9 @@
 
 .forecast-title {
     font-weight: bold;
-    font-size: 18px; /* הקטנת גודל הטקסט */
-    color: #1d428a; /* כחול כהה */
-    margin-bottom: 5px; /* הקטנת המרווח התחתון */
+    font-size: 18px; 
+    color: #1d428a; 
+    margin-bottom: 5px; 
 }
 
 .forecast-details {
@@ -230,14 +199,14 @@
 }
 
 .widget {
-    width: 40%; /* רוחב הווידג'ט */
-    height: 545px; /* גובה הווידג'ט תואם לגובה הקרוסלה */
-    background-color: white; /* צבע רקע לווידג'ט */
-    border: 1px solid #ccc; /* גבול לווידג'ט */
-    float: right; /* מיקום הווידג'ט בצד ימין */
+    width: 40%; 
+    height: 545px; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    float: right; 
     margin-bottom: 20px;
     margin-top: -540px;
     margin-right: 100px;
     border-radius: 10px;
-    overflow-y: auto; /* הוספת גלילה אנכית */
+    overflow-y: auto; 
 }
