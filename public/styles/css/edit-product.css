@@ -1,5 +1,4 @@
-body
-{
+body {
     background-color: var(--almost-white) !important;
 }
 
@@ -7,47 +6,96 @@ body
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* Make background on whole page that is seen */
     background-color: var(--almost-white);
     margin-top: 30px;
+}
 
+.edit-product .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px; /* רווח בין האלמנטים */
+}
+
+.edit-product .left-side,
+.edit-product .right-side {
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--card-bsh);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-items: center;
+}
+
+.edit-product .left-side {
+    flex: 2; 
+    gap: 20px;
+}
+
+.edit-product .right-side {
+    flex: 1; 
 }
 
 .edit-product h3:not(.edit-actions) {
     margin: 5px;
 }
 
-.edit-product .edit-sizes input {
-    margin: 0;
+.edit-product #edit-sizes {
+    gap: 20px;
+   margin-left: 14%;
 }
 
-.edit-product article {
+.edit-product #edit-sizes ul {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    margin: 10px;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: var(--card-bsh);
-    /* Prevent articles from being smeared unnecessarily */
-    height: min-content;
-}
-
-.edit-product .edit-sizes li {
-    margin: 5px;
     align-items: center;
+    width: 100%;
 }
 
-.edit-product .edit-sizes button{
-    margin: 10px;
+.edit-product #edit-sizes li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style-type: none;
+    margin: 5px;
+    width: 100%;
+   
+}
+
+.edit-product #edit-sizes input {
+    margin-right: 15px;
+    width: 35%;
+    text-align: center; 
+    line-height: 1.5; 
+    padding: 5px 10px; 
+}
+
+.edit-product .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.edit-product #addItem,
+.edit-product #trash {
+    display: inline-block;
+    float: left;
+    margin: 0 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 14px;
 }
 
 .edit-product .edit-imgs ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* padding: 0;
-    margin: 0; */
 }
 
 .edit-product button {
@@ -61,19 +109,6 @@ body
     background-color: var(--ll-gray);
 }
 
-.edit-product form,
-.edit-product {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-items: flex-start;
-}
-
-.info
-{
-    display: flex;
-    flex-direction: column;
-}
 .edit-product label {
     display: flex;
     justify-content: space-between;
@@ -104,20 +139,27 @@ body
     border-radius: 3px;
 }
 
+.edit-product .edit-actions {
+    display: flex;
+    justify-content: center; /* מרכז את הכפתור */
+    width: 100%;
+}
+
+.edit-product #addButton {
+    border-radius: 20px;
+    width: 13%;
+}
+
+.edit-product #addButton:hover {
+    background-color: var(--dark-primary-color); /* שינוי צבע הרקע כאשר עוברים מעל הכפתור */
+}
+
 @media (max-width: 900px) {
-    .edit-product .edit-imgs h3 {
-        text-align: center;
+    .edit-product .container {
+        flex-direction: column; /* מעבר לעמודה אחת במסכים קטנים */
     }
-}
-
-.tog
-{
-    display: flex;
-    flex-direction: column;
-}
-
-#edit-sizes
-{
-    display: flex;
-    align-items: center;
+    .edit-product .left-side,
+    .edit-product .right-side {
+        width: 100%;
+    }
 }
