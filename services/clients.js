@@ -43,8 +43,9 @@ async function addCartItemToDB(username, productId, size, quantity) {
 
         const type = isTicket ? 'ticket' : 'product';
 
-        if (!isTicket && !size) {
-            throw new Error('Size is required for non-ticket products');
+        // בדיקה אם המוצר דורש מידה, ולוודא שהמידה ניתנה אם כן
+        if (!isTicket && product.sizes && product.sizes.length > 0 && !size) {
+            throw new Error('Size is required for non-ticket products that have sizes');
         }
 
         // מצא מוצר זהה בעגלה
@@ -54,22 +55,19 @@ async function addCartItemToDB(username, productId, size, quantity) {
             // אם נמצא מוצר זהה, עדכן את הכמות
             existingCartItem.quantity += parseInt(quantity, 10);
         } else {
-            // אם לא נמצא מוצר זהה, הוסף מוצר חדש
-            client.cartItems.push({ id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
+            // אם לא נמצא מוצר זהה, הוסף מוצר חדש עם מזהה _id ייחודי
+            client.cartItems.push({ _id: new mongoose.Types.ObjectId(), id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
         }
 
         await client.save();
         return { success: true, message: 'Item added to cart successfully' };
     } catch (e) {
         console.error('Error adding item to cart:', e);
-        return { success: false, message: 'Error adding item to cart' };
+        return { success: false, message: e.message || 'Error adding item to cart' };
     }
 }
 
-
-
-
-async function removeCartItemFromDB(username, productId, size) {
+async function removeCartItemFromDB(username, cartItemId) {
     try {
         const client = await Client.findOne({ username });
         if (!client) {
@@ -77,37 +75,38 @@ async function removeCartItemFromDB(username, productId, size) {
             return { success: false, message: 'Client not found' };
         }
 
-        if (!mongoose.Types.ObjectId.isValid(productId)) {
-            return { success: false, message: 'Invalid product ID' };
+        if (!mongoose.Types.ObjectId.isValid(cartItemId)) {
+            return { success: false, message: 'Invalid cart item ID' };
         }
 
-        const productObjectId = mongoose.Types.ObjectId(productId);
-        console.log('Searching for product in cart:', productId, size); // Debugging
+        console.log('Client cart items:', client.cartItems); // Debugging
+        console.log('Searching for cart item:', cartItemId); // Debugging
 
-        // Find the cart item index based on the product ID and size
-        const cartItemIndex = client.cartItems.findIndex(item => 
-            item.id.equals(productObjectId) && (item.size === size || !size)
-        );
+        // מצא את הפריט לפי ה-_id של הפריט בעגלה
+        const cartItemIndex = client.cartItems.findIndex(item => item._id && item._id.equals(cartItemId));
 
         console.log('Found cartItemIndex:', cartItemIndex); // Debugging
 
         if (cartItemIndex > -1) {
-            client.cartItems.splice(cartItemIndex, 1); // Remove the item
-            await client.save();
+            client.cartItems.splice(cartItemIndex, 1);
+
+            // עדכן את מסמך הלקוח ללא שימוש במנגנון גרסאות
+            await Client.updateOne(
+                { _id: client._id },
+                { $set: { cartItems: client.cartItems } }
+            );
+
             console.log('Item removed from cart successfully');
-            return { success: true, message: 'Product removed from cart successfully' };
+            return { success: true, message: 'Cart item removed successfully' };
         } else {
-            console.error('Item not found in cart:', productId, size);
-            return { success: false, message: 'Item not found in cart' };
+            console.error('Cart item not found:', cartItemId);
+            return { success: false, message: 'Cart item not found' };
         }
     } catch (e) {
-        console.error('Error removing item from cart:', e);
-        return { success: false, message: 'Error removing item from cart' };
+        console.error('Error removing cart item:', e);
+        return { success: false, message: 'Error removing cart item' };
     }
 }
-
-
-
 
 async function getOrdersFromDB(id) {
     try {
@@ -127,7 +126,14 @@ async function addCartToOrders(username) {
             throw new Error('Client not found');
         }
 
-        client.orders.push(...client.cartItems);
+        // יצירת רשימה חדשה של פריטי ההזמנה מהעגלה
+        const newOrder = client.cartItems.map(item => ({
+            id: item.id,
+            type: item.type,
+            size: item.size
+        }));
+
+        client.orders.push(newOrder);
         client.cartItems = [];
         await client.save();
 
@@ -142,10 +148,10 @@ async function addCartToOrders(username) {
 async function getClientByUsername(username) {
     try {
         const client = await Client.findOne({ username });
-        return client
+        return client;
     } catch (e) {
         console.error('Error fetching client by ID:', e);
-        throw e
+        throw e;
     }
 }
 

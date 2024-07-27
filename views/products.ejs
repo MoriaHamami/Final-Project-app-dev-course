@@ -82,8 +82,8 @@
                         <%= products[i].price %>$
                     </div>
                     <!-- כפתור הלב להוספת לרשימת המשאלות -->
-                    <button class="wishlist-btn" onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
-                        <i class="bi bi-heart"></i>
+                    <button class="wishlist-btn <%= favoriteProductIds.includes(products[i]._id.toString()) ? 'wishlist-active' : '' %>" onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
+                        <i class="<%= favoriteProductIds.includes(products[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart' %>"></i>
                     </button>
                 </a>
             <% } %>
@@ -100,23 +100,41 @@
     <script src="/js/products.js"></script>
     <script>
         function toggleWishlist(event, button, productId) {
-            // מניעת פעולת ברירת מחדל של הקישור
             event.preventDefault();
             event.stopPropagation();
-
+    
             const icon = button.querySelector('i');
-            icon.classList.toggle('bi-heart');
-            icon.classList.toggle('bi-heart-fill');
-            button.classList.toggle('wishlist-active');
-
-            // קוד נוסף להוספת המוצר לרשימת המשאלות יכול להיכנס כאן
+            const isAdding = !icon.classList.contains('bi-heart-fill');
+    
+            $.ajax({
+                url: `/products/toggle-wishlist`,
+                method: 'POST',
+                data: JSON.stringify({ productId, isAdding }),
+                contentType: 'application/json',
+                success: function(response) {
+                    if (response.success) {
+                        icon.classList.toggle('bi-heart');
+                        icon.classList.toggle('bi-heart-fill');
+                        button.classList.toggle('wishlist-active');
+                    } else {
+                        if (response.message) {
+                            alert(response.message); // הצגת הודעת החיבור
+                        } else {
+                            console.error('Error toggling wishlist:', response.error);
+                            alert('Error: ' + response.error);
+                        }
+                    }
+                },
+                error: function(error) {
+                    if (error.status === 401) {
+                        alert('עליך להתחבר תחילה כדי להוסיף למועדפים.'); // הצגת הודעת החיבור
+                    } else {
+                        console.error('Error toggling wishlist:', error);
+                        alert('Error: ' + error.responseText);
+                    }
+                }
+            });
         }
-
-        // function updatePriceVal(value) {
-        //     document.querySelector('.price-val').innerText = value;
-        // }
-
-
     </script>
 </body>
 

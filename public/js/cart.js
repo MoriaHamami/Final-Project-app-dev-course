@@ -1,52 +1,29 @@
 $(document).ready(function() {
-    // Open the shopping cart when the button is clicked
-    $('.cart-btn').click(function(e) {
-        e.preventDefault();
-        $('.shopping-cart').fadeIn();
-    });
-
-    // Close the shopping cart when the close button is clicked
-    $('.shopping-cart .close-btn').click(function() {
-        $('.shopping-cart').fadeOut();
-    });
-
-    // Close the shopping cart when the dark screen is clicked
-    $('.dark-screen').click(function() {
-        $('.shopping-cart').fadeOut();
-    });
-
     // Handle click events on the "Remove" text and trash icon
     $(document).on('click', '.icon-text, .bi-trash3', function() {
-        const productId = $(this).data('product-id');
-        const size = $(this).data('product-size');
-        removeItem(productId, size);
+        const cartItemId = $(this).data('cart-item-id');
+        console.log('Sending cartItemId:', cartItemId); // Debugging
+        removeItem(cartItemId);
     });
 });
 
-
-async function removeItem(productId, size) {
+async function removeItem(cartItemId) {
     try {
-        console.log('Removing item:', productId, size); // Debugging
+        console.log('Removing item:', cartItemId); // Debugging
         const response = await $.ajax({
             url: '/cart/remove',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
-                productId: productId,
-                size: size
+                cartItemId: cartItemId
             })
         });
 
         console.log('Response from server:', response); // Debugging
 
         if (response.success) {
-            showNotice('Product removed from cart successfully');
-            const productElement = $(`.product:has([data-product-id='${productId}'][data-product-size='${size}'])`);
-            console.log('Product element:', productElement); // Debugging
-
-            productElement.fadeOut(400, function() {
-                $(this).remove();
-                updateCartItemCount();
+            showNotice('Product removed from cart successfully', function() {
+                window.location.reload(); // רענון הדף לאחר הצגת ההודעה
             });
         } else {
             showNotice(response.message || 'Error removing product from cart');
@@ -57,12 +34,7 @@ async function removeItem(productId, size) {
     }
 }
 
- 
-
-
-
-// פונקציה להצגת הודעה קטנה
-function showNotice(message) {
+function showNotice(message, callback) {
     console.log('Showing notice:', message); // Debugging
     var noticeModalBody = document.getElementById('noticeModalBody');
     if (noticeModalBody) {
@@ -73,7 +45,10 @@ function showNotice(message) {
         // סגירת המודל לאחר 2 שניות
         setTimeout(function() {
             noticeModal.hide();
-        }, 3000);
+            if (callback) {
+                callback();
+            }
+        }, 2000);
     } else {
         console.error('Notice modal body not found');
     }
@@ -81,17 +56,10 @@ function showNotice(message) {
 
 
 // פונקציה לעדכון סה"כ הפריטים בעגלה
-function updateCartItemCount() {
-    const itemCount = $('.product').length;
-    console.log('Updated item count:', itemCount); // Debugging
-    $('h2').text(`Your basket | ${itemCount}`);
-}
-
-// פונקציה לסיום רכישה
 async function proceedToShipping() {
     try {
         const response = await $.ajax({
-            url: '/orders/add',
+            url: '/cart/checkout',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -102,7 +70,7 @@ async function proceedToShipping() {
         if (response.success) {
             showNotice('Thank you for your purchase!');
             setTimeout(function() {
-                window.location.assign('/shipping');
+                window.location.assign('/'); // העברה לדף הבית
             }, 2000);
         } else {
             showNotice(response.message || 'Error processing order');

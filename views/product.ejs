@@ -115,48 +115,11 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
     <script src="/js/product.js"></script>
-    <script>
-        // הפעלת הקרוסלה עם מהירות מעבר תמונות מותאמת אישית
-        $(document).ready(function(){
-            $('.carousel').carousel({
-                interval: 2000 // זמן מעבר בין תמונות ב-2000 מילישניות (2 שניות)
-            });
-        });
 
-        async function addToCart(productId) {
-    const selectedSize = document.querySelector('input[name="options-base"]:checked')?.value;
-    const selectedQuantity = document.getElementById('quantitySelect').value;
 
-    try {
-        const response = await fetch('/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': '/',
-                'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({
-                productId: productId,
-                size: selectedSize,
-                quantity: parseInt(selectedQuantity, 10)
-            }),
-            credentials: 'include'
-        });
 
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-            showNotice('The product has been successfully added', false);
-        } else {
-            showNotice(result.message || 'Error adding product to cart', false);
-        }
-    } catch (e) {
-        showNotice('Error adding product to cart', false);
-    }
-}
-
-    </script>
+    
+    
 </body>
 
 </html>
