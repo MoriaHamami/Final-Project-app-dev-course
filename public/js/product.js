@@ -13,9 +13,15 @@ function nextSlide() {
     $('.carousel').carousel('pause');
 }
 
-async function addToCart(productId) {
+async function addToCart(productId, redirectToCart = false) {
     const selectedSize = document.querySelector('input[name="options-base"]:checked')?.value;
     const selectedQuantity = parseInt(document.getElementById('quantitySelect').value, 10);
+
+    // וידוא שהמידה נבחרה אם המוצר דורש מידה
+    if (document.querySelector('.product_sizes') && !selectedSize) {
+        showNotice('Please select a size', false);
+        return;
+    }
 
     try {
         const response = await fetch('/cart/add', {
@@ -37,7 +43,7 @@ async function addToCart(productId) {
         const result = await response.json();
 
         if (response.ok && result.success) {
-            showNotice('The product has been successfully added', false);
+            showNotice('The product has been successfully added', redirectToCart);
         } else {
             showNotice(result.message || 'Error adding product to cart', false);
         }
@@ -46,10 +52,7 @@ async function addToCart(productId) {
     }
 }
 
-
-
-
-async function getEditProductPage( id) {
+async function getEditProductPage(id) {
     try {
         // Prevents product to be shown. Only editor will be opened.
         // ev.stopPropagation()
@@ -63,7 +66,6 @@ async function getEditProductPage( id) {
     } catch (e) {
         console.log("Could not get edit page")
     }
-    
 }
 
 // Function to show notice and redirect

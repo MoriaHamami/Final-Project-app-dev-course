@@ -33,8 +33,9 @@ async function getCartPage(req, res) {
             if (item) {
                 item.size = itemInfo.size;
                 item.quantity = itemInfo.quantity;
+                item.cartItemId = itemInfo._id; // Adding the cart item _id
                 sum += item.price * itemInfo.quantity || 0;
-                return { ...item.toObject(), type: itemInfo.type };
+                return { ...item.toObject(), type: itemInfo.type, cartItemId: itemInfo._id }; // Make sure to include cartItemId
             } else {
                 console.log('Item not found for id:', itemInfo.id);
             }
@@ -70,34 +71,34 @@ async function getCartItems(req, res) {
 }
 
 // Function to add item to cart
+// Function to add item to cart
 async function addCartItem(req, res) {
-    const { productId, quantity, size } = req.body;
+    const { productId, size, quantity } = req.body;
     const username = req.session.username;
     try {
         if (!username) {
             return res.status(401).json({ success: false, message: 'User not logged in' });
         }
 
-        const result = await clientsService.addCartItemToDB(username, productId, quantity);
+        const result = await clientsService.addCartItemToDB(username, productId, size, quantity);
         res.json(result);
     } catch (e) {
         console.error('Error adding item to cart:', e.message);
-        res.status(500).json({ success: false, message: 'Error adding item to cart' });
+        res.status(500).json({ success: false, message: e.message || 'Error adding item to cart' });
     }
 }
 
 
-
 // Function to remove item from cart
 async function removeCartItem(req, res) {
-    const { productId, size } = req.body;
+    const { cartItemId } = req.body;
     const username = req.session.username;
     try {
         if (!username) {
             return res.redirect('/login');
         }
 
-        const result = await clientsService.removeCartItemFromDB(username, productId, size);
+        const result = await clientsService.removeCartItemFromDB(username, cartItemId);
         res.json(result);
     } catch (e) {
         console.error('Error removing item from cart:', e.message);
@@ -126,10 +127,31 @@ async function addEditShirtToCart(req, res) {
     }
 }
 
+async function checkoutCart(req, res) {
+    try {
+        const username = req.session.username;
+        if (!username) {
+            return res.status(401).json({ success: false, message: 'User not logged in' });
+        }
+
+        // Add cart items to orders
+        const result = await clientsService.addCartToOrders(username);
+        if (result.success) {
+            res.json({ success: true, message: 'Cart checked out successfully' });
+        } else {
+            res.status(500).json({ success: false, message: result.message });
+        }
+    } catch (e) {
+        console.error('Error during checkout:', e.message);
+        res.status(500).json({ success: false, message: 'Error during checkout' });
+    }
+}
+
 module.exports = {
     getCartPage,
     getCartItems,
     addCartItem,
     removeCartItem,
-    addEditShirtToCart
+    addEditShirtToCart,
+    checkoutCart
 };

@@ -46,46 +46,33 @@
             <h2>Your basket | <%= cartItems.length %></h2>
             <div class="product-container">
                 <% cartItems.forEach((item, index) => { %>
-                <div class="product">
-                    <% if (item.type === 'ticket') { %>
-                        <img src="<%= item.opImg.startsWith('data:') ? item.opImg : '/styles/imgs/tickets/' + item.opImg %>" alt="כרטיס" class="product-image">
-                        <div class="product-info">
-                            <span class="product-name"><b><%= item.title %></b></span>
-                            <span class="product-opponent">Opponent: <%= item.opponent %></span>
-                            <span class="product-stadium">Stadium: <%= item.stadium %></span>
-                            <span class="product-date">Date: <%= new Date(item.date).toLocaleDateString() %></span>
-                            <span class="product-time">Time: <%= new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></span>
-                        </div>
-                    <% } else { %>
-                        <img src="<%= item?.srcImg[0] ? (item?.srcImg[0]?.includes('data:') ? item?.srcImg[0] : ('/styles/imgs/products/' + item?.srcImg[0])) : ''%>" alt="מוצר" class="product-image">
-                        <div class="product-info">
-                            <span class="product-name"><b><%= item.title %></b></span>
-                            <span class="product-Size">Size: <%= item.size %></span>
-                            <span class="product-playerName">Color: <%= item.color %></span>
-                        </div>
-                    <% } %>
-                    <hr>
-                    <span class="product-Price"><%= item.price %>$</span>
-                    <div class="input-group">
-                        <div class="icon-container">
-                            <span class="icon-text" 
-                                  data-product-id="<%= item._id %>" 
-                                  data-product-size="<%= item.size ? item.size : '' %>" 
-                                  onclick="removeItem('<%= item._id %>', '<%= item.size ? item.size : '' %>')">Remove</span>
-                            <i class="bi-trash3" 
-                               data-product-id="<%= item._id %>" 
-                               data-product-size="<%= item.size ? item.size : '' %>" 
-                               onclick="removeItem('<%= item._id %>', '<%= item.size ? item.size : '' %>')"></i>
+                    <div class="product" data-cart-item-id="<%= item._id %>">
+                        <% if (item.type === 'ticket') { %>
+                            <img src="<%= item.opImg.startsWith('data:') ? item.opImg : '/styles/imgs/tickets/' + item.opImg %>" alt="כרטיס" class="product-image">
+                            <div class="product-info">
+                                <span class="product-name"><b><%= item.title %></b></span>
+                                <span class="product-opponent">Opponent: <%= item.opponent %></span>
+                                <span class="product-stadium">Stadium: <%= item.stadium %></span>
+                                <span class="product-date">Date: <%= new Date(item.date).toLocaleDateString() %></span>
+                                <span class="product-time">Time: <%= new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></span>
+                            </div>
+                        <% } else { %>
+                            <img src="<%= item?.srcImg[0] ? (item?.srcImg[0]?.includes('data:') ? item?.srcImg[0] : ('/styles/imgs/products/' + item?.srcImg[0])) : '' %>" alt="מוצר" class="product-image">
+                            <div class="product-info">
+                                <span class="product-name"><b><%= item.title %></b></span>
+                                <span class="product-Size">Size: <%= item.size %></span> <!-- ודא שהשדה הזה מוצג -->
+                                <span class="product-playerName">Color: <%= item.color %></span>
+                            </div>
+                        <% } %>
+                        <hr>
+                        <span class="product-Price"><%= item.price %>$</span>
+                        <div class="input-group">
+                            <div class="icon-container">
+                                <span class="icon-text" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')">Remove</span>
+                                <i class="bi-trash3" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')"></i>
+                            </div>
                         </div>
                     </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </div>
                 <% }); %>
             </div>
             <div class="checkout">
@@ -96,7 +83,7 @@
                             <h4>Total:</h4>
                         </div>
                         <div class="col text-center">
-                            <h4><%= cartItems.totalAmount %> $</h4>
+                            <h4><%= cartItems.reduce((total, item) => total + item.price, 0) %> $</h4>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 
 const subSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,  // הוספת מזהה _id
     id: mongoose.Schema.Types.ObjectId,
     type: String,
     size: String

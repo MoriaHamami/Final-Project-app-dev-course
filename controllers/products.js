@@ -1,22 +1,33 @@
 const productService = require('../services/products');
 const loginController = require('./login');
+const Client = require('../models/clients'); // ייבוא נכון של המודל
+
 
 const getProducts = async (req, res) => {
   try {
-    // Get products from DB using service file
-    const productsInfo = await productService.getProducts()
-    // Render products page and send the products from DB to it
+    const username = req.session.username;
+    let favoriteProductIds = [];
+
+    if (username) {
+      const client = await Client.findOne({ username });
+      favoriteProductIds = client ? client.faveItems.map(item => item.toString()) : [];
+    }
+
+    const productsInfo = await productService.getProducts();
     res.render('products.ejs', {
       products: productsInfo.products,
       maxPrice: productsInfo.maxPrice,
       minPrice: productsInfo.minPrice,
       cats: productsInfo.cat,
       sizes: productsInfo.sizes,
-    })
+      favoriteProductIds, // Add favoriteProductIds to the render context
+    });
   } catch (e) {
-    console.log('e:', e)
+    console.log('e:', e);
   }
-}
+};
+
+
 const getProductsByFilter = async (req, res) => {
   try {
     const priceFilter = req.query.filters?.price
@@ -124,11 +135,46 @@ const deleteProduct = async (req, res) => {
   }
 }
 
+const toggleWishlist = async (req, res) => {
+  const { productId, isAdding } = req.body;
+  const username = req.session.username;
+
+  if (!username) {
+      return res.status(401).json({ success: false, message: 'עליך להתחבר תחילה כדי להוסיף למועדפים.' });
+  }
+
+  try {
+      const client = await Client.findOne({ username });
+
+      if (isAdding) {
+          if (!client.faveItems.includes(productId)) {
+              client.faveItems.push(productId);
+          }
+      } else {
+          client.faveItems = client.faveItems.filter(item => item.toString() !== productId);
+      }
+
+      await client.save();
+
+      res.json({ success: true });
+  } catch (error) {
+      console.error('Error toggling wishlist:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+};
+
+
+
+
 module.exports = {
   createProduct,
   getProducts,
   getProduct,
   updateProduct,
   deleteProduct,
-  getProductsByFilter
-}
+  getProductsByFilter,
+  toggleWishlist // הוספנו את הפונקציה החדשה לייצוא
+};
+
+
+

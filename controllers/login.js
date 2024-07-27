@@ -16,7 +16,13 @@ function isLoggedIn(req, res, next) {
     if (req.session.username != null) {
         return next();
     } else {
-        res.redirect('/login');
+        if (req.xhr) {
+            // If the request is via AJAX, return a JSON response
+            res.status(401).json({ success: false, message: 'עליך להתחבר תחילה כדי להוסיף למועדפים.' });
+        } else {
+            // Otherwise, redirect to the login page
+            res.redirect('/login');
+        }
     }
 }
 
@@ -44,7 +50,7 @@ async function login(req, res) {
     try {
         const result = await loginService.login(username, password);
         if (result) {
-            req.session.username = username;
+            req.session.username = username; // שמירת שם המשתמש בסשן
             res.redirect('/');
         } else {
             res.render("login.ejs", { user: null, error: "שם משתמש או סיסמה לא נכונים" });
@@ -54,6 +60,7 @@ async function login(req, res) {
         res.render("login.ejs", { user: null, error: "שגיאה בהתחברות, נסה שוב מאוחר יותר" });
     }
 }
+
 
 
 
