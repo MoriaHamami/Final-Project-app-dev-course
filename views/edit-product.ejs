@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
     <link rel="stylesheet" href="/styles/css/setup/general.css">
     <link rel="stylesheet" href="/styles/css/edit-product.css">
-
 </head>
 
 <body>
@@ -62,7 +61,6 @@
                             </label>
                         </section>
                     </article>
-
                     <article id="edit-sizes">
                         <h3>Sizes</h3>
                         <% if (product !=null) { %>
@@ -104,7 +102,6 @@
                                         src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i]) %>"
                                         id="<%= i %>">
                                     <button type="button">UPDATE</button>
-                                    </input>
                                     <button type="button" id="<%= i %>" class="deleteImg"
                                         onclick="onDeleteImg('<%= i %>')">DELETE</button>
                                 </li>
@@ -124,54 +121,6 @@
                         <i class="bi bi-plus"></i>
                         Add another image
                     </button>
-                </article>
-
-<div class="tog">
-                <article id="edit-sizes">
-                    <h3>Sizes</h3>
-                    <%if(product !=null){%>
-                        <ul>
-
-                            <% for(let i=0; i< product.sizes.length; i++) { %>
-
-                                <li id="<%= i %>">
-                                    <input value="<%= product.sizes[i] %>" name="sizes">
-                                    <button type="button" onclick="onDeleteSize('<%=i%>')">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </li>
-                                <%}%>
-                        </ul>
-
-                        <%}else{%>
-                            <ul>
-
-                                <li id="0">
-                                    <input value="S">
-                                    <button type="button" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                            <% } %>
-
-                                <button onclick="onAddSize()" type="button">
-                                    <i class="bi bi-plus"></i>
-                                    Add size
-                                </button>
-                </article>
-
-
-                <article class="edit-cat">
-                    <h3>Category</h3>
-                    <select onchange="onChangeCat('select')">
-                        <% for(let i=0; i< cats.length; i++) { %>
-                            <option id="<%= i %>" value="<%= cats[i] %>" <%=product?.cat===cats[i] ? "selected" : "" %>
-                                ><%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
-                            </option>
-                            <%}%>
-                                <option value="other" >Other</option>
-                    </select>
-                </article>
                 </div>
             </div>
 
