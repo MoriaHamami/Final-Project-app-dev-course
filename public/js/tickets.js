@@ -1,54 +1,62 @@
+// Global variables to store the search criteria
 let gTitle = '';
 let gMonth = 0;
 let gStadium = '';
 
+// Function to set the selected month and filter the tickets
 function setMonth(isManager, newMonth = 0) {
-    gMonth = newMonth;
+    gMonth = newMonth; // Update the selected month
     console.log(`Month set to: ${gMonth}`);
-    filterTickets(isManager);
+    filterTickets(isManager); // Filter tickets based on the new month
 }
 
+// Function to set the selected title and filter the tickets
 function setTitle(isManager, newTitle = '') {
-    gTitle = newTitle;
+    gTitle = newTitle; // Update the selected title
     console.log(`Title set to: ${gTitle}`);
-    filterTickets(isManager);
+    filterTickets(isManager); // Filter tickets based on the new title
 }
 
+// Function to set the selected stadium and filter the tickets
 function setStadiumFilter(newStadium = '') {
-    gStadium = newStadium;
+    gStadium = newStadium; // Update the selected stadium
     console.log(`Stadium set to: ${gStadium}`);
-    filterTickets();
+    filterTickets(); // Filter tickets based on the new stadium
 }
 
+// Function to filter tickets based on the selected criteria
 async function filterTickets(isManager) {
     try {
-        let url = `/tickets/filter?title=${gTitle}`;
+        let url = `/tickets/filter?title=${gTitle}`; // Create the URL for the filter request
         
-        if (gMonth !== 0) {
+        if (gMonth !== 0) { // Add month to the URL if a month is selected
             url += `&month=${gMonth}`;
         }
         
-        if (gStadium) {
+        if (gStadium) { // Add stadium to the URL if a stadium is selected
             url += `&stadium=${gStadium}`;
         }
 
+        // Send an AJAX request to the server to get the filtered tickets
         const tickets = await $.ajax({
             url: url,
             method: 'GET',
             contentType: 'application/json',
         });
         console.log('Filtered tickets:', tickets);
-        renderTickets(isManager, tickets);
+        renderTickets(isManager, tickets); // Display the filtered tickets
     } catch (error) {
-        console.error('Error fetching tickets:', error);
+        console.error('Error fetching tickets:', error); // Handle errors
     }
 }
 
+// Function to display the tickets on the page
 function renderTickets(isManager, tickets) {
     let str = '';
     if (tickets.length === 0) {
-        str = '<p>No tickets available</p>';
+        str = '<p>No tickets available</p>'; // Message if no tickets are available
     } else {
+        // Create HTML for each ticket and display it on the page
         for (let i = 0; i < tickets.length; i++) {
             str += `<div class="card" style="width: 18rem;" data-stadium="${tickets[i].stadium}">
                 <div class="battle">
@@ -102,15 +110,16 @@ function renderTickets(isManager, tickets) {
             </div>`;
         }
     }
-    const ticketContainer = document.getElementById('tickets');
-    ticketContainer.innerHTML = str;
+    const ticketContainer = document.getElementById('tickets'); // Find the target element
+    ticketContainer.innerHTML = str; // Add the tickets to the page
 }
 
+// Function to navigate to the ticket edit page based on the ticket ID
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }
 
-
+// Function to add a ticket to the cart
 async function addToCart(ticketId) {
     try {
         const response = await fetch('/cart/add', {
@@ -123,42 +132,44 @@ async function addToCart(ticketId) {
             },
             body: JSON.stringify({
                 productId: ticketId,
-                quantity: 1  // כמות קבועה
+                quantity: 1  // Fixed quantity
             }),
             credentials: 'include'
         });
 
         if (response.status === 401) {
-            showNotice('צריך להתחבר קודם', true);
+            showNotice('You need to log in first', true); // Message if the user is not logged in
         } else if (response.ok) {
             const result = await response.json();
             if (result.success) {
-                showNotice('הכרטיס נוסף לעגלה בהצלחה', false);
+                showNotice('Ticket added to cart successfully', false); // Success message
             } else {
-                showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+                showNotice('Error adding ticket to cart', false); // Error message
             }
         } else {
-            showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+            showNotice('Error adding ticket to cart', false); // Error message
         }
     } catch (e) {
-        showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+        showNotice('Error adding ticket to cart', false); // Error message
     }
 }
 
+// Function to show notices to the user
 function showNotice(message, redirectToLogin) {
-    document.getElementById('noticeModalBody').innerText = message;
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
-    noticeModal.show();
+    document.getElementById('noticeModalBody').innerText = message; // Display the message in the modal body
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {}); // Create a new modal
+    noticeModal.show(); // Show the modal
 
     setTimeout(function() {
         if (redirectToLogin) {
-            window.location.href = '/login';
+            window.location.href = '/login'; // Redirect to login page if needed
         } else {
-            noticeModal.hide();
+            noticeModal.hide(); // Hide the modal after some time
         }
     }, 3000); // Adjust the timeout as needed
 }
 
+// Function to navigate to the ticket edit page based on the ticket ID (duplicate, possible mistake in the original code)
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }

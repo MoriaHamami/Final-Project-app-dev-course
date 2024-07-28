@@ -85,3 +85,22 @@ async function onAddArticle(ev) {
         alert('An error occurred while adding the article.');
     }
 }
+
+
+async function searchNews() {
+    const genre = document.getElementById('genreFilter').value;
+    const text = document.getElementById('textFilter').value;
+
+    try {
+        const response = await $.ajax({
+            url: '/news/search',
+            method: 'GET',
+            data: { genre, text },
+        });
+
+        // הצגת התוצאות בדף (נניח שיש אלמנט עם id 'newsResults' להצגת התוצאות)
+        $('#newsResults').html(response);
+    } catch (e) {
+        console.log('Error searching news:', e);
+    }
+}

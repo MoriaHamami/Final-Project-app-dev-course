@@ -92,3 +92,41 @@ async function getProductsBy(sortVal = '', isAsc = true) {
         // TODO: Later show an error modal
     }
 }
+
+
+function toggleWishlist(event, button, productId) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const icon = button.querySelector('i');
+    const isAdding = !icon.classList.contains('bi-heart-fill');
+
+    $.ajax({
+        url: `/products/toggle-wishlist`,
+        method: 'POST',
+        data: JSON.stringify({ productId, isAdding }),
+        contentType: 'application/json',
+        success: function(response) {
+            if (response.success) {
+                icon.classList.toggle('bi-heart');
+                icon.classList.toggle('bi-heart-fill');
+                button.classList.toggle('wishlist-active');
+            } else {
+                if (response.message) {
+                    alert(response.message); // הצגת הודעת החיבור
+                } else {
+                    console.error('Error toggling wishlist:', response.error);
+                    alert('Error: ' + response.error);
+                }
+            }
+        },
+        error: function(error) {
+            if (error.status === 401) {
+                alert('עליך להתחבר תחילה כדי להוסיף למועדפים.'); // הצגת הודעת החיבור
+            } else {
+                console.error('Error toggling wishlist:', error);
+                alert('Error: ' + error.responseText);
+            }
+        }
+    });
+}

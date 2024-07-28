@@ -107,3 +107,11 @@ async function onDeleteClient(id) {
         alert('Failed to update block status');
     }
 }
+
+
+    $('#searchInput').on('input', function() {
+        const searchValue = $(this).val().toLowerCase();
+        $('#clientTableBody tr').filter(function() {
+            $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
+        });
+    });
