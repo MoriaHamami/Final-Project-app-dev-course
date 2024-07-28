@@ -1,37 +1,29 @@
 .manager {
-    /* Add background color for page */
     background-color: var(--almost-white);
     display: flex;
     justify-content: center;
-    /* When there is no space for an elemnt, let it wrap (go down a row) */
     flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px; /* רווח בין האלמנטים */
 }
 
 .manager section {
     display: flex;
     flex-direction: column;
-    /* Give each section a white background */
-    background-color: white;
-    /* Let each section have space around it */
+    background: linear-gradient(135deg, #f8f9fa, #ffffff); /* רקע גרדיאנט עדין */
     margin: 10px;
     padding: 30px;
-    /* Make the edges rounded in each section */
-    border-radius: 10px;
-    /* Make each section have a shadow to make it seem 3D */
-    box-shadow: var(--card-bsh);
-    /* Prevent articles from being smeared unnecessarily */
+    border-radius: 15px; /* קצוות עגולים יותר */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* צל עמוק יותר */
     height: min-content;
     width: min-content;
 }
 
 .manager ul {
-    /* Remove dots from every ul */
     list-style-type: none;
-    /* Remove default padding from every ul in page */
     padding: 0;
 }
 
-/* Remove default margin from p tags */
 .manager p {
     margin: 0;
 }
@@ -41,39 +33,37 @@
 }
 
 .manager i {
-    /* Make every icon seem clickable */
     cursor: pointer;
+    color: #007bff; /* צבע כחול לאייקונים */
 }
 
 .manager .personal-info {
-    /* Let each p in this section have its own row, 
-    and not be broken into a couple of rows */
     width: max-content;
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    gap: 10px; /* רווח בין האלמנטים */
 }
 
 .manager .userImg {
-    width: 30px;
+    width: 50px; /* תמונה גדולה יותר */
     border-radius: 50%;
     margin-inline-end: 20px;
+    border: 2px solid #007bff; /* מסגרת כחולה עדינה לתמונה */
 }
 
 .manager .personal-info article {
-    /* Make the pencil icon and text be on different ends (spaced between) */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-wrap: wrap;
+    gap: 5px; /* רווח בין האלמנטים */
 }
 
 .manager .personal-info p {
-    /* Make a space between the pencil icon and the text */
     padding-inline-end: 20px;
-    /* Make space between the rows in this section */
     padding-block: 5px;
+    font-size: 16px; /* גודל פונט יותר גדול */
+    color: #333; /* צבע טקסט כהה יותר */
 }
 
 .manager .add-options {
@@ -84,33 +74,32 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0;
+    gap: 10px; /* רווח בין האלמנטים */
 }
 
 .manager .add-options li,
 .manager .shops button {
-    /* Give the buttons a border */
     border: 1px solid var(--l-gray);
-    /* Give the buttons a background */
     background-color: var(--lll-gray);
-    /* Give the button text the ability to be in one line (without breaking to a new line) */
     width: max-content;
-    /* Give the buttons more space in them */
-    padding: 8px;
-    /* Give the buttons more space around them */
+    padding: 10px 20px; /* רווח פנימי גדול יותר */
     margin: 8px;
-    /* Give the buttons circled edges */
-    border-radius: 5px;
-    /* Make the buttons seem clickable */
+    border-radius: 25px; /* קצוות עגולים יותר */
     cursor: pointer;
+    color: #007bff; /* צבע טקסט כחול */
+    font-weight: bold; /* טקסט מודגש */
+    transition: background-color 0.3s ease-in-out; /* אפקט מעבר עדין */
 }
 
-/* When hovering above buttons make their color change */
-.manager .add-options li:hover {
-    background-color: var(--ll-gray);
+.manager .add-options li:hover,
+.manager .shops button:hover {
+    background-color: #e0e0e0; /* שינוי רקע בעת מעבר עכבר */
 }
 
 .manager .bar-graph-head {
     margin-block: 10px 20px;
+    font-size: 18px; /* גודל פונט יותר גדול */
+    color: #555; /* צבע טקסט כהה יותר */
 }
 
 /* LINE GRAPH STYLING */
@@ -120,7 +109,6 @@
 
 /* BAR GRAPH STYLING */
 .manager .bar {
-    /* Color the bars */
     fill: #5a90c0;
 }
 
@@ -137,14 +125,11 @@
 }
 
 .manager text {
-    /* Lighten the bands (תגיות) on the scales */
     fill: #666;
-    /* Make bands larger */
     font-size: 12px;
 }
 
 .manager #x-axis text {
-    /* Make the bands (תגיות) on the x-axis bold */
     font-weight: 600;
 }
 

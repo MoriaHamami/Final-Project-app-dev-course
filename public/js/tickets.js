@@ -94,7 +94,8 @@ function renderTickets(isManager, tickets) {
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <a href="#" class="btn btn-primary" onclick="addToCart('${tickets[i]._id}')">
+                        <a href="#" class="btn btn-primary custom-button"
+                            onclick="addToCart('${tickets[i]._id}')">
                             <i class="bi bi-gem"></i> Buy ticket NOW
                         </a>
                     </ul>
@@ -106,6 +107,8 @@ function renderTickets(isManager, tickets) {
     ticketContainer.innerHTML = str;
 }
 
+
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }
+

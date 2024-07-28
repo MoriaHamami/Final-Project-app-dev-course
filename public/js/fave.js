@@ -24,10 +24,23 @@ async function removeItemFave(productId) {
             })
         });
 
-        alert('Product removed from fave successfully');
-        window.location.reload();
+        showNotice('Product removed from favorites successfully.', '/current-url');
     } catch (e) {
-        console.log('Error removing product from fave:', e);
-        alert('Error removing product from fave');
+        console.log('Error removing product from favorites:', e);
+        showNotice('Error removing product from favorites.');
     }
+}
+function showNotice(message, redirectTo = false) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectTo) {
+            window.location.href = redirectTo; // Redirect to the specified URL
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
 }

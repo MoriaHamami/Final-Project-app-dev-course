@@ -37,9 +37,10 @@ async function onUpdateArticle(ev) {
             }),
         });
 
-        alert('Article updated successfully.');
+        showNotice('Article updated successfully.');
     } catch (e) {
         console.log('Error:', e);
+        showNotice('An error occurred while updating the article.');
     }
 }
 
@@ -54,14 +55,13 @@ async function onDeleteArticle(id) {
         });
 
         if (res.status !== 404) {
-            alert('Article deleted successfully.');
-            window.location.assign('/news');
+            showNotice('Article deleted successfully.', '/news');
         } else {
-            alert('Article could not be deleted.');
+            showNotice('Article could not be deleted.');
         }
     } catch (e) {
         console.log('Error:', e);
-        alert('An error occurred while deleting the article.');
+        showNotice('An error occurred while deleting the article.');
     }
 }
 
@@ -81,9 +81,25 @@ async function onAddArticle(ev) {
             }),
         });
 
-        alert('New article added successfully.');
-        window.location.href = '/news'; // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
+        showNotice('New article added successfully.', '/news'); // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
     } catch (e) {
         console.log('Error:', e);
+        showNotice('An error occurred while adding the article.');
     }
+}
+
+
+function showNotice(message, redirectTo = false) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectTo) {
+            window.location.href = redirectTo; // Redirect to the specified URL
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
 }
