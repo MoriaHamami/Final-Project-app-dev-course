@@ -11,7 +11,6 @@ async function getFavePage(req, res) {
             return res.status(404).send("fave items not found");
         }
 
-        console.log('fave Items Info:', faveItemsInfo);
 
         let sum = 0;
         let faveItems = await Promise.all(faveItemsInfo.map(async (itemInfo) => {
