@@ -18,123 +18,120 @@
 </head>
 
 <body>
+    <!-- Dark screen during header dropdown -->
+    <div class="dark-screen" onclick="onToggleMenu()"></div>
 
-        <!-- Dark screen during header dropdown -->
-        <div class="dark-screen" onclick="onToggleMenu()"></div>
+    <!-- Header section -->
+    <header>
+        <section class="start-icons">
+            <a href="/"><img class="logo" src="/styles/imgs/header/real-madrid-logo.png"></a>
+            <nav>
+                <a href="/" class="header-btn home-btn" onclick="onToggleMenu()">Home</a>
+                <a href="/products" class="header-btn products-btn" onclick="onToggleMenu()">Shop</a>
+                <a href="/tickets" class="header-btn products-btn" onclick="onToggleMenu()">Tickets</a>
+                <a href="/news" class="header-btn about-btn" onclick="onToggleMenu()">About</a>
+        </section>
 
-        <!-- Header section -->
-        <header>
-            <section class="start-icons">
-                <a href="/"><img class="logo" src="/styles/imgs/header/real-madrid-logo.png"></a>
-                <nav>
-                    <a href="/" class="header-btn home-btn" onclick="onToggleMenu()">Home</a>
-                    <a href="/products" class="header-btn products-btn" onclick="onToggleMenu()">Shop</a>
-                    <a href="/tickets" class="header-btn products-btn" onclick="onToggleMenu()">Tickets</a>
-                    <a href="/news" class="header-btn about-btn" onclick="onToggleMenu()">About</a>
-                    
-            </section>
-    
-            <section class="end-icons">
-                <a class="cart-btn" onclick="getCartPage()"><i class="bi bi-bag"></i>
-                </a>
-                <a class="signin-btn" onclick="getLoggedInUser()"><i class="bi bi-person"></i>
-                </a>
-                <button class="menu-toggle-btn" onclick="onToggleMenu()"><i class="bi bi-list"></i>
-                </button>
-            </section>
-        </header>
+        <section class="end-icons">
+            <a class="cart-btn" onclick="getCartPage()"><i class="bi bi-bag"></i></a>
+            <a class="signin-btn" onclick="getLoggedInUser()"><i class="bi bi-person"></i></a>
+            <button class="menu-toggle-btn" onclick="onToggleMenu()"><i class="bi bi-list"></i></button>
+        </section>
+    </header>
 
-    <main class="client">
-        <div class="client_details">
-            <div class="personal_data">
-                <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i> Personal Data</h1>
-                <hr>
-                <img class="user-image" src="<%= client.imgURL && client.imgURL.startsWith('data:') ? client.imgURL : client.imgURL ? '/styles/imgs/clients/' + client.imgURL : '/styles/imgs/clients/default-image.png' %>" alt="User photo">
-                <hr>
-                <div class="information">
-                    <h3>Name</h3>
-                    <p><%= client.fullname %></p>
-                    <h3>User Name</h3>
-                    <p><%= client.username %></p>
-                    <h3>Total Spent</h3>
-                    <p>$<%= client.spent %></p>
+    <div class="background-container">
+        <main class="client">
+            <div class="client_details">
+                <div class="personal_data">
+                    <h1 class="headline"><i class="bi bi-file-earmark-person-fill"></i> Personal Data</h1>
                     <hr>
+                    <img class="user-image" src="<%= client.imgURL && client.imgURL.startsWith('data:') ? client.imgURL : client.imgURL ? '/styles/imgs/clients/' + client.imgURL : '/styles/imgs/clients/default-image.png' %>" alt="User photo">
+                    <hr>
+                    <div class="information">
+                        <h3>Name</h3>
+                        <p><%= client.fullname %></p>
+                        <h3>User Name</h3>
+                        <p><%= client.username %></p>
+                        <h3>Total Spent</h3>
+                        <p>$<%= client.spent %></p>
+                        <hr>
+                    </div>
+                    <a href="/login/logout">
+                        <button class="btn_client">Logout <i class="bi bi-box-arrow-right"></i></button>
+                    </a>
                 </div>
-                <a href="/login/logout">
-                    <button class="btn_client">Logout <i class="bi bi-box-arrow-right"></i></button>
-                </a>
             </div>
-        </div>
 
-        <div class="yourhistory">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tab3-1">Your Favorite Items</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tab3-2">Your Reservation History</a></li>
-            </ul>
-            <hr class="history-line">
-            <div class="tab-content mt-0 mt-md-5" id="items-history">
-                <div class="tab-pane fade show active" id="tab3-1">
-                    <% if (client.faveItems && client.faveItems.length > 0) { %>
-                        <div class="items-header">
-                            <h2>Favorite Items | <%= client.faveItems.length %></h2>
-                        </div>
-                        <div class="favorite_list">
-                            <% client.faveItems.forEach(item => { %>
-                                <div class="product">
-                                    <img src="<%= item.srcImg && item.srcImg[0] && item.srcImg[0].startsWith('data:') ? item.srcImg[0] : '/styles/imgs/products/' + (item.srcImg ? item.srcImg[0] : 'default-image.png') %>" alt="<%= item.title %> image" class="product-image">
-                                    <div class="product_dt">
-                                        <span class="product-title"><%= item.title %></span>
-                                        <span class="product-title">$<%= item.price %></span>
-                                    </div>
-                                    <a href="/products/product/<%= item._id %>" class="btn btn-primary mt-2">See Product</a>
-                                </div>
-                            <% }) %>
-                        </div>
-                    <% } else { %>
-                        <div class="no-favorite-items">
-                            <p>No favorite items yet</p>
-                        </div>
-                    <% } %>
-                </div>
-
-                <div class="tab-pane fade" id="tab3-2">
-                    <% if (client.orders && client.orders.length > 0) { %>
-                        <% client.orders.forEach((orderList, index) => { %>
+            <div class="yourhistory">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tab3-1">Your Favorite Items</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tab3-2">Your Reservation History</a></li>
+                </ul>
+                <hr class="history-line">
+                <div class="tab-content mt-0 mt-md-5" id="items-history">
+                    <div class="tab-pane fade show active" id="tab3-1">
+                        <% if (client.faveItems && client.faveItems.length > 0) { %>
                             <div class="items-header">
-                                <h2>Order <%= index + 1 %> | Items: <%= orderList.length %></h2>
+                                <h2>Favorite Items | <%= client.faveItems.length %></h2>
                             </div>
                             <div class="favorite_list">
-                                <% orderList.forEach(order => { %>
+                                <% client.faveItems.forEach(item => { %>
                                     <div class="product">
-                                        <% if (order.type === 'ticket') { %>
-                                            <img src="<%= order.details.opImg && order.details.opImg.startsWith('data:') ? order.details.opImg : '/styles/imgs/tickets/' + (order.details.opImg ? order.details.opImg : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
-                                        <% } else { %>
-                                            <img src="<%= order.details.srcImg && order.details.srcImg[0] && order.details.srcImg[0].startsWith('data:') ? order.details.srcImg[0] : '/styles/imgs/products/' + (order.details.srcImg ? order.details.srcImg[0] : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
-                                        <% } %>
+                                        <img src="<%= item.srcImg && item.srcImg[0] && item.srcImg[0].startsWith('data:') ? item.srcImg[0] : '/styles/imgs/products/' + (item.srcImg ? item.srcImg[0] : 'default-image.png') %>" alt="<%= item.title %> image" class="product-image">
                                         <div class="product_dt">
-                                            <% if (order.type === 'ticket') { %>
-                                                <span class="product-date">Date: <%= new Date(order.details.date).toLocaleDateString() %></span>
-                                                <span class="product-date">Opponent: <%= order.details.opponent %></span>
-                                            <% } %>
-                                            <span class="product-title"><%= order.details.title %></span>
-                                            <span class="product-title">$<%= order.details.price %></span>
+                                            <span class="product-title"><%= item.title %></span>
+                                            <span class="product-title">$<%= item.price %></span>
                                         </div>
-                                        <% if (order.type !== 'ticket') { %>
-                                            <a href="/<%= order.type %>s/<%= order.type %>/<%= order.id %>" class="btn btn-primary mt-2">See Product</a>
-                                        <% } %>
+                                        <a href="/products/product/<%= item._id %>" class="btn btn-custom-gradient mt-2">See Product</a>
                                     </div>
                                 <% }) %>
                             </div>
-                        <% }) %>
-                    <% } else { %>
-                        <div class="no-orders">
-                            <p>No orders yet</p>
-                        </div>
-                    <% } %>
+                        <% } else { %>
+                            <div class="no-favorite-items">
+                                <p>No favorite items yet</p>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab3-2">
+                        <% if (client.orders && client.orders.length > 0) { %>
+                            <% client.orders.forEach((orderList, index) => { %>
+                                <div class="items-header">
+                                    <h2>Order <%= index + 1 %> | Items: <%= orderList.length %></h2>
+                                </div>
+                                <div class="favorite_list">
+                                    <% orderList.forEach(order => { %>
+                                        <div class="product">
+                                            <% if (order.type === 'ticket') { %>
+                                                <img src="<%= order.details.opImg && order.details.opImg.startsWith('data:') ? order.details.opImg : '/styles/imgs/tickets/' + (order.details.opImg ? order.details.opImg : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
+                                            <% } else { %>
+                                                <img src="<%= order.details.srcImg && order.details.srcImg[0] && order.details.srcImg[0].startsWith('data:') ? order.details.srcImg[0] : '/styles/imgs/products/' + (order.details.srcImg ? order.details.srcImg[0] : 'default-image.png') %>" alt="<%= order.details.title %> image" class="product-image">
+                                            <% } %>
+                                            <div class="product_dt">
+                                                <% if (order.type === 'ticket') { %>
+                                                    <span class="product-date">Date: <%= new Date(order.details.date).toLocaleDateString() %></span>
+                                                    <span class="product-date">Opponent: <%= order.details.opponent %></span>
+                                                <% } %>
+                                                <span class="product-title"><%= order.details.title %></span>
+                                                <span class="product-title">$<%= order.details.price %></span>
+                                            </div>
+                                            <% if (order.type !== 'ticket') { %>
+                                                <a href="/<%= order.type %>s/<%= order.type %>/<%= order.id %>" class="btn btn-custom-gradient mt-2">See Product</a>
+                                            <% } %>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <div class="no-orders">
+                                <p>No orders yet</p>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <!-- Footer section -->
     <footer>
@@ -151,19 +148,11 @@
                 <a href="/products">Shop</a>
                 <a href="/tickets">Tickets</a>
                 <a href="/news">About Us</a>
-
             </div>
-
-
-
-            </a>
             <div class="end">
                 <a href="/cart">Cart</a>
                 <a href="/login">Log In</a>
                 <a href="/client">My Account</a>
-
-
-
             </div>
         </nav>
         <!-- Sponsors icons in footer -->
@@ -179,21 +168,14 @@
         </nav>
         <!-- Social Media icons in footer -->
         <nav class="contact">
-            <a href="https://www.facebook.com/RealMadrid/" title="Facebook"><img
-                    src="/styles/imgs/footer/facebook-logo.png" alt="Facebook"></a>
-            <a href="https://www.instagram.com/realmadrid/" title="Instagram"><img
-                    src="/styles/imgs/footer/instagram-logo.png" alt="Instagram"></a>
+            <a href="https://www.facebook.com/RealMadrid/" title="Facebook"><img src="/styles/imgs/footer/facebook-logo.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/realmadrid/" title="Instagram"><img src="/styles/imgs/footer/instagram-logo.png" alt="Instagram"></a>
             <a href="https://twitter.com/realmadrid" title="X"><img src="/styles/imgs/footer/x-logo.png" alt="X"></a>
-            <a href="https://www.youtube.com/realmadrid" title="YouTube"><img src="/styles/imgs/footer/youtube-logo.png"
-                    alt="YouTube"></a>
-            <a href="https://onefootball.com/en/team/real-madrid-26" title="OneFootball"><img
-                    src="/styles/imgs/footer/onefootball-logo.png" alt="OneFootball"></a>
-            <a href="https://www.twitch.tv/realmadrid" title="Twitch"><img src="/styles/imgs/footer/twitch-logo.png"
-                    alt="Twitch"></a>
-            <a href="https://www.snapchat.com/add/realmadrid" title="Snapchat"><img
-                    src="/styles/imgs/footer/snapchat-logo.png" alt="Snapchat"></a>
-            <a href="https://www.tiktok.com/@realmadrid?lang=en" title="TikTok"><img
-                    src="/styles/imgs/footer/tiktok-logo.png" alt="TikTok"></a>
+            <a href="https://www.youtube.com/realmadrid" title="YouTube"><img src="/styles/imgs/footer/youtube-logo.png" alt="YouTube"></a>
+            <a href="https://onefootball.com/en/team/real-madrid-26" title="OneFootball"><img src="/styles/imgs/footer/onefootball-logo.png" alt="OneFootball"></a>
+            <a href="https://www.twitch.tv/realmadrid" title="Twitch"><img src="/styles/imgs/footer/twitch-logo.png" alt="Twitch"></a>
+            <a href="https://www.snapchat.com/add/realmadrid" title="Snapchat"><img src="/styles/imgs/footer/snapchat-logo.png" alt="Snapchat"></a>
+            <a href="https://www.tiktok.com/@realmadrid?lang=en" title="TikTok"><img src="/styles/imgs/footer/tiktok-logo.png" alt="TikTok"></a>
         </nav>
         <div class="logo">
             <img src="/styles/imgs/footer/logo.png" src="logo">
@@ -202,10 +184,8 @@
     </footer>
 
     <!-- Libraries -->
-       <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-    crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

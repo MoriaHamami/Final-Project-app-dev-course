@@ -54,15 +54,16 @@ async function onUpdateTicket(ev) {
         });
 
         if (response) {
-            alert('Ticket updated successfully.');
-            window.location.href = '/tickets';
+            showNotice('Ticket updated successfully.', false);
+            setTimeout(function() {
+                window.location.href = '/tickets';
+            }, 2000);
         }
     } catch (e) {
         console.log('Error:', e);
-        alert('Failed to update the ticket.');
+        showNotice('Failed to update the ticket.', false);
     }
 }
-
 
 // מאזינים לשינויים בקלטים
 function onChangeTitle(newTitle) {
@@ -80,7 +81,7 @@ function onChangeStadium(newStadium) {
 function onChangePrice(newPrice) {
     const price = parseFloat(newPrice);
     if (price < 0) {
-        alert('Price cannot be negative.');
+        showNotice('Price cannot be negative.', false);
         document.getElementById('price').value = 0;
         gPrice = 0;
     } else {
@@ -91,7 +92,6 @@ function onChangePrice(newPrice) {
 function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
-
 
 // הוספת כתובת מקור של תמונה ל-gopImg
 function addTogSrcImgs(opImg) {
@@ -113,7 +113,7 @@ function onAddImg(input) {
                     <li id="0">
                         <img src="${e.target.result}" class="srcImg-0" id="image-preview" width="300">
                         <input type="file" accept="image/*" name="opImg" onchange="onAddImg(event.target)" id="0">
-                        <button type="button" class="deleteImg" onclick="onDeleteImg('0')">מחק</button>
+                        <button type="button" class="deleteImg" onclick="onDeleteImg('0')">Delete</button>
                     </li>`;
             }
             gopImg = e.target.result;
@@ -181,10 +181,13 @@ async function onAddTicket(ev) {
             }),
         });
 
-       alert('New ticket added successfully.');
-       window.location.href = '/tickets';
+        showNotice('New ticket added successfully.', false);
+        setTimeout(function() {
+            window.location.href = '/tickets';
+        }, 2000);
     } catch (e) {
         console.log('Error:', e);
+        showNotice('Failed to add new ticket.', false);
     }
 }
 
@@ -199,13 +202,31 @@ async function onDeleteTicket(id) {
         });
 
         if (res.status !== 404) {
-            alert('Ticket deleted successfully.');
-            window.location.assign('/tickets');
+            showNotice('Ticket deleted successfully.', false);
+            setTimeout(function() {
+                window.location.href = '/tickets';
+            }, 2000);
         } else {
-            alert('Ticket could not be deleted.');
+            showNotice('Ticket could not be deleted.', false);
         }
     } catch (e) {
         console.log('Error:', e);
-        alert('An error occurred while deleting the ticket.');
+        showNotice('An error occurred while deleting the ticket.', false);
     }
+}
+
+// Function to show notice and redirect
+function showNotice(message, redirectToCart) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; // Redirect to the cart page after 1 second
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
 }

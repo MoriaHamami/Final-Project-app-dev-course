@@ -3,140 +3,64 @@ body {
 }
 
 .edit-product {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     background-color: var(--almost-white);
     margin-top: 30px;
-}
-
-.edit-product .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 20px; /* רווח בין האלמנטים */
-}
-
-.edit-product .left-side,
-.edit-product .right-side {
-    background-color: white;
-    margin: 10px;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: var(--card-bsh);
+}
+
+.edit-product h3 {
+    margin: 10px 0;
+}
+
+.edit-imgs,
+#edit-sizes,
+.edit-cat,
+.edit-txt {
+    background-color: white;
+    border-radius: 16px;
     padding: 20px;
     box-shadow: var(--card-bsh);
-    display: flex;
-    flex-direction: column;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    align-items: center;
+    margin-bottom: 20px;
 }
 
-.edit-product .left-side {
-    flex: 2; 
-    gap: 20px;
-}
-
-.edit-product .right-side {
-    flex: 1; 
-}
-
-.edit-product h3:not(.edit-actions) {
-    margin: 5px;
-}
-
-.edit-product #edit-sizes {
-    gap: 20px;
-   margin-left: 14%;
-}
-
-.edit-product #edit-sizes ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.edit-product #edit-sizes li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    list-style-type: none;
-    margin: 5px;
-    width: 100%;
-   
-}
-
-.edit-product #edit-sizes input {
-    margin-right: 15px;
-    width: 35%;
-    text-align: center; 
-    line-height: 1.5; 
-    padding: 5px 10px; 
-}
-
-.edit-product .button-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.edit-product #addItem,
-.edit-product #trash {
-    display: inline-block;
-    float: left;
-    margin: 0 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 14px;
-}
-
+.edit-product .edit-sizes ul,
 .edit-product .edit-imgs ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
-.edit-product button {
-    background-color: white;
+.edit-product .edit-sizes li,
+.edit-product .edit-imgs li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.edit-product .edit-sizes input,
+.edit-product .edit-imgs input,
+.edit-product .edit-cat select,
+.edit-product .edit-txt input {
     border: 1px solid var(--l-gray);
     border-radius: 5px;
-    margin: 3px 2px;
-}
-
-.edit-product button:hover {
-    background-color: var(--ll-gray);
-}
-
-.edit-product label {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-}
-
-.edit-product input {
-    margin-inline-start: 10px;
-    border: 1px solid var(--l-gray);
-    border-radius: 10px;
-    padding: 5px 15px;
-}
-
-.edit-product input:focus {
-    outline: none;
-}
-
-.edit-product li {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    margin: 5px;
-    align-items: center;
+    padding: 10px;
+    width: 100%;
 }
 
 .edit-product img {
     height: 200px;
-    border-radius: 3px;
+    border-radius: 10px;
+}
+
+.edit-product button {
+    margin-top: 10px;
+}
+
+.edit-actions {
+    margin-top: 20px;
 }
 
 .edit-product .edit-actions {
@@ -155,11 +79,21 @@ body {
 }
 
 @media (max-width: 900px) {
-    .edit-product .container {
-        flex-direction: column; /* מעבר לעמודה אחת במסכים קטנים */
+    .edit-product {
+        flex-direction: column;
+        align-items: center;
     }
-    .edit-product .left-side,
-    .edit-product .right-side {
-        width: 100%;
-    }
+}
+
+
+.tog
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-sizes
+{
+    display: flex;
+    align-items: center;
 }

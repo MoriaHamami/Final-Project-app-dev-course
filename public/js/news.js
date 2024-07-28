@@ -32,11 +32,10 @@ async function onUpdateArticle(ev) {
             }),
         });
 
-        alert('Article updated successfully.');
-        window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר עדכון מוצלח
+        showNotice('Article updated successfully.', '/news');
     } catch (e) {
         console.log('Error:', e);
-        alert('An error occurred while updating the article.');
+        showNotice('An error occurred while updating the article.');
     }
 }
 
@@ -51,14 +50,13 @@ async function onDeleteArticle(id) {
         });
 
         if (res.status !== 404) {
-            alert('Article deleted successfully.');
-            window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר מחיקה מוצלחת
+            showNotice('Article deleted successfully.', '/news');
         } else {
-            alert('Article could not be deleted.');
+            showNotice('Article could not be deleted.');
         }
     } catch (e) {
         console.log('Error:', e);
-        alert('An error occurred while deleting the article.');
+        showNotice('An error occurred while deleting the article.');
     }
 }
 
@@ -78,11 +76,10 @@ async function onAddArticle(ev) {
             }),
         });
 
-        alert('New article added successfully.');
-        window.location.href = '/news'; // הפניה לעמוד הכתבות לאחר הוספה מוצלחת
+        showNotice('New article added successfully.', '/news');
     } catch (e) {
         console.log('Error:', e);
-        alert('An error occurred while adding the article.');
+        showNotice('An error occurred while adding the article.');
     }
 }
 
@@ -103,4 +100,17 @@ async function searchNews() {
     } catch (e) {
         console.log('Error searching news:', e);
     }
+function showNotice(message, redirectTo = false) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectTo) {
+            window.location.href = redirectTo; // Redirect to the specified URL
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
 }

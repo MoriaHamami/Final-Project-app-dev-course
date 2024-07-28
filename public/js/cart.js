@@ -35,14 +35,13 @@ async function removeItem(cartItemId) {
 }
 
 function showNotice(message, callback) {
-    console.log('Showing notice:', message); // Debugging
     var noticeModalBody = document.getElementById('noticeModalBody');
     if (noticeModalBody) {
         noticeModalBody.innerText = message;
         var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
         noticeModal.show();
 
-        // סגירת המודל לאחר 2 שניות
+        // Close the modal after 2 seconds
         setTimeout(function() {
             noticeModal.hide();
             if (callback) {
@@ -55,7 +54,16 @@ function showNotice(message, callback) {
 }
 
 
+
 // פונקציה לעדכון סה"כ הפריטים בעגלה
+function showLargePopup() {
+    var popup = document.getElementById('largePopup');
+    popup.style.display = 'block';
+    setTimeout(function() {
+        popup.style.display = 'none';
+    }, 3000); // Display for 3 seconds
+}
+
 async function proceedToShipping() {
     try {
         const response = await $.ajax({
@@ -68,10 +76,10 @@ async function proceedToShipping() {
         });
 
         if (response.success) {
-            showNotice('Thank you for your purchase!');
+            showLargePopup();
             setTimeout(function() {
-                window.location.assign('/'); // העברה לדף הבית
-            }, 2000);
+                window.location.assign('/'); // Redirect to the home page
+            }, 3000); // Wait for the popup to disappear before redirecting
         } else {
             showNotice(response.message || 'Error processing order');
         }
@@ -80,6 +88,16 @@ async function proceedToShipping() {
         showNotice('Error processing order');
     }
 }
+
+function showLargePopup() {
+    var popup = document.getElementById('largePopup');
+    popup.style.display = 'block';
+    setTimeout(function() {
+        popup.style.display = 'none';
+    }, 3000); // Display for 3 seconds
+}
+
+
 
 
 // מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה

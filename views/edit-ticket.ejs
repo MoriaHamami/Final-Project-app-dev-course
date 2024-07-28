@@ -22,7 +22,7 @@
         <div class="edit_img_info">
             <form id="editTicket">
                 <article class="edit-imgs">
-                    <h3>Add rival team image</h3>
+                    <h3>Add Rival Team Image</h3>
                     <ul>
                         <% if (Ticket != null && Ticket.opImg) { %>
                             <li id="0">
@@ -52,7 +52,7 @@
                     </label>
 
                     <label>
-                        Opposing team
+                        Opposing Team
                         <input id="opponent" value="<%= Ticket != null ? Ticket.opponent : '' %>" name="opponent" onchange="onChangeOpponent(event.target.value)">
                     </label>
 
@@ -89,6 +89,20 @@
             </div>
         </form>
     </main>
+
+    <!-- Notice Modal -->
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+                </div>
+                <div class="modal-body" id="noticeModalBody">
+                    <!-- The message will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <%- include('footer.ejs') -%>
 

@@ -8,12 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const confirmation = confirm("Are you sure you want to remove the client from the list?")
                 if (confirmation) {
                     row.remove()
+                    showNotice('Client removed successfully');
                 }
             }
         })
     })
-}) 
-// TO DO MAKE THIS WORK
+})
+
 $('.orders-btn').click(function () {
     var id = $(this).attr('id')
     getOrdersById(id)
@@ -60,7 +61,7 @@ async function getOrdersById(id) {
         $('.shopping-cart').html(str)
     } catch (e) {
         console.log('e:', e)
-        // TODO: Later show an error modal
+        showNotice('Error fetching orders');
     }
 }
 
@@ -70,25 +71,30 @@ function getImgURL(srcImg, folder){
         return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg)
 }
 
- 
 async function onDeleteClient(id) { 
     try {
-        // Send a delete request using ajax, and send on the body the id of the product to delete
         const res = await $.ajax({
             url: '/clients/edit/' + id,
             method: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify({ id }),
         })
-        if (res.status !== 404) window.location.assign('/clients')
+        if (res.status !== 404) {
+            showNotice('Client deleted successfully');
+            window.location.assign('/clients')
+        } else {
+            showNotice('Client not found');
+        }
     } catch (e) {
         console.log('e:', e)
-    } 
-} async function onBlockClient(id, isBanned) { 
+        showNotice('Error deleting client');
+    }
+} 
+
+async function onBlockClient(id, isBanned) { 
     console.log("in js")
 
     try {
-        // Send a PATCH request to update the block status
         const res = await $.ajax({
             url: '/clients/block/' + id,
             method: 'PATCH',
@@ -97,14 +103,13 @@ async function onDeleteClient(id) {
         });
 
         if (res.status !== 200) {
-            alert('Failed to update block status');
+            showNotice('Failed to update block status');
         } else {
-            // Optionally, update the UI to reflect the change
-            console.log('Block status updated successfully');
+            showNotice('Block status updated successfully');
         }
     } catch (e) {
         console.log('Error:', e);
-        alert('Failed to update block status');
+        showNotice('Failed to update block status');
     }
 }
 
@@ -115,3 +120,17 @@ async function onDeleteClient(id) {
             $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
         });
     });
+function showNotice(message, redirectToCart = false) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; // Redirect to the cart page after 1 second
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
+}

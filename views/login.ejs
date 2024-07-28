@@ -36,7 +36,7 @@
         <input class="userDetails" name="username">
         <input class="userDetails" name="password" type="password">
         <div class="btn">
-          <input type="submit" class="btn btn-primary" role="button" data-bs-toggle="button"></input>
+          <input type="submit" class="btn btn-primary" role="button" data-bs-toggle="button" value="Log in"></input>
         </div>
       </form>
 
@@ -56,10 +56,24 @@
     </div>
   </main>
   <!-- or login with facebook -->
-  <div class="btn-container" >
+  <div class="btn-container">
     <a class="btn btn-primary" id="google" role="button" data-bs-toggle="button" href="/facebook/auth/facebook" class="waves-effect waves-light btn social facebook">
       <i class="fa fa-facebook"></i> Sign in with facebook
     </a>
+  </div>
+
+  <!-- Notice Modal -->
+  <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+            </div>
+            <div class="modal-body" id="noticeModalBody">
+                <!-- The message will be inserted here -->
+            </div>
+        </div>
+    </div>
   </div>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>

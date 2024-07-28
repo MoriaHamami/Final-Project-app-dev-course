@@ -135,33 +135,45 @@ const deleteProduct = async (req, res) => {
   }
 }
 
-const toggleWishlist = async (req, res) => {
-  const { productId, isAdding } = req.body;
-  const username = req.session.username;
+function toggleWishlist(event, button, productId) {
+  event.preventDefault();
+  event.stopPropagation();
 
-  if (!username) {
-      return res.status(401).json({ success: false, message: 'עליך להתחבר תחילה כדי להוסיף למועדפים.' });
-  }
+  const icon = button.querySelector('i');
+  const isAdding = !icon.classList.contains('bi-heart-fill');
 
-  try {
-      const client = await Client.findOne({ username });
-
-      if (isAdding) {
-          if (!client.faveItems.includes(productId)) {
-              client.faveItems.push(productId);
+  $.ajax({
+      url: `/products/toggle-wishlist`,
+      method: 'POST',
+      data: JSON.stringify({ productId, isAdding }),
+      contentType: 'application/json',
+      success: function (response) {
+          if (response.success) {
+              icon.classList.toggle('bi-heart');
+              icon.classList.toggle('bi-heart-fill');
+              button.classList.toggle('wishlist-active');
+              const message = isAdding ? 'Item successfully added to wishlist' : 'Item removed from wishlist';
+              showNotice(message, false);
+          } else {
+              if (response.message) {
+                  showNotice(response.message, false); // הצגת הודעת השגיאה
+              } else {
+                  console.error('Error toggling wishlist:', response.error);
+                  showNotice('Error: ' + response.error, false);
+              }
           }
-      } else {
-          client.faveItems = client.faveItems.filter(item => item.toString() !== productId);
+      },
+      error: function (error) {
+          if (error.status === 401) {
+              showNotice('You must log in first to add to wishlist.', true); // הצגת הודעת החיבור
+          } else {
+              console.error('Error toggling wishlist:', error);
+              showNotice('Error: ' + error.responseText, false);
+          }
       }
+  });
+}
 
-      await client.save();
-
-      res.json({ success: true });
-  } catch (error) {
-      console.error('Error toggling wishlist:', error);
-      res.status(500).json({ success: false, error: 'Internal server error' });
-  }
-};
 
 
 

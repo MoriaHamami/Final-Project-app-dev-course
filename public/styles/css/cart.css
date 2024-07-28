@@ -298,3 +298,100 @@ header {
         margin-bottom: 10px;
     }
 }
+/* Large popup styling */
+.large-popup {
+    display: none; /* Hide by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* On top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Disable scroll */
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    color: white;
+    text-align: center;
+}
+
+.large-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6);
+    display: inline-block;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.large-popup h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.large-popup p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.large-popup button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #2575fc;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.large-popup button:hover {
+    background-color: #2575fc;
+    color: #fff;
+}
+
+/* Modal styling */
+.modal-dialog {
+    border-radius: 30px; /* Rounded corners for the modal container */
+    overflow: hidden; /* Ensures rounded corners are applied to content inside */
+  }
+  
+  .modal-content {
+    border-radius: 30px; /* Rounded corners for the modal content */
+    border: none;
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    position: relative;
+  }
+  
+  .modal-header, .modal-footer {
+    border: none;
+    justify-content: center;
+    font-size: 1em;
+    padding: 20px; /* Adjusted padding for a balanced look */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+  }
+  
+  .modal-header {
+    border-top-left-radius: 30px; /* Rounded corners for the header */
+    border-top-right-radius: 30px; /* Rounded corners for the header */
+  }
+  
+  .modal-footer {
+    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
+    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
+  }
+  
+  .modal-body {
+    padding: 20px; /* Adjusted padding for a balanced look */
+    text-align: center;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  }
+  

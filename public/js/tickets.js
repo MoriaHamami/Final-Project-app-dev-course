@@ -102,7 +102,8 @@ function renderTickets(isManager, tickets) {
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <a href="#" class="btn btn-primary" onclick="addToCart('${tickets[i]._id}')">
+                        <a href="#" class="btn btn-primary custom-button"
+                            onclick="addToCart('${tickets[i]._id}')">
                             <i class="bi bi-gem"></i> Buy ticket NOW
                         </a>
                     </ul>
@@ -170,6 +171,8 @@ function showNotice(message, redirectToLogin) {
 }
 
 // Function to navigate to the ticket edit page based on the ticket ID (duplicate, possible mistake in the original code)
+
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }
+

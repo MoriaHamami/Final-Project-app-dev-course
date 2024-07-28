@@ -1,4 +1,3 @@
-/* tickets.css */
 .tickets {
     background-color: var(--almost-white);
     padding: 20px;
@@ -220,6 +219,27 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.custom-button {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    border: none; /* במידה ואתה רוצה להוריד את הגבול */
+    color: white; /* במידה ואתה רוצה לשנות את צבע הטקסט */
+}
+
+.btn-secondary {
+    background: linear-gradient(90deg, #a8c0ff 0%, #d9ded8 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-secondary:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #d9ded8 0%, #a8c0ff 100%);
+}
+
 .ticket-info div {
     margin: 5px 0;
 }
@@ -351,3 +371,44 @@
 .btn {
     color: black !important;
 }
+
+/* Modal styling */
+.modal-dialog {
+    border-radius: 30px; /* Rounded corners for the modal container */
+    overflow: hidden; /* Ensures rounded corners are applied to content inside */
+  }
+  
+  .modal-content {
+    border-radius: 30px; /* Rounded corners for the modal content */
+    border: none;
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    position: relative;
+  }
+  
+  .modal-header, .modal-footer {
+    border: none;
+    justify-content: center;
+    font-size: 1em;
+    padding: 20px; /* Adjusted padding for a balanced look */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+  }
+  
+  .modal-header {
+    border-top-left-radius: 30px; /* Rounded corners for the header */
+    border-top-right-radius: 30px; /* Rounded corners for the header */
+  }
+  
+  .modal-footer {
+    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
+    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
+  }
+  
+  .modal-body {
+    padding: 20px; /* Adjusted padding for a balanced look */
+    text-align: center;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  }
+  

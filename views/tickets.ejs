@@ -15,135 +15,210 @@
 
 <body>
     <%- include('header.ejs', {page:'tickets'}) -%>
-    <hr>
-    <main class="tickets">
-        <div class="background-image">
-            <h1>Tickets</h1>
-        </div>
-        
-        <!-- Filters -->
-        <div class="filters-container">
-            <div class="filters">
-                <span class="me-3">
-                    <input name="titleFilter" value="" onkeyup="setTitle('<%=isManager%>', event.target.value)"
-                        class="form-control" placeholder="Title">
-                </span>
-                <span class="me-3">
-                    <select id="stadiumFilter" onchange="setStadiumFilter(event.target.value)" class="form-select"
-                        aria-label="Stadium Filter">
-                        <option value="">Select Stadium</option>
-                        <% const uniqueStadiums=new Set(); ALLTickets.forEach(ticket=> {
-                            uniqueStadiums.add(ticket.stadium);
-                            });
-                            uniqueStadiums.forEach(stadium => { %>
-                            <option value="<%= stadium %>">
-                                <%= stadium %>
-                            </option>
-                            <% }); %>
-                    </select>
-                </span>
-                <span class="months" role="group" aria-label=".">
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 0)">All Tickets</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 1)">Jan</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 2)">Feb</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 3)">Mar</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 4)">Apr</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 5)">May</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 6)">Jun</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 7)">Jul</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 8)">Aug</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 9)">Sep</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 10)">Oct</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 11)">Nov</button>
-                    <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 12)">Dec</button>
-                </span>
+        <hr>
+        <main class="tickets">
+            <div class="background-image">
+                <h1>Tickets</h1>
             </div>
-        </div>
 
-        <div class="cards-container" id="tickets">
-            <% if (ALLTickets.length > 0) { %>
-                <% for (let i = 0; i < ALLTickets.length; i++) { %>
-                    <div class="card" style="width: 18rem;" data-stadium="<%= ALLTickets[i].stadium %>">
-                        <div class="battle">
-                            <div class="team">
-                                <img src="/styles/imgs/tickets/real.webp" id="real" alt="real">
-                                <span>Real Madrid<br></span>
+            <!-- Filters -->
+            <div class="filters-container">
+                <div class="filters">
+                    <span class="me-3">
+                        <input name="titleFilter" value="" onkeyup="setTitle('<%=isManager%>', event.target.value)"
+                            class="form-control" placeholder="Title">
+                    </span>
+                    <span class="me-3">
+                        <select id="stadiumFilter" onchange="setStadiumFilter(event.target.value)" class="form-select"
+                            aria-label="Stadium Filter">
+                            <option value="">Select Stadium</option>
+                            <% const uniqueStadiums=new Set(); ALLTickets.forEach(ticket=> {
+                                uniqueStadiums.add(ticket.stadium);
+                                });
+                                uniqueStadiums.forEach(stadium => { %>
+                                <option value="<%= stadium %>">
+                                    <%= stadium %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </span>
+                    <span class="months" role="group" aria-label=".">
+                        <button type="button" class="btn btn-secondary" onclick="setMonth('<%=isManager%>', 0)">All
+                            Tickets</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 1)">Jan</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 2)">Feb</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 3)">Mar</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 4)">Apr</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 5)">May</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 6)">Jun</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 7)">Jul</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 8)">Aug</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 9)">Sep</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 10)">Oct</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 11)">Nov</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="setMonth('<%=isManager%>', 12)">Dec</button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="cards-container" id="tickets">
+                <% if (ALLTickets.length> 0) { %>
+                    <% for (let i=0; i < ALLTickets.length; i++) { %>
+                        <div class="card" style="width: 18rem;" data-stadium="<%= ALLTickets[i].stadium %>">
+                            <div class="battle">
+                                <div class="team">
+                                    <img src="/styles/imgs/tickets/real.webp" id="real" alt="real">
+                                    <span>Real Madrid<br></span>
+                                </div>
+                                <div>
+                                    <img src="https://assets.realmadrid.com/is/content/realmadrid/4oogyu6o156iphvdvphwpck10-logo?$Mobile$&wid=144&hei=144"
+                                        class="card-img-top" alt="championleague">
+                                </div>
+                                <div class="team">
+                                    <img src="<%= ALLTickets[i].opImg.startsWith('data:') ? ALLTickets[i].opImg : '/styles/imgs/tickets/' + ALLTickets[i].opImg %>"
+                                        id="byren" alt="byren">
+                                    <span>
+                                        <%= ALLTickets[i].opponent %><br>
+                                    </span>
+                                </div>
                             </div>
-                            <div>
-                                <img src="https://assets.realmadrid.com/is/content/realmadrid/4oogyu6o156iphvdvphwpck10-logo?$Mobile$&wid=144&hei=144"
-                                    class="card-img-top" alt="championleague">
-                            </div>
-                            <div class="team">
-                                <img src="<%= ALLTickets[i].opImg.startsWith('data:') ? ALLTickets[i].opImg : '/styles/imgs/tickets/' + ALLTickets[i].opImg %>"
-                                    id="byren" alt="byren">
-                                <span><%= ALLTickets[i].opponent %><br></span>
+                            <div class="card-body">
+                                <% if (isManager) { %>
+                                    <div class="edit-icon" onclick="getEditTicketPage('<%= ALLTickets[i]._id %>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </div>
+                                    <% } %>
+                                        <h4 class="card-title">
+                                            <%= ALLTickets[i].title %>
+                                        </h4>
+                                        <div>
+                                            <i class="bi bi-calendar3"></i>
+                                            <span>
+                                                <%= ALLTickets[i].date.toLocaleDateString() %>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-clock"></i>
+                                            <span>
+                                                <%= ALLTickets[i].date.toLocaleTimeString([], { hour: '2-digit' ,
+                                                    minute: '2-digit' }) %>
+                                            </span>
+                                        </div>
+                                        <div class="icon-text-container">
+                                            <div>
+                                                <i class="bi bi-geo-alt"></i>
+                                                <span>
+                                                    <%= ALLTickets[i].stadium %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="icon-text-container">
+                                            <div>
+                                                <i class="bi bi-ticket-detailed"></i>
+                                                <span id="priceof_tic">
+                                                    <%= ALLTickets[i].price %>€
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <a href="#" class="btn btn-primary custom-button"
+                                                onclick="addToCart('<%= ALLTickets[i]._id %>')">
+                                                <i class="bi bi-gem"></i> Buy ticket NOW
+                                            </a>
+                                        </ul>
+
                             </div>
                         </div>
-                        <div class="card-body">
-                            <% if (isManager) { %>
-                                <div class="edit-icon" onclick="getEditTicketPage('<%= ALLTickets[i]._id %>')">
-                                    <i class="bi bi-pencil"></i>
-                                </div>
-                            <% } %>
-                            <h4 class="card-title"><%= ALLTickets[i].title %></h4>
-                            <div>
-                                <i class="bi bi-calendar3"></i>
-                                <span><%= ALLTickets[i].date.toLocaleDateString() %></span>
-                            </div>
-                            <div>
-                                <i class="bi bi-clock"></i>
-                                <span><%= ALLTickets[i].date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></span>
-                            </div>
-                            <div class="icon-text-container">
-                                <div>
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span><%= ALLTickets[i].stadium %></span>
-                                </div>
-                            </div>
-                            <div class="icon-text-container">
-                                <div>
-                                    <i class="bi bi-ticket-detailed"></i>
-                                    <span id="priceof_tic"><%= ALLTickets[i].price %>€</span>
-                                </div>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <a href="#" class="btn btn-primary" onclick="addToCart('<%= ALLTickets[i]._id %>')">
-                                    <i class="bi bi-gem"></i> Buy ticket NOW
-                                </a>
-                            </ul>
-                        </div>
+                        <% } %>
+                            <% } else { %>
+                                <p>No tickets available</p>
+                                <% } %>
+            </div>
+        </main>
+        <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
                     </div>
-                <% } %>
-            <% } else { %>
-                <p>No tickets available</p>
-            <% } %>
-        </div>
-    </main>
-    <%- include('footer.ejs') -%>
-
-    <!-- Modal -->
-    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="noticeModalLabel">Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="noticeModalBody">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-body" id="noticeModalBody">
+                        <!-- The message will be inserted here -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <%- include('footer.ejs') -%>
 
-    <!-- Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/tickets.js"></script>
 
+            
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/tickets.js"></script>
+            <script>
+                async function addToCart(ticketId) {
+                    try {
+                        const response = await fetch('/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': '*/*',
+                                'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            body: JSON.stringify({
+                                productId: ticketId,
+                                quantity: 1  // כמות קבועה
+                            }),
+                            credentials: 'include'
+                        });
+                        if (response.status === 401) {
+                            showNotice('You need to log in first', true);
+                        } else if (response.ok) {
+                            const result = await response.json();
+                            if (result.success) {
+                                showNotice('Ticket added to cart successfully', false);
+                            } else {
+                                showNotice('Error adding ticket to cart', false);
+                            }
+                        } else {
+                            showNotice('Error adding ticket to cart', false);
+                        }
+                    } catch (e) {
+                        showNotice('Error adding ticket to cart', false);
+                    }
+                }
+
+                function showNotice(message, redirectToLogin) {
+                    document.getElementById('noticeModalBody').innerText = message;
+                    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+                    noticeModal.show();
+
+                    setTimeout(function () {
+                        if (redirectToLogin) {
+                            window.location.href = '/login';
+                        } else {
+                            noticeModal.hide();
+                        }
+                    }, 3000); // Adjust the timeout as needed
+                }
+                ז
+                function getEditTicketPage(ticketId) {
+                    window.location.href = `/tickets/edit/${ticketId}`;
+                }
+            </script>
 </body>
 
 </html>

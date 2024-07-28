@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Manager Area | Edit Products </title>
+    <title>Manager Area | Edit Products</title>
     <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
     <!-- Libraries -->
@@ -20,133 +20,116 @@
     <!-- Header include (assuming it's a server-side include) -->
     <!-- <%- include('header.ejs', {page:'edit-product'}) -%> -->
 
-    <main class="edit-product">
-        <form id="editProduct">
-            <div class="container">
-                <div class="left-side">
-                    <article class="edit-cat">
-                        <h3>Category</h3>
-                        <select onchange="onChangeCat('select')">
-                            <% for (let i = 0; i < cats.length; i++) { %>
-                                <option id="<%= i %>" value="<%= cats[i] %>"
-                                    <%= product?.cat === cats[i] ? "selected" : "" %>>
-                                    <%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
-                                </option>
-                            <% } %>
-                            <option value="other">Other</option>
-                        </select>
-                    </article>
-                    <article class="edit-txt">
-                        <h3>Info</h3>
-                        <section class="info">
-                            <label>
-                                Title
-                                <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title"
-                                    onchange="onChangeTitle(event.target.value)">
-                            </label>
-                            <label>
-                                Color
-                                <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color"
-                                    onchange="onChangeColor(event.target.value)">
-                            </label>
-                            <label>
-                                Price
-                                <input id="price" type="number" value="<%= (product !=null) ? product.price : 0 %>"
-                                    name="price" onchange="onChangePrice(event.target.value)">
-                            </label>
-                            <label>
-                                Favorite Player
-                                <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
-                                    name="favePlayer" onchange="onChangeFavePlayer(event.target.value)">
-                            </label>
-                        </section>
-                    </article>
-                    <article id="edit-sizes">
-                        <h3>Sizes</h3>
-                        <% if (product !=null) { %>
-                            <ul>
-                                <% for (let i = 0; i < product.sizes.length; i++) { %>
-                                    <li id="<%= i %>">
-                                        <input value="<%= product.sizes[i] %>" name="sizes">
-                                        <button type="button" onclick="onDeleteSize('<%=i%>')">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </li>
-                                <% } %>
-                            </ul>
-                        <% } else { %>
-                            <ul>
-                                <li id="0">
-                                    <input value="S">
-                                    <button id="trash" type="button" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        <% } %>
-                        <button id="addItem" onclick="onAddSize(event.target)" type="button">
-                            <i class="bi bi-plus"></i>
-                            Add size
-                        </button>
-                    </article>
-                </div>
-                <div class="right-side edit-imgs">
-                    <h3>Images</h3>
-                    <ul>
-                        <% if (product !=null) { %>
-                            <% for (let i = 0; i < product.srcImg.length; i++) { %>
-                                <li id="<%= i %>">
-                                    <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i]) %>"
-                                        class="srcImg-<%= i %>">
-                                    <input type="file" accept="image/*" name="srcImg"
-                                        onchange="onChangeImg(event.target)"
-                                        src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i]) %>"
-                                        id="<%= i %>">
-                                    <button type="button">UPDATE</button>
-                                    <button type="button" id="<%= i %>" class="deleteImg"
-                                        onclick="onDeleteImg('<%= i %>')">DELETE</button>
-                                </li>
-                            <% } %>
-                        <% } else { %>
-                            <li id="0">
-                                <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
-                                <input type="file" accept="image/*" name="srcImg"
-                                    src="/styles/imgs/products/shirt.png" id="0"
-                                    onchange="onChangeImg(event.target)">
-                                <button type="button" id="0" class="deleteImg" onclick="onDeleteImg(0)">DELETE</button>
+    <main class="edit-product container">
+        <form id="editProduct" class="row">
+            <article class="edit-imgs col-md-6 mb-4">
+                <h3 class="text-center">Images</h3>
+                <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+                    <% if (product != null) { %>
+                        <% for (let i = 0; i < product.srcImg.length; i++) { %>
+                            <li id="<%= i %>" class="text-center mx-2">
+                                <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i]) %>" class="srcImg-<%= i %> img-thumbnail">
+                                <input type="file" accept="image/*" name="srcImg" class="form-control mt-2"
+                                    onchange="onChangeImg(event.target)"
+                                    src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i]) %>"
+                                    id="<%= i %>">
+                                <button type="button" id="<%= i %>" class="btn btn-danger btn-sm mt-2 deleteImg"
+                                    onclick="onDeleteImg('<%= i %>')">DELETE</button>
                             </li>
                         <% } %>
-                    </ul>
-                    <button>
-                        <input type="file" accept="image/*" name="addImg" onchange="onAddImg(event.target)">
-                        <i class="bi bi-plus"></i>
-                        Add another image
-                    </button>
-                </div>
-            </div>
-
-            <article class="edit-actions">
-                <% if (product !=null) { %>
-                    <button type="button" id="updateButton" value="<%= product._id %>" onclick="onUpdateProduct(event)">
-                        Save Changes
-                    </button>
-                    <button type="button" id="deleteButton" onclick="onDeleteProduct('<%= product._id %>')">
-                        Delete Item
-                    </button>
-                <% } else { %>
-                    <button id="addButton" onclick="onAddProduct(event)">
-                        Add Item
-                    </button>
-                <% } %>
+                    <% } else { %>
+                        <li id="0" class="text-center mx-2">
+                            <img src="/styles/imgs/products/shirt.png" class="srcImg-0 img-thumbnail">
+                            <input type="file" accept="image/*" name="srcImg" class="form-control mt-2" src="/styles/imgs/products/shirt.png" id="0" onchange="onChangeImg(event.target)">
+                            <button type="button" id="0" class="btn btn-danger btn-sm mt-2 deleteImg" onclick="onDeleteImg(0)">DELETE</button>
+                        </li>
+                    <% } %>
+                </ul>
+                <button type="button" class="btn btn-primary mt-3 w-100">
+                    <input type="file" accept="image/*" name="addImg" onchange="onAddImg(event.target)" class="d-none">
+                    <i class="bi bi-plus"></i> Add another image
+                </button>
             </article>
+
+            <div class="col-md-6">
+                <article id="edit-sizes" class="mb-4">
+                    <h3 class="text-center">Sizes</h3>
+                    <% if (product != null) { %>
+                        <ul class="list-unstyled">
+                            <% for (let i = 0; i < product.sizes.length; i++) { %>
+                                <li id="<%= i %>" class="d-flex align-items-center mb-2">
+                                    <input value="<%= product.sizes[i] %>" name="sizes" class="form-control me-2" onchange="onChangeSize(event.target.value, '<%= i %>')">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="onDeleteSize('<%= i %>')"><i class="bi bi-trash"></i></button>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } else { %>
+                        <ul class="list-unstyled">
+                            <li id="0" class="d-flex align-items-center mb-2">
+                                <input value="S" name="sizes" class="form-control me-2" onchange="onChangeSize(event.target.value, '0')">
+                                <button type="button" class="btn btn-danger btn-sm" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i></button>
+                            </li>
+                        </ul>
+                    <% } %>
+                    <button type="button" class="btn btn-primary w-100" onclick="onAddSize()">
+                        <i class="bi bi-plus"></i> Add size
+                    </button>
+                </article>
+
+                <article class="edit-cat mb-4">
+                    <h3 class="text-center">Category</h3>
+                    <select class="form-select" onchange="onChangeCat('select')">
+                        <% for (let i = 0; i < cats.length; i++) { %>
+                            <option id="<%= i %>" value="<%= cats[i] %>" <%= product?.cat === cats[i] ? "selected" : "" %>><%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %></option>
+                        <% } %>
+                        <option value="other">Other</option>
+                    </select>
+                </article>
+
+                <article class="edit-txt mb-4">
+                    <h3 class="text-center">Info</h3>
+                    <section class="info">
+                        <label class="d-flex justify-content-between mb-3">
+                            Title
+                            <input id="title" value="<%= (product != null) ? product.title : '' %>" name="title" class="form-control ms-2" onchange="onChangeTitle(event.target.value)">
+                        </label>
+                        <label class="d-flex justify-content-between mb-3">
+                            Color
+                            <input id="color" value="<%= (product != null) ? product.color : '' %>" name="color" class="form-control ms-2" onchange="onChangeColor(event.target.value)">
+                        </label>
+                        <label class="d-flex justify-content-between mb-3">
+                            Price
+                            <input id="price" type="number" value="<%= (product != null) ? product.price : 0 %>" name="price" class="form-control ms-2" onchange="onChangePrice(event.target.value)">
+                        </label>
+                        <label class="d-flex justify-content-between mb-3">
+                            Favorite Player
+                            <input id="favePlayer" value="<%= (product != null) ? product.favePlayer : '' %>" name="favePlayer" class="form-control ms-2" onchange="onChangeFavePlayer(event.target.value)">
+                        </label>
+                    </section>
+                </article>
+
+                <article class="edit-actions text-center col-12">
+                    <% if (product != null) { %>
+                        <button type="button" id="updateButton" value="<%= product._id %>" class="btn btn-success me-2" onclick="onUpdateProduct(event)">
+                            Save Changes
+                        </button>
+                        <button type="button" id="deleteButton" class="btn btn-danger" onclick="onDeleteProduct('<%= product._id %>')">
+                            Delete Item
+                        </button>
+                    <% } else { %>
+                        <button id="addButton" class="btn btn-primary" onclick="onAddProduct(event)">
+                            Add Item
+                        </button>
+                    <% } %>
+                </article>
+            </div>
         </form>
     </main>
 
-    <!-- Footer include (assuming it's a server-side include) -->
-    <!-- <%- include('footer.ejs') -%> -->
+    <%- include('footer.ejs') -%>
 
-    <!-- Libraries  -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/edit-product.js"></script>
 </body>
 
