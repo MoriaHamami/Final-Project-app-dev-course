@@ -78,7 +78,7 @@ app.use("/products", require("./routes/products"))
 app.use("/tickets", require("./routes/tickets"))
 app.use("/news", require("./routes/news"))
 app.use("/manager", require("./routes/manager"))
-app.use("/fave", require("./routes/fave"))
+// app.use("/fave", require("./routes/fave"))
 
 
 app.use("/clients", require("./routes/clients"))
@@ -92,10 +92,6 @@ app._router.stack.forEach(function(r) {
   }
 });
 
-// const ticketsService = require('./services/tickets'); // הוספת ה-import
-// // קריאה לפונקציות הבדיקה
-// ticketsService.testTicketsByMonthRange(8); // בדיקה לאוגוסט
-// ticketsService.testTicketsByStadium('Municipal de Montilivi'); // בדיקה לאצטדיון
 
 const port = process.env.PORT || 8084;
 app.listen(port, () => {

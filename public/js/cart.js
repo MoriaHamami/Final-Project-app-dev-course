@@ -82,3 +82,11 @@ async function proceedToShipping() {
 }
 
 
+// מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה
+var cartItems = <%- JSON.stringify(cartItems || []) %>;
+
+function goToProductsPage() {
+    window.location.assign('/products');
+}
+
+

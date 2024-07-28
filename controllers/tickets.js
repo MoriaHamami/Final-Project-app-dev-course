@@ -1,6 +1,7 @@
 const ticketsService = require('../services/tickets');
 const loginController = require('./login');
 
+// Function to get all tickets and render the tickets page
 const getTickets = async (req, res) => {
   try {
     const ALLTickets = await ticketsService.getTickets();
@@ -11,6 +12,7 @@ const getTickets = async (req, res) => {
   }
 };
 
+// Function to get tickets by filters (title, month, stadium)
 const getTicketsByFilter = async (req, res) => {
   try {
     const titleFilter = req.query.title;
@@ -34,23 +36,20 @@ const getTicketsByFilter = async (req, res) => {
       }
 
       filter.$or = dateFilters;
-      console.log(`Filtering by month: ${JSON.stringify(dateFilters)}`);
     }
 
     if (stadiumFilter) {
       filter.stadium = stadiumFilter;
-      console.log(`Filtering by stadium: ${stadiumFilter}`);
     }
 
-    console.log('Filter object:', filter);
     const tickets = await ticketsService.getTickets(filter);
-    console.log('Tickets found:', tickets);
     res.json(tickets);
   } catch (e) {
     res.status(500).send('Internal Server Error');
   }
 };
 
+// Function to get tickets by date
 const getTicketsByDate = async (req, res) => {
   try {
     const monthFilter = req.query.date;
@@ -61,6 +60,7 @@ const getTicketsByDate = async (req, res) => {
   }
 };
 
+// Function to create a new ticket
 const createTicket = async (req, res) => {
   const { title, price, stadium, opImg, opponent, date } = req.body;
   try {
@@ -71,6 +71,7 @@ const createTicket = async (req, res) => {
   }
 };
 
+// Function to get a single ticket by ID
 const getTicket = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -90,6 +91,7 @@ const getTicket = async (req, res) => {
   }
 };
 
+// Function to update a ticket by ID
 const updateTicket = async (req, res) => {
   const id = req.params.id;
   const { title, price, stadium, opImg, opponent, date } = req.body;
@@ -106,12 +108,13 @@ const updateTicket = async (req, res) => {
     ticket.date = date !== undefined ? new Date(date) : ticket.date;
 
     await ticket.save();
-    res.json(ticket);  // Send the updated ticket as a response
+    res.json(ticket);
   } catch (e) {
     res.status(500).json({ error: "Ticket wasn't saved successfully", details: e });
   }
 };
 
+// Function to delete a ticket by ID
 const deleteTicket = async (req, res) => {
   try {
     const Ticket = await ticketsService.deleteTicket(req.params.id);
@@ -124,6 +127,7 @@ const deleteTicket = async (req, res) => {
   }
 };
 
+// Export all the functions to be used in other parts of the application
 module.exports = {
   getTickets,
   getTicketsByDate,

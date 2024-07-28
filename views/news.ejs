@@ -218,25 +218,7 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/news.js"></script> <!-- Assuming you have a separate news.js file for your news page logic -->
-    <script>
-        async function searchNews() {
-            const genre = document.getElementById('genreFilter').value;
-            const text = document.getElementById('textFilter').value;
 
-            try {
-                const response = await $.ajax({
-                    url: '/news/search',
-                    method: 'GET',
-                    data: { genre, text },
-                });
-
-                // הצגת התוצאות בדף (נניח שיש אלמנט עם id 'newsResults' להצגת התוצאות)
-                $('#newsResults').html(response);
-            } catch (e) {
-                console.log('Error searching news:', e);
-            }
-        }
-    </script>
     <!--The JS library for the google map -->
     <script
         src="<%='https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_KEY +'&loading=async&libraries=maps,marker&v=beta'%>"
