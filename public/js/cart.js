@@ -35,13 +35,14 @@ async function removeItem(cartItemId) {
 }
 
 function showNotice(message, callback) {
+    console.log('Showing notice:', message); // Debugging
     var noticeModalBody = document.getElementById('noticeModalBody');
     if (noticeModalBody) {
         noticeModalBody.innerText = message;
         var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
         noticeModal.show();
 
-        // Close the modal after 2 seconds
+        // סגירת המודל לאחר 2 שניות
         setTimeout(function() {
             noticeModal.hide();
             if (callback) {
@@ -53,33 +54,25 @@ function showNotice(message, callback) {
     }
 }
 
-
-
-// פונקציה לעדכון סה"כ הפריטים בעגלה
-function showLargePopup() {
-    var popup = document.getElementById('largePopup');
-    popup.style.display = 'block';
-    setTimeout(function() {
-        popup.style.display = 'none';
-    }, 3000); // Display for 3 seconds
-}
-
 async function proceedToShipping() {
     try {
+        // חישוב הסכום הכולל של העגלה
+        const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+
         const response = await $.ajax({
             url: '/cart/checkout',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
-                cartItems: window.cartItems // כאן משתמשים במשתנה cartItems
+                cartTotal: cartTotal // העברת הסכום הכולל לשרת
             })
         });
 
         if (response.success) {
-            showLargePopup();
+            showNotice('Thank you for your purchase!');
             setTimeout(function() {
-                window.location.assign('/'); // Redirect to the home page
-            }, 3000); // Wait for the popup to disappear before redirecting
+                window.location.assign('/'); // העברה לדף הבית
+            }, 2000);
         } else {
             showNotice(response.message || 'Error processing order');
         }
@@ -88,23 +81,4 @@ async function proceedToShipping() {
         showNotice('Error processing order');
     }
 }
-
-function showLargePopup() {
-    var popup = document.getElementById('largePopup');
-    popup.style.display = 'block';
-    setTimeout(function() {
-        popup.style.display = 'none';
-    }, 3000); // Display for 3 seconds
-}
-
-
-
-
-// מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה
-var cartItems = <%- JSON.stringify(cartItems || []) %>;
-
-function goToProductsPage() {
-    window.location.assign('/products');
-}
-
 

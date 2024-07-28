@@ -14,10 +14,12 @@ function updateOutput(newPrice) {
     // When the slider moves, show in output the value
     $("output").text(newPrice);
 }
+
 function setCat(newCat) {
     gCat = newCat;
     getProductsBy();
 }
+
 function setTitle(newTitle) {
     gTitle = newTitle;
     // clearTimeOut to reset the timer 
@@ -25,11 +27,13 @@ function setTitle(newTitle) {
     // Updates the products only after the user finished typing
     timeOutFunctionId = setTimeout(getProductsBy, 200);
 }
+
 function setPrice(newPrice) {
     gPrice = newPrice;
     $('.price-val').text(newPrice);
     getProductsBy();
 }
+
 function updatePriceVal(newPrice) {
     $('.price-val').text(newPrice);
 }
@@ -45,8 +49,8 @@ async function sortProductsBy(sortVal) {
         const capSortVal = sortVal.charAt(0).toUpperCase() + sortVal.slice(1);
         // Change the icon showing the ascend and descend direction in sort button
         $(`.products .sortBy${capSortVal}Btn`).html(`
-        <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
-        Sort By ${capSortVal}
+            <i class="bi bi-caret-${gSortIsAsc[sortVal] ? 'up' : 'down'}"></i>
+            Sort By ${capSortVal}
         `);
     } catch (e) {
         console.log('Products were not sorted successfully');
@@ -60,7 +64,7 @@ async function getProductsBy(sortVal = '', isAsc = true) {
 
         // Send a get request with the param and sort values from the updated global variables
         const products = await $.ajax({
-            url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sortVal=${sortVal}&isAsc=${isAsc}`,
+            url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sort[sortVal]=${sortVal}&sort[isAsc]=${isAsc}`,
             method: 'GET',
             contentType: 'application/json',
         });
@@ -87,7 +91,6 @@ async function getProductsBy(sortVal = '', isAsc = true) {
     }
 }
 
-
 function toggleWishlist(event, button, productId) {
     event.preventDefault();
     event.stopPropagation();
@@ -105,13 +108,8 @@ function toggleWishlist(event, button, productId) {
                 icon.classList.toggle('bi-heart');
                 icon.classList.toggle('bi-heart-fill');
                 button.classList.toggle('wishlist-active');
-            } else {
-                if (response.message) {
-                    alert(response.message); // הצגת הודעת החיבור
-                } else {
-                    console.error('Error toggling wishlist:', response.error);
-                    alert('Error: ' + response.error);
-                showNotice(isAdding ? 'Item successfully added to wishlist' : 'Item removed from wishlist', false);
+                const message = isAdding ? 'Item successfully added to wishlist' : 'Item removed from wishlist';
+                showNotice(message, false);
             } else {
                 if (response.message) {
                     showNotice(response.message, false); // הצגת הודעת השגיאה
@@ -123,11 +121,7 @@ function toggleWishlist(event, button, productId) {
         },
         error: function(error) {
             if (error.status === 401) {
-                alert('עליך להתחבר תחילה כדי להוסיף למועדפים.'); // הצגת הודעת החיבור
-            } else {
-                console.error('Error toggling wishlist:', error);
-                alert('Error: ' + error.responseText);
-                showNotice('You must log in first to add to wishlist.', true); // הצגת הודעת החיבור
+                showNotice('עליך להתחבר תחילה כדי להוסיף למועדפים.', true); // הצגת הודעת החיבור
             } else {
                 console.error('Error toggling wishlist:', error);
                 showNotice('Error: ' + error.responseText, false);

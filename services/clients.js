@@ -117,7 +117,7 @@ async function getOrdersFromDB(id) {
     }
 }
 
-async function addCartToOrders(username) {
+async function addCartToOrders(username, cartTotal) {
     try {
         console.log('Adding cart to orders for user:', username);
         const client = await Client.findOne({ username });
@@ -133,8 +133,11 @@ async function addCartToOrders(username) {
             size: item.size
         }));
 
+        // הוספת העגלה לרשימת ההזמנות ועדכון spent
         client.orders.push(newOrder);
         client.cartItems = [];
+        client.spent = (client.spent || 0) + cartTotal;
+
         await client.save();
 
         console.log('Cart added to orders successfully');
@@ -144,6 +147,7 @@ async function addCartToOrders(username) {
         return { success: false, message: 'Error adding cart to orders' };
     }
 }
+
 
 async function getClientByUsername(username) {
     try {

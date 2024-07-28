@@ -27,13 +27,16 @@ function setStadiumFilter(newStadium = '') {
 // Function to filter tickets based on the selected criteria
 async function filterTickets(isManager) {
     try {
-        let url = `/tickets/filter?title=${gTitle}`; // Create the URL for the filter request
+        // Create the URL for the filter request
+        let url = `/tickets/filter?title=${gTitle}`;
         
-        if (gMonth !== 0) { // Add month to the URL if a month is selected
+        if (gMonth !== 0) {
+            // Add month to the URL if a month is selected
             url += `&month=${gMonth}`;
         }
         
-        if (gStadium) { // Add stadium to the URL if a stadium is selected
+        if (gStadium) {
+            // Add stadium to the URL if a stadium is selected
             url += `&stadium=${gStadium}`;
         }
 
@@ -169,10 +172,3 @@ function showNotice(message, redirectToLogin) {
         }
     }, 3000); // Adjust the timeout as needed
 }
-
-// Function to navigate to the ticket edit page based on the ticket ID (duplicate, possible mistake in the original code)
-
-function getEditTicketPage(ticketId) {
-    window.location.href = `/tickets/edit/${ticketId}`;
-}
-

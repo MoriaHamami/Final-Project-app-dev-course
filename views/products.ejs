@@ -27,8 +27,7 @@
         <section class="headline">
             <h1>Official Real Madrid Store</h1>
             <p>Discover the exclusive and latest products of the greatest team in the world!<br>
-                Secure your official Real Madrid jerseys, accessories, and gear, and join the unforgettable
-                experience of being a true fan!
+                Secure your official Real Madrid jerseys, accessories, and gear, and join the unforgettable experience of being a true fan!
             </p>
         </section>
 
@@ -40,9 +39,7 @@
                         value="<%= maxPrice %>" onchange="setPrice(event.target.value)"
                         oninput="updatePriceVal(event.target.value)">
                 </label>
-                <p class="price-val">
-                    <%= maxPrice %>
-                </p>
+                <p class="price-val"><%= maxPrice %></p>
                 <p class="dollar-sign">$</p>
                 <label>
                     Product Name
@@ -85,11 +82,8 @@
                         <%= products[i].price %>$
                     </div>
                     <!-- כפתור הלב להוספת לרשימת המשאלות -->
-                    <button
-                        class="wishlist-btn <%= favoriteProductIds.includes(products[i]._id.toString()) ? 'wishlist-active' : '' %>"
-                        onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
-                        <i
-                            class="<%= favoriteProductIds.includes(products[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart' %>"></i>
+                    <button class="wishlist-btn <%= favoriteProductIds.includes(products[i]._id.toString()) ? 'wishlist-active' : '' %>" onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
+                        <i class="<%= favoriteProductIds.includes(products[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart' %>"></i>
                     </button>
                 </a>
             <% } %>
@@ -118,8 +112,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/products.js"></script>
-  
-    
 </body>
 
 </html>

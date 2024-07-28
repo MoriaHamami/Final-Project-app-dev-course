@@ -110,6 +110,7 @@ async function addEditShirtToCart(req, res) {
 }
 
 // Function to checkout the cart
+// Function to checkout the cart
 async function checkoutCart(req, res) {
     try {
         const username = req.session.username;
@@ -117,8 +118,10 @@ async function checkoutCart(req, res) {
             return res.status(401).json({ success: false, message: 'User not logged in' });
         }
 
-        // Add cart items to orders
-        const result = await clientsService.addCartToOrders(username);
+        const cartTotal = req.body.cartTotal;
+
+        // הוספת פריטי העגלה להזמנות ועדכון spent
+        const result = await clientsService.addCartToOrders(username, cartTotal);
         if (result.success) {
             res.json({ success: true, message: 'Cart checked out successfully' });
         } else {
@@ -128,6 +131,7 @@ async function checkoutCart(req, res) {
         res.status(500).json({ success: false, message: 'Error during checkout' });
     }
 }
+
 
 module.exports = {
     getCartPage,
