@@ -1,28 +1,34 @@
+// Import express and create a router instance
 const express = require('express');
 const router = express.Router();
+
+// Import the cart and login controllers
 const cartController = require('../controllers/cart');
 const loginController = require('../controllers/login');
 
-console.log("Initializing /cart routes...");
-
+// Define the route for the cart page with a middleware that calls the next handler
 router.route('/')
     .get((req, res, next) => {
-        console.log('GET /cart called');
         next();
     }, cartController.getCartPage);
 
+// Define the route to add an item to the cart
 router.route('/add')
     .post(cartController.addCartItem);
-// .get(cartController.getCartPage)
+// .get(cartController.getCartPage) // הערה קיימת
 
+// Define the route to add or edit a shirt in the cart via canvas-edit
 router.route('/canvas-edit')
     .post(cartController.addEditShirtToCart);
-// .post(loginController.isLoggedIn, cartController.addEditShirtToCart)
+// .post(loginController.isLoggedIn, cartController.addEditShirtToCart) // הערה קיימת
 
+// Define the route to remove an item from the cart
 router.route('/remove')
     .post(cartController.removeCartItem);
 
+// Define the route for checking out the cart
 router.route('/checkout')
-    .post(cartController.checkoutCart);  // הוסף את ה-Route החדש לפונקציית ה-checkout
+    .post(cartController.checkoutCart); 
 
+// Export the router to be used in other parts of the application
 module.exports = router;

@@ -109,3 +109,56 @@ function renderTickets(isManager, tickets) {
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }
+
+
+async function addToCart(ticketId) {
+    try {
+        const response = await fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+                'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+                productId: ticketId,
+                quantity: 1  // כמות קבועה
+            }),
+            credentials: 'include'
+        });
+
+        if (response.status === 401) {
+            showNotice('צריך להתחבר קודם', true);
+        } else if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+                showNotice('הכרטיס נוסף לעגלה בהצלחה', false);
+            } else {
+                showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+            }
+        } else {
+            showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+        }
+    } catch (e) {
+        showNotice('שגיאה בהוספת הכרטיס לעגלה', false);
+    }
+}
+
+function showNotice(message, redirectToLogin) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    setTimeout(function() {
+        if (redirectToLogin) {
+            window.location.href = '/login';
+        } else {
+            noticeModal.hide();
+        }
+    }, 3000); // Adjust the timeout as needed
+}
+
+function getEditTicketPage(ticketId) {
+    window.location.href = `/tickets/edit/${ticketId}`;
+}
