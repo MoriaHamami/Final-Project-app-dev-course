@@ -163,3 +163,7 @@ justify-content: center;
     margin-bottom: 10px;
     width: 100px;
 }
+
+.edit-shirt-body header {
+    position: relative;
+}
