@@ -45,7 +45,7 @@ body {
 .edit-product .edit-cat select,
 .edit-product .edit-txt input {
     border: 1px solid var(--l-gray);
-    border-radius: 5px;
+    border-radius: 12px;
     padding: 10px;
     width: 100%;
 }
