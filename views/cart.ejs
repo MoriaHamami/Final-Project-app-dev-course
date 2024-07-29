@@ -15,35 +15,6 @@
 <body>
     <%- include('header.ejs', {page:'cart'}) -%>
     <main class="cart">
-        <div class="orderDetails">
-            <div class="customerD">
-                <h4>Your details</h4>
-                <hr>
-                <div class="fullName">
-                    <input type="text" placeholder="Full Name *">
-                </div>
-                <div class="contact-info">
-                    <input type="email" placeholder="Email *">
-                    <input type="tel" placeholder="Phone Number *">
-                </div>
-                <hr>
-                <div class="shipmentD">
-                    <h4>Shipping Address</h4>
-                    <input type="text" placeholder="Country *">
-                    <input type="text" placeholder="Address *">
-                    <input type="text" placeholder="Apartment, suite, etc. (optional)">
-                    <div class="house-info">
-                        <input type="text" placeholder="Postal code *">
-                        <input type="text" placeholder="City *">
-                    </div>
-                    <div class="btn-container">
-                        <a href="#" class="btn btn-light text-dark" role="button" data-bs-toggle="button" onclick="goToProductsPage()">Back to shopping</a>
-                        <a href="#" class="btn btn-primary" role="button" data-bs-toggle="button" onclick="proceedToShipping()">Continue to shipping</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="shopping-cart">
             <h2>Your basket | <%= cartItems.length %></h2>
             <div class="product-container">
@@ -62,7 +33,7 @@
                             <img src="<%= item?.srcImg[0] ? (item?.srcImg[0]?.includes('data:') ? item?.srcImg[0] : ('/styles/imgs/products/' + item?.srcImg[0])) : '' %>" alt="מוצר" class="product-image">
                             <div class="product-info">
                                 <span class="product-name"><b><%= item.title %></b></span>
-                                <span class="product-Size">Size: <%= item.size %></span> <!-- ודא שהשדה הזה מוצג -->
+                                <span class="product-Size">Size: <%= item.size %></span>
                                 <span class="product-playerName">Color: <%= item.color %></span>
                             </div>
                         <% } %>
@@ -87,6 +58,35 @@
                         <div class="col text-center">
                             <h4><%= cartItems.reduce((total, item) => total + item.price, 0) %> $</h4>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="orderDetails">
+            <div class="customerD">
+                <h4>Your details</h4>
+                <hr>
+                <div class="fullName">
+                    <input type="text" placeholder="Full Name *">
+                </div>
+                <div class="contact-info">
+                    <input type="email" placeholder="Email *">
+                    <input type="tel" placeholder="Phone Number *">
+                </div>
+                <hr>
+                <div class="shipmentD">
+                    <h4>Shipping Address</h4>
+                    <input type="text" placeholder="Country *">
+                    <input type="text" placeholder="Address *">
+                    <input type="text" placeholder="Apartment, suite, etc. (optional)">
+                    <div class="house-info">
+                        <input type="text" placeholder="Postal code *">
+                        <input type="text" placeholder="City *">
+                    </div>
+                    <div class="btn-container">
+                        <a href="#" class="btn btn-light text-dark" role="button" data-bs-toggle="button" onclick="goToProductsPage()">Back to shopping</a>
+                        <a href="#" class="btn btn-primary" role="button" data-bs-toggle="button" onclick="proceedToShipping()">Continue to shipping</a>
                     </div>
                 </div>
             </div>
