@@ -4,7 +4,7 @@ let gOpponent = '';
 let gStadium = '';
 let gPrice = 0;
 let gDate = '';
-let gopImg = '';
+let gOpImg = '';
 
 let originalTitle = '';
 let originalOpponent = '';
@@ -14,7 +14,7 @@ let originalDate = '';
 let originalOpImg = '';
 
 // Initialize original values on page load
-window.onload = function() {
+window.onload = function () {
     const ticket = JSON.parse(document.getElementById('ticket-data').textContent);
     if (ticket) {
         originalTitle = ticket.title || '';
@@ -29,7 +29,7 @@ window.onload = function() {
         gStadium = originalStadium;
         gPrice = originalPrice;
         gDate = originalDate;
-        gopImg = originalOpImg;
+        gOpImg = originalOpImg;
     }
 };
 
@@ -42,7 +42,7 @@ async function onUpdateTicket(ev) {
     if (gStadium !== originalStadium) updatedFields.stadium = gStadium;
     if (gPrice !== originalPrice) updatedFields.price = gPrice;
     if (gDate !== originalDate) updatedFields.date = gDate;
-    if (gopImg !== originalOpImg) updatedFields.opImg = gopImg;
+    if (gOpImg !== originalOpImg) updatedFields.opImg = gOpImg;
 
     try {
         const ticketId = $('#updateButton').val();
@@ -55,7 +55,7 @@ async function onUpdateTicket(ev) {
 
         if (response) {
             showNotice('Ticket updated successfully.', false);
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.href = '/tickets';
             }, 2000);
         }
@@ -94,56 +94,58 @@ function onChangeDateTime(dateTime) {
 }
 
 // הוספת כתובת מקור של תמונה ל-gopImg
-function addTogSrcImgs(opImg) {
-    gopImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1);
+function updategSrcImg(opImg) {
+    gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1)
+    const imgElement = document.querySelector(`.edit-ticket li img`)
+    imgElement.src = opImg
 }
 
 // הוספת תמונה
-function onAddImg(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.readAsDataURL(input.files[0]);
-        reader.onload = function (e) {
-            const imgElement = document.querySelector('.edit-ticket .edit-imgs img#image-preview');
-            if (imgElement) {
-                imgElement.src = e.target.result;
-            } else {
-                const ulElement = document.querySelector('.edit-ticket .edit-imgs ul');
-                ulElement.innerHTML = `
-                    <li id="0">
-                        <img src="${e.target.result}" class="srcImg-0" id="image-preview" width="300">
-                        <input type="file" accept="image/*" name="opImg" onchange="onAddImg(event.target)" id="0">
-                        <button type="button" class="deleteImg" onclick="onDeleteImg('0')">Delete</button>
-                    </li>`;
-            }
-            gopImg = e.target.result;
-        };
-    }
-}
+// function onAddImg(input) {
+//     if (input.files && input.files[0]) {
+//         let reader = new FileReader();
+//         reader.readAsDataURL(input.files[0]);
+//         reader.onload = function (e) {
+//             const imgElement = document.querySelector('.edit-ticket .edit-imgs img#image-preview');
+//             if (imgElement) {
+//                 imgElement.src = e.target.result;
+//             } else {
+//                 const ulElement = document.querySelector('.edit-ticket .edit-imgs ul');
+//                 ulElement.innerHTML = `
+//                     <li id="0">
+//                         <img src="${e.target.result}" class="srcImg-0" id="image-preview" width="300">
+//                         <input type="file" accept="image/*" name="opImg" onchange="onAddImg(event.target)" id="0">
+//                         <button type="button" class="deleteImg" onclick="onDeleteImg('0')">Delete</button>
+//                     </li>`;
+//             }
+//             gOpImg = e.target.result;
+//         }
+//     }
+// }
 
 // שינוי תמונה
+
 async function onChangeImg(event) {
     try {
-        const imgSrc = await readChangedURL(event.target);
-        addTogSrcImgs(imgSrc);
+        const imgSrc = await readChangedURL(event.target)
+        updategSrcImg(imgSrc)
     } catch (e) {
-        console.log('Error:', e);
+        console.log('Error:', e)
     }
 }
 
 // מחיקת תמונה
 function onDeleteImg(id) {
-    const imgElement = document.querySelector(`.edit-ticket li#${id} img`);
-    const fileInputElement = document.querySelector(`.edit-ticket li#${id} input[type="file"]`);
-
+    const imgElement = document.querySelector(`.edit-ticket li img`)
+    const fileInputElement = document.querySelector(`.edit-ticket input[type="file"]`)
     if (imgElement) {
-        imgElement.src = '/styles/imgs/products/placeholder.png';
+        imgElement.src = '/styles/imgs/tickets/placeholder.png';
     }
 
     if (fileInputElement) {
         fileInputElement.value = '';
     }
-    gopImg = "";
+    gOpImg = "";
 }
 
 // קריאת URL של התמונה שהשתנתה
@@ -177,12 +179,12 @@ async function onAddTicket(ev) {
                 stadium: gStadium,
                 price: gPrice,
                 date: gDate,
-                opImg: gopImg,
+                opImg: gOpImg,
             }),
         });
 
         showNotice('New ticket added successfully.', false);
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.href = '/tickets';
         }, 2000);
     } catch (e) {
@@ -203,7 +205,7 @@ async function onDeleteTicket(id) {
 
         if (res.status !== 404) {
             showNotice('Ticket deleted successfully.', false);
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.href = '/tickets';
             }, 2000);
         } else {
@@ -222,7 +224,7 @@ function showNotice(message, redirectToCart) {
     noticeModal.show();
 
     // Adding a delay before redirect
-    setTimeout(function() {
+    setTimeout(function () {
         if (redirectToCart) {
             window.location.href = '/cart'; // Redirect to the cart page after 1 second
         } else {

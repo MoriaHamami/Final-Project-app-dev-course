@@ -87,23 +87,31 @@
                     </select>
                 </article>
 
-                <article class="edit-txt mb-4">
+                <article class="edit-txt">
                     <h3 class="text-center">Info</h3>
                     <section class="info">
-                        <label class="d-flex justify-content-between mb-3">
-                            Title
+                        <label>
+                            <p>
+                                Title
+                            </p>
                             <input id="title" value="<%= (product != null) ? product.title : '' %>" name="title" class="form-control ms-2" onchange="onChangeTitle(event.target.value)">
                         </label>
-                        <label class="d-flex justify-content-between mb-3">
-                            Color
+                        <label>
+                            <p>
+                                Color
+                            </p>
                             <input id="color" value="<%= (product != null) ? product.color : '' %>" name="color" class="form-control ms-2" onchange="onChangeColor(event.target.value)">
                         </label>
-                        <label class="d-flex justify-content-between mb-3">
-                            Price
+                        <label>
+                            <p>
+                                Price
+                            </p>
                             <input id="price" type="number" value="<%= (product != null) ? product.price : 0 %>" name="price" class="form-control ms-2" onchange="onChangePrice(event.target.value)">
                         </label>
-                        <label class="d-flex justify-content-between mb-3">
-                            Favorite Player
+                        <label>
+                            <p>
+                                Favorite Player
+                            </p>
                             <input id="favePlayer" value="<%= (product != null) ? product.favePlayer : '' %>" name="favePlayer" class="form-control ms-2" onchange="onChangeFavePlayer(event.target.value)">
                         </label>
                     </section>
