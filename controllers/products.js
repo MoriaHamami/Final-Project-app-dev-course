@@ -31,8 +31,13 @@ const getProducts = async (req, res) => {
 
 const getProductsByFilter = async (req, res) => {
   try {
-    const { price, title, cat, sortVal, isAsc } = req.query.filters || {};
-    const productsInfo = await productService.getProducts(price, title, cat, sortVal, isAsc);
+    const priceFilter = req.query.filters?.price
+    const titleFilter = req.query.filters?.title
+    const catFilter = req.query.filters?.cat
+    const sortVal = req.query.sort?.sortVal
+    const isAsc = req.query.sort?.isAsc
+    // const { price, title, cat, sortVal, isAsc } = req.query.filters || {};
+    const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter, sortVal, isAsc);
     res.json(productsInfo.products);
   } catch (e) {
     console.log('e:', e);
@@ -71,38 +76,47 @@ const getProduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body;
+  // Initialize the following variables, recieved from the body (in this case, from the ajax req)
+  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
   try {
-    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes);
-    res.json(newProduct);
-  } catch (e) {
-    res.json(e);
+    // Send the variables to the product service. There, it will add it to the DB.
+    const newProduct = await productService.createProduct(title, color, cat, price, gender, favePlayer, srcImg, sizes)
+    // Send back to the ajax req, a res with the new product (including the new id given to it automatically)
+    res.json(newProduct)
   }
-};
+  catch (e) {
+    res.json(e)
+  }
+}
 
 const updateProduct = async (req, res) => {
-  const id = req.params.id;
-  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body;
+  // Save the id from the params in the website path
+  let id = req.params.id
+  // Initialize the following variables, recieved from the body (in this case, from the ajax req)
+  const { title, color, cat, price, gender, favePlayer, srcImg, sizes } = req.body
   try {
-    await productService.updateProduct(id, title, color, cat, price, gender, favePlayer, srcImg, sizes);
-    res.json("Product was updated successfully");
+    // Send the variables to the product service. There, it will update it in the DB.
+    await productService.updateProduct(id, title, color, cat, price, gender, favePlayer, srcImg, sizes)
   } catch (e) {
-    res.json("Product wasn't updated successfully" + e);
+    res.json("Product wasn't saved successfully" + e)
   }
-};
+}
 
 const deleteProduct = async (req, res) => {
   try {
-    const product = await productService.deleteProduct(req.params.id);
+    // Get the products id from the params in the web path 
+    // and send it to the service file 9there it will delete the product in DB)
+    const product = await productService.deleteProduct(req.params.id)
+    // If the product wasnt found in DB show an error
     if (!product) {
-      res.status(404).json({ errors: ['Product not found'] });
+      res.status(404).json({ errors: ['Product not found'] })
     } else {
-      res.json(product);
+      res.json(product)
     }
   } catch (e) {
-    res.json("Product wasn't deleted successfully" + e);
+    res.json("Product wasn't deleted successfully" + e)
   }
-};
+}
 
 const toggleWishlist = async (req, res) => {
   const { productId, isAdding } = req.body;
