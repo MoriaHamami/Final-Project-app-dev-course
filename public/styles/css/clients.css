@@ -1,198 +1,257 @@
-/* כללי */
+/* General Styles */
 .clients .manager-area {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
+    display: flex; /* Use flexbox for layout */
+    padding: 20px;
+    gap: 20px; /* Add spacing between the table and the panel */
+    align-items: flex-start; /* Align items to the start of the flex container */
 }
 
-/* טבלה */
 .clients .table-container {
-    overflow-x: hidden;
-    border: 1px solid black;
-    width: 80%;
-    height: 600px;
+    flex: 2; /* Allow table to take up more space */
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #fff; /* White background for contrast */
+    padding: 20px;
 }
 
+.clients .tab-content {
+    flex: 1; /* Allow tab-content to take up less space */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #fff; /* White background for contrast */
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    max-height: 600px; /* Limit height for better visual balance */
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+}
+
+/* Table Styling */
 .clients table {
+    width: 100%;
     border-collapse: collapse;
-    margin: auto;
-    caption-side: top;
-    empty-cells: show;
-    table-layout: auto;
 }
 
 .clients th,
 .clients td {
     padding: 15px;
     text-align: center;
-    width: 15%;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd; /* Light border for separation */
+}
+
+.clients th {
+    background-color: #f4f4f4; /* Light background for headers */
+    font-weight: bold;
 }
 
 .clients tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9; /* Slightly lighter background for even rows */
 }
 
+.clients tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+/* Client Photo Styling */
 .clients .client-photo {
-    width: 80%;
+    width: 100px; /* Uniform photo size */
+    height: 100px;
+    border-radius: 50%; /* Circular photos */
+    object-fit: cover; /* Ensure images cover the area without distortion */
+    border: 2px solid #ddd; /* Light border around photo */
 }
 
+/* Navigation Styling */
 .clients .nav-item {
-    width: 110%;
-    font-size: 80%;
-    display: flex;
+    margin: 0;
 }
 
 .clients .nav-pills .nav-link.active,
 .clients .nav-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 3%;
-    background-color: rgba(188, 197, 190, 0.36);
-    color: black;
-}
-
-.clients .bi-bag-check-fill::before,
-.clients .delete_acc_btn {
-    font-size: 120%;
-    border: none;
-    padding: 0;
-    background-color: transparent;
-}
-
-.clients .th,
-.clients .td,
-.clients .caption,
-.clients .nav-pills .nav-link.active,
-.clients .nav-link {
-    font-size: 16px;
-}
-
-.clients th:nth-child(6),
-.clients td:nth-child(6) {
-    width: 5%;
-}
-
-/* עגלת קניות */
-.clients .shopping-cart {
-    width: 350px;
-    height: 600px;
-    background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-x: hidden;
-    padding-bottom: 80px;
+    background-color: #e0e0e0; /* Light background for nav links */
+    color: #333; /* Dark text color */
+    padding: 10px 20px; /* Padding for better touch targets */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
 }
 
+.clients .nav-pills .nav-link:hover {
+    background-color: #d0d0d0; /* Slightly darker background on hover */
+}
+
+.clients .bi-bag-check-fill::before {
+    font-size: 1.5rem; /* Slightly larger icons */
+}
+
+/* Product Container Styling */
 .clients .product-container {
-    max-height: 350px;
-    overflow-x: hidden;
+    max-height: 500px; /* Increased height for better visibility */
     overflow-y: auto;
-    margin-bottom: 40px;
+    padding: 10px; /* Padding around content */
 }
 
+/* Product Styling */
 .clients .product {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    margin-bottom: 20px;
-    border: 1px solid #989696;
-    border-radius: 16px;
+    margin-bottom: 20px; /* Increased margin for better spacing */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 12px;
+    padding: 15px; /* Padding for content */
+    background-color: #fafafa; /* Slightly off-white background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
 }
 
-.clients .product-Price {
-    margin-top: -6px;
-    margin-right: 10px;
-    padding-bottom: 10px;
-}
-
+/* Product Image Styling */
 .clients .product img {
-    width: 100px;
+    width: 100px; /* Larger product image */
     height: 100px;
-    margin-right: 10px;
+    border-radius: 8px; /* Rounded corners for product images */
+    margin-right: 20px; /* Increased margin for spacing */
 }
 
+/* Product Info Styling */
 .clients .product-info {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    padding: 10px;
+    width: 100%; /* Ensure info takes full width */
 }
 
-.clients .product-info+.product-info {
-    border-top: 1px solid #ccc;
-    margin-top: 20px;
-    padding-top: 20px;
+.clients .product-info span {
+    margin-bottom: 8px; /* Increased margin for better spacing */
 }
 
-.clients #top-shopping-cart {
-    margin-top: 0rem !important;
+.clients .product-info .product-Price {
+    font-weight: bold;
+    color: #333; /* Darker color for better readability */
 }
 
-.block-btn {
-    background-color: white; /* צבע רקע לבן */
-    border: 1px solid #ccc; /* מסגרת */
-    padding: 5px 10px; /* גודל פנים */
-    border-radius: 3px; /* רענון לבן */
-    transition: background-color 0.3s ease; /* אפקט המעבר */
-}
-
-.block-btn:active,
-.block-btn.clicked {
-    background-color: #ccc; /* רקע כהה יותר בלחיצה */
-}
-
-.clients {
-    margin-top: 10px;
-    margin-bottom: 50px;
-}
-
-.search-input {
-    font-size: 1.2rem;
-    padding: 15px;
+/* Shopping Cart Styling */
+.clients .shopping-cart {
     width: 100%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #fff; /* White background for consistency */
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
 }
-/* Modal styling */
+
+/* Search Input Styling */
+.clients .search-input {
+    font-size: 1rem;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styling */
+/* Modal Styling */
 .modal-dialog {
-    border-radius: 30px; /* Rounded corners for the modal container */
-    overflow: hidden; /* Ensures rounded corners are applied to content inside */
-  }
-  
-  .modal-content {
-    border-radius: 30px; /* Rounded corners for the modal content */
+    border-radius: 30px; /* Rounded corners */
+    overflow: hidden;
+}
+
+.modal-content {
+    border-radius: 30px; /* Rounded corners */
     border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* Soft shadow */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* Text color */
     position: relative;
-  }
-  
-  .modal-header, .modal-footer {
+}
+
+.modal-header, .modal-footer {
     border: none;
     justify-content: center;
     font-size: 1em;
-    padding: 20px; /* Adjusted padding for a balanced look */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-  }
-  
-  .modal-header {
-    border-top-left-radius: 30px; /* Rounded corners for the header */
-    border-top-right-radius: 30px; /* Rounded corners for the header */
-  }
-  
-  .modal-footer {
-    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
-    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Adjusted padding for a balanced look */
+    padding: 20px; /* Padding for balance */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* Text color */
+}
+
+.modal-header {
+    border-top-left-radius: 30px; /* Rounded corners for the top-left */
+    border-top-right-radius: 30px; /* Rounded corners for the top-right */
+}
+
+.modal-footer {
+    border-bottom-left-radius: 30px; /* Rounded corners for the bottom-left */
+    border-bottom-right-radius: 30px; /* Rounded corners for the bottom-right */
+}
+
+.modal-body {
+    padding: 20px; /* Padding for content */
     text-align: center;
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  }
-  
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Slightly transparent white background */
+    color:white;
+}
+
+/* Success Modal */
+.success-modal .modal-content {
+    background: linear-gradient(to bottom, #4CAF50, #388E3C); /* Green gradient for success */
+    color: white; /* White text color */
+    border-radius: 30px; /* Matching border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Matching shadow */
+}
+
+.success-modal .modal-header, .success-modal .modal-footer {
+    background: linear-gradient(to bottom, #4CAF50, #388E3C); /* Green gradient for header and footer */
+    color: white; /* White text color */
+    border-radius: 30px 30px 0 0; /* Match the modal content's border-radius */
+}
+
+.success-modal .modal-body {
+    background: rgba(0, 0, 0, 0.1); /* Slightly transparent background */
+    color: white; /* White text color */
+}
+
+/* Button Styling */
+.btn-primary {
+    background: #007bff;
+    border: black;
+    color: white;
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for better touch targets */
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+    border: none;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    border: none;
+    color: white;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for better touch targets */
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    border: none;
+}
+
+/* Scrollbar Styling */
+.clients .tab-content::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.clients .tab-content::-webkit-scrollbar-thumb {
+    background-color: #ddd; /* Color of the scrollbar thumb */
+    border-radius: 8px; /* Rounded corners for the thumb */
+}
+
+.clients .tab-content::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc; /* Darker color on hover */
+}
+
+.clients .tab-content::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Background color of the scrollbar track */
+    border-radius: 8px; /* Rounded corners for the track */
+}

@@ -13,7 +13,7 @@ function nextSlide() {
     $('.carousel').carousel('pause');
 }
 
-async function addToCart(productId, redirectToCart = false) {
+async function addToCart(productId) {
     const selectedSize = document.querySelector('input[name="options-base"]:checked')?.value;
 
     // Ensure size is selected if the product requires a size
@@ -41,7 +41,7 @@ async function addToCart(productId, redirectToCart = false) {
         const result = await response.json();
 
         if (response.ok && result.success) {
-            showNotice('The product has been successfully added', redirectToCart);
+            showNotice('The product has been successfully added', false); // No redirect
         } else {
             showNotice(result.message || 'Error adding product to cart', false);
         }
@@ -64,16 +64,18 @@ function showNotice(message, redirectToCart) {
     var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
     noticeModal.show();
 
-    // Adding a delay before redirect
+    // Adding a delay before redirect or hiding modal
     setTimeout(function() {
         if (redirectToCart) {
             window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
         } else {
-            noticeModal.hide();
+            noticeModal.hide(); // Hide modal and stay on the same page
         }
     }, 2000);
 }
 
-function buyNow(productId) {
-    addToCart(productId, true);
+
+async function buyNow(productId) {
+    await addToCart(productId); // Add to cart
+    window.location.href = '/cart'; // Redirect to the cart page
 }

@@ -1,44 +1,92 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll('.delete-acc-btn')
+    let clientIdToDelete = null;
 
+    const deleteButtons = document.querySelectorAll('.delete-acc-btn');
+    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {});
+    const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'), {});
+    const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+
+    // Handle delete button click
     deleteButtons.forEach(button => {
         button.addEventListener('click', function () {
-            const row = this.closest('tr')
-            if (row) {
-                const confirmation = confirm("Are you sure you want to remove the client from the list?")
-                if (confirmation) {
-                    row.remove()
+            clientIdToDelete = this.getAttribute('data-client-id');
+            confirmDeleteModal.show();
+        });
+    });
+
+    // Handle confirm delete button click
+    confirmDeleteButton.addEventListener('click', async function () {
+        if (clientIdToDelete) {
+            try {
+                const res = await $.ajax({
+                    url: '/clients/edit/' + clientIdToDelete,
+                    method: 'DELETE',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ id: clientIdToDelete }),
+                });
+
+                if (res.status !== 404) {
+                    // Remove the row from the table
+                    const row = document.querySelector(`button[data-client-id="${clientIdToDelete}"]`).closest('tr');
+                    if (row) row.remove();
                     showNotice('Client removed successfully');
+                } else {
+                    showNotice('Client not found');
                 }
+                confirmDeleteModal.hide();
+            } catch (e) {
+                console.log('Error:', e);
+                showNotice('Error deleting client');
             }
-        })
-    })
-})
+        }
+    });
+
+    // Reset the clientIdToDelete when the modal is hidden
+    document.getElementById('confirmDeleteModal').addEventListener('hidden.bs.modal', function () {
+        clientIdToDelete = null;
+    });
+
+    // Automatically close the success modal after a short delay
+    $('#successModal').on('shown.bs.modal', function () {
+        setTimeout(function () {
+            $('#successModal').modal('hide');
+        }, 3000); // Change this value to adjust the delay
+    });
+
+    // Handle search input
+    $('#searchInput').on('input', function () {
+        const searchValue = $(this).val().toLowerCase();
+        $('#clientTableBody tr').filter(function () {
+            $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
+        });
+    });
+});
 
 $('.orders-btn').click(function () {
-    var id = $(this).attr('id')
-    getOrdersById(id)
-})
+    const id = $(this).attr('id');
+    getOrdersById(id);
+});
 
 async function getOrdersById(id) {
-    $('.shopping-cart').html('<div class="container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;"></div>')
+    $('.shopping-cart').html('<div class="container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;"></div>');
     try {
         const orders = await $.ajax({
             url: `/clients/${id}`,
             method: 'GET',
             contentType: 'application/json',
-        })
+        });
         // Create a long string that represents the HTML of products we want to be shown after we got the products from the DB 
-        let str = ''
+        let str = '';
         if (orders?.length > 0) {
             for (let j = 0; j < orders.length; j++) {
-                let order = orders[j]
+                let order = orders[j];
                 str += `   <h2>Items | ${order.length} </h2>
-                            <span class="product-container">`
+                            <span class="product-container">`;
                 for (let i = 0; i < order.length; i++) {
-                    product = order[i].productInfo
+                    const product = order[i].productInfo;
                     str += `<div class="product"> 
-                        <img src="${getImgURL( order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type) }" alt="Product Image" class="product-image">
+                        <img src="${getImgURL(order[i].imgs?.length ? order[i].imgs[0] : null, order[i].type)}" alt="Product Image" class="product-image">
                         <div class="product-info">
                         <span class="product-name"><b>${product.title}</b></span>
                         <span class="product-Size">Size: ${order[i].size} </span>
@@ -47,53 +95,28 @@ async function getOrdersById(id) {
                         <hr>
                         <span class="product-Price">${product.price}$</span>
                         </div>
-                        </div>
-                                        `
+                        </div>`;
                 }
-                str += "</span>"
+                str += "</span>";
             }
         } else {
             str += `<div class="shopping-cart">
-                            No purchases yet
-                        </div>`
+                        No purchases yet
+                    </div>`;
         }
-        // Inside the products area in the HTML, show all the products
-        $('.shopping-cart').html(str)
+        $('.shopping-cart').html(str);
     } catch (e) {
-        console.log('e:', e)
+        console.log('Error:', e);
         showNotice('Error fetching orders');
     }
 }
 
-function getImgURL(srcImg, folder){
-    console.log('srcImg:', srcImg)
-    if(!srcImg) return ""
-        return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg)
+function getImgURL(srcImg, folder) {
+    if (!srcImg) return "";
+    return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg);
 }
 
-async function onDeleteClient(id) { 
-    try {
-        const res = await $.ajax({
-            url: '/clients/edit/' + id,
-            method: 'DELETE',
-            contentType: 'application/json',
-            data: JSON.stringify({ id }),
-        })
-        if (res.status !== 404) {
-            showNotice('Client deleted successfully');
-            window.location.assign('/clients')
-        } else {
-            showNotice('Client not found');
-        }
-    } catch (e) {
-        console.log('e:', e)
-        showNotice('Error deleting client');
-    }
-} 
-
-async function onBlockClient(id, isBanned) { 
-    console.log("in js")
-
+async function onBlockClient(id, isBanned) {
     try {
         const res = await $.ajax({
             url: '/clients/block/' + id,
@@ -113,22 +136,15 @@ async function onBlockClient(id, isBanned) {
     }
 }
 
-
-    $('#searchInput').on('input', function() {
-        const searchValue = $(this).val().toLowerCase();
-        $('#clientTableBody tr').filter(function() {
-            $(this).toggle($(this).find('.client-username').text().toLowerCase().indexOf(searchValue) > -1);
-        });
-    });
 function showNotice(message, redirectToCart = false) {
     document.getElementById('noticeModalBody').innerText = message;
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
     noticeModal.show();
 
     // Adding a delay before redirect
-    setTimeout(function() {
+    setTimeout(function () {
         if (redirectToCart) {
-            window.location.href = '/cart'; // Redirect to the cart page after 1 second
+            window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
         } else {
             noticeModal.hide();
         }
