@@ -25,7 +25,7 @@
                     <h3>Article Information</h3>
 
                     <label>
-                        Genre
+                        Title
                         <input id="genre" value="<%= article != null ? article.genre : '' %>" name="genre" onchange="onChangeGenre(event.target.value)">
                     </label>
 
@@ -41,7 +41,7 @@
                 </article>
 
                 <article class="edit-actions">
-                    <h3>Options</h3>
+                    
 
                     <% if (article != null) { %>
                         <button type="button" id="updateButton" value="<%= article._id %>" onclick="onUpdateArticle(event)">
