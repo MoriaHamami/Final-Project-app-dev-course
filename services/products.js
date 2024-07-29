@@ -56,7 +56,8 @@ const getProducts = async (priceFilter = '', titleFilter = '', catFilter = '', s
     isAsc = isAsc == "true" ? 1 : -1;
     const sortObj = {};
     sortObj[sortVal] = isAsc;
-    products = await Product.find(filter).sort(sortObj);
+    // collation makes the sort case insensitive
+    products = await Product.find(filter).collation({locale: "en"}).sort(sortObj);
   } else {
     products = await Product.find(filter);
   }
