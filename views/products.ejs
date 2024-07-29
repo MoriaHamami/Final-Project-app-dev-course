@@ -73,8 +73,7 @@
             <% for(let i=0; i< products.length; i++) { %>
                 <a class="image-container" href="/products/product/<%= products[i]._id %>">
                     <!-- If the path of the products image has data received from an input put it as source, otherwise show image from local path -->
-                    <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>"
-                        alt="product">
+                    <img src="<%= products[i].srcImg[0] ? (products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])) : ''%>" alt="product">
                     <div class="image-name">
                         <%= products[i].title %>
                     </div>
@@ -111,6 +110,9 @@
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        let favoriteProductIds = <%- JSON.stringify(favoriteProductIds) %>; // מאכלסים את המשתנה הגלובלי מהשרת
+    </script>
     <script src="/js/products.js"></script>
 </body>
 
