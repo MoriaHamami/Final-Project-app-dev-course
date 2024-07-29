@@ -17,74 +17,69 @@
 <body>
     <%- include('header.ejs', {page:'news'}) -%>
     <main class="news">
-        <section id="containerTop"></section>
-        <section id="imgheader">
-            <img id="headerimg" src="/styles/imgs/about/realMadridHeader2.jpeg" alt="headerimg">
 
-      <div class="newsTitle">
-        <h1>What's New?</h1>
-    </div>
+        <div id="imgheader">
+            <img id="headerimg" src="/styles/imgs/about/1242465.jpg" alt="headerimg">
+        </div>
+
+
+        <div class="articles-filers">
+        <span class="newsTitle">
+            <h1>What's New?</h1>
+        </span>
   
-    <section class="filter">
-        <form>
-          <div class="form-group">
-            <label for="dateFilter">Date</label>
-            <input type="date" id="dateFilter" name="dateFilter" onchange="filterNews()">
-          </div>
-          <div class="form-group">
-            <label for="genreFilter">Genre</label>
-            <input type="search" name="genreFilter" id="genreFilter" list="genreOptions" onfocus="loadGenres()" onkeyup="filterNews()" placeholder="Search by Genre">
-            <datalist id="genreOptions"></datalist>
-          </div>
-          <div class="form-group">
-            <label for="textFilter">Text</label>
-            <input type="search" name="textFilter" id="textFilter" onkeyup="filterNews()" placeholder="Search by Text">
-          </div>
-          <div class="form-group">
-            <button onclick="searchNews()" class="searchBtn" type="button"><i class="bi bi-search"></i>Search</button>
-          </div>
-        </form>
-      </section>
-      
-    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <% if (news && news.length > 0) { %>
-                <% news.forEach((article, index) => { %>
-                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+       
+        <section class="filter">
+            <form>
+                <div class="form-group">
+                    <label for="textFilter">Search by Text</label>
+                    <input type="search" name="textFilter" id="textFilter" onkeyup="searchNews()" placeholder="Search by Text">
+                </div>
+                <div class="form-group">
+                    <label for="genreFilter">Search by Genre</label>
+                    <input type="search" name="genreFilter" id="genreFilter" list="genreOptions" onfocus="loadGenres()" onkeyup="searchNews()" placeholder="Search by Genre">
+                    <datalist id="genreOptions"></datalist>
+                </div>
+            </form>
+        </section>
+    
+        <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="newsResults">
+                <% if (news && news.length > 0) { %>
+                    <% news.forEach((article, index) => { %>
+                        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                            <article class="d-block w-100">
+                                <img src="/styles/imgs/news/logo-blackwhite.png" alt="News image" class="news-image">
+                                <div class="article-footer">Last update: <%= article.date.toLocaleDateString() %> at <%= article.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></div>
+                                <div class="update_content">
+                                    <h3><%= article.genre %></h3>
+                                    <p><%= article.txt %></p>
+                                </div>
+                            </article>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="carousel-item active">
                         <article class="d-block w-100">
-                            <img src="/styles/imgs/news/logo-blackwhite.png" alt="News image" class="news-image">
-                            <div class="article-footer">Last update: <%= article.date.toLocaleDateString() %> at <%= article.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></div>
-                            <div class="update_content">
-                                <h3><%= article.genre %></h3>
-                                <p><%= article.txt %></p>
-                            </div>
+                            <p>No news available</p>
                         </article>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <div class="carousel-item active">
-                    <article class="d-block w-100">
-                        <p>No news available</p>
-                    </article>
-                </div>
-            <% } %>
+                <% } %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
     
-
-    </section>
-    <h1 class="title">Who We Are?</h1>
-    </section>
+        </section>
+        <h1 class="title">Who We Are?</h1>
         <section id="whoarewe">
-
             <p1>
                 "An institution that transcends sports, a symbol of passion, excellence, and tradition" <br>
                 <span class="font">Our story begins over a century ago when a group of football enthusiasts came
@@ -127,12 +122,14 @@
         <section class="map">
             <h3>Our stores</h3>
             <!--The div element for the map -->
-            <gmp-map center="<%= coords.center.lat %>,<%= coords.center.long %>" zoom="5" map-id="branchesMap" >
+            <% if (coords && coords.center) { %>
+                <gmp-map center="<%= coords.center.lat %>,<%= coords.center.long %>" zoom="5" map-id="branchesMap">
                     <!-- Go over all the coords and add markers for them on map -->
                     <% for(let i=0; i< coords.data.length; i++) { %>                      
                         <gmp-advanced-marker position="<%= coords.data[i].lat %>,<%= coords.data[i].long %>" title="<%= coords.data[i].address %>"></gmp-advanced-marker>                  
-                        <% } %>
-            </gmp-map>
+                    <% } %>
+                </gmp-map>
+            <% } %>
         </section>
 
         <section class="contact-info">
@@ -149,73 +146,72 @@
         </section>
     </div>
 
-        <section id="innumbers">
-            <h1>A little in numbers..</h1>
-            <p id="titlesCard"><span>La Liga</span><span>UEFA Champions League</span><span>Copa del Rey</span><span>FIFA club world cup</span><span>UEFA Super cup</span></p>
-            <div class="container">
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
-                        </div>
-                        <div class="card-back">
-                            <div class="side">
-                                <p>34</p>
-                            </div>
-                        </div>
+    <section id="innumbers">
+        <h1>A little in numbers..</h1>
+        <p id="titlesCard"><span>La Liga</span><span>UEFA Champions League</span><span>Copa del Rey</span><span>FIFA club world cup</span><span>UEFA Super cup</span></p>
+        <div class="container">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
-                        </div>
-                        <div class="card-back">
-                            <div class="side">
-                                <p>13</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
-                        </div>
-                        <div class="card-back">
-                            <div class="side">
-                                <p>19</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
-                        </div>
-                        <div class="card-back">
-                            <div class="side">
-                                <p>4</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
-                        </div>
-                        <div class="card-back">
-                            <div class="side">
-                                <p>3</p>
-                            </div>
+                    <div class="card-back">
+                        <div class="side">
+                            <p>34</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
+                    </div>
+                    <div class="card-back">
+                        <div class="side">
+                            <p>13</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
+                    </div>
+                    <div class="card-back">
+                        <div class="side">
+                            <p>19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
+                    </div>
+                    <div class="card-back">
+                        <div class="side">
+                            <p>4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="/styles/imgs/about/award.png" alt="Placeholder Image">
+                    </div>
+                    <div class="card-back">
+                        <div class="side">
+                            <p>3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     </main>
     <!-- Notice Modal -->
@@ -238,13 +234,13 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="/scripts/news.js"></script> <!-- Assuming you have a separate news.js file for your news page logic -->
+    <script src="/js/news.js"></script>
 
     <!--The JS library for the google map -->
     <script
         src="<%='https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_KEY +'&loading=async&libraries=maps,marker&v=beta'%>"
         defer>
-        </script>
+    </script>
 </body>
 
 </html>

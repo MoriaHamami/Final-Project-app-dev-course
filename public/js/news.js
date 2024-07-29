@@ -83,7 +83,6 @@ async function onAddArticle(ev) {
     }
 }
 
-
 async function searchNews() {
     const genre = document.getElementById('genreFilter').value;
     const text = document.getElementById('textFilter').value;
@@ -93,13 +92,24 @@ async function searchNews() {
             url: '/news/search',
             method: 'GET',
             data: { genre, text },
+            dataType: 'html'
         });
 
-        // הצגת התוצאות בדף (נניח שיש אלמנט עם id 'newsResults' להצגת התוצאות)
-        $('#newsResults').html(response);
+        // Extract the new HTML for #newsResults and replace the existing content
+        const newContent = $(response).find('#newsResults').html();
+        $('#newsResults').html(newContent);
     } catch (e) {
         console.log('Error searching news:', e);
     }
+}
+
+
+
+function loadGenres() {
+    // פונקציה לדוגמא לטעינת ז'אנרים
+    // תוסיף כאן את הלוגיקה שלך לטעינת ז'אנרים
+}
+
 function showNotice(message, redirectTo = false) {
     document.getElementById('noticeModalBody').innerText = message;
     var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});

@@ -81,17 +81,7 @@ const getNewById = async (id) => {
   }
 };
 
-const searchNews = async (genre, text) => {
-  const query = {};
-  
-  if (genre) {
-    query.genre = { $regex: genre, $options: 'i' };
-  }
-  
-  if (text) {
-    query.txt = { $regex: text, $options: 'i' };
-  }
-  
+const searchNews = async (query) => {
   return await News.find(query);
 };
 

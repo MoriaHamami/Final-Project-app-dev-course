@@ -12,15 +12,16 @@
 .news #headerimg {
     
     width: 100%;
+
     object-fit: cover;
-    transform: translateY(-30%);
+    /* transform: translateY(-30%); */
     
 }
 
 .news .title {
     width: 30%;
     transform: translate(0, -50%);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: GoogleSans, arial, sans-serif-medium, sans-serif in;
     font-size: 48px;
     font-weight: bold;
     color: #ececec; /* צבע טקסט */
@@ -710,5 +711,20 @@ gmp-map {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
 
-
+/* @font-face {
+    font-family: GoogleSans;
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
     
+*
+{
+    font-family: GoogleSans, arial, sans-serif-medium, sans-serif in !important
+} */
+
+.articles-filers
+{
+    display: flex;
+    margin-top: 200px;
+    flex-direction: column;
+}
+
