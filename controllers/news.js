@@ -4,8 +4,8 @@ const aboutService = require('../services/about');
 const getNews = async (req, res) => {
   try {
     const news = await newsService.getNew();
-    const coords = await aboutService.getCoords()
-    coords.center = getCenterCoords(coords.data)
+    const coords = await aboutService.getCoords();
+    coords.center = getCenterCoords(coords.data);
     res.render('news.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords });
   } catch (e) {
     console.log('שגיאה בשליפת חדשות:', e);
@@ -14,28 +14,28 @@ const getNews = async (req, res) => {
 };
 
 function getCenterCoords(coords) {
-  let lats = 0
-  let longs = 0
-  let latsLength = 0
-  let longsLength = 0
+  let lats = 0;
+  let longs = 0;
+  let latsLength = 0;
+  let longsLength = 0;
   for (let i = 0; i < coords.length; i++) {
-      if(coords[i].lat) {
-          lats += coords[i].lat
-          latsLength++
-      }
-      if(coords[i].long) {
-          longs += coords[i].long
-          longsLength++
-      }
+    if (coords[i].lat) {
+      lats += coords[i].lat;
+      latsLength++;
+    }
+    if (coords[i].long) {
+      longs += coords[i].long;
+      longsLength++;
+    }
   }
 
-  const avgLat = latsLength ? lats / latsLength : 37.4220656
-  const avgLong = longsLength ? longs / longsLength : -122.0840897
+  const avgLat = latsLength ? lats / latsLength : 37.4220656;
+  const avgLong = longsLength ? longs / longsLength : -122.0840897;
 
   return {
-      lat: avgLat,
-      long: avgLong
-  }
+    lat: avgLat,
+    long: avgLong
+  };
 }
 
 const createNew = async (req, res) => {
@@ -101,13 +101,26 @@ const searchNews = async (req, res) => {
   const { genre, text } = req.query;
 
   try {
-    const news = await newsService.searchNews(genre, text);
-    res.render('news.ejs', { news });
+    const query = {};
+    if (genre) {
+      query.genre = { $regex: genre, $options: 'i' };
+    }
+    if (text) {
+      query.txt = { $regex: text, $options: 'i' };
+    }
+
+    const news = await newsService.searchNews(query);
+
+    // Render only the #newsResults part
+    res.render('news', { news, coords: req.coords, GOOGLE_KEY: process.env.GOOGLE_KEY, layout: false });
   } catch (e) {
     console.log('Error searching news:', e);
     res.status(500).json({ error: 'Error searching news' });
   }
 };
+
+
+
 
 module.exports = {
   getNews,

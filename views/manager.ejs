@@ -19,108 +19,72 @@
 <body>
     <!-- Adds header code here and send to it page val as "home" -->
     <%- include('header.ejs',{page:'manager'}) -%>
-        <main class="manager">
+    <main class="manager">
 
+        <section class="personal-info">
+            <article>
+                <img class="userImg"
+                    src="<%= manager.imgURL?.includes('data:') ? manager.imgURL : ('/styles/imgs/clients/' + manager.imgURL) %>" />
+            </article>
 
-            <section class="personal-info">
-                <article>
-                    <img class="userImg"
-                        src="<%= manager.imgURL?.includes('data:') ? manager.imgURL : ('/styles/imgs/clients/' + manager.imgURL) %>" />
-                </article>
+            <article>
+                <p class="name">Name: <%= manager.fullname %>
+                </p>
+                <p class="email">Member since: <%= manager.dateCreated.toLocaleDateString() %> at <%=
+                            manager.dateCreated.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
+                </p>
+                <a href="/client" class="button">
+                    Personal area
+                </a>
+            </article>
+        </section>
 
-                <article>
-                    <p class="name">Name: <%= manager.fullname %>
-                    </p>
-                    <p class="email">Member since: <%= manager.dateCreated.toLocaleDateString() %> at <%=
-                                manager.dateCreated.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
-                    </p>
-                    <a href="/client" class="button">
-                            Personal area
-                    </a>
+        <section class="add-options">
+            <ul>
+                <li onclick="onAddTicket()">
+                    <i class="bi bi-plus"></i>
+                    Add ticket
+                </li>
+                <li onclick="onAddNews()">
+                    <i class="bi bi-plus"></i>
+                    Add news
+                </li>
+                <li onclick="onAddProduct()">
+                    <i class="bi bi-plus"></i>
+                    Add product
+                </li>
+                <li onclick="onEditAbout()">
+                    <i class="bi bi-pencil"></i>
+                    Edit about page
+                </li>
+                <li onclick="onGetClientsPage()">
+                    <i class="bi bi-person"></i>
+                    Clients list
+                </li>
+            </ul>
+        </section>
 
-                </article>
-            </section>
+        <section class="analytics">
+            <h3>Analytics</h3>
+            <h4>Clients per year</h4>
+            <div id="graph"></div>
+            <h4 class="bar-graph-head">Products per category</h4>
+            <svg id="chart"></svg>
+        </section>
 
-            <section class="add-options">
-                <ul>
-                    <li onclick="onAddTicket()">
-                        <i class="bi bi-plus"></i>
-                        Add ticket
-                    </li>
-                    <li onclick="onAddNews()">
-                        <i class="bi bi-plus"></i>
-                        Add news
-                    </li>
-                    <li onclick="onAddProduct()">
-                        <i class="bi bi-plus"></i>
-                        Add product
-                    </li>
-                    <li onclick="onEditAbout()">
-                        <i class="bi bi-pencil"></i>
-                        Edit about page
-                    </li>
-                    <li onclick="onGetClientsPage()">
-                        <i class="bi bi-person"></i>
-                        Clients list
-                    </li>
-                </ul>
-            </section>
+    </main>
+    <!-- Adds footer code here -->
+    <%- include('footer.ejs') -%>
 
-            <!-- <section class="shops">
-                <h3>Shops</h3>
-                <ul>
-                    <li>
-                        <p>Modiin</p>
-                        <i class="bi bi-trash"></i>
-                    </li>
-                    <li>
-                        <p>Rishon Lezion</p>
-                        <i class="bi bi-trash"></i>
-                    </li>
-                    <li>
-                        <p>Haifa</p>
-                        <i class="bi bi-trash"></i>
-                    </li>
-                    <li>
-                        <p>Bat Yam</p>
-                        <i class="bi bi-trash"></i>
-                    </li>
-                </ul>
-                <button>Add shop</button>
-            </section> -->
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-            <section class="analytics">
-                <h3>Analytics</h3>
-                <h4>Clients per year</h4>
-                <div id="graph"></div>
-                <h4 class="bar-graph-head">Products per category</h4>
-                <svg id="chart"></svg>
-            </section>
+    <!-- D3JS -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 
-
-
-
-
-        </main>
-        <!-- Adds footer code here -->
-        <%- include('footer.ejs') -%>
-
-            <!-- jQuery  -->
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-            <!-- jQuery and CanvasJS Ajax -->
-            <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
-
-            <!-- D3JS -->
-            <script src="https://d3js.org/d3.v4.min.js"></script>
-
-            <!-- <script src="https://cdn.jsdelivr.net/npm/d3@7"></script> -->
-            <!-- <script src="https://cdn.jsdelivr.net/npm/d3@7/+esm"></script>  -->
-
-            <!-- Local libraries -->
-            <script src="/js/manager.js"></script>
+    <!-- Local libraries -->
+    <script src="/js/manager.js"></script>
 
 </body>
 

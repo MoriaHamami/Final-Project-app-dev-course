@@ -4,17 +4,17 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 20px;
-    gap: 20px; /* רווח בין האלמנטים */
+    gap: 20px;
 }
 
 .manager section {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #f8f9fa, #ffffff); /* רקע גרדיאנט עדין */
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
     margin: 10px;
     padding: 30px;
-    border-radius: 15px; /* קצוות עגולים יותר */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* צל עמוק יותר */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     height: min-content;
     width: min-content;
 }
@@ -34,7 +34,7 @@
 
 .manager i {
     cursor: pointer;
-    color: #007bff; /* צבע כחול לאייקונים */
+    color: #007bff;
 }
 
 .manager .personal-info {
@@ -42,28 +42,28 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px; /* רווח בין האלמנטים */
+    gap: 10px;
 }
 
 .manager .userImg {
-    width: 50px; /* תמונה גדולה יותר */
+    width: 50px;
     border-radius: 50%;
     margin-inline-end: 20px;
-    border: 2px solid #007bff; /* מסגרת כחולה עדינה לתמונה */
+    border: 2px solid #007bff;
 }
 
 .manager .personal-info article {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 5px; /* רווח בין האלמנטים */
+    gap: 5px;
 }
 
 .manager .personal-info p {
     padding-inline-end: 20px;
     padding-block: 5px;
-    font-size: 16px; /* גודל פונט יותר גדול */
-    color: #333; /* צבע טקסט כהה יותר */
+    font-size: 16px;
+    color: #333;
 }
 
 .manager .add-options {
@@ -74,7 +74,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0;
-    gap: 10px; /* רווח בין האלמנטים */
+    gap: 10px;
 }
 
 .manager .add-options li,
@@ -82,24 +82,24 @@
     border: 1px solid var(--l-gray);
     background-color: var(--lll-gray);
     width: max-content;
-    padding: 10px 20px; /* רווח פנימי גדול יותר */
+    padding: 10px 20px;
     margin: 8px;
-    border-radius: 25px; /* קצוות עגולים יותר */
+    border-radius: 25px;
     cursor: pointer;
-    color: #007bff; /* צבע טקסט כחול */
-    font-weight: bold; /* טקסט מודגש */
-    transition: background-color 0.3s ease-in-out; /* אפקט מעבר עדין */
+    color: #007bff;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .manager .add-options li:hover,
 .manager .shops button:hover {
-    background-color: #e0e0e0; /* שינוי רקע בעת מעבר עכבר */
+    background-color: #e0e0e0;
 }
 
 .manager .bar-graph-head {
     margin-block: 10px 20px;
-    font-size: 18px; /* גודל פונט יותר גדול */
-    color: #555; /* צבע טקסט כהה יותר */
+    font-size: 18px;
+    color: #555;
 }
 
 /* LINE GRAPH STYLING */
