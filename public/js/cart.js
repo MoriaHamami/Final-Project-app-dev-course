@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Handle click events on the "Remove" text and trash icon
     $(document).on('click', '.icon-text, .bi-trash3', function() {
         const cartItemId = $(this).data('cart-item-id');
         console.log('Sending cartItemId:', cartItemId); // Debugging
@@ -14,16 +13,14 @@ async function removeItem(cartItemId) {
             url: '/cart/remove',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({
-                cartItemId: cartItemId
-            })
+            data: JSON.stringify({ cartItemId })
         });
 
         console.log('Response from server:', response); // Debugging
 
         if (response.success) {
             showNotice('Product removed from cart successfully', function() {
-                window.location.reload(); // רענון הדף לאחר הצגת ההודעה
+                window.location.reload();
             });
         } else {
             showNotice(response.message || 'Error removing product from cart');
@@ -42,7 +39,6 @@ function showNotice(message, callback) {
         var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
         noticeModal.show();
 
-        // סגירת המודל לאחר 2 שניות
         setTimeout(function() {
             noticeModal.hide();
             if (callback) {
@@ -56,22 +52,19 @@ function showNotice(message, callback) {
 
 async function proceedToShipping() {
     try {
-        // חישוב הסכום הכולל של העגלה
         const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
         const response = await $.ajax({
             url: '/cart/checkout',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({
-                cartTotal: cartTotal // העברת הסכום הכולל לשרת
-            })
+            data: JSON.stringify({ cartTotal })
         });
 
         if (response.success) {
             showNotice('Thank you for your purchase!');
             setTimeout(function() {
-                window.location.assign('/'); // העברה לדף הבית
+                window.location.assign('/');
             }, 2000);
         } else {
             showNotice(response.message || 'Error processing order');
@@ -82,3 +75,22 @@ async function proceedToShipping() {
     }
 }
 
+async function addToCart(productId, size, quantity) {
+    try {
+        const response = await $.ajax({
+            url: '/cart/add',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ productId, size, quantity })
+        });
+
+        if (response.success) {
+            showNotice('Product added to cart successfully');
+        } else {
+            showNotice(response.message || 'Error adding product to cart');
+        }
+    } catch (e) {
+        console.log('Error adding product to cart:', e);
+        showNotice('Error adding product to cart');
+    }
+}

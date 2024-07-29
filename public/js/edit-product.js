@@ -118,13 +118,21 @@ const handleProductFormSubmit = async (event, state, url, method) => {
     }
 };
 
-const showNotification = (message, type = 'success') => {
-    const notification = $('#notification');
-    notification.removeClass('d-none').addClass(`alert-${type}`).text(message);
-    setTimeout(() => {
-        notification.addClass('d-none').removeClass(`alert-${type}`).text('');
-    }, 3000);
-};
+// Function to show notice and redirect
+function showNotification(message, redirectToCart) {
+    document.getElementById('noticeModalBody').innerText = message;
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    noticeModal.show();
+
+    // Adding a delay before redirect
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
+}
 
 const onUpdateProduct = async (event) => {
     event.preventDefault();

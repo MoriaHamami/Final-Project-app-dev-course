@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Product | <%= product.title %> </title>
+    <title>Product | <%= product.title %></title>
     <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
     <!-- Libraries -->
@@ -13,15 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/styles/css/setup/general.css">
     <link rel="stylesheet" href="/styles/css/product.css">
-    <style>
-        .carousel-item {
-            transition: opacity 1s ease-in-out !important;
-            opacity: 0;
-        }
-        .carousel-item.active {
-            opacity: 1;
-        }
-    </style>
 </head>
 
 <body>
@@ -44,14 +35,8 @@
                     <hr>
                 </div>
             <% } %>
-            <select class="form-select" id="quantitySelect">
-                <option selected value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <button class="addTOcart" onclick="addToCart('<%= product._id %>')">
+            
+            <button class="addTOcart" onclick="addToCart('<%= product._id %>', '<%= product.price %>')">
                 <i class="bi bi-cart-plus"></i> Add to shopping cart
             </button>
             <button class="addTOcart" onclick="buyNow('<%= product._id %>')"><i class="bi bi-cart-check"></i> Buy now</button>
@@ -67,7 +52,7 @@
                 <div class="carousel-inner">
                     <% product.srcImg.forEach((imgSrc, index) => { %>
                         <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                            <img class="d-block" src="<%= imgSrc.includes('data:') ? imgSrc : ('/styles/imgs/products/' + imgSrc) %>" alt="Product img">
+                            <img class="d-block" src="<%= imgSrc.includes('data:') ? imgSrc : ('/styles/imgs/products/' + imgSrc) %>" alt="Product image">
                         </div>
                     <% }) %>
                 </div>
@@ -115,11 +100,6 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
     <script src="/js/product.js"></script>
-
-
-
-    
-    
 </body>
 
 </html>

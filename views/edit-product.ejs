@@ -20,9 +20,12 @@
     <%- include('header.ejs', {page:'edit-product'}) -%>
 
     <main class="edit-product container">
-        <div id="notification" class="alert alert-success d-none" role="alert">
-            Product updated successfully!
-        </div>
+        <!-- <div id="notification" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+            </div>
+        </div> -->
         <form id="editProduct" class="row">
             <article class="edit-imgs col-md-6 mb-4">
                 <h3 class="text-center">Images</h3>
@@ -47,7 +50,7 @@
                         </li>
                     <% } %>
                 </ul>
-                <button type="button" class="btn btn-primary mt-3 w-100" onclick="onAddImg(event.target)">
+                <button type="button" class="btn btn-primary mt-3 w-100" onclick="onAddImg()">
                     <i class="bi bi-plus"></i> Add another image
                 </button>
             </article>
@@ -60,7 +63,7 @@
                             <% for (let i = 0; i < product.sizes.length; i++) { %>
                                 <li id="<%= i %>" class="d-flex align-items-center mb-2">
                                     <input value="<%= product.sizes[i] %>" name="sizes" class="form-control me-2" onchange="onChangeSize(event.target.value, '<%= i %>')">
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="onDeleteSize('<%= i %>')"><i class="bi bi-trash"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm deleteSize" onclick="onDeleteSize('<%= i %>')"><i class="bi bi-trash"></i></button>
                                 </li>
                             <% } %>
                         </ul>
@@ -68,7 +71,7 @@
                         <ul class="list-unstyled">
                             <li id="0" class="d-flex align-items-center mb-2">
                                 <input value="S" name="sizes" class="form-control me-2" onchange="onChangeSize(event.target.value, '0')">
-                                <button type="button" class="btn btn-danger btn-sm" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i></button>
+                                <button type="button" class="btn btn-danger btn-sm deleteSize" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i></button>
                             </li>
                         </ul>
                     <% } %>
@@ -125,20 +128,31 @@
                         <button type="button" id="deleteButton" class="btn btn-danger" onclick="onDeleteProduct('<%= product._id %>')">
                             Delete Item
                         </button>
-                    <% } else { %>
-                        <button id="addButton" class="btn btn-primary" onclick="onAddProduct(event)">
-                            Add Item
-                        </button>
                     <% } %>
                 </article>
             </div>
         </form>
     </main>
+    
+    <!-- Notice Modal -->
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+                </div>
+                <div class="modal-body" id="noticeModalBody">
+                    <!-- The message will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <%- include('footer.ejs') -%>
 
     <!-- Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/edit-product.js"></script>
 </body>
 
