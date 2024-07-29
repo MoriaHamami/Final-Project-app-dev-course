@@ -7,7 +7,6 @@ body {
     margin-top: 30px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: var(--card-bsh);
 }
 
 .edit-product h3 {
@@ -40,6 +39,16 @@ body {
     margin: 10px;
 }
 
+.edit-product label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    padding: 5px;
+    font-size: 1em;
+    justify-content: space-between;
+}
+
 .edit-product .edit-sizes input,
 .edit-product .edit-imgs input,
 .edit-product .edit-cat select,
@@ -48,6 +57,20 @@ body {
     border-radius: 12px;
     padding: 10px;
     width: 100%;
+}
+
+.edit-product .edit-txt input {
+    border: 1px solid var(--l-gray);
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+    max-width: 200px;
+    font-size: 1em;
+    transition: transform 0.3s;
+}
+.edit-product .edit-txt input:hover {
+    transform: scale(1.05);
 }
 
 .edit-product img {
@@ -95,5 +118,6 @@ body {
 #edit-sizes
 {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
