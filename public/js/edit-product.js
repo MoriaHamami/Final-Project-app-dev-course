@@ -7,10 +7,20 @@ let gPrice = 0
 let gSizes = []
 let gSrcImgs = []
 // Initialize the amount of images according to the DOM
-let gLastImgIdx = $('.edit-product .edit-imgs li').length ?  $('.edit-product .edit-imgs li').length + 2 : 1
-let gLastSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1
+let gNextImgIdx = $('.edit-product .edit-imgs li').length ?  $('.edit-product .edit-imgs li').length + 2 : 1
+let gNextSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1
 let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0
 let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0
+
+$('.add-img-btn').click(function () {
+    $(".add-img-input").trigger('click')
+})
+
+for(let i = 0; i<gNumOfImgs;i++){
+    $(`.update-btn-${i}`).click(function () {
+        $(`.update-img-${i}`).trigger('click')
+    })
+}
 
 // Functions to update global vars when changes occur in inputs
 function onChangeTitle(newTitle) {
@@ -54,7 +64,6 @@ function addTogSrcImgs(imgSrc) {
         // Add the file name to the global srcImg array 
         gSrcImgs.push(res)
     }
-    console.log('gSrcImgs:',gSrcImgs )
 }
 function updateImgsSrc() {
     // Get all the imgs in DOM
@@ -72,33 +81,66 @@ function onAddImg(input) {
         reader.readAsDataURL(input.files[0])
         // Onload is triggered when the reading successfully ends
         reader.onload = function (e) {
+            console.log('gNumOfImgs:', gNumOfImgs)
             if (gNumOfImgs != 0) {
                 // If there are other images, add the image in DOM after the last image
                 const elLastImg = $('.edit-product .edit-imgs li:last-child')
                 elLastImg.after(
-                    `<li id="${gLastImgIdx}">
-                 <img src="${e.target.result}" class="srcImg-${gLastImgIdx}">
+                    `<li id="idx-${gNextImgIdx}">
+                 <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
                  <input type="file" accept="image/*" name="srcImg"
-                     src="${e.target.result}" id="${gLastImgIdx}" onchange="onChangeImg(event.target)">
-                     <button type="button" id=${gLastImgIdx} class="deleteImg" onclick="onDeleteImg(${gLastImgIdx})">DELETE</button>
+                     src="${e.target.result}" id="${gNextImgIdx}" onchange="onChangeImg(event.target)" class="update-img-${gNextImgIdx}">
+                    </input>
+                                    <button type="button" class="update-btn-${gNextImgIdx}" >Change</button>
+                     <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
                      </li>`
+                     
                 )
+                // addFileListener(gNextImgIdx)
+                // $(`.update-btn-${gNextImgIdx-1}`).click(function () {
+                //     console.log('addedd new:')
+                //     $(`.update-img-${gNextImgIdx-1}`).trigger('click')
+                // })
+            //     gNumOfImgs++
+            // gNextImgIdx++
             } else {
+                console.log('last was delted:')
                 // If there are no images, add the image in DOM inside ul
                 $('.edit-product .edit-imgs ul').append(
-                    `<li id="1">
-                 <img src="${e.target.result}" class="srcImg-1">
-                 <input type="file" accept="image/*" name="srcImg"
-                     src="${e.target.result}" id="1" onchange="onChangeImg(event.target)">
-                 <button type="button" id=0 class="deleteImg" onclick="onDeleteImg(1)">DELETE</button>
-                 </li>`
+                    `<li id="idx-${gNextImgIdx}">
+                    <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
+                       <input type="file" accept="image/*" name="srcImg"
+                                        onchange="onChangeImg(event.target)"
+                                        src="${e.target.result}"
+                                        id="${gNextImgIdx}" class="update-img-${gNextImgIdx}">
+                                    </input>
+                                    <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
+                                            
+                    
+                    <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
+                    </li>`
                 )
+                // $(".update-btn-0").click(function () {
+                //     console.log("added listener to first")
+                //     $(".update-img-0").trigger('click')
+                // })
+                // gNumOfImgs++
+            // gNextImgIdx++
+                
             }
-            // Update local var
-            ++gLastImgIdx
-            ++gNumOfImgs
+            addFileListener(gNextImgIdx)
+
+            gNumOfImgs++
+            gNextImgIdx++
+          
         }
     }
+}
+function  addFileListener(id){
+$(`.update-btn-${id}`).click(function () {
+    console.log('addedd new:', id)
+    $(`.update-img-${id}`).trigger('click')
+})
 }
 async function onChangeImg(input) {
     try {
@@ -110,11 +152,11 @@ async function onChangeImg(input) {
     }
 }
 function onDeleteImg(id) {
-    
+    // console.log('gNumOfImgs:', gNumOfImgs)
     // Update local var
     gNumOfImgs--
     // Remove from DOM the image selected to be deleted
-    $(`.edit-product .edit-imgs li#${id}`).remove()
+    $(`.edit-product .edit-imgs li#idx-${id}`).remove()
 }
 // Get img source from data recieved in input and update in DOM
 async function readChangedURL(input) {
@@ -146,9 +188,9 @@ function onAddSize() {
         // If there are other sizes, add size input section in DOM after the last input
         const elLastSize = $('.edit-product .edit-sizes li:last-child')
         elLastSize.after(
-            `<li id=${gLastSizeIdx}>
+            `<li id="idx-${gNextSizeIdx}">
                 <input value="" name="sizes">
-                <button type="button" onclick="onDeleteSize(${gLastSizeIdx})">
+                <button type="button" onclick="onDeleteSize(${gNextSizeIdx})">
                     <i class="bi bi-trash"></i>
                 </button>
             </li>`
@@ -156,7 +198,7 @@ function onAddSize() {
     } else {
         // If there are no sizes, add the size in DOM inside ul
         $('.edit-product .edit-sizes ul').append(
-            `<li id="1">
+            `<li id="idx-1">
                 <input value="S" name="sizes">
                 <button type="button" onclick="onDeleteSize(1)"> 
                     <i class="bi bi-trash"></i>
@@ -165,7 +207,7 @@ function onAddSize() {
         )
     }
     // Update local var
-    ++gLastSizeIdx
+    ++gNextSizeIdx
     ++gNumOfSizes
     
 }
@@ -180,11 +222,12 @@ function updateSizes() {
 
 function onDeleteSize(id) {
     console.log('id:', id)
+    console.log('gNumOfSizes:', gNumOfSizes)
     // Update local var
     gNumOfSizes--
-    console.log('gNumOfSizes:', gNumOfSizes)
+    console.log('$(`.edit-product .edit-sizes #idx-${id}`):', $(`.edit-product .edit-sizes li#idx-${id}`).length)
     // Remove from DOM the size selected to be deleted
-    $(`.edit-product .edit-sizes li#${id}`).remove()
+    $(`.edit-product .edit-sizes li#idx-${id}`).remove()
 }
 
 

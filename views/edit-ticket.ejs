@@ -28,15 +28,21 @@
                             <li id="0">
                                 <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                      class="srcImg-0" id="image-preview" width="300">
-                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event.target)"
-                                       src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
-                                       id="0">
+                                     <button type="button" class="file-btn">
+                                        Change image
+                                    </button>
+                                         <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
+                                                src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
+                                                id="0" class="file-input">
                                 <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } else { %>
                             <li id="0">
                                 <img src="/styles/imgs/tickets/placeholder.png" class="srcImg-0" id="image-preview">
-                                <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0">
+                                <button type="button" class="file-btn">
+                                    Change image
+                                </button>
+                                    <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0" class="file-input">
                                 <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } %>

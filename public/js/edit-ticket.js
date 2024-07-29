@@ -32,6 +32,11 @@ window.onload = function () {
         gOpImg = originalOpImg;
     }
 };
+$('.file-btn').click(function () {
+    console.log('here:')
+    $(".file-input").trigger('click');
+})
+
 
 async function onUpdateTicket(ev) {
     ev.preventDefault();
@@ -95,9 +100,17 @@ function onChangeDateTime(dateTime) {
 
 // הוספת כתובת מקור של תמונה ל-gopImg
 function updategSrcImg(opImg) {
+    if (!opImg) {
+        const imgElement = document.querySelector(`.edit-ticket li img`)
+        imgElement.src = '/styles/imgs/tickets/placeholder.png';
+        const fileInputElement = document.querySelector(`.edit-ticket input[type="file"]`)
+        fileInputElement.value = '';
+        return
+    }
     gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1)
     const imgElement = document.querySelector(`.edit-ticket li img`)
-    imgElement.src = opImg
+    console.log('gOpImg:', gOpImg)
+    imgElement.src = gOpImg
 }
 
 // הוספת תמונה
@@ -127,6 +140,7 @@ function updategSrcImg(opImg) {
 
 async function onChangeImg(event) {
     try {
+        // console.log('event.target:', event.target)
         const imgSrc = await readChangedURL(event.target)
         updategSrcImg(imgSrc)
     } catch (e) {
@@ -150,6 +164,7 @@ function onDeleteImg(id) {
 
 // קריאת URL של התמונה שהשתנתה
 async function readChangedURL(input) {
+    console.log('input.files:', input.files)
     if (input.files && input.files[0]) {
         return new Promise((res, rej) => {
             let reader = new FileReader();

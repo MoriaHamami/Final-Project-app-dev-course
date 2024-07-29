@@ -58,6 +58,10 @@ label{
     margin: 0;
 }
 
+input[type=file] {
+    display: none;
+}
+
 @media (max-width: 600px) {
     main {
         position: relative;
