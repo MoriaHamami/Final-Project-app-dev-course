@@ -3,13 +3,13 @@
     padding: 20px;
 }
 
-.headline {
+.background-image {
+    position: relative;
     text-align: center;
-    padding: 40px;
-    margin: 20px auto;
-    text-transform: capitalize;
-    animation: fadeIn 2s ease-in-out forwards;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   padding-bottom: 20px;
+   padding-top: 20px;
+   animation: fadeIn 2s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -23,18 +23,24 @@
     }
 }
 
-.headline h1 {
+
+.background-image h1{
     color: #161b79;
     text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.5), 
                  0 0 25px rgba(255, 215, 0, 0.6), 
                  0 0 5px rgba(255, 215, 0, 0.7);
     font-size: 4.5em;
+    padding-bottom: 20px;
 }
 
-.headline p {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 1.9em;
+.background-image p{
+    font-size: 2.2em;
+    font-style: italic;
+    text-transform: capitalize;
+
 }
+
+
 
 .filter {
     display: flex;
@@ -67,9 +73,12 @@
     transition: transform .2s ease-in;
 }
 
+
+
 .filter input:hover,
 .filter select:hover {
     transform: scale(1.05);
+    
 }
 
 .button-container {
@@ -91,7 +100,7 @@
 .filter button:hover {
     background-color: #bebebe;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 #productsList {
@@ -244,11 +253,33 @@
     margin: 5px 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
 .cards-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 5 קלפים בכל שורה */
     gap: 15px; /* Adjust the gap as needed */
     margin: 10px;
+}
+
+.cards-container p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
+    white-space: nowrap;
+    margin-top: 20px;
+    padding: 10%;
 }
 
 .card {
