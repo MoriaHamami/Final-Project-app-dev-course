@@ -5,10 +5,16 @@ async function login(username, password) {
     try {
         // Find user by username and password
         const user = await Client.findOne({ username, pass: password });
-        return user != null;
+        if (!user) {
+            return { success: false, message: "Incorrect username or password" };
+        }
+        if (user.isBanned) {
+            return { success: false, message: "This user is blocked by the manager" };
+        }
+        return { success: true, user };
     } catch (e) {
         console.error('Login error:', e);
-        return false;
+        return { success: false, message: "Login error, please try again later" };
     }
 }
 
