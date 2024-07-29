@@ -17,10 +17,12 @@
 </head>
 
 <body>
-    <!-- Header include (assuming it's a server-side include) -->
-    <!-- <%- include('header.ejs', {page:'edit-product'}) -%> -->
+    <%- include('header.ejs', {page:'edit-product'}) -%>
 
     <main class="edit-product container">
+        <div id="notification" class="alert alert-success d-none" role="alert">
+            Product updated successfully!
+        </div>
         <form id="editProduct" class="row">
             <article class="edit-imgs col-md-6 mb-4">
                 <h3 class="text-center">Images</h3>
@@ -45,8 +47,7 @@
                         </li>
                     <% } %>
                 </ul>
-                <button type="button" class="btn btn-primary mt-3 w-100">
-                    <input type="file" accept="image/*" name="addImg" onchange="onAddImg(event.target)" class="d-none">
+                <button type="button" class="btn btn-primary mt-3 w-100" onclick="onAddImg(event.target)">
                     <i class="bi bi-plus"></i> Add another image
                 </button>
             </article>

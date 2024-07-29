@@ -129,7 +129,6 @@ const getStats = async () => {
       }
     ]);
 
-    console.log('data2:', data);
     return data;
   } catch (e) {
     console.log('e:', e);

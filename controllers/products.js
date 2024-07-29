@@ -1,11 +1,11 @@
 const productService = require('../services/products');
 const loginController = require('./login');
-const Client = require('../models/clients'); // ייבוא נכון של המודל
+const Client = require('../models/clients');
 
 const getProducts = async (req, res) => {
   try {
     const username = req.session.username;
-    let favoriteProductIds = [];
+    let favoriteProductIds = []; // הגדרת המשתנה
 
     if (username) {
       const client = await Client.findOne({ username });
@@ -19,22 +19,19 @@ const getProducts = async (req, res) => {
       minPrice: productsInfo.minPrice,
       cats: productsInfo.cat,
       sizes: productsInfo.sizes,
-      favoriteProductIds, // Add favoriteProductIds to the render context
+      favoriteProductIds,
     });
   } catch (e) {
     console.log('e:', e);
   }
 };
 
+
+
 const getProductsByFilter = async (req, res) => {
   try {
-    const priceFilter = req.query.filters?.price;
-    const titleFilter = req.query.filters?.title;
-    const catFilter = req.query.filters?.cat;
-    const sortVal = req.query.sort?.sortVal;
-    const isAsc = req.query.sort?.isAsc;
-
-    const productsInfo = await productService.getProducts(priceFilter, titleFilter, catFilter, sortVal, isAsc);
+    const { price, title, cat, sortVal, isAsc } = req.query.filters || {};
+    const productsInfo = await productService.getProducts(price, title, cat, sortVal, isAsc);
     res.json(productsInfo.products);
   } catch (e) {
     console.log('e:', e);
