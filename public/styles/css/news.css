@@ -688,8 +688,13 @@ p.columns {
     position: absolute; /* מאפשר למקם את ה-div באופן מוחלט */
     right: -40px; /* מצמיד את ה-div לצד ימין */
     padding-bottom: 10px;
+    transition: transform 0.3s ease-in-out;
 
     
+}
+
+.map:hover{
+    transform: scale(1.05);
 }
 .map h3 {
     font-size: 24px;

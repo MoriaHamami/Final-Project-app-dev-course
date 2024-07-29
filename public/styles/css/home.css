@@ -26,18 +26,18 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #fff; /* Adjust button background color */
-    color: #000; /* Adjust button text color */
+    background-color: #fff; 
+    color: #000; 
     border: none;
     border-radius: 8px;
-    z-index: 1; /* Ensure the button stays above the background */
+    z-index: 1; 
     background-color: goldenrod;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .welcome a p {
-    display: inline; /* Ensure p inside button is inline */
-    margin: 0; /* Remove default margin */
+    display: inline; 
+    margin: 0; 
     font-weight: bold;
 }
 
@@ -46,20 +46,19 @@
     transform: scale(1.2);
 }
 
-/* Remove default p tag margin */
 .home .welcome a p {
     margin: 0;
 }
 
-/* SLIDER STYLING */
+
 
 .home .carousel {
-    width: 430px; /* שמירה על רוחב הקרוסלה המקורי */
-    margin-left: -50%; /* הזזת הקארוסלה שמאלה */
-    background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%); /* רקע גרדיאנט */
-    border-radius: 20px; /* עיגול פינות */
-    padding: 20px; /* ריווח פנימי */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל */
+    width: 430px; 
+    margin-left: -50%; 
+    background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%); 
+    border-radius: 20px; 
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .home .slider {
@@ -71,14 +70,17 @@
 
 .title-container {
     display: flex;
-    justify-content: space-around; /* מבטיח ריווח אחיד בין הכותרות ובין הקצוות */
+    justify-content: space-around; 
     align-items: center; 
-    width: 100%; /* מאפשר לפלקסבוקס להשתמש בכל הרוחב */
-    padding: 20px 1%; /* מרווח פנימי מותאם */
-    box-sizing: border-box; /* מבטיח שה-padding ייכלל ברוחב הכולל */
+    width: 100%;
+    padding: 20px 1%; 
+    box-sizing: border-box; 
 }
 
 .players-title, .score-title {
+    flex: 1 1 45%;
+    text-align: center;
+    margin: 10px 0;
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase; 
@@ -92,13 +94,15 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+
+
+
 .home .carousel-inner img {
     height: 500px; 
     width: auto; 
     border-radius: 20px; 
 }
 
-/* Style side buttons in slider */
 .home .change-slide-button {
     display: flex;
     align-items: center;
@@ -108,10 +112,9 @@
     background-color: var(--l-gray);
 }
 
-/* Style text in slider */
 .home .carousel-caption {
     text-shadow: var(--dark-txtsh);
-    color: black;
+    color: rgb(255, 255, 255);
     background-color: #ffffffb9;
     border-radius: 20px;
     padding: 10px;
@@ -133,41 +136,64 @@
     flex-wrap: wrap; /* עוטף שורות אם יש צורך */
     background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
     transition: background-color 0.3s ease, transform 0.3s ease;
+    background: rgba(80, 80, 80, 0.5);
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-#weather-container:hover {
-    transform: scale(1.02); /* הגדלת הקונטיינר מעט בעת ריחוף */
+
+#weather-container {
+    border: 2px solid #1d428a; 
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%; 
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin: 20px auto;/
+    margin-top: 110px;
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); 
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    gap: 20px;
 }
+
 
 #weather-container h2 {
     font-size: 30px;
     margin-bottom: 20px;
-    color: #1d428a; /* כחול כהה של ריאל מדריד */
+    letter-spacing: 2px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+    color: #1d428a; 
     text-align: center;
-    width: 100%; /* מרחיב את הכותרת לכל רוחב הקונטיינר */
-    background: linear-gradient(45deg, #1d428a, #ffd700); /* מעבר צבעים לכותרת: כחול וזהב */
+    width: 100%; 
+    background: linear-gradient(45deg, #1d428a, #ffd700); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .daily-forecast {
-    border: 1px solid #1d428a; /* כחול כהה */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: transparent;
     margin: 10px;
-    padding: 10px; /* הקטנת הפדינג */
-    background-color: #ffffff; /* לבן */
-    border-radius: 16px; /* עיגול פינות של כל תחזית */
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+    padding: 10px; 
+    background-color: #ffffff; 
+    border-radius: 16px; 
     flex: 1; 
-    min-width: 150px; 
-    max-width: 180px; 
+    min-width: 160px; 
+    max-width: 190px; 
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
 }
 
 .daily-forecast:hover {
-    background-color: #ffd700; /* רקע זהב בעת ריחוף */
-    transform: scale(1.05); /* הגדלת התחזית מעט בעת ריחוף */
+    transform: scale(1.06); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
 }
+
 
 .forecast-title {
     font-weight: bold;
@@ -177,30 +203,24 @@
 }
 
 .forecast-details {
-    display: none;
     font-size: 14px;
     color: var(--gray);
+    display: block; 
 }
 
-.daily-forecast:hover .forecast-details {
-    display: block;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 
 .widget {
-    width: 40%; 
-    height: 545px; 
+    width: 38%; 
+    height: 540px; 
     background-color: white; 
-    border: 1px solid #ccc; 
+    border: transparent;
     float: right; 
     margin-bottom: 20px;
     margin-top: -540px;
     margin-right: 100px;
-    border-radius: 10px;
+    border-radius: 16px;
     overflow-y: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+   
 }
+
