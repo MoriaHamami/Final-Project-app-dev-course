@@ -50,6 +50,45 @@ function showNotice(message, callback) {
     }
 }
 
+// Function to show the large popup
+function showLargePopup(message) {
+    var largePopup = document.querySelector('.large-popup');
+    var largePopupContent = document.querySelector('.large-popup-content');
+
+    if (largePopup && largePopupContent) {
+        largePopupContent.innerHTML = `<h1>${message}</h1><button onclick="closeLargePopup()">Close</button>`;
+        largePopup.style.display = 'flex'; // Show the popup
+        
+        // Hide the popup after a few seconds
+        setTimeout(function() {
+            closeLargePopup();
+            window.location.assign('/'); // Redirect after closing the popup
+        }, 2000); // Adjust time as needed
+    } else {
+        console.error('Large popup or content not found');
+    }
+}
+
+// Function to show the large popup
+function showLargePopup(message) {
+    var largePopup = document.querySelector('.large-popup');
+    var largePopupContent = document.querySelector('.large-popup-content');
+
+    if (largePopup && largePopupContent) {
+        largePopupContent.innerHTML = `<h1>${message}</h1>`;
+        largePopup.style.display = 'flex'; // Show the popup
+        
+        // Hide the popup after a few seconds
+        setTimeout(function() {
+            largePopup.style.display = 'none'; // Hide the popup
+            window.location.assign('/'); // Redirect after closing the popup
+        }, 2000); // Adjust time as needed
+    } else {
+        console.error('Large popup or content not found');
+    }
+}
+
+// Updated proceedToShipping function
 async function proceedToShipping() {
     try {
         const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
@@ -62,10 +101,7 @@ async function proceedToShipping() {
         });
 
         if (response.success) {
-            showNotice('Thank you for your purchase!');
-            setTimeout(function() {
-                window.location.assign('/');
-            }, 2000);
+            showLargePopup('Thank you for your purchase!');
         } else {
             showNotice(response.message || 'Error processing order');
         }
@@ -74,6 +110,9 @@ async function proceedToShipping() {
         showNotice('Error processing order');
     }
 }
+
+
+
 
 async function addToCart(productId, size, quantity) {
     try {
@@ -94,3 +133,5 @@ async function addToCart(productId, size, quantity) {
         showNotice('Error adding product to cart');
     }
 }
+
+
