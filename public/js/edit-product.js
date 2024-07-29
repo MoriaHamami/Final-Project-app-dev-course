@@ -54,6 +54,7 @@ function addTogSrcImgs(imgSrc) {
         // Add the file name to the global srcImg array 
         gSrcImgs.push(res)
     }
+    console.log('gSrcImgs:',gSrcImgs )
 }
 function updateImgsSrc() {
     // Get all the imgs in DOM
@@ -168,6 +169,7 @@ function onAddSize() {
     ++gNumOfSizes
     
 }
+
 function updateSizes() {
     // Get all the sizes in DOM
     const sizes = $('.edit-product .edit-sizes li input')
@@ -175,6 +177,7 @@ function updateSizes() {
     else sizes.map((_, { value }) => value ? gSizes.push(value) : '') // extract values and add to gSizes var
     console.log('gSizes:', gSizes)
 }
+
 function onDeleteSize(id) {
     console.log('id:', id)
     // Update local var
@@ -196,6 +199,8 @@ async function onAddProduct(ev) {
     // $('.edit-product input[name="sizes"]').each(function () {
     //     gSizes.push($(this).val())
     // })
+     gSizes = []
+ gSrcImgs = []
     updateImgsSrc()
     updateSizes()
 
@@ -231,6 +236,9 @@ async function onUpdateProduct(ev) {
     // $('.edit-product input[name="sizes"]').each(function () {
     //     gSizes.push($(this).val())
     // })
+
+     gSizes = []
+ gSrcImgs = []
 
     updateImgsSrc()
 updateSizes()

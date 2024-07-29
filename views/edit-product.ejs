@@ -28,7 +28,7 @@
                     <ul>
                         <%if(product !=null){%>
                             <% for(let i=0; i< product.srcImg.length; i++) { %>
-                                <li id="<%=i%>">
+                                <li id="<%=i+1%>">
                                     <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
                                         class="srcImg-<%=i%>">
                                     <input type="file" accept="image/*" name="srcImg"
@@ -37,19 +37,19 @@
                                         id="<%=i%>">
                                     <button type="button">UPDATE</button>
                                     </input>
-                                    <button type="button" id="<%=i%>" class="deleteImg"
-                                        onclick="onDeleteImg('<%=i%>')">DELETE</button>
+                                    <button type="button" id="<%=i+1%>" class="deleteImg"
+                                        onclick="onDeleteImg('<%=i+1%>')">DELETE</button>
                                 </li>
                                 <%}%>
 
                                     <%}else{%>
-                                        <li id="0">
-                                            <img src="/styles/imgs/products/shirt.png" class="srcImg-0">
+                                        <li id="1">
+                                            <img src="/styles/imgs/products/shirt.png" class="srcImg-1">
                                             <input type="file" accept="image/*" name="srcImg"
-                                                src="/styles/imgs/products/shirt.png" id="0"
+                                                src="/styles/imgs/products/shirt.png" id="1"
                                                 onchange="onChangeImg(event.target)">
-                                            <button type="button" id="0" class="deleteImg"
-                                                onclick="onDeleteImg(0)">DELETE</button>
+                                            <button type="button" id="1" class="deleteImg"
+                                                onclick="onDeleteImg(1)">DELETE</button>
                                         </li>
                                         <%}%>
                     </ul>
@@ -68,9 +68,9 @@
 
                             <% for(let i=0; i< product.sizes.length; i++) { %>
 
-                                <li id="<%= i %>">
+                                <li id="<%= i+1 %>">
                                     <input value="<%= product.sizes[i] %>" name="sizes">
-                                    <button type="button" onclick="onDeleteSize('<%=i%>')">
+                                    <button type="button" onclick="onDeleteSize('<%=i+1%>')">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </li>
@@ -80,9 +80,9 @@
                         <%}else{%>
                             <ul>
 
-                                <li id="0">
+                                <li id="1">
                                     <input value="S">
-                                    <button type="button" onclick="onDeleteSize(0)"><i class="bi bi-trash"></i>
+                                    <button type="button" onclick="onDeleteSize(1)"><i class="bi bi-trash"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -140,12 +140,12 @@
 
 
                 <article class="edit-actions">
-                    <h3>Options</h3>
+                    <!-- <h3>Options</h3> -->
 
-                    <label>
+                    <!-- <label>
                         Is sold out?
                         <input id="soldOut" type="checkbox">
-                    </label>
+                    </label> -->
 
                     <%if(product !=null){%>
                         <button type="button" id="updateButton" value="<%=product._id%>"
