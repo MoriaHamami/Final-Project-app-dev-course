@@ -57,39 +57,52 @@ async function sortProductsBy(sortVal) {
     }
 }
 
+let favoriteProductIds = []; // משתנה גלובלי
+
 async function getProductsBy(sortVal = '', isAsc = true) {
     try {
         // Show loader until loaded
-        $('.products #productsList').html('<div class="container" style="width:100vw;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;padding:40px"></div>');
+        $('#productsList').html('<div class="container" style="width:100vw;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;padding:40px"></div>');
 
         // Send a get request with the param and sort values from the updated global variables
-        const products = await $.ajax({
+        const response = await $.ajax({
             url: `/products/filter?filters[price]=${gPrice}&filters[title]=${gTitle}&filters[cat]=${gCat}&sort[sortVal]=${sortVal}&sort[isAsc]=${isAsc}`,
             method: 'GET',
             contentType: 'application/json',
         });
 
+        // Check the response from the server
+        console.log('Response from server:', response);
+
         // Create a long string that represents the HTML of products we want to be shown after we got the products from the DB (filtered and sorted)
         let str = '';
-        for (let i = 0; i < products.length; i++) {
-            str += `<a class="image-container" href="/products/product/${products[i]._id}">
-                <img src="${products[i].srcImg[0]?.includes('data:') ? products[i].srcImg[0] : ('/styles/imgs/products/' + products[i].srcImg[0])}" alt="product">
-                <div class="image-name">${products[i].title}</div>
-                <div class="price">${products[i].price}$</div>
-                <!-- כפתור הלב להוספת לרשימת המשאלות -->
-                <button class="wishlist-btn ${favoriteProductIds.includes(products[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${products[i]._id}')">
-                    <i class="${favoriteProductIds.includes(products[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
-                </button>
-            </a>`;
+        for (let i = 0; i < response.length; i++) {
+            str += `
+                <a class="image-container" href="/products/product/${response[i]._id}">
+                    <img src="${response[i].srcImg[0]?.includes('data:') ? response[i].srcImg[0] : ('/styles/imgs/products/' + response[i].srcImg[0])}" alt="product">
+                    <div class="image-name">${response[i].title}</div>
+                    <div class="price">${response[i].price}$</div>
+                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+                    <button class="wishlist-btn ${favoriteProductIds.includes(response[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${response[i]._id}')">
+                        <i class="${favoriteProductIds.includes(response[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
+                    </button>
+                </a>`;
         }
 
         // Inside the products area in the HTML, show all the products
-        $('.products #productsList').html(str);
+        $('#productsList').html(str);
     } catch (e) {
-        console.log('e:', e);
+        console.log('Error:', e);
         // TODO: Later show an error modal
+        $('#productsList').html('<p class="error-message">Error loading products. Please try again.</p>');
     }
 }
+
+$(document).ready(() => {
+    getProductsBy();
+});
+
+
 
 function toggleWishlist(event, button, productId) {
     event.preventDefault();

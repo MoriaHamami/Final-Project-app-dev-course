@@ -1,11 +1,10 @@
-// Function to initialize global variables
 const initGlobals = () => {
     return {
-        title: '',
-        color: '',
-        favePlayer: '',
-        cat: '',
-        price: 0,
+        title: $('#title').val() || '',
+        color: $('#color').val() || '',
+        favePlayer: $('#favePlayer').val() || '',
+        cat: $('.edit-cat select').val() || '',
+        price: parseFloat($('#price').val()) || 0,
         sizes: [],
         srcImgs: [],
         numOfImgs: $('.edit-product .edit-imgs li').length || 0,
@@ -13,12 +12,10 @@ const initGlobals = () => {
     };
 };
 
-// Update global state functions
 const updateGlobalState = (state, key, value) => {
     state[key] = value;
 };
 
-// Add or update image source
 const addToSrcImgs = (state, imgSrc) => {
     if (imgSrc.includes('data:')) {
         state.srcImgs.push(imgSrc);
@@ -28,12 +25,11 @@ const addToSrcImgs = (state, imgSrc) => {
     }
 };
 
-// Update image sources from DOM
 const updateImgsSrc = (state) => {
+    state.srcImgs = []; // Clear the srcImgs array before updating
     $('.edit-product .edit-imgs li img').each((_, { src }) => addToSrcImgs(state, src));
 };
 
-// Handle file input change
 const handleFileInput = (state, input) => {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -47,14 +43,12 @@ const handleFileInput = (state, input) => {
                     <input type="file" accept="image/*" name="srcImg" id="${id}" class="form-control mt-2">
                     <button type="button" id="${id}" class="btn btn-danger btn-sm mt-2 deleteImg">DELETE</button>
                 </li>`;
-            const container = state.numOfImgs > 0 ? '.edit-product .edit-imgs li:last-child' : '.edit-product .edit-imgs ul';
-            $(container).after(newImgHTML);
+            $('.edit-product .edit-imgs ul').append(newImgHTML);
             state.numOfImgs++;
         };
     }
 };
 
-// Handle image change
 const handleImageChange = async (input, state) => {
     try {
         const imgSrc = await readChangedURL(input);
@@ -64,13 +58,12 @@ const handleImageChange = async (input, state) => {
     }
 };
 
-// Delete image
 const deleteImg = (state, id) => {
     state.numOfImgs--;
     $(`.edit-product .edit-imgs li#${id}`).remove();
+    updateImgsSrc(state); // Update srcImgs after deletion
 };
 
-// Read changed URL
 const readChangedURL = (input) => {
     if (input.files && input.files[0]) {
         return new Promise((resolve, reject) => {
@@ -82,38 +75,32 @@ const readChangedURL = (input) => {
     }
 };
 
-// Handle size addition
 const handleSizeAddition = (state) => {
     const newSizeHTML = `
         <li id="${state.numOfSizes}" class="d-flex align-items-center mb-2">
             <input value="" name="sizes" class="form-control me-2">
             <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
         </li>`;
-    const container = state.numOfSizes > 0 ? '.edit-product .edit-sizes ul' : '.edit-product .edit-sizes ul';
-    $(container).append(newSizeHTML);
+    $('.edit-product .edit-sizes ul').append(newSizeHTML);
     state.numOfSizes++;
     updateSizes(state);
 };
 
-// Update sizes
 const updateSizes = (state) => {
     state.sizes = $('.edit-product .edit-sizes li input').map((_, input) => $(input).val()).get();
 };
 
-// Handle size change
 const handleSizeChange = (state, newSize, id) => {
     $(`.edit-product .edit-sizes li#${id} input`).val(newSize);
     updateSizes(state);
 };
 
-// Handle size deletion
 const handleSizeDeletion = (state, id) => {
     state.numOfSizes--;
     $(`.edit-product .edit-sizes li#${id}`).remove();
     updateSizes(state);
 };
 
-// Form submission functions
 const handleProductFormSubmit = async (event, state, url, method) => {
     event.preventDefault();
     updateImgsSrc(state);
@@ -131,7 +118,55 @@ const handleProductFormSubmit = async (event, state, url, method) => {
     }
 };
 
-// Add event listeners
+const showNotification = (message, type = 'success') => {
+    const notification = $('#notification');
+    notification.removeClass('d-none').addClass(`alert-${type}`).text(message);
+    setTimeout(() => {
+        notification.addClass('d-none').removeClass(`alert-${type}`).text('');
+    }, 3000);
+};
+
+const onUpdateProduct = async (event) => {
+    event.preventDefault();
+    const state = initGlobals();
+    updateImgsSrc(state);
+    updateSizes(state);
+    const productId = $('#updateButton').val();
+
+    try {
+        await $.ajax({
+            url: `/products/edit/${productId}`,
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(state)
+        });
+        showNotification('Product updated successfully!');
+        setTimeout(() => {
+            window.location.assign(`/products/product/${productId}`);
+        }, 1500);
+    } catch (e) {
+        console.error('Update product error:', e);
+        showNotification('Failed to update product.', 'danger');
+    }
+};
+
+const onDeleteProduct = async (id) => {
+    try {
+        await $.ajax({
+            url: `/products/edit/${id}`,
+            method: 'DELETE',
+            contentType: 'application/json'
+        });
+        showNotification('Product deleted successfully!');
+        setTimeout(() => {
+            window.location.assign('/products');
+        }, 1500);
+    } catch (e) {
+        console.error('Delete product error:', e);
+        showNotification('Failed to delete product.', 'danger');
+    }
+};
+
 const initializeEventListeners = (state) => {
     $(document).on('change', 'input[type="file"]', function () {
         handleFileInput(state, this);
@@ -148,8 +183,16 @@ const initializeEventListeners = (state) => {
     $(document).on('click', '.btn-danger.btn-sm', function () {
         handleSizeDeletion(state, $(this).closest('li').attr('id'));
     });
+
+    $(document).on('click', '#updateButton', function (event) {
+        onUpdateProduct(event);
+    });
+
+    $(document).on('click', '#deleteButton', function () {
+        const productId = $(this).val();
+        onDeleteProduct(productId);
+    });
 };
 
-// Initialize
 const state = initGlobals();
 initializeEventListeners(state);
