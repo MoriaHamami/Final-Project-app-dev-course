@@ -4,48 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Real Madrid | Home Page </title>
+    <title>Real Madrid | Home Page</title>
     <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
-
+    
     <!-- LIBRARIES -->
-
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   <!-- CSS local files -->
-   <link rel="stylesheet" href="/styles/css/setup/font-face.css">
-   <link rel="stylesheet" href="/styles/css/setup/vars.css">
-   <link rel="stylesheet" href="/styles/css/footer.css">
-   <link rel="stylesheet" href="/styles/css/header.css">
-   <link rel="stylesheet" href="/styles/css/home.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-4dS4ot/yjM6G1Q9Tl5ENkFUBwR8OIWy6EqwkiZ2U8X1T9zFcZc7MA3ez+Yol9soO1geciU9zXSD57yfX3rXeXQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- CSS local files -->
+    <link rel="stylesheet" href="/styles/css/setup/font-face.css">
+    <link rel="stylesheet" href="/styles/css/setup/vars.css">
+    <link rel="stylesheet" href="/styles/css/footer.css">
+    <link rel="stylesheet" href="/styles/css/header.css">
+    <link rel="stylesheet" href="/styles/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-4dS4ot/yjM6G1Q9Tl5ENkFUBwR8OIWy6EqwkiZ2U8X1T9zFcZc7MA3ez+Yol9soO1geciU9zXSD57yfX3rXeXQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
 <body>
-
     <!-- Adds header code here and send to it page val as "home" -->
     <%- include('header.ejs', {page: 'home'}) %>
 
     <main class="home">
-
         <!-- Welcome section in home -->
         <section class="welcome">
+            <video autoplay muted loop>
+                <source src="/styles/imgs/home/real-madrid-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <a href="/products" onclick="getShopPage()" class="shop-now-button">
+                <p>SHOP NOW</p>
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </section>
 
-                <a href="/products" onclick="getShopPage()" class="shop-now-button">
-                    <p>SHOP NOW</p>
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-        </section>
-        </section>
         <!-- Bootstrap carousel section in home -->
         <div class="title-container">
             <h1 class="players-title">Our Players</h1>
             <h1 class="score-title">Score Updates</h1>
-        </div>>
+        </div>
         <section class="slider">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <!-- Slider bottom navigation indicator -->
@@ -138,35 +136,35 @@
                     <div class="carousel-item">
                         <img src="/styles/imgs/home/Valverde.webp" class="d-block w-100" alt=".">
                         <div class="carousel-caption d-md-block">
-                            <h5>Valverde</h5>
+                            <h5>Valverde</p>
                             <p>MidFielder</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="/styles/imgs/home/Modric.webp" class="d-block w-100" alt=".">
                         <div class="carousel-caption d-md-block">
-                            <h5>Modric</h5>
+                            <h5>Modric</p>
                             <p>MidFielder</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="/styles/imgs/home/Tchuameni.webp" class="d-block w-100" alt=".">
                         <div class="carousel-caption d-md-block">
-                            <h5>Tchuameni</h5>
+                            <h5>Tchuameni</p>
                             <p>MidFielder</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="/styles/imgs/home/Arda Guler.webp" class="d-block w-100" alt=".">
                         <div class="carousel-caption d-md-block">
-                            <h5>Arda Guler</h5>
+                            <h5>Arda Guler</p>
                             <p>MidFielder</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="/styles/imgs/home/D.Ceballos.webp" class="d-block w-100" alt=".">
                         <div class="carousel-caption d-md-block">
-                            <h5>D. Ceballos</h5>
+                            <h5>D. Ceballos</p>
                             <p>MidFielder</p>
                         </div>
                     </div>
@@ -209,9 +207,9 @@
                 <!-- Slider side navigation buttons -->
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                     <span class="change-slide-button">
-
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
+                    </span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
                     <span class="change-slide-button">
@@ -222,23 +220,11 @@
             </div>
         </section>
 
-        <section class ="widget">
-            <div id="wg-api-football-fixtures"
-                        data-host="v3.football.api-sports.io"
-                        data-refresh="60"
-                        data-date="2022-02-11"
-                        data-key="cfcc03dc06c6d02e78b053f2b8de672c"
-                        data-theme=""
-                        data-show-errors="false"
-                        class="api_football_loader">
-            </div>
-            <script
-                        type="module"
-                        src="https://widgets.api-sports.io/football/1.1.8/widget.js">
-                    </script>
+        <section class="widget">
+            <div id="wg-api-football-fixtures" data-host="v3.football.api-sports.io" data-refresh="60" data-date="2022-02-11" data-key="cfcc03dc06c6d02e78b053f2b8de672c" data-theme="" data-show-errors="false" class="api_football_loader"></div>
+            <script type="module" src="https://widgets.api-sports.io/football/1.1.8/widget.js"></script>
         </section>
 
-  
         <div id="weather-container">
             <!-- מזג האוויר יוצג כאן -->
         </div> 
@@ -246,21 +232,15 @@
     </main>
 
     <!-- Adds footer code here -->
-    <%- include('footer.ejs') -%>
+    <%- include('footer.ejs') %>
 
-    <!-- LIBRARIES  -->
-
+    <!-- LIBRARIES -->
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <!-- JS local files -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/home.js"></script>
 

@@ -57,8 +57,6 @@ async function sortProductsBy(sortVal) {
     }
 }
 
-let favoriteProductIds = []; // משתנה גלובלי
-
 async function getProductsBy(sortVal = '', isAsc = true) {
     try {
         // Show loader until loaded
@@ -98,10 +96,10 @@ async function getProductsBy(sortVal = '', isAsc = true) {
     }
 }
 
+
 $(document).ready(() => {
     getProductsBy();
 });
-
 
 
 function toggleWishlist(event, button, productId) {
