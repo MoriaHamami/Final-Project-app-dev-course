@@ -60,6 +60,7 @@
   margin: 10px 0;
 }
 
+
 .product_sizes .btn {
   display: inline-flex;
   justify-content: center;
@@ -81,7 +82,7 @@
 }
 
 .product_sizes .btn-check:checked + .btn {
-  border-color: #587ff9;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
   background-color: #e0f0ff;
   font-weight: bold;
 }
@@ -105,7 +106,7 @@
 }
 
 .product .addTOcart:hover, .product .editProduct:hover {
-  background-color: #3a5fb8;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
 }
 
 .product .addTOcart i, .product .editProduct i {
@@ -156,14 +157,14 @@
 
 /* עיצוב מודל */
 .modal-dialog {
-  border-radius: 30px; /* Rounded corners for the modal container */
-  overflow: hidden; /* Ensures rounded corners are applied to content inside */
+  border-radius: 30px; 
+  overflow: hidden; 
 }
 
 .modal-content {
-  border-radius: 30px; /* Rounded corners for the modal content */
+  border-radius: 30px; 
   border: none;
-  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
   background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
   color: white;
   position: relative;
@@ -173,23 +174,32 @@
   border: none;
   justify-content: center;
   font-size: 1em;
-  padding: 20px; /* Adjusted padding for a balanced look */
+  padding: 20px; 
   background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
   color: white;
 }
 
 .modal-header {
-  border-top-left-radius: 30px; /* Rounded corners for the header */
-  border-top-right-radius: 30px; /* Rounded corners for the header */
+  border-top-left-radius: 30px; 
+  border-top-right-radius: 30px; 
 }
-
 .modal-footer {
-  border-bottom-left-radius: 30px; /* Rounded corners for the footer */
-  border-bottom-right-radius: 30px; /* Rounded corners for the footer */
+  border-bottom-left-radius: 30px; 
+  border-bottom-right-radius: 30px; 
 }
 
 .modal-body {
-  padding: 20px; /* Adjusted padding for a balanced look */
+  padding: 20px; 
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
+}
+.btn-primary {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
 }

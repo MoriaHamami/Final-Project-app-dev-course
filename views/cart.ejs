@@ -37,12 +37,11 @@
                                 <span class="product-playerName">Color: <%= item.color %></span>
                             </div>
                         <% } %>
-                        <hr>
-                        <span class="product-Price"><%= item.price %>$</span>
-                        <div class="input-group">
-                            <div class="icon-container">
-                                <span class="icon-text" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')">Remove</span>
-                                <i class="bi-trash3" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')"></i>
+                        <div class="product-price-remove">
+                            <span class="product-price"><%= item.price %>$</span>
+                            <div class="remove-container">
+                                <span class="remove-text" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')">Remove</span>
+                                <i class="bi bi-trash remove-icon" data-cart-item-id="<%= item.cartItemId %>" onclick="removeItem('<%= item.cartItemId %>')"></i>
                             </div>
                         </div>
                     </div>
@@ -83,6 +82,7 @@
                     <div class="house-info">
                         <input type="text" placeholder="Postal code *">
                         <input type="text" placeholder="City *">
+                        
                     </div>
                     <div class="btn-container">
                         <a href="#" class="btn btn-light text-dark" role="button" data-bs-toggle="button" onclick="goToProductsPage()">Back to shopping</a>
@@ -107,7 +107,12 @@
             </div>
         </div>
     </div>
-
+    <div class="large-popup">
+        <div class="large-popup-content">
+            <!-- תוכן יוכנס דינמית -->
+        </div>
+    </div>
+    
     <%- include('footer.ejs') -%>
     <script>
         // מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה

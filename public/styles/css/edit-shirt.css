@@ -1,22 +1,29 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
 .edit-shirt-page {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 20px;
+    background-color: #f7f9fc;
 }
 
-
-
 .edit-shirt {
-    /* width: 50vw; */
-    /* height: 70vh; */
-    /* position: relative; */
-     display: flex; 
-     flex-direction: column;
-align-items: center;
-justify-content: center; 
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px;
 }
 
 .shirt-template {
@@ -26,78 +33,89 @@ justify-content: center;
 }
 
 #myCanvas {
-    /* z-index: 1000; */
-    /* width: 100px; 
-    height: 100px;  */
     width: 500px;
     height: 500px;
-    /* background-image: url('../imgs/general/shirt.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;  */
-    /* border:1px solid #000; */
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .remark {
-    margin: 5px;
-    color: gray;
+    margin: 10px;
+    color: #777;
+    font-style: italic;
 }
-.buttons-container button,.buttons-container select, .buttons-container input {
-    border-radius: 5px;
-    background-color: white;
-    border: 1px solid lightgray;
-    margin: 5px;
 
+.buttons-container button,
+.buttons-container select,
+.buttons-container input {
+    border-radius: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.buttons-container button{
+
+.buttons-container button {
     cursor: pointer;
 }
-.buttons-container button:hover{
-    background: rgb(239, 239, 239);
 
+.buttons-container button:hover {
+    background-color: #e9f0f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.text-container{
+
+.text-container {
     display: flex;
+    margin-top: 10px;
 }
 
 .color {
-    width: 30px;
-    /* Increase the width */
-    height: 30px;
-    /* Increase the height */
+    width: 40px;
+    height: 40px;
     border: none;
-    /* Remove button border */
     margin: 5px;
-    /* Spacing between buttons */
     cursor: pointer;
     outline: none;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.color:hover {
+    transform: scale(1.1);
 }
 
 .color-button {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     margin: 5px;
     cursor: pointer;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     color: white;
-    /* לשים צבע לטקסט שמתאים לרקע */
+    border-radius: 50%;
 }
 
 .color-palette {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .color-palette .color {
-    width: 20px;
-    height: 20px;
-    border: none;
+    width: 30px;
+    height: 30px;
     margin: 5px;
-    cursor: pointer;
-    outline: none;
+    border-radius: 50%;
 }
 
 #colorPicker,
@@ -107,25 +125,16 @@ justify-content: center;
 
 #colorPicker .color:hover,
 #colorShirtPicker .color:hover {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 #colorPicker .color,
 #colorShirtPicker .color {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     margin: 5px;
-    /* display: block; */
     border-radius: 50%;
-    outline: 1px solid lightgray;
-
-}
-
-
-
-.color-palette .color:hover {
-    opacity: 0.7;
-
+    outline: 2px solid lightgray;
 }
 
 #saveBtn,
@@ -136,34 +145,99 @@ justify-content: center;
 #colorShirt,
 #addTextBtn,
 #textInput {
-    width: 100px;
-    height: 30px;
-    margin-bottom: 5px;
+    width: 140px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    border: 1px solid lightgray;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#saveBtn:hover,
+#undoBtn:hover,
+#redoBtn:hover,
+#clearBtn:hover,
+#colorBtn:hover,
+#colorShirt:hover,
+#addTextBtn:hover,
+#textInput:hover {
+    background-color: #e9f0f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-custom {
     font-size: 18px;
-    /* גודל פונט */
-    padding: 10px 20px;
-    /* גודל הכפתור */
-    margin: 5px;
-    /* מרווח בין הכפתורים */
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 30px;
+    border: 1px solid lightgray;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
+.btn-custom:hover {
+    background-color: #e9f0f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
 .buttons-container {
     display: flex;
     flex-direction: column;
-    /* align-items: start;
-    justify-content: start; */
-    /* margin-left: 20px; */
+    align-items: center;
 }
 
 .edit-button {
     margin-bottom: 10px;
-    width: 100px;
+    width: 140px;
+    height: 40px;
+    border-radius: 30px;
+    border: 1px solid lightgray;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.edit-shirt-body header {
-    position: relative;
+.edit-button:hover {
+    background-color: #e9f0f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom add to cart button */
+#saveBtn {
+    width: 160px;
+    height: 45px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+#saveBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
