@@ -52,17 +52,18 @@ async function login(req, res) {
     const { username, password } = req.body;
     try {
         const result = await loginService.login(username, password);
-        if (result) {
+        if (result.success) {
             req.session.username = username; // Save username in session
             res.redirect('/');
         } else {
-            res.render("login.ejs", { user: null, error: "Incorrect username or password" });
+            res.render("login.ejs", { user: null, error: result.message });
         }
     } catch (e) {
         console.log('Error:', e);
         res.render("login.ejs", { user: null, error: "Login error, please try again later" });
     }
 }
+
 
 // Register function
 async function register(req, res) {
