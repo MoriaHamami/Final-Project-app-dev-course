@@ -11,7 +11,7 @@ function setMonth(newMonth = 0) {
 }
 
 // Function to set the selected title and filter the tickets
-function setTitle( newTitle = '') {
+function setTitle(newTitle = '') {
     gTitle = newTitle; // Update the selected title
     console.log(`Title set to: ${gTitle}`);
     filterTickets(); // Filter tickets based on the new title
@@ -114,8 +114,7 @@ function renderTickets(tickets) {
             </div>`;
         }
     }
-    const ticketContainer = document.getElementById('tickets'); // Find the target element
-    ticketContainer.innerHTML = str; // Add the tickets to the page
+    $('#tickets').html(str); // Add the tickets to the page using jQuery
 }
 
 // Function to navigate to the ticket edit page based on the ticket ID
@@ -126,30 +125,28 @@ function getEditTicketPage(ticketId) {
 // Function to add a ticket to the cart
 async function addToCart(ticketId) {
     try {
-        const response = await fetch('/cart/add', {
+        const response = await $.ajax({
+            url: '/cart/add',
             method: 'POST',
+            contentType: 'application/json',
             headers: {
-                'Content-Type': 'application/json',
                 'Accept': '*/*',
                 'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7',
                 'X-Requested-With': 'XMLHttpRequest'
             },
-            body: JSON.stringify({
+            data: JSON.stringify({
                 productId: ticketId,
                 quantity: 1  // Fixed quantity
             }),
-            credentials: 'include'
+            xhrFields: {
+                withCredentials: true
+            }
         });
 
         if (response.status === 401) {
             showNotice('You need to log in first', true); // Message if the user is not logged in
-        } else if (response.ok) {
-            const result = await response.json();
-            if (result.success) {
-                showNotice('Ticket added to cart successfully', false); // Success message
-            } else {
-                showNotice('Error adding ticket to cart', false); // Error message
-            }
+        } else if (response.success) {
+            showNotice('Ticket added to cart successfully', false); // Success message
         } else {
             showNotice('Error adding ticket to cart', false); // Error message
         }
@@ -160,8 +157,8 @@ async function addToCart(ticketId) {
 
 // Function to show notices to the user
 function showNotice(message, redirectToLogin) {
-    document.getElementById('noticeModalBody').innerText = message; // Display the message in the modal body
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {}); // Create a new modal
+    $('#noticeModalBody').text(message); // Display the message in the modal body using jQuery
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Create a new modal
     noticeModal.show(); // Show the modal
 
     setTimeout(function() {

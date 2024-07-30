@@ -1,17 +1,16 @@
-
 function onAddImg(input) {
   if (input.files && input.files[0]) {
     let reader = new FileReader();
     reader.readAsDataURL(input.files[0]);
     reader.onload = function (e) {
-      document.getElementById('image-preview').src = e.target.result;
-      document.getElementById('imgURL').value = e.target.result;
+      $('#image-preview').attr('src', e.target.result);
+      $('#imgURL').val(e.target.result);
     };
   }
 }
 
 function submitForm() {
-  const form = document.getElementById('registerForm');
+  const form = $('#registerForm')[0];
   const formData = new FormData(form);
 
   const data = {
@@ -21,19 +20,17 @@ function submitForm() {
     imgURL: formData.get('imgURL')
   };
 
-  fetch('/login/register', {
+  $.ajax({
+    url: '/login/register',
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  }).then(async response => {
-    const result = await response.json();
-    if (response.ok) {
+    contentType: 'application/json',
+    data: JSON.stringify(data),
+    success: function(response) {
       window.location.href = '/';
-    } else {
-      // הצגת הודעת שגיאה
-      showError(result.error || 'Registration failed');
+    },
+    error: function(jqXHR) {
+      const result = jqXHR.responseJSON;
+      showError(result ? result.error : 'Registration failed');
     }
   }).catch(error => {
     console.error('Error:', error);
@@ -42,12 +39,10 @@ function submitForm() {
 }
 
 function showError(message) {
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'alert alert-danger';
-  errorDiv.role = 'alert';
-  errorDiv.innerText = message;
+  const errorDiv = $('<div></div>')
+    .addClass('alert alert-danger')
+    .attr('role', 'alert')
+    .text(message);
 
-  const errorContainer = document.getElementById('error-container');
-  errorContainer.innerHTML = ''; // מנקה הודעות קודמות אם קיימות
-  errorContainer.appendChild(errorDiv);
+  $('#error-container').empty().append(errorDiv);
 }

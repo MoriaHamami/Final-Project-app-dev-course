@@ -1,18 +1,19 @@
-async function fetchUserDetails() {
-  try {
-      const response = await fetch('/user/details'); // ניתן להתאים את ה-URL למיקום הנכון של ה-API שלך
-      if (!response.ok) {
-          throw new Error('Failed to fetch user details');
-      }
-      const user = await response.json();
-      const signinButton = document.getElementById('signin-button');
-      if (signinButton) {
-          signinButton.textContent = `Hello, ${user.username}`; // החלפת הטקסט בכפתור SIGN IN
-      }
-  } catch (error) {
-      console.error('Error fetching user details:', error);
-      showNotice('Error fetching user details');
-  }
+function fetchUserDetails() {
+    $.ajax({
+        url: '/user/details', 
+        method: 'GET',
+        dataType: 'json',
+        success: function(user) {
+            var signinButton = $('#signin-button');
+            if (signinButton.length) {
+                signinButton.text(`Hello, ${user.username}`);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching user details:', textStatus, errorThrown);
+            showNotice('Error fetching user details');
+        }
+    });
 }
 
 // קריאה לפונקציה עם טעינת הדף
@@ -20,17 +21,16 @@ fetchUserDetails();
 
 
 function showNotice(message, redirectToCart = false) {
-  document.getElementById('noticeModalBody').innerText = message;
-  var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
-  noticeModal.show();
+    $('#noticeModalBody').text(message);
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
+    noticeModal.show();
 
-  // Adding a delay before redirect
-  setTimeout(function() {
-      if (redirectToCart) {
-          window.location.href = '/cart'; // Redirect to the cart page after 1 second
-      } else {
-          noticeModal.hide();
-      }
-  }, 2000);
+
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; 
+        } else {
+            noticeModal.hide();
+        }
+    }, 2000);
 }
-

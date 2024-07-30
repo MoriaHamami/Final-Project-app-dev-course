@@ -90,14 +90,22 @@
 .edit-ticket label {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     margin: 10px 0;
     width: 100%;
     padding: 5px;
     font-size: 1em;
-    justify-content: space-between;
+    gap: 10px;
 }
 
+.edit-ticket label p {
+    flex: 0 0 150px; /* Adjust the width according to your needs */
+    margin: 0;
+}
+
+
 .edit-ticket input {
+    flex: 1;
     border: 1px solid var(--l-gray);
     border-radius: 10px;
     padding: 10px 15px;
@@ -116,7 +124,6 @@
 .edit-ticket input:hover {
     transform: scale(1.05);
 }
-
 .edit-ticket li {
     display: flex;
     flex-direction: column;
