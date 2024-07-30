@@ -54,7 +54,7 @@
                         </li>
                         <%}%>
                     </ul>
-                    <button type="button" class="add-img-btn">
+                    <button type="button" class="add-img-btn" id="addimg">
                         <i class="bi bi-plus"></i>
                         Add image
                     </button>
@@ -79,12 +79,12 @@
                     <ul>
                         <li id="idx-1">
                             <input value="S">
-                            <button type="button" onclick="onDeleteSize(1)"><i class="bi bi-trash"></i>
+                            <button type="button" onclick="onDeleteSize(1)" id="trash"><i class="bi bi-trash" ></i>
                             </button>
                         </li>
                     </ul>
                     <% } %>
-                    <button onclick="onAddSize()" type="button">
+                    <button onclick="onAddSize()" type="button" id="sizebtn">
                         <i class="bi bi-plus"></i>
                         Add size
                     </button>
