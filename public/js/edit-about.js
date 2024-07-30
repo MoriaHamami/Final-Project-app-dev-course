@@ -90,9 +90,7 @@ async function onUpdateShops() {
         })
         console.log('done:')
         // Leave edit mode and show the about page 
-        window.location.assign('/news')
-        // TODO: Change to about route
-        // window.location.assign('/news')
+        window.location.assign('/about')
     } catch (e) {
         console.log('Could not save shops from frontend:', e)
         // TODO: Later show an error modal
