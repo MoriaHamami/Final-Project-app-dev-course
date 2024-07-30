@@ -27,7 +27,7 @@ async function onUpdateArticle(ev) {
 
     try {
         await $.ajax({
-            url: '/news/edit/' + $('#updateButton').val(),
+            url: '/about/edit/' + $('#updateButton').val(),
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -48,14 +48,14 @@ async function onUpdateArticle(ev) {
 async function onDeleteArticle(id) {
     try {
         const res = await $.ajax({
-            url: '/news/edit/' + id,
+            url: '/about/edit/' + id,
             method: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify({ id }),
         });
 
         if (res.status !== 404) {
-            showNotice('Article deleted successfully.', '/news');
+            showNotice('Article deleted successfully.', '/about');
         } else {
             showNotice('Article could not be deleted.');
         }
@@ -71,7 +71,7 @@ async function onAddArticle(ev) {
 
     try {
         const newArticle = await $.ajax({
-            url: '/news/edit',
+            url: '/about/edit',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -81,7 +81,7 @@ async function onAddArticle(ev) {
             }),
         });
 
-        showNotice('New article added successfully.', '/news'); // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
+        showNotice('New article added successfully.', '/about'); // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
     } catch (e) {
         console.log('Error:', e);
         showNotice('An error occurred while adding the article.');
