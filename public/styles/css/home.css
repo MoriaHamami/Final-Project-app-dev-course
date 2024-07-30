@@ -51,51 +51,22 @@
 }
 
 
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
 
 .home .carousel {
-    width: 430px; 
-    margin-left: -50%; 
+    width: 36%; 
     background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%); 
     border-radius: 20px; 
     padding: 20px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-left: 7%; /* מרווח בין הקרוסלה לווידג'ט */
 }
-
-.home .slider {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.title-container {
-    display: flex;
-    justify-content: space-around; 
-    align-items: center; 
-    width: 100%;
-    padding: 20px 1%; 
-    box-sizing: border-box; 
-}
-
-.players-title, .score-title {
-    flex: 1 1 45%;
-    text-align: center;
-    margin: 10px 0;
-    font-size: 36px;
-    font-weight: bold;
-    text-transform: uppercase; 
-    letter-spacing: 4px; 
-    background: linear-gradient(45deg, #aa9104, #ffd700); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
-    margin-top: 15px; 
-    margin-bottom: 0px; 
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-
-
 
 .home .carousel-inner img {
     height: 500px; 
@@ -113,11 +84,85 @@
 }
 
 .home .carousel-caption {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-shadow: var(--dark-txtsh);
-    color: rgb(255, 255, 255);
+    color: rgb(11, 0, 72);
     background-color: #ffffffb9;
     border-radius: 20px;
     padding: 10px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    padding: 20px 1%; 
+    box-sizing: border-box; 
+}
+
+.players-title {
+    flex: 1 1 45%;
+    text-align: left;
+    margin: 10px 0;
+    margin-left: 220px;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    background: linear-gradient(45deg, #aa9104, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.widget-container {
+    display: flex;
+    justify-content: flex-end; /* מיישר את הווידג'ט לצד ימין */
+    align-items: flex-start;
+    width: 100%;
+    position: relative; /* מאפשר מיקום יחסי של הכותרת */
+}
+
+.widget {
+    width: 67%;
+    height: 546px; 
+    background-color: white; 
+    border: transparent;
+    max-height: 546px;
+    border-radius: 16px;
+    overflow-y: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-right: 10%; /* הוספת מרווח מצד ימין */
+    margin-top: -540px; /* העלאת הווידג'ט מעלה */
+}
+
+.score-title {
+    flex: none;
+    text-align: right;
+    margin: 10px 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    background: linear-gradient(45deg, #aa9104, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute; /* מיקום מוחלט */
+    top: -615px; /* העלאת הכותרת מעלה */
+    right: 17%; /* מרחק מהקצה הימני */
+}
+
+.title-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    padding: 20px 1%; 
+    box-sizing: border-box; 
 }
 
 #weather-container {
@@ -136,36 +181,17 @@
     flex-wrap: wrap; /* עוטף שורות אם יש צורך */
     background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
     transition: background-color 0.3s ease, transform 0.3s ease;
-    background: rgba(80, 80, 80, 0.5);
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-
-#weather-container {
-    border: 2px solid #1d428a; 
-    border-radius: 20px;
-    padding: 20px;
-    width: 90%; 
-    background-color: #ffffff; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    margin: 20px auto;/
-    margin-top: 110px;
-    display: flex; 
-    justify-content: space-around; 
-    align-items: center; 
-    flex-wrap: wrap; 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
     background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); 
     transition: background-color 0.3s ease, transform 0.3s ease;
     gap: 20px;
 }
-
 
 #weather-container h2 {
     font-size: 30px;
     margin-bottom: 20px;
     letter-spacing: 2px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    
     color: #1d428a; 
     text-align: center;
     width: 100%; 
@@ -177,13 +203,14 @@
 .daily-forecast {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: transparent;
-    margin: 10px;
+    margin: 7px;
     padding: 10px; 
     background-color: #ffffff; 
     border-radius: 16px; 
     flex: 1; 
-    min-width: 160px; 
-    max-width: 190px; 
+    min-width: 170px; 
+    max-width: 200px; 
+    height: auto;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
@@ -194,7 +221,6 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
 }
 
-
 .forecast-title {
     font-weight: bold;
     font-size: 18px; 
@@ -204,23 +230,128 @@
 
 .forecast-details {
     font-size: 14px;
-    color: var(--gray);
     display: block; 
 }
 
 
-.widget {
-    width: 38%; 
-    height: 540px; 
-    background-color: white; 
-    border: transparent;
-    float: right; 
-    margin-bottom: 20px;
-    margin-top: -540px;
-    margin-right: 100px;
-    border-radius: 16px;
-    overflow-y: auto; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-   
+
+
+/* Media queries */
+@media (max-width: 768px) {
+    .title-container {
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        top: 0; /* מבטלת את המיקום המוחלט במסכים קטנים */
+        right: 0;
+    }
+
+    .players-title, .score-title {
+        flex: 1 1
+        100%;
+        text-align: center;
+        font-size: 5vw;
+        position: relative; 
+         margin: 1rem 0; 
+         }
+
+        .home .slider {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .home .carousel {
+            width: 90%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        .home .carousel-inner img {
+            height: auto;
+            width: 100%;
+        }
+        
+        .widget-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        
+        .widget {
+            width: 90%;
+            height: 650px; /* הקטנת גובה הווידג'ט */
+            margin-top: 20px; /* מרווח בין הכותרת לווידג'ט */
+            margin: 20px auto; /* מרכז את הווידג'ט */
+            position: relative; 
+        }
+        
+        .title-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative; /* מבטלת את המיקום המוחלט במסכים קטנים */
+            top: 0;
+            right: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+    .players-title, .score-title {
+    font-size: 3em;
+    }
+    .home .carousel {
+        padding: 5px;
+    }
+    
+    .widget {
+        width: 100%;
+        max-height: 600px; 
+        margin-top: -5px; 
+        margin: 10px auto; 
+        position: relative;
+    }
+    
+    .widget-container {
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        top: 0;
+        right: 0;
+    }
 }
 
+@media (max-width: 768px) {
+    .widget {
+        width: 90%; /
+        height: 500px; 
+        margin: 20px auto; 
+        position: relative; 
+    }
+
+    .score-title {
+        position: relative; 
+        top: 0; 
+        right: 0; 
+        text-align: center; 
+        font-size: 24px; 
+        margin-bottom: 3px; 
+        margin-top: 10px; 
+    }
+
+    .home .carousel {
+        padding: 10px; 
+    }
+
+    .home .carousel-inner img {
+        height: auto; 
+        width: 100%; 
+    }
+}

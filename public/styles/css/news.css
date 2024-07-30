@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden; 
+}
+
 
 .news {
     background: whitesmoke;
@@ -398,7 +402,7 @@
 p.columns {
     font-size: 20px;
     margin-top: -45px;
-    margin-bottom: 90px;
+    margin-bottom: 160px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     column-count: 2; /* Increase the number of columns */
     column-gap: 40px; /* Decrease the space between columns */
@@ -418,7 +422,7 @@ p.columns {
   #pictures {
     max-width: 35%; 
     margin: 55px auto; 
-    margin-top: -45%; 
+    margin-top: -720px;
     margin-right: 3%;
     float: right; 
 }
@@ -444,7 +448,7 @@ p.columns {
     text-align: left;
     border-bottom: 3px solid darkblue;
     border-top: 3px solid darkblue;
-    
+    margin-top: 75px; /* הוסף כאן את המרווח הרצוי */
 }
 
 #innumbers h1 {
@@ -641,13 +645,15 @@ p.columns {
   }
 
   .contact-info {
+    border: 1px solid darkblue;
     font-family: Arial, sans-serif;
     margin: -80px -20px; /* העלאת המחלקה מעלה פחות */
     margin-left: 60px; /* הזזה שמאלה */
+    margin-bottom: -20px;
     padding: 20px;
-    border: transparent;
     max-width: 570px; /* רוחב מקסימלי */
     transition: transform 0.3s ease; /* הוספת מעבר חלק */
+    border-radius: 16px;
 }
 
 .contact-info:hover {
@@ -657,7 +663,7 @@ p.columns {
 .contact-info h1 {
     text-align: center;
     font-size: 24px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: darkblue;
 }
@@ -707,7 +713,7 @@ p.columns {
 gmp-map {
     width: 100%;
     height: 80%; 
-    border-radius: 8px; 
+    border-radius: 16px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
 
@@ -727,4 +733,5 @@ gmp-map {
     margin-top: 200px;
     flex-direction: column;
 }
+
 

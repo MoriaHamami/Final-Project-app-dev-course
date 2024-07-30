@@ -46,7 +46,6 @@
         <!-- Bootstrap carousel section in home -->
         <div class="title-container">
             <h1 class="players-title">Our Players</h1>
-            <h1 class="score-title">Score Updates</h1>
         </div>
         <section class="slider">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -222,32 +221,37 @@
                 </a>
             </div>
         </section>
-       <!--  
-        <section class="widget">
-            <div id="wg-api-football-fixtures" data-host="v3.football.api-sports.io" data-refresh="60" data-date="2022-02-11" data-key="cfcc03dc06c6d02e78b053f2b8de672c" data-theme="" data-show-errors="false" class="api_football_loader"></div>
-            <script type="module" src="https://widgets.api-sports.io/football/1.1.8/widget.js"></script>
-        </section>
-        -->
-        
-
-        <section class ="widget">
-            <div id="wg-api-football-fixtures"
-                        data-host="v3.football.api-sports.io"
-                        data-refresh="60"
-                        data-date="2022-02-11"
-                        data-key="cfcc03dc06c6d02e78b053f2b8de672c"
-                        data-theme=""
-                        data-show-errors="false"
-                        class="api_football_loader">
+     
+        <section class="widget-container">
+            <div class="title-container">
+            <h1 class="score-title">Score Updates</h1>
             </div>
-    </div>
+            <div class="widget">
+                <div id="wg-api-football-fixtures"
+                    data-host="v3.football.api-sports.io"
+                    data-refresh="60"
+                    data-key="cfcc03dc06c6d02e78b053f2b8de672c"
+                    data-theme=""
+                    data-show-errors="false"
+                    class="api_football_loader">
+                </div>
+            <script type="module" src="https://widgets.api-sports.io/football/1.1.8/widget.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    const widget = document.getElementById('wg-api-football-fixtures');
+                    const today = new Date().toISOString().split('T')[0];
+                    widget.setAttribute('data-date', today);
+                });
+            </script>
+        </section>
             <script
 
                         type="module"
                         src="https://widgets.api-sports.io/football/1.1.8/widget.js">
                     </script>
         </section>
-    
+  
+
   
         <div id="weather-container">
           
