@@ -200,42 +200,41 @@ body {
     color: white;
 }
 
+/* עיצוב מודל */
 .modal-dialog {
-    border-radius: 30px;
-    overflow: hidden;
-}
-
-.modal-content {
-    border-radius: 30px;
+    border-radius: 30px; 
+    overflow: hidden; 
+  }
+  
+  .modal-content {
+    border-radius: 30px; 
     border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6);
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
     position: relative;
-}
-
-.modal-header,
-.modal-footer {
+  }
+  
+  .modal-header, .modal-footer {
     border: none;
     justify-content: center;
     font-size: 1em;
-    padding: 20px;
+    padding: 20px; 
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
-}
-
-.modal-header {
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-}
-
-.modal-footer {
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
-
-.modal-body {
-    padding: 20px;
+  }
+  
+  .modal-header {
+    border-top-left-radius: 30px; 
+    border-top-right-radius: 30px; 
+  }
+  .modal-footer {
+    border-bottom-left-radius: 30px; 
+    border-bottom-right-radius: 30px; 
+  }
+  
+  .modal-body {
+    padding: 20px; 
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.9);
-}
+    background-color: rgba(255, 255, 255, 0.9);
+  }
