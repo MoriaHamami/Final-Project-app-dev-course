@@ -104,11 +104,11 @@
 
 .info {
     margin-top: 40px;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
 }
 
 .players-title {
@@ -132,9 +132,11 @@ flex-wrap: wrap;
     align-items: center;
 
 }
-.carousel.pointer-event{
+
+.carousel.pointer-event {
     width: 100%;
 }
+
 .widget-container {
     display: flex;
     flex-direction: column;
@@ -142,7 +144,7 @@ flex-wrap: wrap;
     /* מיישר את הווידג'ט לצד ימין */
     align-items: center;
     width: 50%;
-   
+
 }
 
 .widget {
@@ -154,11 +156,11 @@ flex-wrap: wrap;
     border-radius: 16px;
     overflow-y: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 .score-title {
- 
+
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
@@ -168,7 +170,7 @@ flex-wrap: wrap;
     -webkit-text-fill-color: transparent;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  
+
 }
 
 .title-container {
@@ -247,15 +249,12 @@ flex-wrap: wrap;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.carousel-item.active{
-display: flex !important;
-align-items: center !important;
-justify-content: center !important;
+.carousel-item.active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* .home .carousel-inner img{
-align-self: center !important;
-} */
 
 .forecast-title {
     font-weight: bold;
@@ -377,9 +376,9 @@ align-self: center !important;
     }
 
     .score-title {
-        
+
         font-size: 24px;
-       
+
     }
 
     .home .carousel {
