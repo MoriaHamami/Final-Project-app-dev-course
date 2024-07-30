@@ -13,12 +13,12 @@ function onAddImg(input) {
 function submitForm() {
   const form = document.getElementById('registerForm');
   const formData = new FormData(form);
-
+const imgSrc = formData.get('imgURL') ? formData.get('imgURL') : "profile.png"
   const data = {
     fullname: formData.get('fullname'),
     username: formData.get('username'),
     password: formData.get('password'),
-    imgURL: formData.get('imgURL')
+    imgURL: imgSrc
   };
 
   fetch('/login/register', {

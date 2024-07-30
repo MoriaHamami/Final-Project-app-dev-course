@@ -21,32 +21,32 @@ app.use(session({
   resave: false
 }));
 
-const User = require('./models/clients')
-const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
+// const User = require('./models/clients')
+// const passport = require('passport');
+// const FacebookStrategy = require('passport-facebook').Strategy;
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
-});
+// passport.serializeUser(function (user, cb) {
+//   cb(null, user);
+// });
 
-passport.deserializeUser(function (obj, cb) {
-  cb(null, obj);
-});
+// passport.deserializeUser(function (obj, cb) {
+//   cb(null, obj);
+// });
 
-passport.use(new FacebookStrategy({
-  clientID: '1781154845712809',
-  clientSecret: '0474256b713967ee139d2e591da139b6',
-  callbackURL: "http://localhost:8082/facebook/auth/facebook/callback"
-},
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ username: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
+// passport.use(new FacebookStrategy({
+//   clientID: '1781154845712809',
+//   clientSecret: '0474256b713967ee139d2e591da139b6',
+//   callbackURL: "http://localhost:8082/facebook/auth/facebook/callback"
+// },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ username: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
 // Set EJS as the view engine for the Express application
 const ejs = require('ejs');
@@ -71,7 +71,7 @@ app.use(express.json({ limit: '50mb' }))
 app.use(express.static('public'))
 app.use("/", require("./routes/home"))
 app.use("/login", require("./routes/login"))
-app.use("/facebook", require("./routes/facebook"))
+// app.use("/facebook", require("./routes/facebook"))
 app.use("/about", require("./routes/about"))
 app.use("/client", require("./routes/client"))
 app.use("/products", require("./routes/products"))
@@ -84,7 +84,7 @@ app.use("/manager", require("./routes/manager"))
 app.use("/clients", require("./routes/clients"))
 app.use("/cart", require("./routes/cart"))
 app.use("/", require("./routes/home"));
-app.use("/orders", require("./routes/orders"));
+// app.use("/orders", require("./routes/orders"));
 
 app._router.stack.forEach(function(r) {
   if (r.route && r.route.path) {
