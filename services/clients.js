@@ -48,16 +48,8 @@ async function addCartItemToDB(username, productId, size, quantity) {
             throw new Error('Size is required for non-ticket products that have sizes');
         }
 
-        // מצא מוצר זהה בעגלה
-        const existingCartItem = client.cartItems.find(item => item.id.equals(productObjectId) && item.size === size);
-
-        if (existingCartItem) {
-            // אם נמצא מוצר זהה, עדכן את הכמות
-            existingCartItem.quantity += parseInt(quantity, 10);
-        } else {
-            // אם לא נמצא מוצר זהה, הוסף מוצר חדש עם מזהה _id ייחודי
-            client.cartItems.push({ _id: new mongoose.Types.ObjectId(), id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
-        }
+        // הוסף פריט חדש לעגלה עם מזהה _id ייחודי
+        client.cartItems.push({ _id: new mongoose.Types.ObjectId(), id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
 
         await client.save();
         return { success: true, message: 'Item added to cart successfully' };
@@ -66,6 +58,9 @@ async function addCartItemToDB(username, productId, size, quantity) {
         return { success: false, message: e.message || 'Error adding item to cart' };
     }
 }
+
+
+
 
 async function removeCartItemFromDB(username, cartItemId) {
     try {

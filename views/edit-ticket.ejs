@@ -28,7 +28,7 @@
                             <li id="0">
                                 <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                      class="srcImg-0" id="image-preview" width="300">
-                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event.target)"
+                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
                                        src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                        id="0">
                                 <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>

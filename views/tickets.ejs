@@ -107,14 +107,21 @@
                                         <div>
                                             <i class="bi bi-calendar3"></i>
                                             <span>
-                                                <%= ALLTickets[i].date.toLocaleDateString() %>
+                                                <% if (ALLTickets[i].date) { %>
+                                                    <%= new Date(ALLTickets[i].date).toLocaleDateString() %>
+                                                <% } else { %>
+                                                    No date available
+                                                <% } %>
                                             </span>
                                         </div>
                                         <div>
                                             <i class="bi bi-clock"></i>
                                             <span>
-                                                <%= ALLTickets[i].date.toLocaleTimeString([], { hour: '2-digit' ,
-                                                    minute: '2-digit' }) %>
+                                                <% if (ALLTickets[i].date) { %>
+                                                    <%= new Date(ALLTickets[i].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+                                                <% } else { %>
+                                                    No time available
+                                                <% } %>
                                             </span>
                                         </div>
                                         <div class="icon-text-container">

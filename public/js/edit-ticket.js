@@ -93,51 +93,27 @@ function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
 
-// הוספת כתובת מקור של תמונה ל-gopImg
+// הוספת כתובת מקור של תמונה ל-gOpImg
 function updategSrcImg(opImg) {
-    gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1)
-    const imgElement = document.querySelector(`.edit-ticket li img`)
-    imgElement.src = opImg
+    gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1);
+    const imgElement = document.querySelector(`.edit-ticket li img`);
+    imgElement.src = opImg;
 }
 
-// הוספת תמונה
-// function onAddImg(input) {
-//     if (input.files && input.files[0]) {
-//         let reader = new FileReader();
-//         reader.readAsDataURL(input.files[0]);
-//         reader.onload = function (e) {
-//             const imgElement = document.querySelector('.edit-ticket .edit-imgs img#image-preview');
-//             if (imgElement) {
-//                 imgElement.src = e.target.result;
-//             } else {
-//                 const ulElement = document.querySelector('.edit-ticket .edit-imgs ul');
-//                 ulElement.innerHTML = `
-//                     <li id="0">
-//                         <img src="${e.target.result}" class="srcImg-0" id="image-preview" width="300">
-//                         <input type="file" accept="image/*" name="opImg" onchange="onAddImg(event.target)" id="0">
-//                         <button type="button" class="deleteImg" onclick="onDeleteImg('0')">Delete</button>
-//                     </li>`;
-//             }
-//             gOpImg = e.target.result;
-//         }
-//     }
-// }
-
 // שינוי תמונה
-
 async function onChangeImg(event) {
     try {
-        const imgSrc = await readChangedURL(event.target)
-        updategSrcImg(imgSrc)
+        const imgSrc = await readChangedURL(event.target);
+        updategSrcImg(imgSrc);
     } catch (e) {
-        console.log('Error:', e)
+        console.log('Error:', e);
     }
 }
 
 // מחיקת תמונה
-function onDeleteImg(id) {
-    const imgElement = document.querySelector(`.edit-ticket li img`)
-    const fileInputElement = document.querySelector(`.edit-ticket input[type="file"]`)
+function onDeleteImg() {
+    const imgElement = document.querySelector(`#image-preview`);
+    const fileInputElement = document.querySelector(`input[type="file"][name="opImg"]`);
     if (imgElement) {
         imgElement.src = '/styles/imgs/tickets/placeholder.png';
     }
@@ -167,6 +143,12 @@ async function readChangedURL(input) {
 // הוספת כרטיס חדש
 async function onAddTicket(ev) {
     ev.preventDefault();
+
+    // בדיקה אם כל השדות מלאים
+    if (!gTitle || !gOpponent || !gStadium || !gPrice || !gDate || !gOpImg) {
+        showNotice('All fields are required.', false);
+        return;
+    }
 
     try {
         const newTicket = await $.ajax({
