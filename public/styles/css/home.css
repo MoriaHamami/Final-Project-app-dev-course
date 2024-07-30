@@ -26,18 +26,18 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #fff; 
-    color: #000; 
+    background-color: #fff;
+    color: #000;
     border: none;
     border-radius: 8px;
-    z-index: 1; 
+    z-index: 1;
     background-color: goldenrod;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .welcome a p {
-    display: inline; 
-    margin: 0; 
+    display: inline;
+    margin: 0;
     font-weight: bold;
 }
 
@@ -60,18 +60,19 @@
 }
 
 .home .carousel {
-    width: 36%; 
-    background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%); 
-    border-radius: 20px; 
-    padding: 20px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    margin-left: 7%; /* מרווח בין הקרוסלה לווידג'ט */
+    width: 36%;
+    background: linear-gradient(135deg, #1d428a 0%, #ffffff 50%, #ffd700 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 7%;
+    /* מרווח בין הקרוסלה לווידג'ט */
 }
 
 .home .carousel-inner img {
-    height: 500px; 
-    width: auto; 
-    border-radius: 20px; 
+    height: 500px;
+    width: auto !important;
+    border-radius: 20px;
 }
 
 .home .change-slide-button {
@@ -94,18 +95,24 @@
 
 .title-container {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 20px 1%; 
-    box-sizing: border-box; 
+    padding: 20px 1%;
+    box-sizing: border-box;
+}
+
+.info {
+    margin-top: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+flex-wrap: wrap;
 }
 
 .players-title {
-    flex: 1 1 45%;
-    text-align: left;
-    margin: 10px 0;
-    margin-left: 240px;
+
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
@@ -117,37 +124,41 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.slider{
-    width: 70%;
-    margin-left: 4%;
+.slider {
+    width: 50%;
+    /* margin-left: 4%; */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 
 }
-
+.carousel.pointer-event{
+    width: 100%;
+}
 .widget-container {
     display: flex;
-    justify-content: flex-end; /* מיישר את הווידג'ט לצד ימין */
-    align-items: flex-start;
-    width: 100%;
-    position: relative; /* מאפשר מיקום יחסי של הכותרת */
+    flex-direction: column;
+    justify-content: flex-end;
+    /* מיישר את הווידג'ט לצד ימין */
+    align-items: center;
+    width: 50%;
+   
 }
 
 .widget {
-    width: 67%;
-    height: 546px; 
-    background-color: white; 
+    width: 84%;
+    height: 546px;
+    background-color: white;
     border: transparent;
     max-height: 546px;
     border-radius: 16px;
-    overflow-y: auto; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    margin-right: 10%; /* הוספת מרווח מצד ימין */
-    margin-top: -540px; /* העלאת הווידג'ט מעלה */
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .score-title {
-    flex: none;
-    text-align: right;
-    margin: 10px 0;
+ 
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
@@ -157,38 +168,47 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    position: absolute; /* מיקום מוחלט */
-    top: -615px; /* העלאת הכותרת מעלה */
-    right: 17%; /* מרחק מהקצה הימני */
+  
 }
 
 .title-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     align-items: center;
-    padding: 20px 1%; 
-    box-sizing: border-box; 
+    padding: 20px 1%;
+    box-sizing: border-box;
 }
 
 #weather-container {
-    border: 2px solid #1d428a; /* כחול כהה של ריאל מדריד */
+    border: 2px solid #1d428a;
+    /* כחול כהה של ריאל מדריד */
     border-radius: 20px;
     padding: 20px;
-    width: 90%; /* מתפרס לרוחב המסך */
-    background-color: #ffffff; /* לבן */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* מוסיף צל */
-    margin: 20px auto; /* מרכז את הקונטיינר */
+    width: 90%;
+    /* מתפרס לרוחב המסך */
+    background-color: #ffffff;
+    /* לבן */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* מוסיף צל */
+    margin: 20px auto;
+    /* מרכז את הקונטיינר */
     margin-top: 110px;
-    display: flex; /* שימוש ב-Flexbox */
-    justify-content: space-around; /* מרווח בין התחזיות */
-    align-items: center; /* ממרכז את התחזיות אנכית */
-    transition: transform 0.3s ease-in-out; /* אנימציית מעבר חלקה */
-    flex-wrap: wrap; /* עוטף שורות אם יש צורך */
-    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); /* מעבר צבעים לרקע לבן */
+    display: flex;
+    /* שימוש ב-Flexbox */
+    justify-content: space-around;
+    /* מרווח בין התחזיות */
+    align-items: center;
+    /* ממרכז את התחזיות אנכית */
+    transition: transform 0.3s ease-in-out;
+    /* אנימציית מעבר חלקה */
+    flex-wrap: wrap;
+    /* עוטף שורות אם יש צורך */
+    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%);
+    /* מעבר צבעים לרקע לבן */
     transition: background-color 0.3s ease, transform 0.3s ease;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%); 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #e7e7e7 100%);
     transition: background-color 0.3s ease, transform 0.3s ease;
     gap: 20px;
 }
@@ -198,10 +218,10 @@
     margin-bottom: 20px;
     letter-spacing: 2px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: #1d428a; 
+    color: #1d428a;
     text-align: center;
-    width: 100%; 
-    background: linear-gradient(45deg, #1d428a, #ffd700); 
+    width: 100%;
+    background: linear-gradient(45deg, #1d428a, #ffd700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -210,33 +230,43 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: transparent;
     margin: 7px;
-    padding: 10px; 
-    background-color: #ffffff; 
-    border-radius: 16px; 
-    flex: 1; 
-    min-width: 170px; 
-    max-width: 200px; 
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    flex: 1;
+    min-width: 170px;
+    max-width: 200px;
     height: auto;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .daily-forecast:hover {
-    transform: scale(1.06); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.06);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+
+.carousel-item.active{
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+}
+
+/* .home .carousel-inner img{
+align-self: center !important;
+} */
 
 .forecast-title {
     font-weight: bold;
-    font-size: 18px; 
-    color: #1d428a; 
-    margin-bottom: 5px; 
+    font-size: 18px;
+    color: #1d428a;
+    margin-bottom: 5px;
 }
 
 .forecast-details {
     font-size: 14px;
-    display: block; 
+    display: block;
 }
 
 
@@ -248,80 +278,85 @@
         flex-direction: column;
         align-items: center;
         position: relative;
-        top: 0; /* מבטלת את המיקום המוחלט במסכים קטנים */
+        top: 0;
+        /* מבטלת את המיקום המוחלט במסכים קטנים */
         right: 0;
     }
 
-    .players-title, .score-title {
-        flex: 1 1
-        100%;
-        text-align: center;
+    .players-title,
+    .score-title {
         font-size: 5vw;
-        position: relative; 
-         margin: 1rem 0; 
-         }
-
-        .home .slider {
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-        
-        .home .carousel {
-            width: 90%;
-            margin: 0 auto;
-            padding: 10px;
-        }
-        
-        .home .carousel-inner img {
-            height: auto;
-            width: 100%;
-        }
-        
-        .widget-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-            top: 0;
-            right: 0;
-        }
-        
-        .widget {
-            width: 90%;
-            height: 650px; /* הקטנת גובה הווידג'ט */
-            margin-top: 20px; /* מרווח בין הכותרת לווידג'ט */
-            margin: 20px auto; /* מרכז את הווידג'ט */
-            position: relative; 
-        }
-        
-        .title-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            position: relative; /* מבטלת את המיקום המוחלט במסכים קטנים */
-            top: 0;
-            right: 0;
-        }
+        margin: 1rem 0;
     }
 
-    @media (max-width: 480px) {
-    .players-title, .score-title {
-    font-size: 3em;
+    .home .slider {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
+
+    .home .carousel {
+        width: 90%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    .home .carousel-inner img {
+        height: auto;
+        /* width: 100%; */
+    }
+
+    .widget-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        top: 0;
+        right: 0;
+    }
+
+    .widget {
+        width: 90%;
+        height: 650px;
+        /* הקטנת גובה הווידג'ט */
+        margin-top: 20px;
+        /* מרווח בין הכותרת לווידג'ט */
+        margin: 20px auto;
+        /* מרכז את הווידג'ט */
+        position: relative;
+    }
+
+    .title-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        /* מבטלת את המיקום המוחלט במסכים קטנים */
+        top: 0;
+        right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .players-title,
+    .score-title {
+        font-size: 3em;
+    }
+
     .home .carousel {
         padding: 5px;
     }
-    
+
     .widget {
         width: 100%;
-        max-height: 600px; 
-        margin-top: -5px; 
-        margin: 10px auto; 
+        max-height: 600px;
+        margin-top: -5px;
+        margin: 10px auto;
         position: relative;
     }
-    
+
     .widget-container {
         height: 600px;
         display: flex;
@@ -336,28 +371,23 @@
 
 @media (max-width: 768px) {
     .widget {
-        width: 90%; /
-        height: 500px; 
-        margin: 20px auto; 
-        position: relative; 
+        width: 90%;/ height: 500px;
+        margin: 20px auto;
+        position: relative;
     }
 
     .score-title {
-        position: relative; 
-        top: 0; 
-        right: 0; 
-        text-align: center; 
-        font-size: 24px; 
-        margin-bottom: 3px; 
-        margin-top: 10px; 
+        
+        font-size: 24px;
+       
     }
 
     .home .carousel {
-        padding: 10px; 
+        padding: 10px;
     }
 
     .home .carousel-inner img {
-        height: auto; 
-        width: 100%; 
+        height: auto;
+        /* width: 100%; */
     }
 }
