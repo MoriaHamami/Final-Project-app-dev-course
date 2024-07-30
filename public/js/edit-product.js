@@ -230,25 +230,14 @@ function onDeleteSize(id) {
     $(`.edit-product .edit-sizes li#idx-${id}`).remove()
 }
 
-
-
-
-
-
 async function onAddProduct(ev) {
-    // Prevent refresh after the user submits the form
-    ev.preventDefault()
-    // TODO: Deal with sizes, gender and category
-    // $('.edit-product input[name="sizes"]').each(function () {
-    //     gSizes.push($(this).val())
-    // })
-     gSizes = []
- gSrcImgs = []
-    updateImgsSrc()
-    updateSizes()
+    ev.preventDefault();
+    gSizes = [];
+    gSrcImgs = [];
+    updateImgsSrc();
+    updateSizes();
 
     try {
-        // Send a post request using ajax, and send on the body the data from the form
         const newProduct = await $.ajax({
             url: '/products/edit',
             method: 'POST',
@@ -260,34 +249,28 @@ async function onAddProduct(ev) {
                 srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
-                // gender,
                 sizes: gSizes
             }),
-        })
-        // Leave edit mode and show the product page 
-        window.location.assign('/products/product/' + newProduct._id)
+        });
+        // Trigger the modal
+        $('#successModal').modal('show');
+        setTimeout(() => {
+            window.location.assign('/products/product/' + newProduct._id);
+        }, 2000);
     } catch (e) {
-        console.log('e:', e)
+        console.log('e:', e);
         // TODO: Later show an error modal
     }
 }
+
 async function onUpdateProduct(ev) {
-    // Prevent refresh after the user submits the form
-    ev.preventDefault()
-
-    // TODO: Deal with sizes, gender and category
-    // $('.edit-product input[name="sizes"]').each(function () {
-    //     gSizes.push($(this).val())
-    // })
-
-     gSizes = []
- gSrcImgs = []
-
-    updateImgsSrc()
-updateSizes()
+    ev.preventDefault();
+    gSizes = [];
+    gSrcImgs = [];
+    updateImgsSrc();
+    updateSizes();
 
     try {
-        // Send a put (update) request using ajax, and send on the body the data from the form
         await $.ajax({
             url: '/products/edit/' + $('#updateButton').val(),
             method: 'PUT',
@@ -299,20 +282,21 @@ updateSizes()
                 srcImg: gSrcImgs,
                 favePlayer: gFavePlayer,
                 price: gPrice,
-                // gender,
                 sizes: gSizes
             }),
-        })
+        });
 
-        // TODO: Add success message
-             // Leave edit mode and show the product page 
-             window.location.assign('/products/product/' + $('#updateButton').val())
-
+        // Trigger the modal
+        $('#successModal').modal('show');
+        setTimeout(() => {
+            window.location.assign('/products/product/' + $('#updateButton').val());
+        }, 2000);
     } catch (e) {
-        console.log('e:', e)
+        console.log('e:', e);
     }
-
 }
+
+
 async function onDeleteProduct(id) {
     try {
         // Send a delete request using ajax, and send on the body the id of the product to delete

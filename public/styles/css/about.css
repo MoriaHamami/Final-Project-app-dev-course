@@ -1,14 +1,21 @@
-
-.news{
-    background: linear-gradient(to right, #ededed, #b8b8b8); /* הגדרת גרדיאנט עם כיוון משמאל לימין עם צבעים אפורים */
+body {
+    overflow-x: hidden;
 }
 
+* {
+    box-sizing: border-box;
+    
+}
 
-#imgheader {  
-    position: relative; 
+.news {
+    background: linear-gradient(to right, #ededed, #b8b8b8);
+}
+
+#imgheader {
+    position: relative;
     width: 100%;
-    height: 50vh; /* 50% מגובה המסך */
-    overflow: hidden; 
+    height: 50vh;
+    overflow: hidden;
 }
 
 #headerimg {
@@ -20,90 +27,80 @@
     object-fit: cover;
     transform: translateY(-30%);
 }
-    
 
 .title {
     position: absolute;
-    top: 50%; /* מיקום אנכי מחזיק באמצע המסך */
-    left: 20%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 48px;
     font-weight: bold;
     color: #ececec;
     text-align: center;
     letter-spacing: 4px;
     z-index: 999;
-    background-color: #161b79; /* צבע רקע */
-    padding: 5px;
-    padding-left: 14px;
-    padding-right: 10px;
+    background-color: #161b79;
+    padding: 5px 14px 5px 10px;
     border-radius: 4px;
+    max-width: 90%;
 }
 
 #whoarewe {
-    border: none; 
-    padding: 20px; 
-    margin: 55px ; 
-    margin-top: 40px;
-    margin-left: 75px;
+    border: none;
+    padding: 20px;
+    margin: 40px 75px 55px 75px;
     width: 55%;
-
+    max-width: 90%;
 }
 
 #whoarewe p1 {
-    font-size:xx-large;
+    font-size: xx-large;
     font-weight: bold;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 1.5px;
     text-shadow: 2px 2px 2px gray;
-  }
-  
+}
 
-  #whoarewe p2 {
+#whoarewe p2 {
     margin-top: 7px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-  }
-
-  .font{
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.font {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 22px;
     text-shadow: none;
     letter-spacing: normal;
-  }
-  
+}
 
 #pictures {
-    max-width: 35%; /* קובע את הרוחב המרבי של ה־section ל־90% מרוחב החלון */
-    margin: 55px auto; /* מרכז את ה־section באופן אופקי */
-    margin-top: -45%; /* מרווח מלמעלה */
+    max-width: 35%;
+    margin: 55px auto;
+    margin-top: -45%;
     margin-right: 3%;
-    float: right; /* הידוק האלמנט לצד ימין */
+    float: right;
 }
 
 #carouselExampleSlidesOnly {
-    width: 100%; /* קרוסלה ברוחב של 40% מהמסך */
-
+    width: 100%;
 }
 
 .carousel-item img {
-    max-width: 100%; /* הגדרת גודל מרבי לתמונה */
-    max-height: 100%; /* הגדרת גודל מרבי לתמונה */
-    width: auto; /* הגדרת רוחב אוטומטי */
-    height: auto; /* הגדרת גובה אוטומטי */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     border-radius: 5px;
 }
 
-
-
 #innumbers {
-    background: rgb(255, 230, 67); /* צבע רקע בסיסי */
-    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); /* גרדיאנט */
+    background: rgb(255, 230, 67);
+    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2);
     padding: 30px;
 }
 
-#innumbers h1{
+#innumbers h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(25, 25, 123);
 }
@@ -111,17 +108,15 @@
 #titlesCard span {
     margin-left: 109px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   
     font-weight: bold;
 }
-
 
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 111px;
-    
+    max-width: 100%;
 }
 
 .card {
@@ -129,8 +124,8 @@
     height: 160px;
     position: relative;
     perspective: 1000px;
-    background: rgb(255, 230, 67); /* צבע רקע בסיסי */
-    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); /* גרדיאנט */
+    background: rgb(255, 230, 67);
+    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2);
     border: none;
 }
 
@@ -155,7 +150,7 @@
 
 .card-front {
     background-color: #f0f0f0;
-    border:solid 5px #161b79;
+    border: solid 5px #161b79;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -165,30 +160,26 @@
 }
 
 .card-back {
-    background-color:#f0f0f0;
+    background-color: #f0f0f0;
     border-radius: 20px;
-    border:solid 5px #161b79;
+    border: solid 5px #161b79;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     transform: rotateY(180deg);
-  
 }
 
 .card img {
     width: 80px;
     height: auto;
-    object-fit:cover; /* תמונה תואמת את גודל המרחב בלי לשנות את יחסי היחס */
+    object-fit: cover;
     border-radius: 5px;
-    
 }
-
 
 .card p {
     font-size: 3rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-   
 }
 
 .card-back .side {
@@ -200,30 +191,26 @@
     padding: 20px;
 }
 
-
-
-
 #gallery {
-    display: flex; /* הצגת החלוניות בשורה */
-    flex-wrap: wrap; /* עטיפת שורה - החלוניות ימשיכו להציג כאשר הגודל מוגדר כמו ב־flexbox */
-    margin-left: 5%; /* מרווח משמאל */
-    margin-top: 10%; /* מרווח מלמעלה */
-    
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    margin-top: 10%;
+    max-width: 100%;
 }
 
-
 .window {
-    width: 100px; /* רוחב קבוע של החלונית */
-    height: 100px; /* גובה קבוע של החלונית */
-    overflow: hidden; /* הסתרת התוכן החורג מהחלון */
-    transition: width 0.3s, height 0.3s; /* אנימציה כאשר החלונית מתרחבת */
-    margin-right: 20px; /* מרווח מימין בין החלוניות */
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    transition: width 0.3s, height 0.3s;
+    margin-right: 20px;
     margin: 3%;
 }
 
 .window:hover {
-    width: 320px; /* רוחב החלונית כאשר העכבר עובר מעליה */
-    height: 400px; /* גובה החלונית כאשר העכבר עובר מעליה */
+    width: 320px;
+    height: 400px;
 }
 
 .window-content {
@@ -233,35 +220,34 @@
 .window-content img {
     display: block;
     padding: 15px;
-    width: 100%; /* רוחב התמונה יהיה כמו רוחב החלונית */
-    height: 100%; /* גובה התמונה יהיה כמו גובה החלונית */
+    width: 100%;
+    height: 100%;
 }
-
 
 .window-content .caption {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(239, 205, 52, 0.693); /* רקע שקוף לכיתוב */
-    color: #082b83; /* צבע טקסט */
+    background-color: rgba(239, 205, 52, 0.693);
+    color: #082b83;
     font-weight: bolder;
-    padding: 10px; /* מרווח פנימי לכיתוב */
-    transition: transform 0.3s; /* אנימציה כאשר הכיתוב מוצג */
-    transform: translateY(100%); /* הסתרת הכיתוב בתחילה */
+    padding: 10px;
+    transition: transform 0.3s;
+    transform: translateY(100%);
 }
 
 .window:hover .caption {
-    transform: translateY(0); /* הצגת הכיתוב כאשר העכבר עובר מעליו */
+    transform: translateY(0);
 }
 
-.about .map{
+.about .map {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.about gmp-map{
+.about gmp-map {
     height: 300px;
     width: 80%;
     margin-block: 30px;
