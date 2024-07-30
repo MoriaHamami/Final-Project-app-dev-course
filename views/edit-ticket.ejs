@@ -31,13 +31,13 @@
                                 <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
                                        src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                        id="0">
-                                <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
+                                <button type="button" class="btn btn-danger deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } else { %>
                             <li id="0">
                                 <img src="/styles/imgs/tickets/placeholder.png" class="srcImg-0" id="image-preview">
                                 <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0">
-                                <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
+                                <button type="button" class="btn btn-danger deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } %>
                     </ul>
@@ -48,31 +48,26 @@
 
                     <label>
                         <p>Title</p>
-                        
                         <input id="title" value="<%= Ticket != null ? Ticket.title : '' %>" name="title" onchange="onChangeTitle(event.target.value)">
                     </label>
 
                     <label>
                         <p>Opposing Team</p>
-                        
                         <input id="opponent" value="<%= Ticket != null ? Ticket.opponent : '' %>" name="opponent" onchange="onChangeOpponent(event.target.value)">
                     </label>
 
                     <label>
                         <p>Stadium</p>
-                        
                         <input id="stadium" value="<%= Ticket != null ? Ticket.stadium : '' %>" name="stadium" onchange="onChangeStadium(event.target.value)">
                     </label>
                     
                     <label>
                         <p>Price</p>
-                        
                         <input id="price" type="number" value="<%= Ticket != null ? Ticket.price : '' %>" name="price" min="0" onchange="onChangePrice(event.target.value)">
                     </label>
                     
                     <label>
                         <p>Date and Time</p>
-                        
                         <input id="date" type="datetime-local" value="<%= Ticket != null && Ticket.date ? Ticket.date.toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
                     </label>
                 </article>
@@ -103,7 +98,7 @@
                     <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
                 </div>
                 <div class="modal-body" id="noticeModalBody">
-                    <!-- The message will be inserted here -->
+                    <!-- ההודעה תוצג כאן -->
                 </div>
             </div>
         </div>
