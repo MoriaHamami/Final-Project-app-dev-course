@@ -15,7 +15,7 @@ function onAddFacebookPost() {
 }
 
 function onEditAbout() {
-    window.location.assign('/about/edit')
+    window.location.assign('/about/edit-shops')
 }
 
 function onGetClientsPage() {

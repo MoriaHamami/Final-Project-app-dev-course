@@ -81,7 +81,7 @@ async function onUpdateShops() {
     try {
         // Send a post request using ajax, and send on the body the data from the form
         await $.ajax({
-            url: '/about/edit',
+            url: '/about/edit-shops',
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({
