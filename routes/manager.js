@@ -9,5 +9,7 @@ router.route('/')
 router.route('/getStats')
     .get(loginController.isManagerLoggedIn, managerController.getStats)
     // .get(managerController.getManagerPage)
+    router.route('/edit-facebook')
+        .get(loginController.isManagerLoggedIn, managerController.getFacebookEditPage)
 
 module.exports = router

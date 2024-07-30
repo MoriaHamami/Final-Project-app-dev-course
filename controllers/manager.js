@@ -14,6 +14,15 @@ async function getManagerPage(req, res) {
     }
 }
 
+async function getFacebookEditPage(req, res) {
+    try {
+        
+        res.render('edit-facebook.ejs', { key:123 })
+    } catch (e) {
+        console.log('e:', e)
+    }
+}
+
 async function getStats(req, res){
     try {        
         const clientStats = await clientsService.getStats()
@@ -29,5 +38,6 @@ async function getStats(req, res){
 
 module.exports = {
     getManagerPage,
-    getStats
+    getStats,
+    getFacebookEditPage
 } 

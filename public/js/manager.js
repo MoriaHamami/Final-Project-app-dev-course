@@ -10,6 +10,10 @@ function onAddProduct() {
     window.location.assign('/products/edit')
 }
 
+function onAddFacebookPost() {
+    window.location.assign('/manager/edit-facebook')
+}
+
 function onEditAbout() {
     window.location.assign('/about/edit')
 }
