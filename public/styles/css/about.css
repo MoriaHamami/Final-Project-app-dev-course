@@ -191,6 +191,17 @@
 
 }
 
+.news #newsCarousel .edit-icon button{
+    padding: 3px 5px;
+font-size: smaller;
+}
+.news #newsCarousel .edit-icon{
+    z-index: 1;
+   position: absolute;
+   top: 10px;
+   right: 65px;
+}
+
 .news #newsCarousel:hover {
     animation: scaleUp 0.3s forwards; 
     cursor: pointer;

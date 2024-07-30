@@ -50,6 +50,13 @@
                         <% news.forEach((article, index) => { %>
                             <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
                                 <article class="d-block w-100">
+                                    <% if (isManager) { %>
+                                        <a class="edit-icon" href="/about/edit/<%= article._id %>" onclick="event.stopPropagation()">
+                                            <button>
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </button>
+                                        </a>
+                                        <% } %>
                                     <img src="/styles/imgs/news/logo-blackwhite.png" alt="News image" class="news-image">
                                     <div class="article-footer">Last update: <%= article.date.toLocaleDateString() %> at <%= article.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></div>
                                     <div class="update_content">
@@ -254,6 +261,11 @@
     <script
         src="<%='https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_KEY +'&loading=async&libraries=maps,marker&v=beta'%>"
         defer>
+    </script>
+   
+          <script>
+            let isManager = "<%- JSON.stringify(isManager) %>"; 
+        </script>
     </script>
 </body>
 

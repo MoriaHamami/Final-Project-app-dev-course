@@ -23,11 +23,13 @@
 
 /* Other CSS rules... */
 .background-container {
-    position: relative;
-    background-size: cover; /* התמונה מכסה את כל השטח */
-    background-position: center; /* התמונה במרכז */
-    background-attachment: fixed; /* התמונה מקובעת */
-    padding: 20px; /* ריווח פנימי */
+    position: relative; /* Ensures container is positioned above background */
+    padding: 20px; /* Optional: Add padding to keep content away from edges */
+    background: whitesmoke; /* White smoke background color */
+    overflow: hidden; /* Ensures overlay does not overflow */
+    z-index: 1; /* Keeps container above the background */
+    min-height: 100vh; /* Ensure it covers full viewport height */
+    box-sizing: border-box;
 }
 
 .background-container::before {
@@ -37,13 +39,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/styles/imgs/tickets/backround.jpg'); /* נתיב לתמונה */
+    background: url('/styles/imgs/footer/abstract-bg.png') no-repeat center center; /* Updated path to the uploaded image */
     background-size: cover; /* התמונה מכסה את כל השטח */
-    background-position: center; /* התמונה במרכז */
-    opacity: 0.5; /* רמת השקיפות של התמונה */
-    z-index: -1; /* כדי שהתמונה תהיה מאחורי התוכן */
+    opacity: 0.5; /* Adjust opacity to make the image more transparent */
+    z-index: 0; /* Position below the content */
 }
-/* כללי */
+
+/* Ensure container content is above the image */
+.background-container > * {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background image */
+}
+
 .client {
     display: flex;
     flex-wrap: wrap;
@@ -51,14 +58,12 @@
     margin-top: 10px;
     flex-direction: row;
     flex-basis: auto;
-    position: relative; /* כדי שהתוכן יופיע מעל התמונה */
-    z-index: 1; /* כדי שהתוכן יופיע מעל התמונה */
 }
 
 /* personal data card */
 .client .personal_data {
-    border: 2px solid rgba(44, 105, 130, 0.519);
-    background-color: rgba(130, 198, 217, 0.382);
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgba(245, 245, 245, 0.737);
     padding: 8%;
     border-radius: 25px; /* עגול יותר */
     margin-bottom: 10px;
@@ -118,8 +123,8 @@
     justify-content: flex-start;
     flex-direction: column;
     margin-left: 5%;
-    border: 2px solid rgba(203, 236, 249, 0.519); /* תוקן */
-    background-color: rgba(130, 198, 217, 0.382);
+    border: 2px solid rgb(0, 2, 3); /* תוקן */
+    background-color: rgba(245, 245, 245, 0.555);
     padding: 20px;
     border-radius: 25px; /* עגול יותר */
     margin: 0 10px;
@@ -135,7 +140,7 @@
     flex-direction: column;
     padding: 2%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .client .product img {
@@ -189,4 +194,76 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .client .client_details {
+        width: 50%;
+    }
+    
+    .client .yourhistory {
+        width: 90%;
+    }
+
+    .favorite_list, .order {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .client {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .client .client_details,
+    .client .yourhistory {
+        width: 100%;
+    }
+
+    .favorite_list, .order {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .client .btn_client {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .background-container::before {
+        background-size: cover;
+        background-position: center top;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-custom-gradient {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
+
+    .client .client_details,
+    .client .yourhistory {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .favorite_list, .order {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .client img.user-image {
+        width: 80%;
+    }
+
+    .client .btn_client {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .background-container::before {
+        background-size: contain;
+        background-position: center top;
+    }
 }

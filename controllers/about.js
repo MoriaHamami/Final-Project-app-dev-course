@@ -1,12 +1,14 @@
 const newsService = require('../services/news');
 const aboutService = require('../services/about');
+const loginController = require('./login');
 
 const getAboutPage = async (req, res) => {
   try {
     const news = await newsService.getNew();
     const coords = await aboutService.getCoords();
     coords.center = getCenterCoords(coords.data);
-    res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords });
+    const isManager = await loginController.getIsManager(req, res);
+res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords, isManager });
   } catch (e) {
     console.log('שגיאה בשליפת חדשות:', e);
     res.status(500).json({ error: 'שגיאה בשליפת חדשות' });
