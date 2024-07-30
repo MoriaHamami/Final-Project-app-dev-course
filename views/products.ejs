@@ -37,7 +37,7 @@
             <form>
                 <label>
                     Max Price
-                    <input type="range" max="<%= maxPrice %>" min="<%= minPrice %>" name="priceFilter"
+                    <input type="range" max="<%= maxPrice %>" min="<%= minPrice || 1 %>" name="priceFilter"
                         value="<%= maxPrice %>" onchange="setPrice(event.target.value)"
                         oninput="updatePriceVal(event.target.value)">
                 </label>

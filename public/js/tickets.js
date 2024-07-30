@@ -4,17 +4,17 @@ let gMonth = 0;
 let gStadium = '';
 
 // Function to set the selected month and filter the tickets
-function setMonth(isManager, newMonth = 0) {
+function setMonth(newMonth = 0) {
     gMonth = newMonth; // Update the selected month
     console.log(`Month set to: ${gMonth}`);
-    filterTickets(isManager); // Filter tickets based on the new month
+    filterTickets(); // Filter tickets based on the new month
 }
 
 // Function to set the selected title and filter the tickets
-function setTitle(isManager, newTitle = '') {
+function setTitle( newTitle = '') {
     gTitle = newTitle; // Update the selected title
     console.log(`Title set to: ${gTitle}`);
-    filterTickets(isManager); // Filter tickets based on the new title
+    filterTickets(); // Filter tickets based on the new title
 }
 
 // Function to set the selected stadium and filter the tickets
@@ -25,7 +25,7 @@ function setStadiumFilter(newStadium = '') {
 }
 
 // Function to filter tickets based on the selected criteria
-async function filterTickets(isManager) {
+async function filterTickets() {
     try {
         // Create the URL for the filter request
         let url = `/tickets/filter?title=${gTitle}`;
@@ -47,14 +47,14 @@ async function filterTickets(isManager) {
             contentType: 'application/json',
         });
         console.log('Filtered tickets:', tickets);
-        renderTickets(isManager, tickets); // Display the filtered tickets
+        renderTickets(tickets); // Display the filtered tickets
     } catch (error) {
         console.error('Error fetching tickets:', error); // Handle errors
     }
 }
 
 // Function to display the tickets on the page
-function renderTickets(isManager, tickets) {
+function renderTickets(tickets) {
     let str = '';
     if (tickets.length === 0) {
         str = '<p>No tickets available</p>'; // Message if no tickets are available

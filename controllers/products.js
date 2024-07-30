@@ -19,7 +19,7 @@ const getProducts = async (req, res) => {
           minPrice: productsInfo.minPrice,
           cats: productsInfo.cat,
           sizes: productsInfo.sizes,
-          favoriteProductIds,
+          favoriteProductIds: JSON.stringify(favoriteProductIds),
       });
   } catch (e) {
       console.log('e:', e);

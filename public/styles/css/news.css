@@ -220,12 +220,24 @@
     }
 }
 
-.news #newsCarousel .news-image {
+.news #newsCarousel .news-image{
     width: 4%;
     height: auto;
     border-radius: 10px; 
     margin-left: 97.3%; 
     margin-top: -12px;
+}
+
+
+.news #newsCarousel .edit-icon button{
+    padding: 3px 5px;
+font-size: smaller;
+}
+.news #newsCarousel .edit-icon{
+    z-index: 1;
+   position: absolute;
+   top: 10px;
+   right: 65px;
 }
 
 .news #newsCarousel .carousel-item .update_content {
