@@ -1,9 +1,9 @@
-// משתנים גלובליים לשמירת שינויים בקלטים
+// Global variables to store input changes
 let gGenre = '';
 let gTxt = '';
 let gDate = '';
 
-// מאזינים לשינויים בקלטים
+// Listeners for input changes
 function onChangeGenre(newGenre) {
     gGenre = newGenre;
 }
@@ -16,13 +16,13 @@ function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
 
-// שליחת עדכון של כתבה קיימת
+// Submit update for an existing article
 async function onUpdateArticle(ev) {
     ev.preventDefault();
 
     try {
         await $.ajax({
-            url: '/news/edit/' + $('#updateButton').val(),
+            url: '/about/edit/' + $('#updateButton').val(), // Use jQuery to get the value of updateButton
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -32,25 +32,25 @@ async function onUpdateArticle(ev) {
             }),
         });
 
-        showNotice('Article updated successfully.', '/news');
+        showNotice('Article updated successfully.', '/about');
     } catch (e) {
         console.log('Error:', e);
         showNotice('An error occurred while updating the article.');
     }
 }
 
-// מחיקת כתבה
+// Delete an article
 async function onDeleteArticle(id) {
     try {
         const res = await $.ajax({
-            url: '/news/edit/' + id,
+            url: '/about/edit/' + id,
             method: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify({ id }),
         });
 
         if (res.status !== 404) {
-            showNotice('Article deleted successfully.', '/news');
+            showNotice('Article deleted successfully.', '/about');
         } else {
             showNotice('Article could not be deleted.');
         }
@@ -60,13 +60,13 @@ async function onDeleteArticle(id) {
     }
 }
 
-// הוספת כתבה חדשה
+// Add a new article
 async function onAddArticle(ev) {
     ev.preventDefault();
 
     try {
         const newArticle = await $.ajax({
-            url: '/news/edit',
+            url: '/about/edit',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -76,7 +76,7 @@ async function onAddArticle(ev) {
             }),
         });
 
-        showNotice('New article added successfully.', '/news');
+        showNotice('New article added successfully.', '/about');
     } catch (e) {
         console.log('Error:', e);
         showNotice('An error occurred while adding the article.');
@@ -84,35 +84,37 @@ async function onAddArticle(ev) {
 }
 
 async function searchNews() {
-    const genre = document.getElementById('genreFilter').value;
-    const text = document.getElementById('textFilter').value;
-
+    const genre = $('#genreFilter').val(); // Use jQuery to get the value of genreFilter
+    const text = $('#textFilter').val(); // Use jQuery to get the value of textFilter
+  
     try {
-        const response = await $.ajax({
-            url: '/news/search',
-            method: 'GET',
-            data: { genre, text },
-            dataType: 'html'
-        });
-
-        // Extract the new HTML for #newsResults and replace the existing content
-        const newContent = $(response).find('#newsResults').html();
-        $('#newsResults').html(newContent);
+      const response = await $.ajax({
+        url: '/about/search', // Ensure this is the correct URL
+        method: 'GET',
+        data: { genre, text },
+        dataType: 'html'
+      });
+  
+      // Extract the new HTML for #newsResults and replace the existing content
+      const newContent = $(response).find('#newsResults').html(); // Assuming #newsResults is the correct ID in your about.ejs
+      $('#newsResults').html(newContent); // Use jQuery to set the new content of newsResults
     } catch (e) {
-        console.log('Error searching news:', e);
+      console.log('Error searching news:', e);
     }
-}
+  }
+  
 
 
 
+// Example function for loading genres
 function loadGenres() {
-    // פונקציה לדוגמא לטעינת ז'אנרים
-    // תוסיף כאן את הלוגיקה שלך לטעינת ז'אנרים
+    // Add your logic here to load genres
 }
 
+// Show notice modal with a message and optional redirect
 function showNotice(message, redirectTo = false) {
-    document.getElementById('noticeModalBody').innerText = message;
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    $('#noticeModalBody').text(message); // Use jQuery to set the text of noticeModalBody
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Use jQuery to get the noticeModal element
     noticeModal.show();
 
     // Adding a delay before redirect

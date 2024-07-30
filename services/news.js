@@ -82,8 +82,14 @@ const getNewById = async (id) => {
 };
 
 const searchNews = async (query) => {
-  return await News.find(query);
+  try {
+    return await News.find(query); // כנראה שצריך להיות News ולא About
+  } catch (e) {
+    console.log('Error searching news:', e);
+    throw e;
+  }
 };
+
 
 module.exports = {
   createNew,

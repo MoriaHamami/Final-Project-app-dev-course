@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // Event listener for removing an item from the cart
     $(document).on('click', '.icon-text, .bi-trash3', function() {
         const cartItemId = $(this).data('cart-item-id');
         console.log('Sending cartItemId:', cartItemId); // Debugging
@@ -6,6 +7,10 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Remove an item from the cart.
+ * @param {string} cartItemId - The ID of the cart item to be removed.
+ */
 async function removeItem(cartItemId) {
     try {
         console.log('Removing item:', cartItemId); // Debugging
@@ -31,12 +36,17 @@ async function removeItem(cartItemId) {
     }
 }
 
+/**
+ * Show a notice message to the user.
+ * @param {string} message - The message to display.
+ * @param {function} [callback] - Optional callback function to run after the notice is hidden.
+ */
 function showNotice(message, callback) {
     console.log('Showing notice:', message); // Debugging
-    var noticeModalBody = document.getElementById('noticeModalBody');
-    if (noticeModalBody) {
-        noticeModalBody.innerText = message;
-        var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    var $noticeModalBody = $('#noticeModalBody');
+    if ($noticeModalBody.length) {
+        $noticeModalBody.text(message);
+        var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
         noticeModal.show();
 
         setTimeout(function() {
@@ -50,18 +60,21 @@ function showNotice(message, callback) {
     }
 }
 
-// Function to show the large popup
+/**
+ * Show a large popup with a message.
+ * @param {string} message - The message to display in the popup.
+ */
 function showLargePopup(message) {
-    var largePopup = document.querySelector('.large-popup');
-    var largePopupContent = document.querySelector('.large-popup-content');
+    var $largePopup = $('.large-popup');
+    var $largePopupContent = $('.large-popup-content');
 
-    if (largePopup && largePopupContent) {
-        largePopupContent.innerHTML = `<h1>${message}</h1>`;
-        largePopup.style.display = 'flex'; // Show the popup
-        
+    if ($largePopup.length && $largePopupContent.length) {
+        $largePopupContent.html(`<h1>${message}</h1>`);
+        $largePopup.css('display', 'flex'); // Show the popup
+
         // Hide the popup after a few seconds
         setTimeout(function() {
-            largePopup.style.display = 'none'; // Hide the popup
+            $largePopup.css('display', 'none'); // Hide the popup
             window.location.assign('/'); // Redirect after closing the popup
         }, 2000); // Adjust time as needed
     } else {
@@ -69,22 +82,24 @@ function showLargePopup(message) {
     }
 }
 
-// Updated proceedToShipping function
+/**
+ * Proceed to the shipping step in the checkout process.
+ */
 async function proceedToShipping() {
-    // בדיקה אם העגלה ריקה
+    // Check if the cart is empty
     if (cartItems.length === 0) {
         showNotice('Your cart is empty.');
         return;
     }
 
-    // בדיקה אם כל הפרטים מלאים
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phoneNumber = document.getElementById('phoneNumber').value.trim();
-    const country = document.getElementById('country').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const postalCode = document.getElementById('postalCode').value.trim();
-    const city = document.getElementById('city').value.trim();
+    // Check if all fields are filled
+    const fullName = $('#fullName').val().trim();
+    const email = $('#email').val().trim();
+    const phoneNumber = $('#phoneNumber').val().trim();
+    const country = $('#country').val().trim();
+    const address = $('#address').val().trim();
+    const postalCode = $('#postalCode').val().trim();
+    const city = $('#city').val().trim();
 
     if (!fullName || !email || !phoneNumber || !country || !address || !postalCode || !city) {
         showNotice('Please fill in all required fields.');
@@ -112,6 +127,12 @@ async function proceedToShipping() {
     }
 }
 
+/**
+ * Add a product to the cart.
+ * @param {string} productId - The ID of the product to add.
+ * @param {string} size - The size of the product.
+ * @param {number} quantity - The quantity of the product.
+ */
 async function addToCart(productId, size, quantity) {
     try {
         const response = await $.ajax({

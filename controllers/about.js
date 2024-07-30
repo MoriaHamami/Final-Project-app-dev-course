@@ -64,7 +64,7 @@ const getNew = async (req, res) => {
     if (req.path.includes('edit')) {
       return res.render('edit-news.ejs', { article });
     } else {
-      return res.redirect('/news');
+      return res.redirect('/about');
     }
   } catch (e) {
     console.log('שגיאה בשליפת מאמר:', e);
@@ -111,13 +111,14 @@ const searchNews = async (req, res) => {
 
     const news = await newsService.searchNews(query);
 
-    // Render only the #newsResults part
-    res.render('news', { news, coords: req.coords, GOOGLE_KEY: process.env.GOOGLE_KEY, layout: false });
+    // Render the about page with the search results
+    res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, layout: false });
   } catch (e) {
-    console.log('Error searching news:', e);
-    res.status(500).json({ error: 'Error searching news' });
+    console.log('Error searching about:', e);
+    res.status(500).json({ error: 'Error searching about' });
   }
 };
+
 
 
 async function getEditAboutPage(req, res) {

@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: none !important;
+     border: none !important;
+     
 }
 
 body {
@@ -83,13 +86,24 @@ h4 {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
-    display: flex; /* השתמש ב-Flexbox */
-    justify-content: center; /* ממרכז אופקית */
-    align-items: center; /* ממרכז אנכית */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none; /* Remove the border */
 }
+
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary:focus:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
 
 
 
@@ -229,3 +243,7 @@ margin-top: -18px;
     background-color: rgba(255, 255, 255, 0.9);
   }
 
+  .text-danger {
+    margin-top: 10px; /* Adjust as needed */
+    text-align: center; /* Center the error message */
+}

@@ -27,22 +27,22 @@
       <h1>Welcome!</h1>
       <h5>Sign in or create your account</h5>
 
-      <!-- הצגת הודעת שגיאה אם קיימת -->
-      <% if (typeof error !== 'undefined' && error) { %>
-      <div class="alert alert-danger" role="alert">
-        <%= error %>
-      </div>
-      <% } %>
-
       <form class="login-form" action="/login" method="post">
         <input class="userDetails" name="username" placeholder="Username">
         <input class="userDetails" name="password" type="password" placeholder="Password">
         <div class="btn">
           <input type="submit" class="btn btn-primary" role="button" data-bs-toggle="button" value="Log in"></input>
         </div>
+        <!-- Error message container -->
+        <div id="error-message" class="text-danger" style="margin-top: 10px;"></div>
+        <!-- הצגת הודעת שגיאה אם קיימת -->
+        <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+        <% } %>
       </form>
       
-
       <!-- In order to register, the client will be sent to the register page -->
       <a href="/login/register">Register</a>
 

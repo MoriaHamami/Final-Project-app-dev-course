@@ -1,22 +1,21 @@
-document.addEventListener('DOMContentLoaded', function () {
+// This script will run once the DOM is fully loaded
+$(document).ready(function () {
     let clientIdToDelete = null;
 
-    const deleteButtons = document.querySelectorAll('.delete-acc-btn');
-    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {});
-    const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-    const successModal = new bootstrap.Modal(document.getElementById('successModal'), {});
-    const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    const deleteButtons = $('.delete-acc-btn');
+    const confirmDeleteModal = new bootstrap.Modal($('#confirmDeleteModal')[0], {});
+    const confirmDeleteButton = $('#confirmDeleteButton');
+    const successModal = new bootstrap.Modal($('#successModal')[0], {});
+    const noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
 
     // Handle delete button click
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            clientIdToDelete = this.getAttribute('data-client-id');
-            confirmDeleteModal.show();
-        });
+    deleteButtons.on('click', function () {
+        clientIdToDelete = $(this).data('client-id');
+        confirmDeleteModal.show();
     });
 
     // Handle confirm delete button click
-    confirmDeleteButton.addEventListener('click', async function () {
+    confirmDeleteButton.on('click', async function () {
         if (clientIdToDelete) {
             try {
                 const res = await $.ajax({
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (res.status !== 404) {
                     // Remove the row from the table
-                    const row = document.querySelector(`button[data-client-id="${clientIdToDelete}"]`).closest('tr');
+                    const row = $(`button[data-client-id="${clientIdToDelete}"]`).closest('tr');
                     if (row) row.remove();
                     showNotice('Client removed successfully');
                 } else {
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Reset the clientIdToDelete when the modal is hidden
-    document.getElementById('confirmDeleteModal').addEventListener('hidden.bs.modal', function () {
+    $('#confirmDeleteModal').on('hidden.bs.modal', function () {
         clientIdToDelete = null;
     });
 
@@ -63,11 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Handle orders button click
 $('.orders-btn').click(function () {
     const id = $(this).attr('id');
     getOrdersById(id);
 });
 
+// Fetch and display orders by client ID
 async function getOrdersById(id) {
     $('.shopping-cart').html('<div class="container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;"></div>');
     try {
@@ -111,11 +112,13 @@ async function getOrdersById(id) {
     }
 }
 
+// Get the image URL based on the source image and folder
 function getImgURL(srcImg, folder) {
     if (!srcImg) return "";
     return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg);
 }
 
+// Block or unblock a client by their ID
 async function onBlockClient(id, isBanned) {
     try {
         const res = await $.ajax({
@@ -136,9 +139,10 @@ async function onBlockClient(id, isBanned) {
     }
 }
 
+// Display a notice with a message and optionally redirect to the cart
 function showNotice(message, redirectToCart = false) {
-    document.getElementById('noticeModalBody').innerText = message;
-    const noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    $('#noticeModalBody').text(message);
+    const noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
     // Adding a delay before redirect

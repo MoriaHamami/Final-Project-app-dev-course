@@ -1,85 +1,108 @@
-// Global variable to help us keep track of input changes
-let gShops = []
+// Global variable to keep track of input changes
+let gShops = [];
 // Initialize the amount of shops according to the DOM
-let gNumOfShops = $('.edit-about .edit-shops li').length || 0
-let nextAvailableId = gNumOfShops+1
-const fieldsPerShop = 4
+let gNumOfShops = $('.edit-about .edit-shops li').length || 0;
+let nextAvailableId = gNumOfShops + 1;
+const fieldsPerShop = 4;
 
 function onAddShop() {
     if (gNumOfShops != 0) {
-        // If there are other shops, add shop input section in DOM after the last input
-        const elFirstShop = $('.edit-about .edit-shops li:first-child')
+        const elFirstShop = $('.edit-about .edit-shops li:first-child');
         elFirstShop.before(
             `<li id=${nextAvailableId}>
-                    <input value="" placeholder="Type location name" name="shops">
-                    <input value="" placeholder="Type location address" name="shops">
-                    <input value="" placeholder="Type location latitude" name="shops">
-                    <input value="" placeholder="Type location longitude" name="shops">
-                    <button type="button" onclick="onDeleteShop(${nextAvailableId})">
-                      <i class="bi bi-trash"></i> Remove
-                    </button>
+                <input value="" placeholder="Type location name" name="shops">
+                <input value="" placeholder="Type location address" name="shops">
+                <input value="" placeholder="Type location latitude" name="shops" type="number">
+                <input value="" placeholder="Type location longitude" name="shops" type="number">
+                <button type="button" onclick="onDeleteShop(${nextAvailableId})">
+                  <i class="bi bi-trash"></i> Remove
+                </button>
             </li>`
-        )
+        );
     } else {
-        // If there are no shops, add the shop in DOM inside ul
         $('.edit-about .edit-shops ul').append(
             `               
                 <li id="0">
                     <input value="" placeholder="Type location name" name="shops">
                     <input value="" placeholder="Type location address" name="shops">
-                    <input value="" placeholder="Type location latitude" name="shops">
-                    <input value="" placeholder="Type location longitude" name="shops">
+                    <input value="" placeholder="Type location latitude" name="shops" type="number">
+                    <input value="" placeholder="Type location longitude" name="shops" type="number">
                     <button type="button" onclick="onDeleteShop(0)"><i class="bi bi-trash"></i> Remove
                     </button>
                 </li>`
-        )
+        );
     }
-    // Update local var
-    ++gNumOfShops
-    ++nextAvailableId
+    ++gNumOfShops;
+    ++nextAvailableId;
 }
+
+function showAlert(message) {
+    console.log('showAlert called with message:', message); // Log to ensure function is called
+    const alertBox = $('#alert');
+    alertBox.text(message);
+    alertBox.show();
+    setTimeout(() => {
+        alertBox.hide();
+        window.location.assign('/about');
+    }, 2000);
+}
+
 function updateShops() {
-    let i = 0
-    let idx = 0
+    let i = 0;
+    let idx = 0;
     // Get all the shops in DOM
-    const inputs = $('.edit-about .edit-shops li input')
-    // console.log('inputs:', inputs)
-    if (!inputs) return gShops = []
-    // extract values and add to gShops var
-    else inputs.map((_, { value }) => {
-        // Check if each input was the first in its block or second and so on
+    const inputs = $('.edit-about .edit-shops li input');
+    if (!inputs) {
+        gShops = [];
+        return;
+    }
+    // Extract values and add to gShops variable
+    inputs.each((_, input) => {
+        const value = $(input).val();
         switch (i % fieldsPerShop) {
             case 0:
-                value ? gShops[idx] = { name: value } : gShops[idx] = { name: "" }
-                break
+                gShops[idx] = { name: value || "" };
+                break;
             case 1:
-                value ? gShops[idx].address = value : gShops[idx].address = ""
-                break
+                gShops[idx].address = value || "";
+                break;
             case 2:
-                value ? gShops[idx].lat = value : gShops[idx].lat = ""
-                break
+                gShops[idx].lat = value || "";
+                break;
             case 3:
-                // If the input was the last in its block, go on to next shop afterwards (idx++)
-                value ? gShops[idx++].long = value : gShops[idx++].long = ""
-                break
+                gShops[idx++].long = value || "";
+                break;
         }
-        i++
-        
-    })
+        i++;
+    });
 }
+
 function onDeleteShop(id) {
-    // Update local var
-    gNumOfShops--
-    // Remove from DOM the shop selected to be deleted
-    $(`.edit-about .edit-shops li#${id}`).remove()
-   
+    // Update local variable
+    gNumOfShops--;
+    // Remove the selected shop from the DOM
+    $(`.edit-about .edit-shops li#${id}`).remove();
+}
+
+function areAllFieldsFilled() {
+    let allFilled = true;
+    $('.edit-about .edit-shops li input').each(function() {
+        if ($(this).val() === '') {
+            allFilled = false;
+            return false; // Exit loop
+        }
+    });
+    return allFilled;
 }
 
 async function onUpdateShops() {
-
-    updateShops()
+    console.log('onUpdateShops called'); // Log to ensure function is called
+    if (!areAllFieldsFilled()) {
+        alert('Please fill in all fields before saving.');
+        return;
+    }
+    updateShops();
     try {
-        // Send a post request using ajax, and send on the body the data from the form
         await $.ajax({
             url: '/about/edit-shops',
             method: 'PUT',
@@ -88,10 +111,12 @@ async function onUpdateShops() {
                 shops: gShops
             }),
         })
+        
+        showAlert('Shops updated successfully!');
         // Leave edit mode and show the about page 
         window.location.assign('/about')
     } catch (e) {
-        console.log('Could not save shops from frontend:', e)
+        console.log('Could not save shops from frontend:', e);
         // TODO: Later show an error modal
     }
 }
