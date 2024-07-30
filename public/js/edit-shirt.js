@@ -5,6 +5,7 @@ var currentColor = 'black'; // Default color
 var toolbarOpen = false; // Is the toolbar open or closed
 var gSize = "XS";
 var img = new Image();
+var gBGColor = "white"
 
 // Handle the onload event to ensure the image is fully loaded before drawing on it
 img.onload = function () {
@@ -62,7 +63,7 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
             url: '/cart/canvas-edit',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ dataURL, color: currentColor, size: gSize })
+            data: JSON.stringify({ dataURL, color: gBGColor, size: gSize })
         });
         window.location.assign('/cart');
     } catch (error) {
@@ -91,6 +92,7 @@ function changeFrameColor(color) {
 // Function to change the shirt color
 function changeShirtColor(color) {
     document.getElementById('myCanvas').style.backgroundColor = color;
+    gBGColor = color
 }
 
 // Function to draw text on the shirt
