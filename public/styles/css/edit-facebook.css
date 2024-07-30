@@ -3,6 +3,8 @@
   
   /* Main Background Styling */
   .edit-facebook {
+    display: flex;
+    align-items: center;
     position: relative; /* Position relative to use pseudo-elements */
     padding: 20px; /* Optional: Add padding to keep content away from edges */
     background: whitesmoke; /* White smoke background color */
@@ -30,7 +32,7 @@
   }
   
   /* Form Styling */
-  .edit-txt label {
+  .edit-txt label,p {
     display: block;
     margin-bottom: 1rem;
     font-size: 1.1em; /* Slightly larger font size */
@@ -56,7 +58,31 @@
     outline: none; /* Remove default outline */
   }
  
-  
+  .edit-facebook img {
+    height: 170px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-facebook .edit-imgs li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* .edit-facebook .edit-img_info {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+} */
+
+.edit-facebook .edit-imgs,
+.edit-facebook .edit-txt {
+        flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
   
   /* Button Styling */
@@ -70,11 +96,11 @@
     transition: background-color 0.3s ease; /* Smooth transition */
   }
   
-  button#updateButton {
+  .edit-facebook button {
     background: #007bff; /* Primary button color */
   }
   
-  button#updateButton:hover {
+  .edit-facebook button:hover {
     background: #0056b3; /* Darker shade on hover */
   }
 

@@ -11,5 +11,6 @@ router.route('/getStats')
     // .get(managerController.getManagerPage)
     router.route('/edit-facebook')
         .get(loginController.isManagerLoggedIn, managerController.getFacebookEditPage)
+        .post(loginController.isManagerLoggedIn, managerController.facebookPost)
 
 module.exports = router

@@ -88,7 +88,6 @@ async function onUpdateShops() {
                 shops: gShops
             }),
         })
-        console.log('done:')
         // Leave edit mode and show the about page 
         window.location.assign('/about')
     } catch (e) {
