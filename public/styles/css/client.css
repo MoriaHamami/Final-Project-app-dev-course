@@ -1,4 +1,11 @@
+main{
+    padding-block: 30px;
+    top:0 !important
+}
 
+.background-container{
+    top: 63px;
+}
 
 /* Custom button styles */
 .btn-custom-gradient {
@@ -26,9 +33,7 @@
 /* Other CSS rules... */
 .background-container {
     position: relative; /* Ensures container is positioned above background */
-    padding: 20px; /* Optional: Add padding to keep content away from edges */
     background: whitesmoke; /* White smoke background color */
-    overflow: hidden; /* Ensures overlay does not overflow */
     z-index: 1; /* Keeps container above the background */
     min-height: 100vh; /* Ensure it covers full viewport height */
     box-sizing: border-box;
@@ -37,7 +42,7 @@
 .background-container::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 63px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -196,6 +201,10 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+footer{
+bottom: -10px !important;
 }
 
 /* Responsive Design */
