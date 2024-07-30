@@ -520,6 +520,7 @@ p.columns {
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 10px; 
 }
 
 .card-back {
@@ -553,6 +554,7 @@ p.columns {
     display: block;
     padding: 20px;
 }
+
 
 .newsTitle {
     text-align: center; /* מרכז את הטקסט */
@@ -725,6 +727,7 @@ gmp-map {
     height: auto; /* שמירה על יחס רוחב-גובה */
     margin: 0 auto; /* מרכז את התמונות */
     border-radius: 5px; /* אופציונלי, לשמירה על קצוות מעוגלים */
+    display: flex;
 }
 
 
