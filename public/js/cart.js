@@ -56,25 +56,6 @@ function showLargePopup(message) {
     var largePopupContent = document.querySelector('.large-popup-content');
 
     if (largePopup && largePopupContent) {
-        largePopupContent.innerHTML = `<h1>${message}</h1><button onclick="closeLargePopup()">Close</button>`;
-        largePopup.style.display = 'flex'; // Show the popup
-        
-        // Hide the popup after a few seconds
-        setTimeout(function() {
-            closeLargePopup();
-            window.location.assign('/'); // Redirect after closing the popup
-        }, 2000); // Adjust time as needed
-    } else {
-        console.error('Large popup or content not found');
-    }
-}
-
-// Function to show the large popup
-function showLargePopup(message) {
-    var largePopup = document.querySelector('.large-popup');
-    var largePopupContent = document.querySelector('.large-popup-content');
-
-    if (largePopup && largePopupContent) {
         largePopupContent.innerHTML = `<h1>${message}</h1>`;
         largePopup.style.display = 'flex'; // Show the popup
         
@@ -90,6 +71,26 @@ function showLargePopup(message) {
 
 // Updated proceedToShipping function
 async function proceedToShipping() {
+    // בדיקה אם העגלה ריקה
+    if (cartItems.length === 0) {
+        showNotice('Your cart is empty.');
+        return;
+    }
+
+    // בדיקה אם כל הפרטים מלאים
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phoneNumber = document.getElementById('phoneNumber').value.trim();
+    const country = document.getElementById('country').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const postalCode = document.getElementById('postalCode').value.trim();
+    const city = document.getElementById('city').value.trim();
+
+    if (!fullName || !email || !phoneNumber || !country || !address || !postalCode || !city) {
+        showNotice('Please fill in all required fields.');
+        return;
+    }
+
     try {
         const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
@@ -111,9 +112,6 @@ async function proceedToShipping() {
     }
 }
 
-
-
-
 async function addToCart(productId, size, quantity) {
     try {
         const response = await $.ajax({
@@ -133,5 +131,3 @@ async function addToCart(productId, size, quantity) {
         showNotice('Error adding product to cart');
     }
 }
-
-

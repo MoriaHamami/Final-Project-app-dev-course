@@ -25,23 +25,25 @@ async function getCartPage(req, res) {
                 item = await productsService.getProductById(itemInfo.id);
             }
             if (item) {
-                item.size = itemInfo.size;
+                item.size = itemInfo.size; // Ensure size is included from cart item
                 item.quantity = itemInfo.quantity;
                 item.cartItemId = itemInfo._id; // Adding the cart item _id
-                sum += item.price * itemInfo.quantity || 0;
-                return { ...item.toObject(), type: itemInfo.type, cartItemId: itemInfo._id }; // Make sure to include cartItemId
+                sum += item.price || 0; // Calculate the total amount
+                return { ...item.toObject(), type: itemInfo.type, cartItemId: itemInfo._id, size: itemInfo.size, price: item.price }; // Make sure to include cartItemId and size
             }
             return null;
         }));
 
         cartItems = cartItems.filter(item => item !== null);
-        cartItems.totalAmount = sum;
-
-        res.render('cart', { cartItems, username });
+        console.log("Total sum:", sum); // Debugging line to check the total sum
+        res.render('cart', { cartItems, totalAmount: sum, username });
     } catch (e) {
         res.status(500).send("Error retrieving cart page.");
     }
 }
+
+
+
 
 // Function to get cart items
 async function getCartItems(req, res) {

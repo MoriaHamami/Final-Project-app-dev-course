@@ -4,13 +4,22 @@ const loginController = require('./login');
 // Function to get all tickets and render the tickets page
 const getTickets = async (req, res) => {
   try {
-    const ALLTickets = await ticketsService.getTickets();
-    const isManager = await loginController.getIsManager(req, res);
-    res.render('tickets.ejs', { ALLTickets, isManager });
+      const ALLTickets = await ticketsService.getTickets();
+      const isManager = await loginController.getIsManager(req, res);
+      
+      // Ensure all tickets have a valid date
+      ALLTickets.forEach(ticket => {
+          if (!ticket.date) {
+              ticket.date = null;
+          }
+      });
+      
+      res.render('tickets.ejs', { ALLTickets, isManager });
   } catch (e) {
-    res.status(500).json({ error: 'Error fetching tickets' });
+      res.status(500).json({ error: 'Error fetching tickets' });
   }
 };
+
 
 // Function to get tickets by filters (title, month, stadium)
 const getTicketsByFilter = async (req, res) => {
