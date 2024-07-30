@@ -410,13 +410,7 @@ p.columns {
     letter-spacing: normal;
   }
 
-  #pictures {
-    max-width: 35%; 
-    margin: 55px auto; 
-    margin-top: -45%; 
-    margin-right: 3%;
-    float: right; 
-}
+
 
 #carouselExampleSlidesOnly {
     width: 100%; 
@@ -710,3 +704,25 @@ gmp-map {
     flex-direction: column;
 }
 
+.carousel-item active
+{
+    width: 50%;
+}
+
+#carouselExampleSlidesOnly .carousel-item img {
+    width: 30%; /* הגדרה של רוחב התמונה */
+    height: auto; /* שמירה על יחס רוחב-גובה */
+    margin: 0 auto; /* מרכז את התמונות */
+    border-radius: 5px; /* אופציונלי, לשמירה על קצוות מעוגלים */
+}
+
+
+.w-100 {
+    width: 30% !important;
+}
+
+#pictures-cro
+{
+    display: flex;
+    margin: 0 auto;
+}
