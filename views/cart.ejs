@@ -119,8 +119,6 @@
     
     <%- include('footer.ejs') -%>
     <script>
-        // מוודא שהמשתנה cartItems מוגדר וכולל את פריטי העגלה
-        var cartItems = <%- JSON.stringify(cartItems) %>; // לוודא שהמשתנה מוגדר מהשרת
 
         function goToProductsPage() {
             window.location.assign('/products');
