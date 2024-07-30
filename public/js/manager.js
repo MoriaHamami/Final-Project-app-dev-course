@@ -3,7 +3,7 @@ function onAddTicket() {
 }
 
 function onAddNews() {
-    window.location.assign('/news/edit')
+    window.location.assign('/about/edit')
 }
 
 function onAddProduct() {
