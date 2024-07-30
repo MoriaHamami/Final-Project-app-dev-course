@@ -1,13 +1,7 @@
-@font-face {
-    font-family: 'Ubuntu';
-    src: url('fonts/Ubuntu-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+* {
+    font-family: "GoogleFont";
 }
 
-body {
-    font-family: 'Ubuntu', sans-serif;
-}
 main {
     position: relative;
     top: 73px;
@@ -22,10 +16,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
 a:hover {
     text-decoration: none;
     color: inherit;
-opacity: 0.8;
+    opacity: 0.8;
 }
 
 ul {
@@ -33,28 +28,30 @@ ul {
     margin: 0;
 }
 
-.button,button{
-        /* Give the buttons a border */
-        border: 1px solid var(--l-gray);
-        /* Give the buttons a background */
-        background-color: var(--lll-gray);
-        /* Give the button text the ability to be in one line (without breaking to a new line) */
-        width: max-content;
-        /* Give the buttons more space in them */
-        padding: 8px;
-        /* Give the buttons more space around them */
-        margin: 8px;
-        /* Give the buttons circled edges */
-        border-radius: 5px;
-        /* Make the buttons seem clickable */
-        cursor: pointer;
+.button,
+button {
+    /* Give the buttons a border */
+    border: 1px solid var(--l-gray);
+    /* Give the buttons a background */
+    background-color: var(--lll-gray);
+    /* Give the button text the ability to be in one line (without breaking to a new line) */
+    width: max-content;
+    /* Give the buttons more space in them */
+    padding: 8px;
+    /* Give the buttons more space around them */
+    margin: 8px;
+    /* Give the buttons circled edges */
+    border-radius: 5px;
+    /* Make the buttons seem clickable */
+    cursor: pointer;
 }
 
-button:hover, .button:hover{
+button:hover,
+.button:hover {
     background-color: var(--ll-gray);
 }
 
-label{
+label {
     margin: 0;
 }
 

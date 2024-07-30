@@ -203,7 +203,7 @@
     display: flex;
     flex-direction: column;
 
-    justify-content: center;
+    justify-content: space-around;
     /* ליצור את התמונה והטקסט במרכז האנכי של הקונטיינר */
     align-items: center;
     /* ליצור את התמונה והטקסט במרכז האופקי של הקונטיינר */
@@ -217,6 +217,7 @@
     border-radius: 10px;
     background-color: white;
     transition: transform 0.2s ease-in-out;
+    padding: 7px;
 }
 
 @keyframes rotate-shadow {
@@ -257,15 +258,17 @@
 }
 
 .products .image-container img {
+    padding: 7px;
     max-width: 100%;
+    width: auto;
     /* מקסימום רוחב של התמונה */
-    height: auto;
+    height: 50%;
     /* שמירה על יחסיות */
     display: block;
     /* מניעת רווחים מסביב לתמונה */
     margin-bottom: 10px;
     /* רווח בין התמונה לטקסט */
-    width: 100%;
+    /* width: 100%; */
     /* שימוש ברוחב מקסימלי של התמונה בתיבה */
 }
 
@@ -356,9 +359,9 @@
 
 .products #productsList {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     /* רווח בין התמונות */
-    gap: 20px;
+    gap: 10px;
     margin: 10px;
 }
 

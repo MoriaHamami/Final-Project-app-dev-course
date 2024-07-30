@@ -124,3 +124,9 @@ function showNotice(message, redirectTo = false) {
         }
     }, 2000);
 }
+
+// Function to navigate to the ticket edit page based on the ticket ID
+// function getEditNewsPage(event, newsId) {
+//     event.stopPropagation()
+//     window.location.href = `/tickets/edit/${newsId}`;
+// }

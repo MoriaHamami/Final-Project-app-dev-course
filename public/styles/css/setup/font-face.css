@@ -1,10 +1,4 @@
 @font-face {
-    font-family: 'Ubuntu';
-    src: url('fonts/Ubuntu-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-body {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'GoogleFont';
+    src: url('../../fonts/Montserrat-VariableFont_wght.ttf');
 }
