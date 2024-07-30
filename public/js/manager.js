@@ -1,27 +1,26 @@
 function onAddTicket() {
-    window.location.assign('/tickets/edit')
+    $(location).attr('href', '/tickets/edit');
 }
 
 function onAddNews() {
-    window.location.assign('/about/edit')
+    $(location).attr('href', '/about/edit');
 }
 
 function onAddProduct() {
-    window.location.assign('/products/edit')
+    $(location).attr('href', '/products/edit');
 }
 
 function onAddFacebookPost() {
-    window.location.assign('/manager/edit-facebook')
+    $(location).attr('href', '/manager/edit-facebook');
 }
 
 function onEditAbout() {
-    window.location.assign('/about/edit-shops')
+    $(location).attr('href', '/about/edit-shops');
 }
 
 function onGetClientsPage() {
-    window.location.assign('/clients')
+    $(location).attr('href', '/clients');
 }
-
 
 async function getStats() {
     try {
