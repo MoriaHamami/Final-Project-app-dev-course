@@ -39,18 +39,18 @@ async function getStats(req, res){
 // FACEBOOK
 async function facebookPost(req, res){
 
-    const { txt, imgSrc } = req.body;
+    const { txt, linkURL } = req.body;
     const API_BASE = 'https://graph.facebook.com/v15.0';
     
     // ===== MAKE POST ON PAGE =====
     const fbPostObj = {
         message: txt,
-        url: imgSrc ? imgSrc : ''
+        link: linkURL ? linkURL : ''
         // link: 'https://www.google.com/imgres?q=img&imgurl=https%3A%2F%2Fcdn-imgix.headout.com%2Fmedia%2Fimages%2Fc9db3cea62133b6a6bb70597326b4a34-388-dubai-img-worlds-of-adventure-tickets-01.jpg%3Fauto%3Dformat%26w%3D814.9333333333333%26h%3D458.4%26q%3D90%26ar%3D16%253A9%26crop%3Dfaces&imgrefurl=https%3A%2F%2Fwww.imgworldstickets.com%2Fimg-worlds-plan-your-visit%2F&docid=0ynKpGBOsdPJEM&tbnid=KF0CLfOd4wQ76M&vet=12ahUKEwidtu-Dhs-HAxXNSfEDHVDDC-IQM3oECGgQAA..i&w=733&h=458&hcb=2&ved=2ahUKEwidtu-Dhs-HAxXNSfEDHVDDC-IQM3oECGgQAA'
     };
     // link: 'https://IMAGE-LINK'
      
-     const postResp = await fetch(`${API_BASE}/${process.env.FACEBOOK_ID}/photos?access_token=${process.env.FACEBOOK_API}`, {
+     const postResp = await fetch(`${API_BASE}/${process.env.FACEBOOK_ID}/feed?access_token=${process.env.FACEBOOK_API}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -634,15 +634,14 @@ p.columns {
   .bottom-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* לשם פיזור האיברים במרווחים שווים */
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center; /* ליישור האיברים במרכז בצורה אנכית */
-    padding-bottom: 30px;
-    padding-top: 40px;
+    
   }
 
   .contact-info {
     font-family: Arial, sans-serif;
-    margin: -80px -20px; /* העלאת המחלקה מעלה פחות */
     margin-left: 60px; /* הזזה שמאלה */
     padding: 20px;
     border: transparent;
@@ -679,18 +678,7 @@ p.columns {
 
 
 .map {
-    width: 57%;
-    height: 102vh; /* גובה של כל המסך */
-    display: flex;
-    flex-direction: column; /* מסדר את האלמנטים במאונך */
-    align-items: center; /* מרכז את האלמנטים אופקית */
-    justify-content: center; /* מרכז את האלמנטים אנכית */
-    box-sizing: border-box; /* כולל את הפדינג בחישוב הרוחב והגובה */
-    position: absolute; /* מאפשר למקם את ה-div באופן מוחלט */
-    right: -40px; /* מצמיד את ה-div לצד ימין */
-    padding-bottom: 10px;
-    transition: transform 0.3s ease-in-out;
-
+width: 50%;
     
 }
 

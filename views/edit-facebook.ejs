@@ -21,7 +21,7 @@
 
     <main class="edit-facebook">
 
-                        <article class="edit-imgs">
+                        <!-- <article class="edit-imgs">
                             <p>Post Image</p>
                             <form id="myForm" enctype="multipart/form-data">
 
@@ -36,8 +36,8 @@
                                     </li>
                             </ul>
                             </form>
-                            
-                        </article>
+
+                        </article> -->
     
         
                 <article class="edit-txt">
@@ -51,6 +51,10 @@
                     <label>
                         Post Text
                         <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"></textarea>
+                    </label>
+                    <label>
+                        Add link
+                        <input type="url" placeholder="http://www.example.com" id="URL" name="URL" onchange="onChangeURL(event.target.value)"></input>
                     </label>
                     
                     <!-- <label>
