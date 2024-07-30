@@ -2,13 +2,12 @@ const weatherApiKey = '54e5fa763dd39a887729e98f2ca75202';
 const city = 'Madrid'; // העיר שתרצה להציג את מזג האוויר שלה
 const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`;
 
-
 function getShopPage() {
-    window.location.assign('/products')
+    window.location.assign('/products');
 }
 
 function displayWeather(data) {
-    const weatherElement = document.getElementById('weather-container');
+    const weatherElement = $('#weather-container');
     let weatherForecast = '<h2>Weekly Weather :</h2>';
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const currentDate = new Date();
@@ -30,7 +29,7 @@ function displayWeather(data) {
             }
         }
     }
-    weatherElement.innerHTML = weatherForecast;
+    weatherElement.html(weatherForecast);
 }
 
 function findWeatherForDate(weatherList, date) {
@@ -38,14 +37,16 @@ function findWeatherForDate(weatherList, date) {
     return weatherList.find(weather => weather.dt_txt.includes(targetDate));
 }
 
-fetch(weatherApiUrl)
-    .then(response => response.json())
-    .then(data => {
-        displayWeather(data);
-    })
-    .catch(error => {
-        console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
+$(document).ready(function() {
+    $.ajax({
+        url: weatherApiUrl,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            displayWeather(data);
+        },
+        error: function(error) {
+            console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
+        }
     });
-
-    
-
+});

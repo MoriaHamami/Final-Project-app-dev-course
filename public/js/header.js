@@ -1,23 +1,23 @@
 function getCartPage() {
-    window.location.assign('/cart')
+    $(location).attr('href', '/cart');
 }
-async function getLoggedInUser() {
-    try {
-        // const user = {
-        //     name: "lihideshe",
-        //     isManager: true
-        // }
-        // TODO : Later add Tal client page func to get user and render in client page
-        const user = await $.ajax({
-            url: '/login/isLogged',
-            method: 'GET',
-            contentType: 'application/json',
-        })
-        if (!user) window.location.assign('/login')
-        else if (user.isManager) window.location.assign('/manager')
-        else window.location.assign('/client')
 
-    } catch (error) {
-        console.error('Error:', error)
-    }
+function getLoggedInUser() {
+    $.ajax({
+        url: '/login/isLogged',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(user) {
+            if (!user) {
+                $(location).attr('href', '/login');
+            } else if (user.isManager) {
+                $(location).attr('href', '/manager');
+            } else {
+                $(location).attr('href', '/client');
+            }
+        },
+        error: function(error) {
+            console.error('Error:', error);
+        }
+    });
 }
