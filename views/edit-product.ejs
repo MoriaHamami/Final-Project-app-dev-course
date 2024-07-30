@@ -20,166 +20,165 @@
 <body>
     <%- include('header.ejs', {page:'edit-product'}) -%>
 
-        <main class="edit-product">
-            <form id="editProduct">
-                <div class="edit-sections">
-                    <article class="edit-imgs">
-                        <h3>Images</h3>
-                        <ul>
-                            <%if(product !=null){%>
-                                <% for(let i=0; i< product.srcImg.length; i++) { %>
-                                    <li id="idx-<%=i+1%>">
-                                        <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
-                                            class="srcImg-<%=i%>">
-                                        <input type="file" accept="image/*" name="srcImg"
-                                            onchange="onChangeImg(event.target)"
-                                            src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
-                                            id="<%=i%>" class="update-img-<%=i%>">
-                                        </input>
-                                        <button type="button" class="update-btn-<%=i%>">Change</button>
-                                        <button type="button" id="<%=i%>" class="deleteImg"
-                                            onclick="onDeleteImg('<%=i+1%>')">DELETE</button>
-                                    </li>
-                                    <%}%>
-                                        <%}else{%>
-                                            <li id="idx-1">
-                                                <img src="/styles/imgs/products/shirt.png" class="srcImg-1">
-                                                <input type="file" accept="image/*" name="srcImg"
-                                                    onchange="onChangeImg(event.target)"
-                                                    src="/styles/imgs/products/shirt.png" id="1" class="update-img-0">
-                                                </input>
-                                                <button type="button" class="update-btn-0">Change</button>
-                                                <button type="button" id="1" class="deleteImg"
-                                                    onclick="onDeleteImg(1)">DELETE</button>
-                                            </li>
-                                            <%}%>
-                        </ul>
-                        <button type="button" class="add-img-btn">
-                            <i class="bi bi-plus"></i>
-                            Add image
-                        </button>
-                        <input class="add-img-input" type="file" accept="image/*" name="addImg"
-                            onchange="onAddImg(event.target)">
-                    </article>
-
-                    <article class="edit-sizes">
-                        <h3>Sizes</h3>
+    <main class="edit-product">
+        <form id="editProduct">
+            <div class="edit-sections">
+                <article class="edit-imgs">
+                    <h3>Images</h3>
+                    <ul>
                         <%if(product !=null){%>
-                            <ul>
-                                <% for(let i=0; i< product.sizes.length; i++) { %>
-                                    <li id="idx-<%= i+1 %>">
-                                        <input value="<%= product.sizes[i] %>" name="sizes">
-                                        <button type="button" onclick="onDeleteSize('<%=i+1%>')">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </li>
-                                    <%}%>
-                            </ul>
-                            <%}else{%>
-                                <ul>
-                                    <li id="idx-1">
-                                        <input value="S">
-                                        <button type="button" onclick="onDeleteSize(1)"><i class="bi bi-trash"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                                <% } %>
-                                    <button onclick="onAddSize()" type="button">
-                                        <i class="bi bi-plus"></i>
-                                        Add size
-                                    </button>
-                    </article>
-                </div>
-
-                <div class="edit-sections">
-                    <article class="edit-cat">
-                        <h3>Category</h3>
-                        <select onchange="onChangeCat('select')">
-                            <% for(let i=0; i< cats.length; i++) { %>
-                                <option id="<%= i %>" value="<%= cats[i] %>" <%=product?.cat===cats[i] ? "selected" : ""
-                                    %>>
-                                    <%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
-                                </option>
-                                <%}%>
-                                    <option value="other">Other</option>
-                        </select>
-                    </article>
-
-                    <article class="edit-txt">
-                        <h3>Info</h3>
-                        <section class="info">
-                            <label>
-                                Title
-                                <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title"
-                                    onchange="onChangeTitle(event.target.value)">
-                            </label>
-                            <label>
-                                Color
-                                <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color"
-                                    onchange="onChangeColor(event.target.value)">
-                            </label>
-                            <label>
-                                Price
-                                <input id="price" type="number" value="<%= (product !=null) ? product.price : 0 %>"
-                                    name="price" onchange="onChangePrice(event.target.value)">
-                            </label>
-                            <label>
-                                Favorite Player
-                                <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
-                                    name="favePlayer" onchange="onChangeFavePlayer(event.target.value)">
-                            </label>
-                        </section>
-                    </article>
-                </div>
-
-                <article class="edit-actions">
-                    <%if(product !=null){%>
-                        <button type="button" id="updateButton" value="<%=product._id%>"
-                            onclick="onUpdateProduct(event)">
-                            Save Changes
-                        </button>
-                        <button type="button" id="deleteButton" onclick="onDeleteProduct('<%=product._id%>')">
-                            Delete Item
-                        </button>
-                        <% }else{ %>
-                            <button id="addButton" onclick="onAddProduct(event)">
-                                Add Item
-                            </button>
-                            <% } %>
+                        <% for(let i=0; i< product.srcImg.length; i++) { %>
+                        <li id="idx-<%=i+1%>">
+                            <img src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
+                                class="srcImg-<%=i%>">
+                            <input type="file" accept="image/*" name="srcImg"
+                                onchange="onChangeImg(event.target)"
+                                src="<%= product.srcImg[i]?.includes('data:') ? product.srcImg[i] : ('/styles/imgs/products/' + product.srcImg[i])%>"
+                                id="<%=i%>" class="update-img-<%=i%>">
+                            </input>
+                            <button type="button" class="update-btn-<%=i%>">Change</button>
+                            <button type="button" id="<%=i%>" class="deleteImg"
+                                onclick="onDeleteImg('<%=i+1%>')">DELETE</button>
+                        </li>
+                        <%}%>
+                        <%}else{%>
+                        <li id="idx-1">
+                            <img src="/styles/imgs/products/shirt.png" class="srcImg-1">
+                            <input type="file" accept="image/*" name="srcImg"
+                                onchange="onChangeImg(event.target)"
+                                src="/styles/imgs/products/shirt.png" id="1" class="update-img-0">
+                            </input>
+                            <button type="button" class="update-btn-0">Change</button>
+                            <button type="button" id="1" class="deleteImg"
+                                onclick="onDeleteImg(1)">DELETE</button>
+                        </li>
+                        <%}%>
+                    </ul>
+                    <button type="button" class="add-img-btn">
+                        <i class="bi bi-plus"></i>
+                        Add image
+                    </button>
+                    <input class="add-img-input" type="file" accept="image/*" name="addImg"
+                        onchange="onAddImg(event.target)">
                 </article>
-            </form>
-        </main>
 
-        <%- include('footer.ejs') -%>
-           <!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <article class="edit-sizes">
+                    <h3>Sizes</h3>
+                    <%if(product !=null){%>
+                    <ul>
+                        <% for(let i=0; i< product.sizes.length; i++) { %>
+                        <li id="idx-<%= i+1 %>">
+                            <input value="<%= product.sizes[i] %>" name="sizes">
+                            <button type="button" onclick="onDeleteSize('<%=i+1%>')">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </li>
+                        <%}%>
+                    </ul>
+                    <%}else{%>
+                    <ul>
+                        <li id="idx-1">
+                            <input value="S">
+                            <button type="button" onclick="onDeleteSize(1)"><i class="bi bi-trash"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <% } %>
+                    <button onclick="onAddSize()" type="button">
+                        <i class="bi bi-plus"></i>
+                        Add size
+                    </button>
+                </article>
             </div>
-            <div class="modal-body">
-                Your changes have been saved successfully.
+
+            <div class="edit-sections">
+                <article class="edit-cat">
+                    <h3>Category</h3>
+                    <select onchange="onChangeCat('select')">
+                        <% for(let i=0; i< cats.length; i++) { %>
+                        <option id="<%= i %>" value="<%= cats[i] %>" <%=product?.cat===cats[i] ? "selected" : "" %>>
+                            <%= cats[i].charAt(0).toUpperCase() + cats[i].slice(1) %>
+                        </option>
+                        <%}%>
+                        <option value="other">Other</option>
+                    </select>
+                </article>
+
+                <article class="edit-txt">
+                    <h3>Info</h3>
+                    <section class="info">
+                        <label>
+                            Title
+                            <input id="title" value="<%= (product !=null) ? product.title : '' %>" name="title"
+                                onchange="onChangeTitle(event.target.value)">
+                        </label>
+                        <label>
+                            Color
+                            <input id="color" value="<%= (product !=null) ? product.color : '' %>" name="color"
+                                onchange="onChangeColor(event.target.value)">
+                        </label>
+                        <label>
+                            Price
+                            <input id="price" type="number" value="<%= (product !=null) ? product.price : 0 %>"
+                                name="price" onchange="onChangePrice(event.target.value)">
+                        </label>
+                        <label>
+                            Favorite Player
+                            <input id="favePlayer" value="<%= (product !=null) ? product.favePlayer : '' %>"
+                                name="favePlayer" onchange="onChangeFavePlayer(event.target.value)">
+                        </label>
+                    </section>
+                </article>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+
+            <article class="edit-actions">
+                <%if(product !=null){%>
+                <button type="button" id="updateButton" value="<%=product._id%>"
+                    onclick="onUpdateProduct(event)">
+                    Save Changes
+                </button>
+                <button type="button" id="deleteButton" onclick="onDeleteProduct('<%=product._id%>')">
+                    Delete Item
+                </button>
+                <% }else{ %>
+                <button id="addButton" onclick="onAddProduct(event)">
+                    Add Item
+                </button>
+                <% } %>
+            </article>
+        </form>
+    </main>
+
+    <%- include('footer.ejs') -%>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+                </div>
+                <div class="modal-body" id="noticeModalBody">
+                    <!-- The message will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-
-
-            <!-- Libraries  -->
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-                integrity="sha384-oBqDVmMz4fnFO9gybA4ABH/6YRI2G7Dap7aGIuY2lCkLlbg41dGoU5I0gqFEOsMg"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                integrity="sha384-cn7l7gDp0eyHgBBR3zz+DJzggl4EkDD2KmP8f5y0ujp4lATQzBiTbF7Sz9gE6Ju5"
-                crossorigin="anonymous"></script>
-            <script src="/js/edit-product.js"></script>
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybA4ABH/6YRI2G7Dap7aGIuY2lCkLlbg41dGoU5I0gqFEOsMg"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyHgBBR3zz+DJzggl4EkDD2KmP8f5y0ujp4lATQzBiTbF7Sz9gE6Ju5"
+        crossorigin="anonymous"></script>
+    <script src="/js/edit-product.js"></script>
+    
 </body>
 
 </html>

@@ -253,10 +253,7 @@ async function onAddProduct(ev) {
             }),
         });
         // Trigger the modal
-        $('#successModal').modal('show');
-        setTimeout(() => {
-            window.location.assign('/products/product/' + newProduct._id);
-        }, 2000);
+        showNotice('The product has been successfully added.', true);
     } catch (e) {
         console.log('e:', e);
         // TODO: Later show an error modal
@@ -286,16 +283,12 @@ async function onUpdateProduct(ev) {
             }),
         });
 
-        // Trigger the modal
-        $('#successModal').modal('show');
-        setTimeout(() => {
-            window.location.assign('/products/product/' + $('#updateButton').val());
-        }, 2000);
+        // Show success message
+        showNotice('The product has been successfully updated.', false);
     } catch (e) {
         console.log('e:', e);
     }
 }
-
 
 async function onDeleteProduct(id) {
     try {
@@ -312,14 +305,17 @@ async function onDeleteProduct(id) {
     }
 }
 
+function showNotice(message, redirectToCart) {
+    $('#noticeModalBody').text(message);
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
+    noticeModal.show();
 
-
-
-
-
-
-
-
-
-
-
+    // Adding a delay before redirect or hiding modal
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
+        } else {
+            noticeModal.hide(); // Hide modal and stay on the same page
+        }
+    }, 2000);
+}

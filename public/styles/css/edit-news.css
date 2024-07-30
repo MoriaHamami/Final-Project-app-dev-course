@@ -64,42 +64,41 @@
 
 /* Modal Styling */
 .modal-dialog {
-  border-radius: 12px; /* More subtle rounded corners */
-  overflow: hidden;
+  border-radius: 30px; 
+  overflow: hidden; 
 }
 
 .modal-content {
-  border-radius: 12px;
+  border-radius: 30px; 
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Softer shadow */
-  background: #fff; /* White background for contrast */
-  color: #333; /* Darker text color for readability */
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
   position: relative;
 }
 
 .modal-header, .modal-footer {
   border: none;
   justify-content: center;
-  font-size: 1.1em;
-  padding: 15px; /* Adjusted padding for balance */
-  background: #f8f9fa; /* Light background for header and footer */
-  color: #333;
+  font-size: 1em;
+  padding: 20px; 
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
 }
 
 .modal-header {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: 30px; 
+  border-top-right-radius: 30px; 
 }
-
 .modal-footer {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 30px; 
+  border-bottom-right-radius: 30px; 
 }
 
 .modal-body {
-  padding: 20px;
+  padding: 20px; 
   text-align: center;
-  background: #fff; /* White background for body */
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Button Styling */
