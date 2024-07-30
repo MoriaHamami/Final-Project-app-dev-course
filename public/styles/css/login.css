@@ -106,19 +106,6 @@ h4 {
 
 
 
-
-#google, 
-#apple{
-    background-color:white;
-    color:rgb(62, 49, 250);
-    border: 1px solid  #ccc;
-}
-#google:hover, 
-#apple:hover{
-border-color: rgb(62, 49, 250);
-box-shadow: 0 0 5px  rgb(62, 49, 250);
-}
-
 .text-box,
 hr {
     max-width: 600px; /* גודל התיבה מקסימלי */

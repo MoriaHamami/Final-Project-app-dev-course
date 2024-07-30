@@ -44,7 +44,7 @@ function showAlert(message) {
     setTimeout(() => {
         alertBox.hide();
         window.location.assign('/about');
-    }, 2000);
+    }, 3000);
 }
 
 function updateShops() {
@@ -98,7 +98,7 @@ function areAllFieldsFilled() {
 async function onUpdateShops() {
     console.log('onUpdateShops called'); // Log to ensure function is called
     if (!areAllFieldsFilled()) {
-        alert('Please fill in all fields before saving.');
+        showNotice('Please fill in all fields before saving.');
         return;
     }
     updateShops();
@@ -112,7 +112,7 @@ async function onUpdateShops() {
             }),
         })
         
-        showAlert('Shops updated successfully!');
+        showNotice('Shops updated successfully!');
         // Leave edit mode and show the about page 
         window.location.assign('/about')
     } catch (e) {
@@ -120,3 +120,17 @@ async function onUpdateShops() {
         // TODO: Later show an error modal
     }
 }
+function showNotice(message, redirectToCart) {
+    $('#noticeModalBody').text(message);
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
+    noticeModal.show();
+
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; 
+        } else {
+            noticeModal.hide(); 
+        }
+    }, 300);
+}
+
