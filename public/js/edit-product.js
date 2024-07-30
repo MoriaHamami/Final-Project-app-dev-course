@@ -212,7 +212,7 @@ async function onAddProduct(ev) {
             }),
         });
         // Trigger the modal
-        showNotice('The product has been successfully added.', true);
+        showNotice('The product has been successfully added.', newProduct._id);
     } catch (e) {
         console.log('e:', e);
         // TODO: Later show an error modal
@@ -228,7 +228,7 @@ async function onUpdateProduct(ev) {
     updateSizes();
 
     try {
-        await $.ajax({
+         $.ajax({
             url: '/products/edit/' + $('#updateButton').val(),
             method: 'PUT',
             contentType: 'application/json',
@@ -242,7 +242,6 @@ async function onUpdateProduct(ev) {
                 sizes: gSizes
             }),
         });
-
         // Show success message
         showNotice('The product has been successfully updated.', false);
     } catch (e) {
@@ -259,22 +258,26 @@ async function onDeleteProduct(id) {
             contentType: 'application/json',
             data: JSON.stringify({ id }),
         });
-        if (res.status !== 404) window.location.assign('/products');
+        if (res.status !== 404) {
+            window.location.assign('/products')
+            showNotice('The product has been deleted.', false);
+
+        }
     } catch (e) {
         console.log('e:', e);
     }
 }
 
 // Display a notice modal with a message
-function showNotice(message, redirectToCart) {
+function showNotice(message, productId) {
     $('#noticeModalBody').text(message);
     var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
     // Adding a delay before redirect or hiding modal
     setTimeout(function () {
-        if (redirectToCart) {
-            window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
+        if (productId) {
+            window.location.href = `/product/${productId}`; // Redirect to the cart page after 2 seconds
         } else {
             noticeModal.hide(); // Hide modal and stay on the same page
         }
