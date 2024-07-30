@@ -1,9 +1,9 @@
-// משתנים גלובליים לשמירת שינויים בקלטים
+// Global variables to keep track of input changes
 let gGenre = '';
 let gTxt = '';
 let gDate = '';
 
-// מאזינים לשינויים בקלטים
+// Event listeners for input changes
 function onChangeGenre(newGenre) {
     gGenre = newGenre;
 }
@@ -16,12 +16,12 @@ function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
 
-// הוספת כתובת מקור של תמונה ל-gopImg (לא רלוונטי לעריכת כתבות)
+// Function to add image source to gSrcImgs (not relevant for article editing)
 function addTogSrcImgs(opImg) {
-    // כאן תוכל להוסיף פונקציות נוספות לעריכת תמונה אם יהיה צורך
+    // Here you can add additional functions for image editing if needed
 }
 
-// שליחת עדכון של כתבה קיימת
+// Function to send an update for an existing article
 async function onUpdateArticle(ev) {
     ev.preventDefault();
 
@@ -44,7 +44,7 @@ async function onUpdateArticle(ev) {
     }
 }
 
-// מחיקת כתבה
+// Function to delete an article
 async function onDeleteArticle(id) {
     try {
         const res = await $.ajax({
@@ -65,7 +65,7 @@ async function onDeleteArticle(id) {
     }
 }
 
-// הוספת כתבה חדשה
+// Function to add a new article
 async function onAddArticle(ev) {
     ev.preventDefault();
 
@@ -81,17 +81,17 @@ async function onAddArticle(ev) {
             }),
         });
 
-        showNotice('New article added successfully.', '/about'); // לשנות לכתובת המתאימה לעמוד הראשי של עמוד החדשות
+        showNotice('New article added successfully.', '/about'); // Change to the appropriate URL for the main news page
     } catch (e) {
         console.log('Error:', e);
         showNotice('An error occurred while adding the article.');
     }
 }
 
-
+// Function to show a notification modal
 function showNotice(message, redirectTo = false) {
-    document.getElementById('noticeModalBody').innerText = message;
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    $('#noticeModalBody').text(message);
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
     // Adding a delay before redirect

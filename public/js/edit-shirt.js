@@ -1,39 +1,45 @@
-var canvas = document.getElementById('myCanvas');
+// Get the canvas and context
+var canvas = $('#myCanvas')[0];
 var ctx = canvas.getContext('2d');
 var painting = false;
 var currentColor = 'black'; // Default color
 var toolbarOpen = false; // Is the toolbar open or closed
 var gSize = "XS";
 var img = new Image();
-var gBGColor = "white"
+var gBGColor = "white";
 
 // Handle the onload event to ensure the image is fully loaded before drawing on it
 img.onload = function () {
     // Draw the image on the canvas
     ctx.drawImage(img, 0, 0, canvas.offsetWidth, canvas.offsetHeight);
-}
+};
 
-canvas.addEventListener('mousedown', function (event) {
+// Event listener for starting the painting
+$('#myCanvas').on('mousedown', function (event) {
     painting = true;
     var rect = canvas.getBoundingClientRect(); // Get the absolute position of the canvas
     draw(event.clientX - rect.left, event.clientY - rect.top, false); // Adjust to the absolute mouse position
 });
 
-canvas.addEventListener('mousemove', function (event) {
+// Event listener for drawing on the canvas
+$('#myCanvas').on('mousemove', function (event) {
     if (painting && !toolbarOpen) {
         var rect = canvas.getBoundingClientRect(); // Get the absolute position of the canvas
         draw(event.clientX - rect.left, event.clientY - rect.top, true); // Adjust to the absolute mouse position
     }
 });
 
-canvas.addEventListener('mouseup', function () {
+// Event listener for stopping the painting
+$('#myCanvas').on('mouseup', function () {
     painting = false;
 });
 
-canvas.addEventListener('mouseleave', function () {
+// Event listener for stopping the painting when leaving the canvas
+$('#myCanvas').on('mouseleave', function () {
     painting = false;
 });
 
+// Function to draw on the canvas
 function draw(x, y, isDrawing) {
     if (!isDrawing) {
         ctx.beginPath();
@@ -55,7 +61,7 @@ function clearCanvas() {
 }
 
 // Add event listener for the "Save Image" button
-document.getElementById('saveBtn').addEventListener('click', async function () {
+$('#saveBtn').on('click', async function () {
     var dataURL = canvas.toDataURL(); // Convert the canvas to a base64 image
 
     try {
@@ -73,8 +79,9 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
 });
 
 // Add event listener for the "Restart" button
-document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+$('#clearBtn').on('click', clearCanvas);
 
+// Update the size variable
 function updateSize(ev) {
     gSize = ev.target.value;
 }
@@ -91,8 +98,8 @@ function changeFrameColor(color) {
 
 // Function to change the shirt color
 function changeShirtColor(color) {
-    document.getElementById('myCanvas').style.backgroundColor = color;
-    gBGColor = color
+    $('#myCanvas').css('backgroundColor', color);
+    gBGColor = color;
 }
 
 // Function to draw text on the shirt
@@ -107,16 +114,16 @@ function drawText(text) {
 var enteredText = '';
 
 // Add event listener for the "Add Text" button
-document.getElementById('addTextBtn').addEventListener('click', function () {
+$('#addTextBtn').on('click', function () {
     if (enteredText.trim() !== '') {
         drawText(enteredText);
         enteredText = '';
-        document.getElementById('textInput').value = '';
+        $('#textInput').val('');
     }
 });
 
 // Add event listener for text input
-document.getElementById('textInput').addEventListener('input', function () {
+$('#textInput').on('input', function () {
     enteredText = this.value;
 });
 
@@ -129,18 +136,19 @@ function drawSketch(x, y) {
 }
 
 // Add event listeners for the color picker buttons
-document.querySelectorAll('.color').forEach(function (button) {
-    button.addEventListener('click', function () {
-        currentColor = this.style.backgroundColor;
+$('.color').each(function () {
+    $(this).on('click', function () {
+        currentColor = $(this).css('backgroundColor');
     });
 });
 
 // Add event listener for drawing on the shirt
-canvas.addEventListener('mousedown', function (event) {
+$('#myCanvas').on('mousedown', function (event) {
     var rect = canvas.getBoundingClientRect(); // Get the absolute position of the canvas
     drawSketch(event.clientX - rect.left, event.clientY - rect.top); // Adjust to the absolute mouse position
 });
 
+// Function to draw the shirt frame
 function drawShirtFrame() {
     var shirtImage = new Image();
     shirtImage.src = '../styles/imgs/general/shirt.svg'; // Assuming this is the path to your image
@@ -149,6 +157,7 @@ function drawShirtFrame() {
     }
 }
 
-window.addEventListener('load', function () {
+// Draw the shirt frame when the window loads
+$(window).on('load', function () {
     drawShirtFrame();
 });
