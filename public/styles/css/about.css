@@ -59,7 +59,6 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
     font-size: 20px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-    position: relative; /* תיקון מיקום ה-footer */
     border-radius: 10px; /* נוספה הגדרת border-radius */
     
 
@@ -184,7 +183,6 @@
 }
 
 .news #newsCarousel {
-    position: relative;
     width: 95%;
     margin: 0 auto; 
     overflow: hidden;
@@ -298,7 +296,6 @@
 }
 .located p {
     text-align: right;
-    position: relative;
     top: 45px; /* אפשר לשנות את הערך לפי הצורך */
     margin-right: 240px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -367,7 +364,6 @@
     margin-left: 75px;
     margin-top: 10%;
     width: 55%;
-    position: relative;
     padding-top: 20px; /* Ensure there's enough space for the fixed title */
 }
 
@@ -377,7 +373,6 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 2px;
     text-shadow: 2px 2px 2px gray;
-    position: fixed; /* Fixed position to keep it in place */
     top: 10px; /* Adjust as needed */
     left: 75px; /* Adjust to align with section */
     background-color: darkblue; /* Optional, to avoid content overlap */
@@ -497,7 +492,6 @@ p.columns {
     height: 140px; /* גובה הכרטיס עצמו */
     transition: transform 0.5s;
     transform-style: preserve-3d;
-    position: relative;
 }
 
 .card:hover .card-inner {
