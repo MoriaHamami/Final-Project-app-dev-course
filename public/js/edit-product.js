@@ -1,192 +1,158 @@
 // Global variables to help us keep track of input changes
-let gTitle = ''
-let gColor = ''
-let gFavePlayer = ''
-let gCat = ''
-let gPrice = 0
-let gSizes = []
-let gSrcImgs = []
-// Initialize the amount of images according to the DOM
-let gNextImgIdx = $('.edit-product .edit-imgs li').length ?  $('.edit-product .edit-imgs li').length + 2 : 1
-let gNextSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1
-let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0
-let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0
+let gTitle = '';
+let gColor = '';
+let gFavePlayer = '';
+let gCat = '';
+let gPrice = 0;
+let gSizes = [];
+let gSrcImgs = [];
+// Initialize the number of images and sizes according to the DOM
+let gNextImgIdx = $('.edit-product .edit-imgs li').length ? $('.edit-product .edit-imgs li').length + 2 : 1;
+let gNextSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1;
+let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0;
+let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0;
 
+// Trigger file input when the add image button is clicked
 $('.add-img-btn').click(function () {
-    $(".add-img-input").trigger('click')
-})
+    $(".add-img-input").trigger('click');
+});
 
-for(let i = 0; i<gNumOfImgs;i++){
+// Add event listeners for update buttons on existing images
+for (let i = 0; i < gNumOfImgs; i++) {
     $(`.update-btn-${i}`).click(function () {
-        $(`.update-img-${i}`).trigger('click')
-    })
+        $(`.update-img-${i}`).trigger('click');
+    });
 }
 
 // Functions to update global vars when changes occur in inputs
 function onChangeTitle(newTitle) {
-    gTitle = newTitle
+    gTitle = newTitle;
 }
+
 function onChangeColor(newColor) {
-    gColor = newColor
+    gColor = newColor;
 }
+
 function onChangePrice(newPrice) {
-    gPrice = newPrice
+    gPrice = newPrice;
 }
+
 function onChangeFavePlayer(newFavePlayer) {
-    gFavePlayer = newFavePlayer
+    gFavePlayer = newFavePlayer;
 }
+
 function onChangeCat(inputType) {
-    if(inputType === "select"){
-        const elSelect = $('.edit-product .edit-cat select')
-        if(elSelect.find(":selected").val() === "other") {
-            elSelect.after(`<input placeholder="Type a category for product" onchange="onChangeCat('input')">`)
-            elSelect.hide()
-        }else{
-            gCat = elSelect.find(":selected").val()
+    if (inputType === "select") {
+        const elSelect = $('.edit-product .edit-cat select');
+        if (elSelect.find(":selected").val() === "other") {
+            elSelect.after(`<input placeholder="Type a category for product" onchange="onChangeCat('input')">`);
+            elSelect.hide();
+        } else {
+            gCat = elSelect.find(":selected").val();
         }
-    }else{
-        const elInput = $('.edit-product .edit-cat input')
-        gCat = elInput.val()
+    } else {
+        const elInput = $('.edit-product .edit-cat input');
+        gCat = elInput.val();
     }
 }
+
+// Add image source to global array
 function addTogSrcImgs(imgSrc) {
     if (imgSrc.includes('data:')) {
-        // If the image was uploaded just add its source to the global srcImg array 
-        gSrcImgs.push(imgSrc)
+        gSrcImgs.push(imgSrc);
     } else {
-        // If the image is from a local path, get the file name saved localy (example: ".../fileName.jpeg" -> get "fileName.jpeg")
-        // Save a temp var
-        const str = imgSrc
-        // Get the index where the last "/" is in the img path
-        const i = str.lastIndexOf('/')
-        // get a substring from right after the first slash, until the end of the string
-        const res = str.substring(i + 1)
-        // Add the file name to the global srcImg array 
-        gSrcImgs.push(res)
+        const str = imgSrc;
+        const i = str.lastIndexOf('/');
+        const res = str.substring(i + 1);
+        gSrcImgs.push(res);
     }
 }
+
+// Update global image source array with images from the DOM
 function updateImgsSrc() {
-    // Get all the imgs in DOM
-    const imgs = $('.edit-product .edit-imgs li img')
-    if (!imgs) return gSrcImgs = []
-    else imgs.map((_, { src }) => addTogSrcImgs(src)) // extract src and add to gSrcImgs var
+    const imgs = $('.edit-product .edit-imgs li img');
+    if (!imgs.length) return gSrcImgs = [];
+    imgs.each((_, img) => addTogSrcImgs(img.src));
 }
 
+// Handle adding a new image
 function onAddImg(input) {
-    // Check if file is recieved
     if (input.files && input.files[0]) {
-        // The FileReader object enables to read the content of a file and use readAsDataURL
-        let reader = new FileReader()
-        // Reading the file
-        reader.readAsDataURL(input.files[0])
-        // Onload is triggered when the reading successfully ends
+        let reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
         reader.onload = function (e) {
-            console.log('gNumOfImgs:', gNumOfImgs)
             if (gNumOfImgs != 0) {
-                // If there are other images, add the image in DOM after the last image
-                const elLastImg = $('.edit-product .edit-imgs li:last-child')
+                const elLastImg = $('.edit-product .edit-imgs li:last-child');
                 elLastImg.after(
                     `<li id="idx-${gNextImgIdx}">
-                 <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
-                 <input type="file" accept="image/*" name="srcImg"
-                     src="${e.target.result}" id="${gNextImgIdx}" onchange="onChangeImg(event.target)" class="update-img-${gNextImgIdx}">
-                    </input>
-                                    <button type="button" class="update-btn-${gNextImgIdx}" >Change</button>
-                     <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
-                     </li>`
-                     
-                )
-                // addFileListener(gNextImgIdx)
-                // $(`.update-btn-${gNextImgIdx-1}`).click(function () {
-                //     console.log('addedd new:')
-                //     $(`.update-img-${gNextImgIdx-1}`).trigger('click')
-                // })
-            //     gNumOfImgs++
-            // gNextImgIdx++
+                        <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
+                        <input type="file" accept="image/*" name="srcImg" src="${e.target.result}" id="${gNextImgIdx}" onchange="onChangeImg(event.target)" class="update-img-${gNextImgIdx}">
+                        </input>
+                        <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
+                        <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
+                    </li>`
+                );
             } else {
-                console.log('last was delted:')
-                // If there are no images, add the image in DOM inside ul
                 $('.edit-product .edit-imgs ul').append(
                     `<li id="idx-${gNextImgIdx}">
-                    <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
-                       <input type="file" accept="image/*" name="srcImg"
-                                        onchange="onChangeImg(event.target)"
-                                        src="${e.target.result}"
-                                        id="${gNextImgIdx}" class="update-img-${gNextImgIdx}">
-                                    </input>
-                                    <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
-                                            
-                    
-                    <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
+                        <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
+                        <input type="file" accept="image/*" name="srcImg" onchange="onChangeImg(event.target)" src="${e.target.result}" id="${gNextImgIdx}" class="update-img-${gNextImgIdx}">
+                        </input>
+                        <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
+                        <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
                     </li>`
-                )
-                // $(".update-btn-0").click(function () {
-                //     console.log("added listener to first")
-                //     $(".update-img-0").trigger('click')
-                // })
-                // gNumOfImgs++
-            // gNextImgIdx++
-                
+                );
             }
-            addFileListener(gNextImgIdx)
-
-            gNumOfImgs++
-            gNextImgIdx++
-          
+            addFileListener(gNextImgIdx);
+            gNumOfImgs++;
+            gNextImgIdx++;
         }
     }
 }
-function  addFileListener(id){
-$(`.update-btn-${id}`).click(function () {
-    console.log('addedd new:', id)
-    $(`.update-img-${id}`).trigger('click')
-})
+
+// Add event listener for the update button of a specific image
+function addFileListener(id) {
+    $(`.update-btn-${id}`).click(function () {
+        $(`.update-img-${id}`).trigger('click');
+    });
 }
+
+// Handle updating an existing image
 async function onChangeImg(input) {
     try {
-        // Load, view and get the image  
-        const imgSrc = await readChangedURL(input)
-        addTogSrcImgs(imgSrc)
+        const imgSrc = await readChangedURL(input);
+        addTogSrcImgs(imgSrc);
     } catch (e) {
-        console.log('e:', e)
-    }
-}
-function onDeleteImg(id) {
-    // console.log('gNumOfImgs:', gNumOfImgs)
-    // Update local var
-    gNumOfImgs--
-    // Remove from DOM the image selected to be deleted
-    $(`.edit-product .edit-imgs li#idx-${id}`).remove()
-}
-// Get img source from data recieved in input and update in DOM
-async function readChangedURL(input) {
-    // Check if file is recieved
-    if (input.files && input.files[0]) {
-        // Return a promise to indicate when the image has loaded 
-        return new Promise((res, rej) => {
-            // The FileReader object enables to read the content of a file and use readAsDataURL
-            let reader = new FileReader()
-            // Reading the file
-            reader.readAsDataURL(input.files[0])
-            // Onload is triggered when the reading successfully ends
-            reader.onload = function (e) {
-                const imgUrl = e.target.result
-                // View the loaded image in the img elemnt
-                $(`.edit-product .srcImg-${input.id}`).attr('src', imgUrl)
-                // Update the src attribute in the input accordingly
-                $(input).attr('src', imgUrl)
-                // Return the image source
-                return res(imgUrl)
-            }
-        })
+        console.log('e:', e);
     }
 }
 
+// Handle deleting an image
+function onDeleteImg(id) {
+    gNumOfImgs--;
+    $(`.edit-product .edit-imgs li#idx-${id}`).remove();
+}
+
+// Get img source from data received in input and update in DOM
+async function readChangedURL(input) {
+    if (input.files && input.files[0]) {
+        return new Promise((res, rej) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function (e) {
+                const imgUrl = e.target.result;
+                $(`.edit-product .srcImg-${input.id}`).attr('src', imgUrl);
+                $(input).attr('src', imgUrl);
+                res(imgUrl);
+            }
+        });
+    }
+}
+
+// Handle adding a new size input
 function onAddSize() {
-    console.log('gNumOfSizes:', gNumOfSizes)
     if (gNumOfSizes != 0) {
-        // If there are other sizes, add size input section in DOM after the last input
-        const elLastSize = $('.edit-product .edit-sizes li:last-child')
+        const elLastSize = $('.edit-product .edit-sizes li:last-child');
         elLastSize.after(
             `<li id="idx-${gNextSizeIdx}">
                 <input value="" name="sizes">
@@ -194,9 +160,8 @@ function onAddSize() {
                     <i class="bi bi-trash"></i>
                 </button>
             </li>`
-        )
+        );
     } else {
-        // If there are no sizes, add the size in DOM inside ul
         $('.edit-product .edit-sizes ul').append(
             `<li id="idx-1">
                 <input value="S" name="sizes">
@@ -204,32 +169,26 @@ function onAddSize() {
                     <i class="bi bi-trash"></i>
                 </button>
             </li>`
-        )
+        );
     }
-    // Update local var
-    ++gNextSizeIdx
-    ++gNumOfSizes
-    
+    ++gNextSizeIdx;
+    ++gNumOfSizes;
 }
 
+// Update global sizes array with sizes from the DOM
 function updateSizes() {
-    // Get all the sizes in DOM
-    const sizes = $('.edit-product .edit-sizes li input')
-    if (!sizes) return gSizes = []
-    else sizes.map((_, { value }) => value ? gSizes.push(value) : '') // extract values and add to gSizes var
-    console.log('gSizes:', gSizes)
+    const sizes = $('.edit-product .edit-sizes li input');
+    if (!sizes.length) return gSizes = [];
+    sizes.each((_, size) => size.value ? gSizes.push(size.value) : '');
 }
 
+// Handle deleting a size input
 function onDeleteSize(id) {
-    console.log('id:', id)
-    console.log('gNumOfSizes:', gNumOfSizes)
-    // Update local var
-    gNumOfSizes--
-    console.log('$(`.edit-product .edit-sizes #idx-${id}`):', $(`.edit-product .edit-sizes li#idx-${id}`).length)
-    // Remove from DOM the size selected to be deleted
-    $(`.edit-product .edit-sizes li#idx-${id}`).remove()
+    gNumOfSizes--;
+    $(`.edit-product .edit-sizes li#idx-${id}`).remove();
 }
 
+// Handle adding a new product
 async function onAddProduct(ev) {
     ev.preventDefault();
     gSizes = [];
@@ -260,6 +219,7 @@ async function onAddProduct(ev) {
     }
 }
 
+// Handle updating an existing product
 async function onUpdateProduct(ev) {
     ev.preventDefault();
     gSizes = [];
@@ -290,28 +250,29 @@ async function onUpdateProduct(ev) {
     }
 }
 
+// Handle deleting a product
 async function onDeleteProduct(id) {
     try {
-        // Send a delete request using ajax, and send on the body the id of the product to delete
         const res = await $.ajax({
             url: '/products/edit/' + id,
             method: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify({ id }),
-        })
-        if (res.status !== 404) window.location.assign('/products')
+        });
+        if (res.status !== 404) window.location.assign('/products');
     } catch (e) {
-        console.log('e:', e)
+        console.log('e:', e);
     }
 }
 
+// Display a notice modal with a message
 function showNotice(message, redirectToCart) {
     $('#noticeModalBody').text(message);
     var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
     // Adding a delay before redirect or hiding modal
-    setTimeout(function() {
+    setTimeout(function () {
         if (redirectToCart) {
             window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
         } else {
