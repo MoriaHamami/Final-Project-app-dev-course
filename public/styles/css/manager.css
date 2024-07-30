@@ -34,7 +34,7 @@
 
 .manager i {
     cursor: pointer;
-    color: #007bff;
+    color: #080a0b;
 }
 
 .manager .personal-info {
@@ -49,7 +49,7 @@
     width: 50px;
     border-radius: 50%;
     margin-inline-end: 20px;
-    border: 2px solid #007bff;
+    border: 2px solid #090c10;
 }
 
 .manager .personal-info article {
@@ -86,7 +86,7 @@
     margin: 8px;
     border-radius: 25px;
     cursor: pointer;
-    color: #007bff;
+    color: #010102;
     font-weight: bold;
     transition: background-color 0.3s ease-in-out;
 }
@@ -109,7 +109,7 @@
 
 /* BAR GRAPH STYLING */
 .manager .bar {
-    fill: #5a90c0;
+    fill: #06447b;
 }
 
 /* Lighten the axis lines */
