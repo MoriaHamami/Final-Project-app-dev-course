@@ -41,37 +41,120 @@
     text-transform: capitalize;
 }
 
-.filter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.filter form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.filters-container {
+    background-color: white;
+    padding: 10px;
     box-shadow: var(--card-bsh);
     border-radius: 10px;
-    background-color: white;
     margin: 10px;
-    padding: 20px;
-    gap: 25px;
-    max-width: 100%; /* Ensure form doesn't exceed the screen width */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    display: flex;
+    flex-wrap: wrap; /* מאפשר לאלמנטים לרדת שורה */
+    justify-content: center; /* מרכז את הפילטרים */
 }
 
-.filter input,
-.filter select {
-    margin-left: 10px;
+.filters {
+    display: flex;
+    flex-wrap: wrap; /* מאפשר לאלמנטים לרדת שורה */
+    align-items: center;
+    gap: 15px; /* רווח בין הפילטרים */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: center; /* מרכז את הפילטרים */
+    width: 100%; /* להבטיח שהפילטרים תופסים את כל רוחב המיכל */
+}
+
+.filters span {
+    display: flex;
+    align-items: center;
+}
+
+.filters input,
+.filters select {
+    margin: 0;
     border-radius: 8px;
     border: transparent;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     outline: none;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     transition: transform .2s ease-in;
+}
+
+.filters input:hover,
+.filters select:hover {
+    transform: scale(1.1);
+}
+
+.filters .months {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    width: 100%; /* להבטיח שהכפתורים תופסים את כל רוחב המיכל */
+}
+
+.filters .button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* מרכז את הכפתורים */
+    flex-wrap: wrap; /* מאפשר לכפתורים לרדת שורה */
+}
+
+/* התאמות מדיה */
+@media (max-width: 1200px) {
+    .filters-container {
+        justify-content: center; /* מרכז את הפילטרים גם במסכים קטנים */
+    }
+    .filters {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .filters .button-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .filters .months {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .filters .months {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .filters .button-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .filters .months {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .filters .button-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        align-items: center;
+    }
 }
 
 .tickets #ticketsList {

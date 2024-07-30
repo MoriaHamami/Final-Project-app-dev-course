@@ -105,7 +105,7 @@
     flex: 1 1 45%;
     text-align: left;
     margin: 10px 0;
-    margin-left: 220px;
+    margin-left: 240px;
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
@@ -115,6 +115,12 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.slider{
+    width: 70%;
+    margin-left: 4%;
+
 }
 
 .widget-container {

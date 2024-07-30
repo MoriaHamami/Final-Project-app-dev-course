@@ -354,15 +354,38 @@
 
 .wishlist-btn.wishlist-active {
     color: #ff0000;
-    /* צבע אדום כהה יותר */
 }
 
 .products #productsList {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    /* רווח בין התמונות */
     gap: 10px;
     margin: 10px;
+    grid-template-columns: repeat(6, 1fr); 
+}
+
+
+@media (max-width: 1200px) {
+    .products #productsList {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .products #productsList {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 768px) {
+    .products #productsList {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 576px) {
+    .products #productsList {
+        grid-template-columns: 2fr; 
+    }
 }
 
 /* Modal styling */
@@ -414,4 +437,149 @@
     /* Adjusted padding for a balanced look */
     text-align: center;
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+}
+
+.products .filter {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 10px;
+}
+
+.products .filter form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: var(--card-bsh);
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    gap: 25px;
+}
+
+.products .filter label {
+    margin: 5px 10px;
+    font-weight: bold;
+}
+
+.products .filter input,
+.products .filter select {
+    margin-left: 10px;
+    border-radius: 8px;
+    border: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform .2s ease-in;
+}
+
+.products .filter input:hover,
+.products .filter select:hover {
+    transform: scale(1.1);
+}
+
+.products .filter .price-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.products .filter .dollar-sign {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.products .filter .button-container {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.products .filter button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease;
+}
+
+.products .filter button:hover {
+    background-color: #bebebe;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+/* התאמות מדיה */
+@media (max-width: 992px) {
+    .products .filter form {
+        flex-direction: column;
+    }
+    .products .filter .button-container {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .products .filter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .products .filter .button-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+}
+
+/* הגדרת פריסת המוצרים */
+.products #productsList {
+    display: grid;
+    gap: 10px;
+    margin: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* פחות מוצרים בשורה */
+}
+
+.product-card {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: var(--card-bsh);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    padding: 10px;
+    text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.product-card .product-info {
+    padding: 10px;
+}
+
+.product-card h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+}
+
+.product-card p {
+    font-size: 1em;
+    margin: 0 0 10px;
+}
+
+.product-card .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #161b79;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
 }
