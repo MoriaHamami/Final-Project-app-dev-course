@@ -24,19 +24,19 @@
         <div class="edit_img_info">
             <form id="editTicket">
                 <article class="edit-imgs">
-                    <h3>Add Rival Team Image</h3>
+                    <h3>Rival Team Image</h3>
                     <ul>
                         <% if (Ticket != null && Ticket.opImg) { %>
                             <li id="0">
                                 <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                      class="srcImg-0" id="image-preview" width="300">
-                                <button type="button" class="file-btn">
-                                    Change image
-                                </button>
-                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
-                                       src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
-                                       id="0" class="file-input">
-                                <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
+                                     <button type="button" class="file-btn">
+                                        Change image
+                                    </button>
+                                         <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
+                                                src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
+                                                id="0" class="file-input">
+                                <button type="button" class="deleteImg" onclick="onDeleteImg()"><i class="bi bi-trash3"></i> Delete</button>
                             </li>
                         <% } else { %>
                             <li id="0">
@@ -44,8 +44,8 @@
                                 <button type="button" class="file-btn">
                                     Change image
                                 </button>
-                                <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0" class="file-input">
-                                <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
+                                    <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0" class="file-input">
+                                <button type="button" class="deleteImg" onclick="onDeleteImg()"> <i class="bi bi-trash3"></i> Delete</button>
                             </li>
                         <% } %>
                     </ul>

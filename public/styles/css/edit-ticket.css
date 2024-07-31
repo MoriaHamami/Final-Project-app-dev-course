@@ -10,12 +10,12 @@
 }
 
 .edit-ticket form {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
     width: 100%;
     justify-content: center;
     max-width: 1200px;
-    gap: 20px; /* Space between form elements */
 }
 
 .edit-ticket article {
@@ -34,8 +34,10 @@
 
 .edit-ticket .edit-img_info {
     display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 1200px;
+    gap: 20px;
 }
 
 .edit-ticket .edit-imgs,
@@ -53,6 +55,7 @@
     font-size: 2.5em;
     color: var(--primary-color);
     font-weight: bold;
+    letter-spacing: 3px;
 }
 
 .edit-ticket h3 {
@@ -64,26 +67,54 @@
 
 .edit-ticket button {
     border: none;
-    border-radius: 10px;
+    border-radius: 18px;
     margin: 5px;
     padding: 10px 20px;
     font-size: 1em;
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+    transition: background-color 0.3s, transform 0.3s;
+    color: rgb(75, 74, 74);
     cursor: pointer;
 }
 
 #updateButton {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background for update button */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-#deleteButton {
-    background-color: #f8d7da; /* Red background for delete button */
-    color: #721c24; /* Dark red text for delete button */
+#deleteButton{
+    color: white;
+    background-color: rgb(201, 201, 201);
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-#updateButton:hover,
-#deleteButton:hover {
-    transform: scale(1.10); /* Slightly enlarge buttons on hover */
+
+#deleteButton:hover{
+    transform: scale(1.1);
+    background-color: red;
+
+}
+#updateButton:hover{
+    transform: scale(1.1);
+
+}
+
+.file-btn {
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.file-btn:hover {
+    transform: scale(1.10);
+}
+
+.deleteImg {
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.deleteImg:hover {
+    transform: scale(1.10);
+    background-color: red;
+    color: white;
 }
 
 .edit-ticket label {
@@ -100,6 +131,11 @@
 .edit-ticket label p {
     flex: 0 0 150px; /* Fixed width for label text */
     margin: 0;
+}
+
+
+.edit-ticket #date{
+    cursor: pointer;
 }
 
 .edit-ticket input {
@@ -140,21 +176,21 @@
 #addButton {
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     width: 100%;
-    max-width: 500px;
-    height: 80px;
-    font-size: 1.5em;
+    max-width: 400px; /* Reduced max-width */
+    height: 60px; /* Reduced height */
+    font-size: 1.2em; /* Reduced font size */
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
 }
 
 #addButton:hover {
+
     transform: scale(1.10); /* Slightly enlarge button on hover */
 }
 
-/* Modal styling */
 .modal-dialog {
     border-radius: 20px;
     overflow: hidden; /* Hide overflow content */
@@ -195,3 +231,14 @@
     font-size: 1.2em;
 }
 
+/* Media Queries */
+@media (max-width: 768px) {
+    .edit-ticket form {
+        grid-template-columns: 1fr; /* עמודה אחת למסכים קטנים */
+    }
+
+    .edit-ticket .edit-img_info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
