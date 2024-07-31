@@ -99,6 +99,11 @@ main.client {}
     font-size: 120%;
     background-color: #c9c0c03c;
     overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.client .btn_client:hover{
+    transform: scale(1.1);
 }
 
 /* Circular user image */
