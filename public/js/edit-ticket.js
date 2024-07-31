@@ -1,4 +1,4 @@
-// משתנים גלובליים לשמירת שינויים בקלטים
+// Global variables
 let gTitle = '';
 let gOpponent = '';
 let gStadium = '';
@@ -13,9 +13,9 @@ let originalPrice = 0;
 let originalDate = '';
 let originalOpImg = '';
 
-// Initialize original values on page load
+//original values on page load
 window.onload = function () {
-    const ticket = JSON.parse(document.getElementById('ticket-data').textContent);
+    const ticket = JSON.parse($('#ticket-data').text());
     if (ticket) {
         originalTitle = ticket.title || '';
         originalOpponent = ticket.opponent || '';
@@ -23,7 +23,7 @@ window.onload = function () {
         originalPrice = ticket.price || 0;
         originalDate = ticket.date ? new Date(ticket.date).toISOString().slice(0, 16) : '';
         originalOpImg = ticket.opImg || '';
-        // Initialize the global variables with the original values
+    
         gTitle = originalTitle;
         gOpponent = originalOpponent;
         gStadium = originalStadium;
@@ -32,12 +32,13 @@ window.onload = function () {
         gOpImg = originalOpImg;
     }
 };
+
+// Trigger file input click when the button is clicked
 $('.file-btn').click(function () {
-    console.log('here:')
     $(".file-input").trigger('click');
-})
+});
 
-
+//ticket update
 async function onUpdateTicket(ev) {
     ev.preventDefault();
 
@@ -65,12 +66,11 @@ async function onUpdateTicket(ev) {
             }, 2000);
         }
     } catch (e) {
-        console.log('Error:', e);
         showNotice('Failed to update the ticket.', false);
     }
 }
 
-// מאזינים לשינויים בקלטים
+//input changes
 function onChangeTitle(newTitle) {
     gTitle = newTitle;
 }
@@ -87,7 +87,7 @@ function onChangePrice(newPrice) {
     const price = parseFloat(newPrice);
     if (price < 0) {
         showNotice('Price cannot be negative.', false);
-        document.getElementById('price').value = 0;
+        $('#price').val(0);
         gPrice = 0;
     } else {
         gPrice = price;
@@ -98,68 +98,65 @@ function onChangeDateTime(dateTime) {
     gDate = dateTime;
 }
 
-// הוספת כתובת מקור של תמונה ל-gOpImg
+// Update image 
 function updategSrcImg(opImg) {
     if (!opImg) {
-        const imgElement = document.querySelector(`.edit-ticket li img`)
-        imgElement.src = '/styles/imgs/tickets/placeholder.png';
-        const fileInputElement = document.querySelector(`.edit-ticket input[type="file"]`)
-        fileInputElement.value = '';
-        return
+        const imgElement = $('.edit-ticket li img');
+        imgElement.attr('src', '/styles/imgs/tickets/placeholder.png');
+        const fileInputElement = $('.edit-ticket input[type="file"]');
+        fileInputElement.val('');
+        return;
     }
-    gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1)
-    const imgElement = document.querySelector(`.edit-ticket li img`)
-    console.log('gOpImg:', gOpImg)
-    imgElement.src = gOpImg
+    gOpImg = opImg.includes('data:') ? opImg : opImg.substring(opImg.lastIndexOf('/') + 1);
+    const imgElement = $('.edit-ticket li img');
+    imgElement.attr('src', gOpImg);
 }
 
-// שינוי תמונה
+//image change
 async function onChangeImg(event) {
     try {
-        // console.log('event.target:', event.target)
-        const imgSrc = await readChangedURL(event.target)
-        updategSrcImg(imgSrc)
+        const imgSrc = await readChangedURL(event.target);
+        updategSrcImg(imgSrc);
     } catch (e) {
         console.log('Error:', e);
     }
 }
 
-// מחיקת תמונה
+// Delete image
 function onDeleteImg() {
-    const imgElement = document.querySelector(`#image-preview`);
-    const fileInputElement = document.querySelector(`input[type="file"][name="opImg"]`);
+    const imgElement = $('#image-preview');
+    const fileInputElement = $('input[type="file"][name="opImg"]');
     if (imgElement) {
-        imgElement.src = '/styles/imgs/tickets/placeholder.png';
+        imgElement.attr('src', '/styles/imgs/tickets/placeholder.png');
     }
 
     if (fileInputElement) {
-        fileInputElement.value = '';
+        fileInputElement.val('');
     }
     gOpImg = "";
 }
 
-// קריאת URL של התמונה שהשתנתה
+// Read URL of the changed image
 async function readChangedURL(input) {
-    console.log('input.files:', input.files)
     if (input.files && input.files[0]) {
         return new Promise((res, rej) => {
             let reader = new FileReader();
             reader.readAsDataURL(input.files[0]);
             reader.onload = function (e) {
                 const imgUrl = e.target.result;
-                document.querySelector(`.edit-ticket .srcImg-${input.id}`).src = imgUrl;
+                $(`.edit-ticket .srcImg-${input.id}`).attr('src', imgUrl);
                 input.src = imgUrl;
                 res(imgUrl);
-            }
+            };
         });
     }
 }
 
-// הוספת כרטיס חדש
+// Add a new ticket
 async function onAddTicket(ev) {
     ev.preventDefault();
 
-    // בדיקה אם כל השדות מלאים
+    // Check if all fields are filled
     if (!gTitle || !gOpponent || !gStadium || !gPrice || !gDate || !gOpImg) {
         showNotice('All fields are required.', false);
         return;
@@ -185,12 +182,11 @@ async function onAddTicket(ev) {
             window.location.href = '/tickets';
         }, 2000);
     } catch (e) {
-        console.log('Error:', e);
         showNotice('Failed to add new ticket.', false);
     }
 }
 
-// מחיקת כרטיס
+// Delete a ticket
 async function onDeleteTicket(id) {
     try {
         const res = await $.ajax({
@@ -209,18 +205,17 @@ async function onDeleteTicket(id) {
             showNotice('Ticket could not be deleted.', false);
         }
     } catch (e) {
-        console.log('Error:', e);
         showNotice('An error occurred while deleting the ticket.', false);
     }
 }
 
-// Function to show notice and redirect
+//show notice and redirect back to cart page
 function showNotice(message, redirectToCart) {
-    document.getElementById('noticeModalBody').innerText = message;
-    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'), {});
+    $('#noticeModalBody').text(message);
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
-    // Adding a delay before redirect
+    //delay before redirect
     setTimeout(function () {
         if (redirectToCart) {
             window.location.href = '/cart'; // Redirect to the cart page after 1 second

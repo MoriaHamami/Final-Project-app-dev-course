@@ -1,24 +1,24 @@
 /* Main manager container */
 .manager {
-    background-color: var(--almost-white); /* Light background color */
-    display: flex; /* Enable flexbox layout */
-    justify-content: center; /* Center align items horizontally */
-    flex-wrap: wrap; /* Wrap items */
-    padding: 20px; /* Padding inside the container */
-    gap: 20px; /* Gap between items */
+    background-color: var(--almost-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
 }
 
 /* Manager section styling */
 .manager section {
-    display: flex; /* Enable flexbox layout */
-    flex-direction: column; /* Arrange items in a column */
-    background: linear-gradient(135deg, #f8f9fa, #ffffff); /* Gradient background */
-    margin: 10px; /* Space around the section */
-    padding: 30px; /* Padding inside the section */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    height: min-content; /* Adjust height to content */
-    width: min-content; /* Adjust width to content */
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    margin: 10px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
 }
 
 /* Unordered list styling */
@@ -32,9 +32,33 @@
     margin: 0; /* Remove default margin */
 }
 
-/* Button container styling */
-.manager .button {
-    margin-inline: 0; /* Remove default margin */
+.headline {
+    color: black;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.headline h1 {
+    margin: 0;
+}
+
+.button {
+    border: 1px solid var(--l-gray);
+    background-color: var(--lll-gray);
+    width: max-content;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 20px !important;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in, transform 0.2s ease-in;
+   font-weight: bold;
+}
+
+.button:hover {
+    background-color: var(--primary-color-dark);
+    transform: scale(1.05);
 }
 
 /* Icon styling */
@@ -45,19 +69,19 @@
 
 /* Personal info container styling */
 .manager .personal-info {
-    width: max-content; /* Adjust width to content */
-    display: flex; /* Enable flexbox layout */
-    flex-direction: row; /* Arrange items in a row */
-    align-items: center; /* Center align items */
-    gap: 10px; /* Gap between items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
 }
 
 /* User image styling */
 .manager .userImg {
-    width: 50px; /* Fixed width */
-    border-radius: 50%; /* Circular image */
-    margin-inline-end: 20px; /* Space to the right */
-    border: 2px solid #090c10; /* Dark border */
+    width: 85px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border:transparent
 }
 
 /* Personal info article styling */
@@ -68,7 +92,8 @@
     gap: 5px; /* Gap between items */
 }
 
-/* Personal info paragraph styling */
+
+
 .manager .personal-info p {
     padding-inline-end: 20px; /* Padding on the right */
     padding-block: 5px; /* Vertical padding */
@@ -83,29 +108,30 @@
 
 /* Unordered list for add options styling */
 .manager .add-options ul {
-    display: flex; /* Enable flexbox layout */
-    flex-wrap: wrap; /* Wrap items */
-    margin: 0; /* Remove default margin */
-    gap: 10px; /* Gap between items */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* List item and button styling */
-.manager .add-options li, .manager .shops button {
-    border: 1px solid var(--l-gray); /* Light gray border */
-    background-color: var(--lll-gray); /* Light gray background */
-    width: max-content; /* Adjust width to content */
-    padding: 10px 20px; /* Padding inside the element */
-    margin: 8px; /* Space around the element */
-    border-radius: 25px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    color: #010102; /* Dark text color */
-    font-weight: bold; /* Bold text */
-    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
+
+.manager .add-options li,
+.manager .shops button {
+    border: 1px solid var(--l-gray);
+    background-color: var(--lll-gray);
+    width: max-content;
+    padding: 10px 20px;
+    margin: 8px;
+    border-radius: 25px;
+    cursor: pointer;
+    color: #010102;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in, transform 0.2s ease-in;
 }
 
-/* Hover effect for list items and buttons */
-.manager .add-options li:hover, .manager .shops button:hover {
-    background-color: #e0e0e0; /* Darker gray background on hover */
+.manager .add-options li:hover,
+.manager .shops button:hover {
+    background-color: var(--primary-color-dark);
+    transform: scale(1.05);  background-color: #e0e0e0;
 }
 
 /* Bar graph header styling */
@@ -115,22 +141,20 @@
     color: #555; /* Dark text color */
 }
 
-/* Line graph styling */
 .manager #graph {
     margin-inline-start: 50px; /* Left margin */
 }
 
-/* Bar graph styling */
 .manager .bar {
     fill: #06447b; /* Dark blue fill color */
 }
 
-/* Axis line styling */
-.manager #x-axis path, #y-axis line, #y-axis path {
-    stroke: #666; /* Dark gray stroke color */
+.manager #x-axis path,
+#y-axis line,
+#y-axis path {
+    stroke: #666;
 }
 
-/* Tick mark styling for x-axis */
 .manager #x-axis .tick line {
     visibility: hidden; /* Hide tick marks */
 }
@@ -149,4 +173,39 @@
 /* Orders container styling */
 .manager .orders {
     width: 100%; /* Full width */
+}
+
+.manager .analytics {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .manager {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .manager section {
+        width: 45%;
+    }
+
+    .manager .personal-info {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .manager .userImg {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .manager .add-options ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .manager .analytics {
+        width: 80%;
+    }
 }

@@ -4,69 +4,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Real madrid | Log In </title>
+  <title>Real Madrid | Log In</title>
   <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
-  <!-- Libraries -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Fonts and Styles -->
   <link rel="stylesheet" href="/styles/css/setup/font-face.css">
   <link rel="stylesheet" href="/styles/css/setup/general.css">
   <link rel="stylesheet" href="../styles/css/login.css">
-
 </head>
 
 <body>
-
   <main class="login">
     <div>
+      <!-- Logo Image -->
       <div class="img">
         <img src="../styles/imgs/tickets/logo_black.png" id="logo">
       </div>
       <h1>Welcome!</h1>
       <h5>Sign in or create your account</h5>
 
+      <!-- Login Form -->
       <form class="login-form" action="/login" method="post">
         <input class="userDetails" name="username" placeholder="Username">
         <input class="userDetails" name="password" type="password" placeholder="Password">
         <div class="btn">
-          <input type="submit" class="btn btn-primary" role="button" data-bs-toggle="button" value="Log in"></input>
+          <input type="submit" class="btn btn-primary" role="button" data-bs-toggle="button" value="Log in">
         </div>
         <!-- Error message container -->
         <div id="error-message" class="text-danger" style="margin-top: 10px;"></div>
-        <!-- הצגת הודעת שגיאה אם קיימת -->
+        <!-- Error Message Display -->
         <% if (typeof error !== 'undefined' && error) { %>
         <div class="alert alert-danger" role="alert">
           <%= error %>
         </div>
         <% } %>
       </form>
-      
-      <!-- In order to register, the client will be sent to the register page -->
+
+      <!-- Register Link -->
       <a href="/login/register">Register</a>
-
-
+    </div>
+  </main>
 
   <!-- Notice Modal -->
   <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
-            </div>
-            <div class="modal-body" id="noticeModalBody">
-                <!-- The message will be inserted here -->
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
         </div>
+        <div class="modal-body" id="noticeModalBody">
+          <!-- The message will be inserted here -->
+        </div>
+      </div>
     </div>
   </div>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <!-- Libraries  -->
+  <!-- jQuery Library -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- Custom JavaScript -->
   <script src="../js/login.js"></script>
 
 </body>

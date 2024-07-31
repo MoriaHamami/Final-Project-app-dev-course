@@ -1,27 +1,26 @@
 const ticketsService = require('../services/tickets');
 const loginController = require('./login');
 
-// Function to get all tickets and render the tickets page
+// get all tickets
 const getTickets = async (req, res) => {
   try {
-      const ALLTickets = await ticketsService.getTickets();
-      const isManager = await loginController.getIsManager(req, res);
-      
-      // Ensure all tickets have a valid date
-      ALLTickets.forEach(ticket => {
-          if (!ticket.date) {
-              ticket.date = null;
-          }
-      });
-      
-      res.render('tickets.ejs', { ALLTickets, isManager });
+    const ALLTickets = await ticketsService.getTickets();
+    const isManager = await loginController.getIsManager(req, res);
+    
+    // Check if all tickets have a valid date
+    ALLTickets.forEach(ticket => {
+      if (!ticket.date) {
+        ticket.date = null;
+      }
+    });
+    
+    res.render('tickets.ejs', { ALLTickets, isManager });
   } catch (e) {
-      res.status(500).json({ error: 'Error fetching tickets' });
+    res.status(500).json({ error: 'Error fetching tickets' });
   }
 };
 
-
-// Function to get tickets by filters (title, month, stadium)
+// get tickets by filters (title, month, stadium)
 const getTicketsByFilter = async (req, res) => {
   try {
     const titleFilter = req.query.title;
@@ -30,10 +29,12 @@ const getTicketsByFilter = async (req, res) => {
 
     const filter = {};
 
+   
     if (titleFilter) {
       filter.title = new RegExp(titleFilter, 'i');
     }
 
+   
     if (monthFilter && monthFilter !== "0") {
       const month = parseInt(monthFilter) - 1;
 
@@ -47,6 +48,7 @@ const getTicketsByFilter = async (req, res) => {
       filter.$or = dateFilters;
     }
 
+    
     if (stadiumFilter) {
       filter.stadium = stadiumFilter;
     }
@@ -69,7 +71,7 @@ const getTicketsByDate = async (req, res) => {
   }
 };
 
-// Function to create a new ticket
+//create a new ticket
 const createTicket = async (req, res) => {
   const { title, price, stadium, opImg, opponent, date } = req.body;
   try {
@@ -80,7 +82,7 @@ const createTicket = async (req, res) => {
   }
 };
 
-// Function to get a single ticket by ID
+// get a single ticket by ID
 const getTicket = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -100,7 +102,7 @@ const getTicket = async (req, res) => {
   }
 };
 
-// Function to update a ticket by ID
+//update a ticket by ID - Edit page 
 const updateTicket = async (req, res) => {
   const id = req.params.id;
   const { title, price, stadium, opImg, opponent, date } = req.body;
@@ -123,7 +125,7 @@ const updateTicket = async (req, res) => {
   }
 };
 
-// Function to delete a ticket by ID
+//delete a ticket by ID - - Edit page 
 const deleteTicket = async (req, res) => {
   try {
     const Ticket = await ticketsService.deleteTicket(req.params.id);
@@ -136,7 +138,7 @@ const deleteTicket = async (req, res) => {
   }
 };
 
-// Export all the functions to be used in other parts of the application
+// Export all the functions
 module.exports = {
   getTickets,
   getTicketsByDate,

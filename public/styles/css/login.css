@@ -3,79 +3,82 @@
     padding: 0;
     box-sizing: border-box;
     outline: none !important;
-     border: none !important;
-     
+    border: none !important;
 }
 
 body {
-    margin: 50px 0; /* רווחים מלמעלה ומלמטה */
-}
-.img{
-    display: flex;
-    justify-content: center; /* ממרכז לרוחב */
-    align-items: center; 
-}
-#logo{
-    width: 75px;
-    height: auto;
-   
-}
-.login {
-    text-align: center; /* מרכז את התוכן באופן אופקי */
+    margin: 50px 0;
 }
 
-h1,h5{
+.img {
     display: flex;
-    justify-content: center; /* ממרכז לרוחב */
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    width: 75px;
+    height: auto;
+}
+
+.login {
+    text-align: center;
+}
+
+h1, h5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
+
 .userDetails {
     display: flex;
-    justify-content: center; /* ממרכז לרוחב */
-    align-items: center; /* ממרכז לאורך */ 
+    justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
+
 .userDetails input[type="email"] {
     background-color: #edeff2;
-    width: 394px; /* רוחב קבוע */
+    width: 394px;
     height: 64px;
-    margin: 0 auto; /* מרכוז את התיבה באופן אופקי */
+    margin: 0 auto;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
     outline: none;
 }
+
 .userDetails input[type="email"]:focus {
     border-color: rgb(62, 49, 250);
-    box-shadow: 0 0 5px  rgb(62, 49, 250);
+    box-shadow: 0 0 5px rgb(62, 49, 250);
 }
 
 #cant {
     color: rgb(62, 49, 250);
-    margin-bottom: 20px; /* מרווח מתחת לתו "Can't log in?" */
+    margin-bottom: 20px;
 }
 
 h4 {
     color: #b0b0b0;
-    margin-top: 20px; /* מרווח מעל לתו "Or" */
+    margin-top: 20px;
 }
 
-
-#cant:hover{
+#cant:hover {
     text-decoration: underline;
 }
-.btn-container,
-.btn {
+
+.btn-container, .btn {
     display: flex;
-    flex-direction: column; /* יצר את הפריטים לפי עמודות */
-    justify-content: center; /* ממרכז את האלמנטים באופן אופקי */
-    align-items: center; /* ממרכז את האלמנטים באופן אנכי */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .userDetails + .userDetails {
-    margin-top: 20px; /* ניתן לשנות את הערך לפי הצורך */
+    margin-top: 20px;
 }
 
 .btn-primary {
@@ -92,7 +95,7 @@ h4 {
     font-size: 18px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none; /* Remove the border */
+    border: none;
 }
 
 .btn-primary:focus, 
@@ -103,24 +106,20 @@ h4 {
     border: none !important;
 }
 
-
-
-
-.text-box,
-hr {
-    max-width: 600px; /* גודל התיבה מקסימלי */
-    padding: 20px; /* ריווח בתיבה */
-    margin: 20px auto 0; /* מרכוז התיבה באופן אופקי */
-    display: flex; /* קביעת תכונת התצוגה ל-Flex */
-    justify-content: center; /* מרכוז התוכן באופן אופקי */
-    align-items: center; /* מרכוז התוכן באופן אנכי */
-}
-.text-box{
-margin-top: -18px;
+.text-box, hr {
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.userDetails
-{
+.text-box {
+    margin-top: -18px;
+}
+
+.userDetails {
     background-color: #edeff2;
     width: 394px;
     height: 64px;
@@ -130,35 +129,31 @@ margin-top: -18px;
     border-radius: 10px;
     font-size: 16px;
     outline: none;
-
 }
 
-#registerForm
-{
+#registerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-
 }
-
 
 .image-upload {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* ממרכז לרוחב */
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px; /* רווח מתחת */
+    margin-bottom: 20px;
 }
 
 .image-upload img {
     width: 150px;
     height: auto;
-    margin-bottom: 10px; /* רווח מתחת לתמונה */
-    border: 1px solid #ccc; /* גבול מסביב לתמונה */
-    border-radius: 10px; /* פינות מעוגלות */
-    padding: 5px; /* ריווח פנימי לתמונה */
-    background-color: #fff; /* רקע לבן לתמונה */
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #fff;
 }
 
 .image-upload input[type="file"] {
@@ -179,7 +174,7 @@ margin-top: -18px;
 }
 
 .image-upload .deleteImg {
-    margin-top: 10px; /* רווח מעל לכפתור מחיקה */
+    margin-top: 10px;
     background-color: #dc3545;
     color: white;
     border: none;
@@ -192,45 +187,45 @@ margin-top: -18px;
 
 /* Modal styling */
 .modal-dialog {
-    border-radius: 30px; /* Rounded corners for the modal container */
-    overflow: hidden; /* Ensures rounded corners are applied to content inside */
-  }
-  
-  .modal-content {
-    border-radius: 30px; /* Rounded corners for the modal content */
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.modal-content {
+    border-radius: 30px;
     border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6);
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
     position: relative;
-  }
-  
-  .modal-header, .modal-footer {
+}
+
+.modal-header, .modal-footer {
     border: none;
     justify-content: center;
     font-size: 1em;
-    padding: 20px; /* Adjusted padding for a balanced look */
+    padding: 20px;
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
-  }
-  
-  .modal-header {
-    border-top-left-radius: 30px; /* Rounded corners for the header */
-    border-top-right-radius: 30px; /* Rounded corners for the header */
-  }
-  
-  .modal-footer {
-    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
-    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Adjusted padding for a balanced look */
+}
+
+.modal-header {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.modal-footer {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.modal-body {
+    padding: 20px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
-  }
+}
 
-  .text-danger {
-    margin-top: 10px; /* Adjust as needed */
-    text-align: center; /* Center the error message */
+.text-danger {
+    margin-top: 10px;
+    text-align: center;
 }
