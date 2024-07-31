@@ -30,12 +30,12 @@
                             <li id="0">
                                 <img src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
                                      class="srcImg-0" id="image-preview" width="300">
-                                     <button type="button" class="file-btn">
-                                        Change image
-                                    </button>
-                                         <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
-                                                src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
-                                                id="0" class="file-input">
+                                <button type="button" class="file-btn">
+                                    Change image
+                                </button>
+                                <input type="file" accept="image/*" name="opImg" onchange="onChangeImg(event)"
+                                       src="<%= Ticket.opImg.includes('data:') ? Ticket.opImg : ('/styles/imgs/tickets/' + Ticket.opImg) %>"
+                                       id="0" class="file-input">
                                 <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } else { %>
@@ -44,7 +44,7 @@
                                 <button type="button" class="file-btn">
                                     Change image
                                 </button>
-                                    <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0" class="file-input">
+                                <input type="file" accept="image/*" name="opImg" src="/styles/imgs/tickets/placeholder.png" onchange="onChangeImg(event)" id="0" class="file-input">
                                 <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
                             </li>
                         <% } %>
@@ -53,27 +53,31 @@
 
                 <article class="edit-txt">
                     <h3>Game Information</h3>
-
+                    <!-- Title input -->
                     <label>
                         <p>Title</p>
                         <input id="title" value="<%= Ticket != null ? Ticket.title : '' %>" name="title" onchange="onChangeTitle(event.target.value)">
                     </label>
                     
+                    <!-- Opposing Team input -->
                     <label>
                         <p>Opposing Team</p>
                         <input id="opponent" value="<%= Ticket != null ? Ticket.opponent : '' %>" name="opponent" onchange="onChangeOpponent(event.target.value)">
                     </label>
                     
+                    <!-- Stadium input -->
                     <label>
                         <p>Stadium</p>
                         <input id="stadium" value="<%= Ticket != null ? Ticket.stadium : '' %>" name="stadium" onchange="onChangeStadium(event.target.value)">
                     </label>
                     
+                    <!-- Price input -->
                     <label>
                         <p>Price</p>
                         <input id="price" type="number" value="<%= Ticket != null ? Ticket.price : '' %>" name="price" min="0" onchange="onChangePrice(event.target.value)">
                     </label>
                     
+                    <!-- Date and Time input -->
                     <label>
                         <p>Date and Time</p>
                         <input id="date" type="datetime-local" value="<%= Ticket != null && Ticket.date ? Ticket.date.toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
@@ -83,6 +87,7 @@
 
             <div class="addBTN">
                 <% if (Ticket != null) { %>
+                    <!-- Update and Delete buttons for existing ticket -->
                     <button type="button" id="updateButton" value="<%= Ticket._id %>" onclick="onUpdateTicket(event)">
                         Save Changes
                     </button>
@@ -90,6 +95,7 @@
                         Delete Item
                     </button>
                 <% } else { %>
+                    <!-- Add button for new ticket -->
                     <button type="button" id="addButton" onclick="onAddTicket(event)">
                         Add Item
                     </button>
@@ -106,7 +112,7 @@
                     <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
                 </div>
                 <div class="modal-body" id="noticeModalBody">
-                    <!-- ההודעה תוצג כאן -->
+                    <!-- Notice message will be displayed here -->
                 </div>
             </div>
         </div>
@@ -120,7 +126,7 @@
 
     <script src="/js/edit-ticket.js"></script>
 
-    <!-- להעביר רת זה  -->
+    <!-- Ticket data for JavaScript -->
     <script id="ticket-data" type="application/json">
         <%= JSON.stringify(Ticket) %>
     </script>

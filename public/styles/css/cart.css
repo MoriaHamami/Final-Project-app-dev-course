@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    overflow-x: hidden; /* מניעת גלילה אופקית */
 }
 
 header {
@@ -13,11 +14,18 @@ header {
 /* Cart Container */
 .cart {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+    flex-direction: column;
     padding: 20px;
     gap: 20px;
-    flex-wrap: wrap;
+    max-width: 100%; /* מניעת חריגה מהמסך */
+    overflow-x: hidden; /* מניעת גלילה אופקית */
+}
+
+@media (min-width: 768px) {
+    .cart {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
 
 /* Order Details and Shopping Cart Sections */
@@ -26,14 +34,19 @@ header {
     flex: 1;
     display: flex;
     flex-direction: column;
-    max-width: 48%;
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .cart .orderDetails,
+    .cart .shopping-cart {
+        max-width: 48%;
+    }
 }
 
 /* Customer Details Section */
@@ -97,9 +110,15 @@ header {
 /* Contact Info Section */
 .cart .contact-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 10px;
     width: 100%;
+}
+
+@media (min-width: 768px) {
+    .cart .contact-info {
+        flex-direction: row;
+    }
 }
 
 .cart .contact-info input {
@@ -109,10 +128,16 @@ header {
 /* House Info Section */
 .cart .house-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 10px;
     flex-wrap: wrap;
     width: 100%;
+}
+
+@media (min-width: 768px) {
+    .cart .house-info {
+        flex-direction: row;
+    }
 }
 
 .cart .house-info > div {
@@ -125,7 +150,14 @@ header {
     margin-top: 20px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .cart .btn-container {
+        flex-direction: row;
+    }
 }
 
 .cart .btn-primary,
@@ -165,7 +197,7 @@ header {
 /* Product Item Styling */
 .cart .product {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
     border: 1px solid #dcdcdc;
@@ -175,13 +207,27 @@ header {
     overflow: hidden; /* Prevent overflow */
 }
 
+@media (min-width: 768px) {
+    .cart .product {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
 /* Product Image */
 .cart .product img {
     width: 120px;
-    height: 120px;
-    margin-right: 15px;
+    /* height: 120px; */
+    margin-bottom: 10px;
     border-radius: 8px;
     object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .cart .product img {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
 }
 
 /* Product Info */

@@ -13,7 +13,6 @@ async function login(username, password) {
         }
         return { success: true, user };
     } catch (e) {
-        console.error('Login error:', e);
         return { success: false, message: "Login error, please try again later" };
     }
 }
@@ -49,7 +48,6 @@ async function register(fullname, username, password, imgURL) {
         // Save user to database
         await user.save();
     } catch (e) {
-        console.error('Registration error:', e);
         throw new Error('Error saving user');
     }
 }
@@ -61,7 +59,6 @@ async function getIsManager(username) {
         const user = await Client.findOne({ username });
         return user?.isManager;
     } catch (e) {
-        console.error('Error fetching manager status:', e);
         return false;
     }
 }
@@ -72,7 +69,6 @@ async function getUserByUsername(username) {
         const user = await Client.findOne({ username });
         return user;
     } catch (e) {
-        console.error('Error fetching user:', e);
         return null;
     }
 }
