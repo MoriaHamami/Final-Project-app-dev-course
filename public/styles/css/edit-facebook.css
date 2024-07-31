@@ -1,109 +1,100 @@
-/* General Container Styling */
+/* Main background styling */
+.edit-facebook {
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center align items vertically */
+    position: relative; /* Position relative for pseudo-elements and layered elements */
+    padding: 20px; /* Padding around the container */
+    background: whitesmoke; /* Light background color */
+    overflow: hidden; /* Hide overflow content */
+}
 
-  
-  /* Main Background Styling */
-  .edit-facebook {
-    display: flex;
-    align-items: center;
-    position: relative; /* Position relative to use pseudo-elements */
-    padding: 20px; /* Optional: Add padding to keep content away from edges */
-    background: whitesmoke; /* White smoke background color */
-    overflow: hidden; /* Ensures overlay does not overflow */
-  }
-  
-  /* Pseudo-element for Background Image */
-  .edit-facebook::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/styles/imgs/footer/abstract-bg.png') no-repeat center center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust opacity to make the image more transparent */
-    z-index: 0; /* Position below the content */
-  }
-  
-  /* Ensure container content is above the image */
-  .edit-facebook > * {
-    position: relative;
-    z-index: 1; /* Ensures content is above the background image */
-  }
-  
-  /* Form Styling */
-  .edit-txt label,p {
-    display: block;
-    margin-bottom: 1rem;
+/* Background image styling */
+.edit-facebook::before {
+    content: ""; /* Create a pseudo-element */
+    position: absolute; /* Position absolutely within the relative parent */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width of the parent */
+    height: 100%; /* Full height of the parent */
+    background: url('/styles/imgs/footer/abstract-bg.png') no-repeat center center; /* Set background image */
+    background-size: cover; /* Cover the whole area */
+    opacity: 0.5; /* Set opacity to make it semi-transparent */
+    z-index: 0; /* Layer behind other elements */
+}
+
+/* Ensure content is above the image */
+.edit-facebook > * {
+    position: relative; /* Position relative within the parent */
+    z-index: 1; /* Layer above the background image */
+}
+
+/* Form styling */
+.edit-txt label, p {
+    display: block; /* Display block-level elements */
+    margin-bottom: 1rem; /* Space below elements */
     font-size: 1.1em; /* Slightly larger font size */
-    color: #333; /* Darker text color for better readability */
-  }
-  
-  .edit-txt input, .edit-txt textarea {
-    width: 100%;
+    color: #333; /* Dark text color */
+}
+
+/* Input and textarea styling */
+.edit-txt input, .edit-txt textarea {
+    width: 100%; /* Full width */
     border-radius: 8px; /* Rounded corners */
-    border: 1px solid #ddd; /* Light border for input fields */
-    padding: 10px; /* Added padding for better spacing */
-    box-sizing: border-box; /* Ensures padding is included in width */
-    font-size: 1em; /* Consistent font size */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    background: whitesmoke;
-  }
-  
-  /* Input Focus Styling */
-  .edit-txt input:focus, .edit-txt textarea:focus {
-    background: #fff; /* Keep background white */
+    border: 1px solid #ddd; /* Light border */
+    padding: 10px; /* Padding inside the element */
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+    font-size: 1em; /* Regular font size */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for border color and shadow */
+    background: whitesmoke; /* Light background color */
+}
+
+/* Input focus styling */
+.edit-txt input:focus, .edit-txt textarea:focus {
+    background: #fff; /* White background on focus */
     border-color: #2575fc; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5); /* Subtle shadow effect */
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5); /* Subtle shadow effect on focus */
     outline: none; /* Remove default outline */
-  }
- 
-  .edit-facebook img {
-    height: 170px;
-    border-radius: 10px;
-    margin-bottom: 10px;
 }
 
+/* Image styling */
+.edit-facebook img {
+    height: 170px; /* Fixed height */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below the image */
+}
+
+/* List item styling */
 .edit-facebook .edit-imgs li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-/* .edit-facebook .edit-img_info {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-} */
-
-.edit-facebook .edit-imgs,
-.edit-facebook .edit-txt {
-        flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center align items */
 }
 
+/* Flexbox layout for image and text sections */
+.edit-facebook .edit-imgs, .edit-facebook .edit-txt {
+    flex: 1; /* Flex grow to fill available space */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center align items */
+}
 
-  
-  /* Button Styling */
-  button {
-    border: none;
-    border-radius: 8px; /* Rounded corners for buttons */
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
-  }
-  
-  .edit-facebook button {
-    background: #007bff; /* Primary button color */
-  }
-  
-  .edit-facebook button:hover {
+/* Button styling */
+button {
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside the button */
+    font-size: 1em; /* Regular font size */
+    color: #fff; /* White text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+/* Specific button styling */
+.edit-facebook button {
+    background: #007bff; /* Primary blue color */
+}
+
+/* Button hover effect */
+.edit-facebook button:hover {
     background: #0056b3; /* Darker shade on hover */
-  }
-
-  
-  
-  
+}

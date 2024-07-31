@@ -1,37 +1,35 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")  // Import Express module
+const router = express.Router()  // Create a new router object
 
-const productsController = require("../controllers/products");
-const loginController = require("../controllers/login");
+const productsController = require("../controllers/products")  // Import products controller
+const loginController = require("../controllers/login")  // Import login controller
 
-// ייבוא הפונקציה isLoggedIn מהקובץ של loginController
-const { isLoggedIn } = loginController; // ייבוא isLoggedIn בצורה נכונה
+const { isLoggedIn } = loginController  // Import isLoggedIn function
 
-//  For each route received, check method requested and send to relevant controller
+// Route to get all products
 router.route('/')
-    .get(productsController.getProducts);
+    .get(productsController.getProducts)
 
+// Route to filter products based on criteria
 router.route('/filter')
-    .get(productsController.getProductsByFilter);
+    .get(productsController.getProductsByFilter)
 
+// Route to get a specific product by ID
 router.route('/product/:id')
-    .get(productsController.getProduct);
+    .get(productsController.getProduct)
 
+// Route to edit a product by ID, ensuring the manager is logged in
 router.route('/edit/:id')
-    // .get(productsController.getProduct)
     .get(loginController.isManagerLoggedIn, productsController.getProduct)
-    // .put(productsController.updateProduct)
     .put(loginController.isManagerLoggedIn, productsController.updateProduct)
-    // .delete(productsController.deleteProduct);
     .delete(loginController.isManagerLoggedIn, productsController.deleteProduct)
 
+// Route to create a new product, ensuring the manager is logged in
 router.route('/edit')
-    // .get(productsController.getProduct)
     .get(loginController.isManagerLoggedIn, productsController.getProduct)
-    // .post(productsController.createProduct);
     .post(loginController.isManagerLoggedIn, productsController.createProduct)
 
-// נתיב להוספת והסרת מוצרים מרשימת המשאלות עם פונקציית isLoggedIn
-router.post('/toggle-wishlist', isLoggedIn, productsController.toggleWishlist);
+// Route to toggle a product in the wishlist, ensuring the user is logged in
+router.post('/toggle-wishlist', isLoggedIn, productsController.toggleWishlist)
 
-module.exports = router;
+module.exports = router  // Export the router

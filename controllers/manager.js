@@ -1,71 +1,78 @@
-const clientsService = require('../services/clients');
-const productsService = require('../services/products');
-const loginService = require('../services/login');
+const clientsService = require('../services/clients') // Import clients service
+const productsService = require('../services/products') // Import products service
+const loginService = require('../services/login') // Import login service
 
-// Func renders the manager page
+// Function renders the manager page
 async function getManagerPage(req, res) {
     try {
-        const loggedInUser = req.session.username
-        
-        const managerInfo = await clientsService.getClientByUsername(loggedInUser)
-        res.render('manager.ejs', { manager: managerInfo })
+        const loggedInUser = req.session.username // Get the logged-in user's username
+        const managerInfo = await clientsService.getClientByUsername(loggedInUser) // Fetch manager info by username
+        res.render('manager.ejs', { manager: managerInfo }) // Render the manager page with manager info
     } catch (e) {
-        console.log('e:', e)
+        console.log('Error fetching manager page:', e) // Log any errors
+        res.status(500).send('Internal Server Error') // Send 500 status code
     }
 }
 
+// Function renders the Facebook edit page
 async function getFacebookEditPage(req, res) {
     try {
-        
-        res.render('edit-facebook.ejs', { key:123 })
+        res.render('edit-facebook.ejs', { key:123 }) // Render the Facebook edit page with a key
     } catch (e) {
-        console.log('e:', e)
+        console.log('Error rendering Facebook edit page:', e) // Log any errors
+        res.status(500).send('Internal Server Error') // Send 500 status code
     }
 }
 
-async function getStats(req, res){
-    try {        
-        const clientStats = await clientsService.getStats()
-        const productStats = await productsService.getStats()
-        // console.log('managerInfo:', stats)
-        const stats = {productStats, clientStats }
-        res.json(stats)
+// Function gets statistics for the manager page
+async function getStats(req, res) {
+    try {
+        const clientStats = await clientsService.getStats() // Fetch client stats
+        const productStats = await productsService.getStats() // Fetch product stats
+        const stats = { productStats, clientStats } // Combine stats into an object
+        res.json(stats) // Send stats as JSON response
     } catch (e) {
-        console.log('e:', e)
+        console.log('Error fetching stats:', e) // Log any errors
+        res.status(500).json({ error: 'Internal Server Error' }) // Send 500 status code with error message
     }
-
 }
 
-// FACEBOOK
-async function facebookPost(req, res){
+// Function handles Facebook post submission
+async function facebookPost(req, res) {
+    const { txt, linkURL } = req.body // Destructure text and link URL from request body
+    const API_BASE = 'https://graph.facebook.com/v15.0' // Set base URL for Facebook API
 
-    const { txt, linkURL } = req.body;
-    const API_BASE = 'https://graph.facebook.com/v15.0';
-    
-    // ===== MAKE POST ON PAGE =====
+    // Create an object for the Facebook post
     const fbPostObj = {
-        message: txt,
-        link: linkURL ? linkURL : ''
-        // link: 'https://www.google.com/imgres?q=img&imgurl=https%3A%2F%2Fcdn-imgix.headout.com%2Fmedia%2Fimages%2Fc9db3cea62133b6a6bb70597326b4a34-388-dubai-img-worlds-of-adventure-tickets-01.jpg%3Fauto%3Dformat%26w%3D814.9333333333333%26h%3D458.4%26q%3D90%26ar%3D16%253A9%26crop%3Dfaces&imgrefurl=https%3A%2F%2Fwww.imgworldstickets.com%2Fimg-worlds-plan-your-visit%2F&docid=0ynKpGBOsdPJEM&tbnid=KF0CLfOd4wQ76M&vet=12ahUKEwidtu-Dhs-HAxXNSfEDHVDDC-IQM3oECGgQAA..i&w=733&h=458&hcb=2&ved=2ahUKEwidtu-Dhs-HAxXNSfEDHVDDC-IQM3oECGgQAA'
-    };
-    // link: 'https://IMAGE-LINK'
-     
-     const postResp = await fetch(`${API_BASE}/${process.env.FACEBOOK_ID}/feed?access_token=${process.env.FACEBOOK_API}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(fbPostObj)
-     });
-    
-    const post = await postResp.json();
-    res.json(post)
-    // const postId = post.id;
-  }
+        message: txt, // Set message to text from request body
+        link: linkURL ? linkURL : '' // Set link to URL from request body or empty string
+    }
 
+    try {
+        // Send POST request to Facebook API
+        const postResp = await fetch(`${API_BASE}/${process.env.FACEBOOK_ID}/feed?access_token=${process.env.FACEBOOK_API}`, {
+            method: 'POST', // Use POST method
+            headers: {
+                'Content-Type': 'application/json' // Set content type to JSON
+            },
+            body: JSON.stringify(fbPostObj) // Send Facebook post object as JSON
+        })
+
+        const post = await postResp.json() // Parse response JSON
+        if (post.error) {
+            throw new Error(post.error.message) // Throw error if response contains an error
+        }
+        res.json(post) // Send response as JSON
+    } catch (e) {
+        console.log('Error posting to Facebook:', e) // Log any errors
+        res.status(500).json({ error: 'Internal Server Error' }) // Send 500 status code with error message
+    }
+}
+
+// Function exports
 module.exports = {
-    getManagerPage,
-    getStats,
-    getFacebookEditPage,
-    facebookPost
-} 
+    getManagerPage, 
+    getStats, 
+    getFacebookEditPage, 
+    facebookPost 
+}
