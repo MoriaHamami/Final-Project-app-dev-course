@@ -1,34 +1,29 @@
-// Global variables to keep track of input changes
+// Global variables
 let gGenre = '';
 let gTxt = '';
 let gDate = '';
 
 // Event listeners for input changes
 function onChangeGenre(newGenre) {
-    gGenre = newGenre;
+    gGenre = newGenre; // Update genre
 }
 
 function onChangeTxt(newTxt) {
-    gTxt = newTxt;
+    gTxt = newTxt; // Update text
 }
 
 function onChangeDateTime(dateTime) {
-    gDate = dateTime;
+    gDate = dateTime; // Update date and time
 }
 
-// Function to add image source to gSrcImgs (not relevant for article editing)
-function addTogSrcImgs(opImg) {
-    // Here you can add additional functions for image editing if needed
-}
-
-// Function to check if any input field is empty
+//heck if input field is empty
 function areFieldsEmpty() {
     return gGenre.trim() === '' || gTxt.trim() === '' || gDate.trim() === '';
 }
 
-// Function to send an update for an existing article
+// update for an existing article
 async function onUpdateArticle(ev) {
-    ev.preventDefault();
+    ev.preventDefault(); // Prevent form submission
 
     if (areFieldsEmpty()) {
         showNotice('All fields must be filled out.');
@@ -75,7 +70,7 @@ async function onDeleteArticle(id) {
 
 // Function to add a new article
 async function onAddArticle(ev) {
-    ev.preventDefault();
+    ev.preventDefault(); // Prevent form submission
 
     if (areFieldsEmpty()) {
         showNotice('All fields must be filled out.');
@@ -83,7 +78,7 @@ async function onAddArticle(ev) {
     }
 
     try {
-        const newArticle = await $.ajax({
+        await $.ajax({
             url: '/about/edit',
             method: 'POST',
             contentType: 'application/json',
@@ -94,7 +89,7 @@ async function onAddArticle(ev) {
             }),
         });
 
-        showNotice('New article added successfully.', '/about'); // Change to the appropriate URL for the main news page
+        showNotice('New article added successfully.', '/about');
     } catch (e) {
         showNotice('An error occurred while adding the article.');
     }
@@ -102,14 +97,13 @@ async function onAddArticle(ev) {
 
 // Function to show a notification modal
 function showNotice(message, redirectTo = false) {
-    $('#noticeModalBody').text(message);
-    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
-    noticeModal.show();
+    $('#noticeModalBody').text(message); // Set the message in the modal
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Initialize and show the modal
 
-    // Adding a delay before redirect
+    // Redirect after a delay
     setTimeout(function() {
         if (redirectTo) {
-            window.location.href = redirectTo; // Redirect to the specified URL
+            window.location.href = redirectTo;
         } else {
             noticeModal.hide();
         }

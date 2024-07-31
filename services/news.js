@@ -1,5 +1,6 @@
 const News = require('../models/news');
 
+// Create a new article
 const createNew = async (genre, txt, date) => {
   const newArticle = new News({
     genre,
@@ -7,94 +8,72 @@ const createNew = async (genre, txt, date) => {
     date
   });
   try {
-    return await newArticle.save();
+    return await newArticle.save(); // Save the article and return the result
   } catch (e) {
-    return e;
+    return e; // error
   }
 };
 
+// Get all news
 const getNew = async () => {
   return await News.find({});
 };
 
-const getNewsByMonth = async (month) => {
-  if (!month) {
-    const allNews = await News.find({});
-    return allNews;
-  }
-
-  const monthNews = [];
-  for (let year = 2023; year <= 2026; year++) {
-    const startDate = new Date(year, month - 1, 1);
-    const endDate = new Date(year, month, 0);
-
-    const news = await News.find({
-      date: {
-        $gte: startDate,
-        $lte: endDate
-      }
-    });
-
-    monthNews.push(...news);
-  }
-
-  return monthNews;
-};
-
+// Update an existing article by ID
 const updateArticle = async (id, genre, txt, date) => {
   const article = await getNewById(id);
 
-  if (!article) return null;
+  if (!article) return null; // Return null if article is not found
 
+  // Update fields if provided
   if (genre) article.genre = genre;
   if (txt) article.txt = txt;
   if (date) article.date = date;
 
   try {
-    await article.save();
+    await article.save(); // Save the updated article
     return article;
   } catch (e) {
-    return e;
+    return e; // Return the error if saving fails
   }
 };
 
+// Delete article by ID
 const deleteArticle = async (id) => {
   try {
     const article = await News.findById(id);
     if (!article) {
-      return null;
+      return null; // Return null if article is not found
     }
 
-    await article.deleteOne();
+    await article.deleteOne(); // Delete the article
     return article;
   } catch (e) {
-    return e;
+    return e; // Return the error if deletion fails
   }
 };
 
+// Fetch article by ID
 const getNewById = async (id) => {
   try {
     return await News.findById(id);
   } catch (error) {
-    console.error('Error fetching article by id:', error);
-    throw error;
+    throw error; // Throw error if fetching fails
   }
 };
 
+// Search news articles based on a query
 const searchNews = async (query) => {
   try {
-    return await News.find(query); // כנראה שצריך להיות News ולא About
+    return await News.find(query); // Return search results
   } catch (e) {
-    console.log('Error searching news:', e);
-    throw e;
+    throw e; // Throw error if search fails
   }
 };
-
 
 module.exports = {
   createNew,
   getNew,
-  getNewsByMonth,
   updateArticle,
   deleteArticle,
   getNewById,

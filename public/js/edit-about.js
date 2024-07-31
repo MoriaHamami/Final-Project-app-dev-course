@@ -1,10 +1,12 @@
-// Global variable to keep track of input changes
+// Global variable
 let gShops = [];
-// Initialize the amount of shops according to the DOM
+
+// number of shops based on the DOM
 let gNumOfShops = $('.edit-about .edit-shops li').length || 0;
 let nextAvailableId = gNumOfShops + 1;
 const fieldsPerShop = 4;
 
+// add a new shop to the list
 function onAddShop() {
     if (gNumOfShops != 0) {
         const elFirstShop = $('.edit-about .edit-shops li:first-child');
@@ -36,8 +38,8 @@ function onAddShop() {
     ++nextAvailableId;
 }
 
+//display an alert message
 function showAlert(message) {
-    console.log('showAlert called with message:', message); // Log to ensure function is called
     const alertBox = $('#alert');
     alertBox.text(message);
     alertBox.show();
@@ -47,16 +49,17 @@ function showAlert(message) {
     }, 3000);
 }
 
+// update the global shops array with current values from the DOM
 function updateShops() {
     let i = 0;
     let idx = 0;
-    // Get all the shops in DOM
+    // Get all the shop input fields
     const inputs = $('.edit-about .edit-shops li input');
     if (!inputs) {
         gShops = [];
         return;
     }
-    // Extract values and add to gShops variable
+    // Extract values and add them to gShops array
     inputs.each((_, input) => {
         const value = $(input).val();
         switch (i % fieldsPerShop) {
@@ -77,26 +80,28 @@ function updateShops() {
     });
 }
 
+// Function to delete a shop by ID
 function onDeleteShop(id) {
     // Update local variable
     gNumOfShops--;
-    // Remove the selected shop from the DOM
+    // Remove the shop from the DOM
     $(`.edit-about .edit-shops li#${id}`).remove();
 }
 
+// Function to check if all input fields are filled
 function areAllFieldsFilled() {
     let allFilled = true;
     $('.edit-about .edit-shops li input').each(function() {
         if ($(this).val() === '') {
             allFilled = false;
-            return false; // Exit loop
+            return false; // 
         }
     });
     return allFilled;
 }
 
+// Function to update shop details
 async function onUpdateShops() {
-    console.log('onUpdateShops called'); // Log to ensure function is called
     if (!areAllFieldsFilled()) {
         showNotice('Please fill in all fields before saving.');
         return;
@@ -113,13 +118,14 @@ async function onUpdateShops() {
         })
         
         showNotice('Shops updated successfully!');
-        // Leave edit mode and show the about page 
+        // Redirect to the about page
         window.location.assign('/about')
     } catch (e) {
-        console.log('Could not save shops from frontend:', e);
-        // TODO: Later show an error modal
+       // error 
     }
 }
+
+// show a notice message in a modal
 function showNotice(message, redirectToCart) {
     $('#noticeModalBody').text(message);
     var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
@@ -133,4 +139,3 @@ function showNotice(message, redirectToCart) {
         }
     }, 300);
 }
-

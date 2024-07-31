@@ -27,29 +27,29 @@
             <article class="edit-shops">
                 <h3>Shops</h3>
 
-                <!-- Add shop button -->
+                <!-- Button to add a new shop -->
                 <button onclick="onAddShop(event.target)" type="button" class="add-btn">
                     <i class="bi bi-plus"></i>
                     Add shop
                 </button>
-                <!-- Save shops button -->
+                <!-- Button to save shop details -->
                 <button onclick="onUpdateShops(event.target)" type="button" class="save-btn">
                     <i class="bi bi-download"></i>
                     Save shops
                 </button>
                 
-                <!-- Check if coordinates are available -->
+                <!-- Check if coordinates data is available -->
                 <%if(coords !=null){%>
                     <ul>
-                        <!-- Iterate over shops data -->
+                        <!-- Iterate over the shops data and display each shop -->
                         <% for(let i=0; i< coords.data.length; i++) { %>
                             <li id="<%= i %>">
-                                <!-- Shop details inputs -->
+                                <!-- Input fields for shop details -->
                                 <input value="<%= coords.data[i].name %>" name="shops">
                                 <input value="<%= coords.data[i].address %>" name="shops">
                                 <input value="<%= coords.data[i].lat %>" name="shops" type="number">
                                 <input value="<%= coords.data[i].long %>" name="shops" type="number">
-                                <!-- Delete shop button -->
+                                <!-- Button to delete the shop -->
                                 <button type="button" onclick="onDeleteShop('<%=i%>')">
                                     <i class="bi bi-trash"></i> Remove 
                                 </button>
@@ -58,13 +58,13 @@
                     </ul>
                 <%}else{%>
                     <ul>
-                        <!-- Default empty shop inputs if no coordinates -->
+                        <!-- Default shop input fields if no coordinates are available -->
                         <li id="0">
                             <input value="" placeholder="Type location name" name="shops">
                             <input value="" placeholder="Type location address" name="shops">
                             <input value="" placeholder="Type location latitude" name="shops" type="number">
                             <input value="" placeholder="Type location longitude" name="shops" type="number">
-                            <!-- Delete shop button -->
+                            <!-- Button to delete the default shop -->
                             <button type="button" onclick="onDeleteShop(0)">
                                 <i class="bi bi-trash"></i> Remove 
                             </button>
@@ -75,7 +75,7 @@
         </form>
     </main>
 
-    <!-- Success alert -->
+    <!-- Success alert message -->
     <div id="alert" class="alert alert-success" role="alert" style="display:none;">
         Shops updated successfully!
     </div>
@@ -83,7 +83,7 @@
     <!-- Include footer -->
     <%- include('footer.ejs') -%>
     
-    <!-- Notice Modal -->
+    <!-- Modal for notices -->
     <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -97,10 +97,10 @@
         </div>
     </div>
 
-    <!-- jQuery -->
+    <!-- jQuery library -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Custom JS -->
+    <!-- Custom JavaScript file -->
     <script src="/js/edit-about.js"></script>
 </body>
 </html>

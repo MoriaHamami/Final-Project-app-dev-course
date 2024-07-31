@@ -2,20 +2,20 @@ const newsService = require('../services/news');
 const aboutService = require('../services/about');
 const loginController = require('./login');
 
+// Get the about page with news and coordinates
 const getAboutPage = async (req, res) => {
   try {
-    const news = await newsService.getNew();
-    const coords = await aboutService.getCoords();
-    coords.center = getCenterCoords(coords.data);
-    const isManager = req.session.isManager; // וודא שהמשתמש מחובר ומוגדר כמנהל
+    const news = await newsService.getNew(); // Fetch news
+    const coords = await aboutService.getCoords(); // Fetch coordinates
+    coords.center = getCenterCoords(coords.data); // Calculate center coordinates
+    const isManager = req.session.isManager; // Check if the user is a manager
     res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords, isManager });
   } catch (e) {
-    console.log('שגיאה בשליפת חדשות:', e);
-    res.status(500).json({ error: 'שגיאה בשליפת חדשות' });
+    res.status(500).json({ error: 'Error fetching news' }); // Handle errors
   }
 };
 
-
+// Calculate the center coordinates from a list of coordinates
 function getCenterCoords(coords) {
   let lats = 0;
   let longs = 0;
@@ -32,8 +32,8 @@ function getCenterCoords(coords) {
     }
   }
 
-  const avgLat = latsLength ? lats / latsLength : 37.4220656;
-  const avgLong = longsLength ? longs / longsLength : -122.0840897;
+  const avgLat = latsLength ? lats / latsLength : 37.4220656; // Default latitude
+  const avgLong = longsLength ? longs / longsLength : -122.0840897; // Default longitude
 
   return {
     lat: avgLat,
@@ -44,34 +44,32 @@ function getCenterCoords(coords) {
 const createNew = async (req, res) => {
   const { genre, txt, date } = req.body;
   try {
-    const newArticle = await newsService.createNew(genre, txt, date);
-    res.json(newArticle);
+    const newArticle = await newsService.createNew(genre, txt, date); // Create a new article
+    res.json(newArticle); // Send the new article as a response
   } catch (e) {
-    console.log('שגיאה ביצירת חדשות:', e);
-    res.status(500).json({ error: 'שגיאה ביצירת חדשות' });
+    res.status(500).json({ error: 'Error creating news' }); // Handle errors
   }
 };
 
 const getNew = async (req, res) => {
   try {
     if (!req.params.id) {
-      return res.render('edit-news.ejs', { article: null });
+      return res.render('edit-news.ejs', { article: null }); // Render edit page with no article
     }
 
-    const article = await newsService.getNewById(req.params.id);
+    const article = await newsService.getNewById(req.params.id); // Fetch article by ID
 
     if (!article) {
-      return res.status(404).json({ error: 'מאמר לא נמצא' });
+      return res.status(404).json({ error: 'Article not found' }); // Handle article not found
     }
 
     if (req.path.includes('edit')) {
-      return res.render('edit-news.ejs', { article });
+      return res.render('edit-news.ejs', { article }); // Render edit page with article
     } else {
-      return res.redirect('/about');
+      return res.redirect('/about'); // Redirect if not editing
     }
   } catch (e) {
-    console.log('שגיאה בשליפת מאמר:', e);
-    return res.status(500).json({ error: 'שגיאה בשליפת מאמר' });
+    return res.status(500).json({ error: 'Error fetching article' }); // Handle errors
   }
 };
 
@@ -79,24 +77,22 @@ const updateNew = async (req, res) => {
   const id = req.params.id;
   const { genre, txt, date } = req.body;
   try {
-    await newsService.updateArticle(id, genre, txt, date);
-    res.json({ success: true, message: 'המאמר עודכן בהצלחה' });
+    await newsService.updateArticle(id, genre, txt, date); // Update the article
+    res.json({ success: true, message: 'Article updated successfully' }); // Success response
   } catch (e) {
-    console.log('שגיאה בעדכון מאמר:', e);
-    res.status(500).json({ error: 'שגיאה בעדכון מאמר' });
+    res.status(500).json({ error: 'Error updating article' }); // Handle errors
   }
 };
 
 const deleteNew = async (req, res) => {
   try {
-    const article = await newsService.deleteArticle(req.params.id);
+    const article = await newsService.deleteArticle(req.params.id); // Delete the article
     if (!article) {
-      return res.status(404).json({ error: 'מאמר לא נמצא' });
+      return res.status(404).json({ error: 'Article not found' }); // Handle article not found
     }
-    res.json({ success: true, message: 'המאמר נמחק בהצלחה' });
+    res.json({ success: true, message: 'Article deleted successfully' }); // Success response
   } catch (e) {
-    console.log('שגיאה במחיקת מאמר:', e);
-    res.status(500).json({ error: 'שגיאה במחיקת מאמר' });
+    res.status(500).json({ error: 'Error deleting article' }); // Handle errors
   }
 };
 
@@ -106,71 +102,39 @@ const searchNews = async (req, res) => {
   try {
     const query = {};
     if (genre) {
-      query.genre = { $regex: genre, $options: 'i' };
+      query.genre = { $regex: genre, $options: 'i' }; // Search by genre
     }
     if (text) {
-      query.txt = { $regex: text, $options: 'i' };
+      query.txt = { $regex: text, $options: 'i' }; // Search by text
     }
 
-    const news = await newsService.searchNews(query);
+    const news = await newsService.searchNews(query); // Search for news articles
     res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, isManager: req.session.isManager });
   } catch (e) {
-    console.log('Error searching news:', e);
-    res.status(500).json({ error: 'Error searching news' });
+    res.status(500).json({ error: 'Error searching news' }); // Handle errors
   }
 };
 
-
-
-
+// Get the edit about page with coordinates
 async function getEditAboutPage(req, res) {
   try {
-      const coords = await aboutService.getCoords()
-      res.render('edit-about.ejs', {coords })
+      const coords = await aboutService.getCoords(); // Fetch coordinates
+      res.render('edit-about.ejs', {coords }); // Render edit page with coordinates
   } catch (e) {
-      console.log('e:', e)
+      console.log('Error:', e); // Handle errors
   }
 }
 
-async function updateShops(req, res){
-// Initialize shops, recieved from the body (in this case, from the ajax req)
-const { shops } = req.body
-try {
-  // Send the variable to the about service. There, it will update it in the DB.
-  const updatedShops = await aboutService.updateShops(shops)
-  res.json(updatedShops)
-}
-catch (e) {
-  console.log("Could not save shops")
-}
-}
-
-function getCenterCoords(coords) {
-  let lats = 0
-  let longs = 0
-  let latsLength = 0
-  let longsLength = 0
-  for (let i = 0; i < coords.length; i++) {
-      if(coords[i].lat) {
-          lats += coords[i].lat
-          latsLength++
-      }
-      if(coords[i].long) {
-          longs += coords[i].long
-          longsLength++
-      }
-  }
-
-  const avgLat = latsLength ? lats / latsLength : 37.4220656
-  const avgLong = longsLength ? longs / longsLength : -122.0840897
-
-  return {
-      lat: avgLat,
-      long: avgLong
+// Update shops data
+async function updateShops(req, res) {
+  const { shops } = req.body;
+  try {
+    const updatedShops = await aboutService.updateShops(shops); // Update shops data
+    res.json(updatedShops); // Send the updated shops as a response
+  } catch (e) {
+    console.log("Could not save shops"); // Handle errors
   }
 }
-
-
 
 module.exports = {
   getAboutPage,
