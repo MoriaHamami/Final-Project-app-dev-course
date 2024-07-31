@@ -63,7 +63,7 @@ form#editProduct {
 .edit-product .edit-sizes li, .edit-product .edit-imgs li {
     list-style: none; /* Remove list style */
     display: flex; /* Enable flexbox layout */
-    flex-direction: row; /* Arrange items in a row */
+    flex-direction: column; /* Arrange items in a column */
     align-items: center; /* Center align items */
     justify-content: space-between; /* Space between items */
     margin: 5px 0; /* Space above and below */
