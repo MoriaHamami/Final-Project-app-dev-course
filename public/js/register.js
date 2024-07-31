@@ -10,8 +10,24 @@ function onAddImg(input) {
   }
 }
 
+// Function to validate the form
+function validateForm() {
+  const form = $('#registerForm')[0];
+  const formData = new FormData(form);
+
+  if (!formData.get('fullname') || !formData.get('username') || !formData.get('password')) {
+    showError('Please fill in all the fields before registering');
+    return false;
+  }
+  return true;
+}
+
 // Function to submit the registration form
 function submitForm() {
+  if (!validateForm()) {
+    return; // Exit if form is not valid
+  }
+
   const form = $('#registerForm')[0];
   const formData = new FormData(form);
   // Get the image URL or set a default image
@@ -25,6 +41,8 @@ function submitForm() {
     imgURL: imgSrc
   };
 
+  console.log('Data being sent:', data); // Log data for debugging
+
   // Send the data via AJAX POST request
   $.ajax({
     url: '/login/register',
@@ -36,10 +54,16 @@ function submitForm() {
     },
     error: function(jqXHR) {
       const result = jqXHR.responseJSON;
-      showError(result ? result.error : 'Registration failed'); // Show error message
+      if (result && result.error === 'username_exists') {
+        showError('This username already exists in the system');
+      } else {
+        showError(result ? result.error : 'Registration failed'); // Show error message
+      }
+     
     }
   }).catch(error => {
-    showError('Registration failed due to a network error'); // Handle network errors
+    showError('This username already exists in the system'); //  Show error message
+    
   });
 }
 
