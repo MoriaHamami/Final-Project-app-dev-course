@@ -40,7 +40,8 @@
         <input class="userDetails" name="fullname" placeholder="Full Name" required>
         <input class="userDetails" name="username" placeholder="Username" required>
         <input class="userDetails" name="password" type="password" placeholder="Password" required>
-        
+                  <!-- Error Container for Form -->
+                  <div id="error-container"></div>
         <!-- Image Upload Section -->
         <div class="image-upload">
           <img src="/styles/imgs/login/profile.png" class="srcImg-0" id="image-preview" width="150">
@@ -56,12 +57,13 @@
         </div>
       </form>
 
-      <!-- Error Container for Form -->
-      <div id="error-container"></div>
+      
 
-      <hr>
-      Already a member? <a href="/login">Sign in</a>
-    </div>
+      <div class="sign-in-container">
+        <hr class="separator">
+        <p class="sign-in-text">Already a member? <a href="/login">Sign in</a></p>
+      </div>
+    
   </main>
 
   <!-- jQuery Library -->

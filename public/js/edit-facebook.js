@@ -19,6 +19,12 @@ async function facebookPost(ev) {
     // Prevent default form submission behavior
     ev.preventDefault()
 
+    // Check if both inputs are filled
+    if (!gTxt || !gURL) {
+        showNotice('All inputs must be filled.', false)
+        return
+    }
+
     try {
         // Send AJAX request to save new article
         const newArticle = await $.ajax({
@@ -45,4 +51,19 @@ async function facebookPost(ev) {
         // Log any errors that occur during the AJAX request
         console.log('Error:', e)
     }
+}
+
+function showNotice(message, redirectToCart) {
+    $('#noticeModalBody').text(message); // Update modal body with message
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Initialize modal
+    noticeModal.show(); // Show modal
+
+    // Adding a delay before redirect or hiding modal
+    setTimeout(function() {
+        if (redirectToCart) {
+            window.location.href = '/cart'; // Redirect to cart page
+        } else {
+            noticeModal.hide(); // Hide modal
+        }
+    }, 2000);
 }
