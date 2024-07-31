@@ -1,138 +1,152 @@
+/* Main manager container */
 .manager {
-    background-color: var(--almost-white);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 20px;
-    gap: 20px;
+    background-color: var(--almost-white); /* Light background color */
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center align items horizontally */
+    flex-wrap: wrap; /* Wrap items */
+    padding: 20px; /* Padding inside the container */
+    gap: 20px; /* Gap between items */
 }
 
+/* Manager section styling */
 .manager section {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(135deg, #f8f9fa, #ffffff);
-    margin: 10px;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    height: min-content;
-    width: min-content;
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    background: linear-gradient(135deg, #f8f9fa, #ffffff); /* Gradient background */
+    margin: 10px; /* Space around the section */
+    padding: 30px; /* Padding inside the section */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    height: min-content; /* Adjust height to content */
+    width: min-content; /* Adjust width to content */
 }
 
+/* Unordered list styling */
 .manager ul {
-    list-style-type: none;
-    padding: 0;
+    list-style-type: none; /* Remove list style */
+    padding: 0; /* Remove default padding */
 }
 
+/* Paragraph styling */
 .manager p {
-    margin: 0;
+    margin: 0; /* Remove default margin */
 }
 
+/* Button container styling */
 .manager .button {
-    margin-inline: 0;
+    margin-inline: 0; /* Remove default margin */
 }
 
+/* Icon styling */
 .manager i {
-    cursor: pointer;
-    color: #080a0b;
+    cursor: pointer; /* Pointer cursor on hover */
+    color: #080a0b; /* Dark icon color */
 }
 
+/* Personal info container styling */
 .manager .personal-info {
-    width: max-content;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+    width: max-content; /* Adjust width to content */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: row; /* Arrange items in a row */
+    align-items: center; /* Center align items */
+    gap: 10px; /* Gap between items */
 }
 
+/* User image styling */
 .manager .userImg {
-    width: 50px;
-    border-radius: 50%;
-    margin-inline-end: 20px;
-    border: 2px solid #090c10;
+    width: 50px; /* Fixed width */
+    border-radius: 50%; /* Circular image */
+    margin-inline-end: 20px; /* Space to the right */
+    border: 2px solid #090c10; /* Dark border */
 }
 
+/* Personal info article styling */
 .manager .personal-info article {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 5px;
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: space-between; /* Space between items */
+    gap: 5px; /* Gap between items */
 }
 
+/* Personal info paragraph styling */
 .manager .personal-info p {
-    padding-inline-end: 20px;
-    padding-block: 5px;
-    font-size: 16px;
-    color: #333;
+    padding-inline-end: 20px; /* Padding on the right */
+    padding-block: 5px; /* Vertical padding */
+    font-size: 16px; /* Slightly larger font size */
+    color: #333; /* Dark text color */
 }
 
+/* Add options container styling */
 .manager .add-options {
-    width: max-content;
+    width: max-content; /* Adjust width to content */
 }
 
+/* Unordered list for add options styling */
 .manager .add-options ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    gap: 10px;
+    display: flex; /* Enable flexbox layout */
+    flex-wrap: wrap; /* Wrap items */
+    margin: 0; /* Remove default margin */
+    gap: 10px; /* Gap between items */
 }
 
-.manager .add-options li,
-.manager .shops button {
-    border: 1px solid var(--l-gray);
-    background-color: var(--lll-gray);
-    width: max-content;
-    padding: 10px 20px;
-    margin: 8px;
-    border-radius: 25px;
-    cursor: pointer;
-    color: #010102;
-    font-weight: bold;
-    transition: background-color 0.3s ease-in-out;
+/* List item and button styling */
+.manager .add-options li, .manager .shops button {
+    border: 1px solid var(--l-gray); /* Light gray border */
+    background-color: var(--lll-gray); /* Light gray background */
+    width: max-content; /* Adjust width to content */
+    padding: 10px 20px; /* Padding inside the element */
+    margin: 8px; /* Space around the element */
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    color: #010102; /* Dark text color */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
 }
 
-.manager .add-options li:hover,
-.manager .shops button:hover {
-    background-color: #e0e0e0;
+/* Hover effect for list items and buttons */
+.manager .add-options li:hover, .manager .shops button:hover {
+    background-color: #e0e0e0; /* Darker gray background on hover */
 }
 
+/* Bar graph header styling */
 .manager .bar-graph-head {
-    margin-block: 10px 20px;
-    font-size: 18px;
-    color: #555;
+    margin-block: 10px 20px; /* Vertical margin */
+    font-size: 18px; /* Slightly larger font size */
+    color: #555; /* Dark text color */
 }
 
-/* LINE GRAPH STYLING */
+/* Line graph styling */
 .manager #graph {
-    margin-inline-start: 50px;
+    margin-inline-start: 50px; /* Left margin */
 }
 
-/* BAR GRAPH STYLING */
+/* Bar graph styling */
 .manager .bar {
-    fill: #06447b;
+    fill: #06447b; /* Dark blue fill color */
 }
 
-/* Lighten the axis lines */
-.manager #x-axis path,
-#y-axis line,
-#y-axis path {
-    stroke: #666;
+/* Axis line styling */
+.manager #x-axis path, #y-axis line, #y-axis path {
+    stroke: #666; /* Dark gray stroke color */
 }
 
-/* Remove the tick marks on the x-axis */
+/* Tick mark styling for x-axis */
 .manager #x-axis .tick line {
-    visibility: hidden;
+    visibility: hidden; /* Hide tick marks */
 }
 
+/* Text styling */
 .manager text {
-    fill: #666;
-    font-size: 12px;
+    fill: #666; /* Dark gray text color */
+    font-size: 12px; /* Regular font size */
 }
 
+/* X-axis text styling */
 .manager #x-axis text {
-    font-weight: 600;
+    font-weight: 600; /* Bold text */
 }
 
+/* Orders container styling */
 .manager .orders {
-    width: 100%;
+    width: 100%; /* Full width */
 }

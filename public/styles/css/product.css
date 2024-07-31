@@ -1,206 +1,240 @@
-
-/* כללי */
+/* General product styling */
 .product {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex: 1;
-  padding: 20px;
-  border: 3px solid #e0e0e0;
-  border-radius: 20px;
-  margin: 20px auto;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(88, 127, 249, 0.4);
-  width: 80%;
+  display: flex; /* Enable flexbox layout */
+  flex-direction: row-reverse; /* Arrange items in row-reverse direction */
+  justify-content: center; /* Center align items horizontally */
+  align-items: center; /* Center align items vertically */
+  flex-wrap: wrap; /* Wrap items */
+  flex: 1; /* Flex grow */
+  padding: 20px; /* Padding around the container */
+  border: 3px solid #e0e0e0; /* Light gray border */
+  border-radius: 20px; /* Rounded corners */
+  margin: 20px auto; /* Center horizontally and space around */
+  background-color: #f9f9f9; /* Light background color */
+  box-shadow: 0 4px 8px rgba(88, 127, 249, 0.4); /* Subtle shadow */
+  width: 80%; /* 80% width */
 }
 
-/* תיאור המוצר  */
+/* Product information section */
 .product .information_product {
-  flex: 1;
-  border-radius: 20px;
-  padding: 15px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(119, 127, 233, 0.774);
+  flex: 1; /* Flex grow */
+  border-radius: 20px; /* Rounded corners */
+  padding: 15px; /* Padding inside the section */
+  background-color: white; /* White background color */
+  display: flex; /* Enable flexbox layout */
+  flex-direction: column; /* Arrange items in a column */
+  align-items: center; /* Center align items */
+  justify-content: center; /* Center align items */
+  box-shadow: 0 4px 8px rgba(119, 127, 233, 0.774); /* Subtle shadow */
 }
 
+/* Product category styling */
 .category {
-  color: #333;
-  font-size: 1em;
-  margin-bottom: 10px;
+  color: #333; /* Dark text color */
+  font-size: 1em; /* Regular font size */
+  margin-bottom: 10px; /* Space below the category */
 }
 
+/* Product type styling */
 .product_type {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-  color: #888;
+  font-size: 1.5em; /* Larger font size */
+  font-weight: bold; /* Bold text */
+  margin-bottom: 15px; /* Space below the product type */
+  text-align: center; /* Center align text */
+  color: #888; /* Light gray text color */
 }
 
+/* Product price styling */
 .product_price {
-  font-size: 1.2em;
-  color: #333;
-  margin-bottom: 15px;
-  text-align: center;
+  font-size: 1.2em; /* Slightly larger font size */
+  color: #333; /* Dark text color */
+  margin-bottom: 15px; /* Space below the price */
+  text-align: center; /* Center align text */
 }
 
+/* Product sizes section */
 .product_sizes {
-  margin-bottom: 15px;
-  text-align: center;
+  margin-bottom: 15px; /* Space below the sizes section */
+  text-align: center; /* Center align text */
 }
 
+/* Horizontal line separator for sizes */
 .product_sizes hr {
-  border: none;
-  border-bottom: 1px solid #eee;
-  margin: 10px 0;
+  border: none; /* Remove default border */
+  border-bottom: 1px solid #eee; /* Light bottom border */
+  margin: 10px 0; /* Space around the line */
 }
 
-
+/* Size button styling */
 .product_sizes .btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border: 1px solid #d0d0d0;
-  border-radius: 50%;
-  cursor: pointer;
-  background-color: white;
-  transition: background-color 0.3s, border-color 0.3s;
-  font-size: 0.8em;
-  text-align: center;
+  display: inline-flex; /* Enable inline flexbox layout */
+  justify-content: center; /* Center align items horizontally */
+  align-items: center; /* Center align items vertically */
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  margin: 5px; /* Space around the button */
+  border: 1px solid #d0d0d0; /* Light gray border */
+  border-radius: 50%; /* Circular button */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: white; /* White background color */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+  font-size: 0.8em; /* Slightly smaller font size */
+  text-align: center; /* Center align text */
 }
 
+/* Size button hover effect */
 .product_sizes .btn:hover {
-  border-color: #a0a0a0;
+  border-color: #a0a0a0; /* Darker gray border on hover */
 }
 
+/* Checked size button */
 .product_sizes .btn-check:checked + .btn {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  background-color: #e0f0ff;
-  font-weight: bold;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  background-color: #e0f0ff; /* Light blue background color */
+  font-weight: bold; /* Bold text */
 }
 
-/* כפתורי קניות  */
+/* Add to cart and edit product buttons */
 .product .addTOcart, .product .editProduct {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  width: 100%;
-  max-width: 350px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 10px;
+  display: flex; /* Enable flexbox layout */
+  justify-content: center; /* Center align items horizontally */
+  align-items: center; /* Center align items vertically */
+  padding: 10px; /* Padding inside the button */
+  width: 100%; /* Full width */
+  max-width: 350px; /* Maximum width */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: white; /* White text color */
+  font-size: 1em; /* Regular font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+  margin-bottom: 10px; /* Space below the button */
 }
 
+/* Hover effect for add to cart and edit product buttons */
 .product .addTOcart:hover, .product .editProduct:hover {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
 }
 
+/* Icons inside buttons */
 .product .addTOcart i, .product .editProduct i {
-  font-size: 1em;
-  margin-right: 5px;
+  font-size: 1em; /* Regular font size */
+  margin-right: 5px; /* Space to the right of the icon */
 }
 
-/* טופס בחירת כמות  */
+/* Form select element for quantity */
 .product .form-select {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #d0d0d0;
-  font-size: 0.9em;
+  width: 100%; /* Full width */
+  margin-bottom: 15px; /* Space below the select element */
+  padding: 8px; /* Padding inside the select element */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #d0d0d0; /* Light gray border */
+  font-size: 0.9em; /* Slightly smaller font size */
 }
 
-/* תמונות של המוצר */
+/* Product images section */
 .product .product_images {
-  flex: 1;
-  min-width: 50%;
-  margin-left: 10px;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  flex: 1; /* Flex grow */
+  min-width: 50%; /* Minimum width */
+  margin-left: 10px; /* Space to the left */
+  background-color: transparent; /* Transparent background */
+  display: flex; /* Enable flexbox layout */
+  justify-content: center; /* Center align items horizontally */
+  align-items: center; /* Center align items vertically */
+  height: 100%; /* Full height */
 }
 
+/* Product image styling */
 .product .product_images img {
-  width: 80%;
-  object-fit: contain;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%; /* 80% width */
+  object-fit: contain; /* Contain the image within the element */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(186deg) brightness(100%) contrast(100%);
+/* Carousel control icons */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(186deg) brightness(100%) contrast(100%); /* Adjust icon color */
 }
 
+/* Carousel indicators */
 .carousel-indicators li {
-  width: 20px;
-  height: 2px;
-  margin: 0 3px;
-  background-color: #0c0b0b;
+  width: 20px; /* Fixed width */
+  height: 2px; /* Fixed height */
+  margin: 0 3px; /* Space around the indicator */
+  background-color: #0c0b0b; /* Dark background color */
 }
 
-/* עיצוב מודל */
+/* Modal dialog styling */
 .modal-dialog {
-  border-radius: 30px; 
-  overflow: hidden; 
+  border-radius: 30px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow */
 }
 
+/* Modal content styling */
 .modal-content {
-  border-radius: 30px; 
-  border: none;
-  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  position: relative;
+  border-radius: 30px; /* Rounded corners */
+  border: none; /* Remove border */
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* Deep shadow for the modal */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: white; /* White text color */
+  position: relative; /* Position relative for internal positioning */
 }
 
+/* Modal header and footer styling */
 .modal-header, .modal-footer {
-  border: none;
-  justify-content: center;
-  font-size: 1em;
-  padding: 20px; 
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
+  border: none; /* Remove border */
+  justify-content: center; /* Center align items */
+  font-size: 1em; /* Regular font size */
+  padding: 20px; /* Padding inside the header and footer */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: white; /* White text color */
 }
 
+/* Modal header styling */
 .modal-header {
-  border-top-left-radius: 30px; 
-  border-top-right-radius: 30px; 
+  border-top-left-radius: 30px; /* Rounded corners */
+  border-top-right-radius: 30px; /* Rounded corners */
 }
+
+/* Modal footer styling */
 .modal-footer {
-  border-bottom-left-radius: 30px; 
-  border-bottom-right-radius: 30px; 
+  border-bottom-left-radius: 30px; /* Rounded corners */
+  border-bottom-right-radius: 30px; /* Rounded corners */
 }
 
+/* Modal body styling */
 .modal-body {
-  padding: 20px; 
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-.btn-primary {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  border: none;
-  color: white;
+  padding: 20px; /* Padding inside the body */
+  text-align: center; /* Center align text */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
 }
 
+/* Primary button styling */
+.btn-primary {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  border: none; /* Remove border */
+  color: white; /* White text color */
+}
+
+/* Primary button hover effect */
 .btn-primary:hover {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  border: none;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Same gradient background on hover */
+  border: none; /* Remove border */
+}
+
+/* Animation for product image zoom */
+@keyframes zoomIn {
+  0% {
+      transform: scale(1); /* Initial scale */
+  }
+  100% {
+      transform: scale(1.1); /* Final scale */
+  }
+}
+
+/* Apply zoom animation on hover */
+.product .product_images img:hover {
+  animation: zoomIn 0.5s forwards; /* Apply zoom animation */
 }

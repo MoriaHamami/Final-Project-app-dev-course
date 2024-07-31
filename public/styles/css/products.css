@@ -1,585 +1,564 @@
+/* General styling for the products section */
 .products {
-    background-color: var(--almost-white);
+    background-color: var(--almost-white); /* Light background color */
 }
 
+/* Styling for the headline section */
 .headline {
-    text-align: center;
-    /* מרכז את הטקסט */
-    padding: 40px;
-    /* מרווח פנימי */
-    margin: 20px auto;
-    /* מרווח חיצוני למעלה ולמטה, מרכז אוטומטית */
-    opacity: 0;
-    /* התחל עם שקיפות מלאה */
-    text-transform: capitalize;
-    animation: fadeIn 2s ease-in-out forwards;
-    /* הגדרת אנימציה */
+    text-align: center; /* Center align text */
+    padding: 40px; /* Padding around the headline */
+    opacity: 0; /* Start with full transparency */
+    text-transform: capitalize; /* Capitalize text */
+    animation: fadeIn 2s ease-in-out forwards; /* Animation for fading in */
 }
 
+/* Keyframes for fade-in animation */
 @keyframes fadeIn {
     from {
-        opacity: 0;
-        /* התחלה בשקיפות מלאה */
-        transform: translateY(-20px);
-        /* הזזה כלפי מעלה */
+        opacity: 0; /* Start with full transparency */
+        transform: translateY(-20px); /* Move up */
     }
-
     to {
-        opacity: 1;
-        /* סיום בשקיפות אפס */
-        transform: translateY(0);
-        /* חזרה למקום המקורי */
+        opacity: 1; /* End with no transparency */
+        transform: translateY(0); /* Move back to original position */
     }
 }
 
+/* Styling for the headline's h1 element */
 .headline h1 {
-    color: #161b79;
-    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.5),
-        0 0 25px rgba(255, 215, 0, 0.6),
-        0 0 5px rgba(255, 215, 0, 0.7);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 4.5em;
-    margin: 0;
-    padding: 20px;
+    color: #161b79; /* Dark blue color */
+    text-shadow: 
+        1px 1px 2px rgba(255, 215, 0, 0.5), /* Light shadow */
+        0 0 25px rgba(255, 215, 0, 0.6), /* Medium shadow */
+        0 0 5px rgba(255, 215, 0, 0.7); /* Dark shadow */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Font family */
+    font-size: 4.5em; /* Large font size */
+    margin: 0; /* No margin */
+    padding: 20px; /* Padding around the text */
 }
 
-
+/* Styling for the headline's paragraph */
 .headline p {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 1.9em;
-    font-style: italic;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Font family */
+    font-size: 1.9em; /* Font size */
+    font-style: italic; /* Italic style */
 }
 
+/* Styling for the filter section within products */
 .products .filter {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Column direction */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* Font family */
 }
 
+/* Styling for the filter form */
 .products .filter form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    box-shadow: var(--card-bsh);
-    border-radius: 10px;
-    background-color: white;
-    margin: 10px;
-    padding: 10px;
-    gap: 25px;
-    /* רווח בין הפריטים בטופס */
+    display: flex; /* Flexbox layout */
+    flex-wrap: wrap; /* Wrap items */
+    align-items: center; /* Center align items vertically */
+    box-shadow: var(--card-bsh); /* Box shadow */
+    border-radius: 10px; /* Rounded corners */
+    background-color: white; /* White background */
+    margin: 10px; /* Margin around the form */
+    padding: 10px; /* Padding inside the form */
+    gap: 25px; /* Gap between form elements */
 }
 
+/* Styling for inputs and selects within the filter form */
 .products .filter input,
 .products .filter select {
-    margin-left: 10px;
-    border-radius: 8px;
-    border: transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: none;
-    padding: 5px;
-    cursor: pointer;
-    transition: transform .2s ease-in;
+    margin-left: 10px; /* Margin to the left */
+    border-radius: 8px; /* Rounded corners */
+    border: transparent; /* No border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    outline: none; /* No outline */
+    padding: 5px; /* Padding inside the element */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.2s ease-in; /* Smooth transform transition */
 }
 
+/* Hover effect for inputs and selects */
 .products .filter input:hover,
 .products .filter select:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Scale up on hover */
 }
 
+/* Styling for range inputs */
 .products .filter input[type="range"] {
-    border: none;
-    -webkit-appearance: none;
-    height: 8px;
-    /* גובה פס הקלט */
-    border-radius: 5px;
-    /* פינות מעוגלות */
-    background: #d3d3d3;
-    /* צבע הרקע של הפס */
-    outline: none;
-    opacity: 0.7;
-    transition: transform .2s ease-in;
-    margin-left: 10px;
+    border: none; /* No border */
+    -webkit-appearance: none; /* Remove default appearance */
+    height: 8px; /* Height of the range track */
+    border-radius: 5px; /* Rounded corners */
+    background: #d3d3d3; /* Light gray background */
+    outline: none; /* No outline */
+    opacity: 0.7; /* Semi-transparent */
+    transition: transform 0.2s ease-in; /* Smooth transform transition */
+    margin-left: 10px; /* Margin to the left */
 }
 
-
+/* Styling for the range input's thumb (WebKit) */
 .products .filter input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: darkblue;
-    cursor: pointer;
-    transition: transform .2s ease-in;
+    -webkit-appearance: none; /* Remove default appearance */
+    appearance: none; /* Remove default appearance */
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    border-radius: 50%; /* Circular thumb */
+    background: darkblue; /* Dark blue background */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.2s ease-in; /* Smooth transform transition */
 }
 
+/* Styling for the range input's thumb (Mozilla) */
 .products .filter input[type="range"]::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: #0000f2;
-    cursor: pointer;
-    transition: transform .3s ease-in;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    border-radius: 50%; /* Circular thumb */
+    background: #0000f2; /* Blue background */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.3s ease-in; /* Smooth transform transition */
 }
 
+/* Hover effect for range inputs */
 .products .filter input[type="range"]:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Scale up on hover */
 }
 
-
+/* Hover effect for the range input's thumb (WebKit) */
 .products .filter input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1.15);
+    transform: scale(1.15); /* Scale up on hover */
 }
 
-
-
-
+/* Styling for the dollar sign */
 .dollar-sign {
-    margin-left: -23px;
+    margin-left: -23px; /* Negative margin to move it left */
 }
 
+/* Styling for labels within the filter form */
 .products .filter label {
-    margin: 5px 10px;
-    font-weight: bold;
+    margin: 5px 10px; /* Margin around the label */
+    font-weight: bold; /* Bold text */
 }
 
+/* Styling for the button container within the filter form */
 .products .filter .button-container {
-    margin-left: auto;
-    display: flex;
-    gap: 10px;
+    margin-left: auto; /* Align to the right */
+    display: flex; /* Flexbox layout */
+    gap: 10px; /* Gap between buttons */
 }
 
+/* Styling for the custom shirt button */
 .products .custom-shirt-btn {
-    background-color: rgb(251, 215, 135);
+    background-color: rgb(251, 215, 135); /* Light orange background */
 }
 
+/* General button styling within the filter form */
 .products .filter button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 10px;
-    border-radius: 20px;
-    gap: 8px;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease;
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 20px; /* Rounded corners */
+    gap: 8px; /* Gap between button content */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease; /* Smooth transitions */
 }
 
+/* Hover effect for buttons within the filter form */
 .products .filter button:hover {
-    background-color: #bebebe;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
+    background-color: #bebebe; /* Light gray background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
+    transform: scale(1.1); /* Scale up on hover */
 }
+
+/* Hover effect for the custom shirt button */
 .products .filter .custom-shirt-btn:hover {
-    background-color: var(--l-gold);
-
+    background-color: var(--l-gold); /* Light gold background */
 }
 
+/* Styling for the image part of the products */
 .products .image-part {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center align items horizontally */
+    align-items: center; /* Center align items vertically */
 }
 
+/* Styling for images within the image part */
 .products .image-part img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    /* התמונה תהיה רחבה לכל הרוחב שהגדרת */
-    height: auto;
-    /* נשמר יחס הרוחב לגובה */
+    max-width: 100%; /* Maximum width */
+    max-height: 100%; /* Maximum height */
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
 }
 
+/* Styling for the products list */
 .products #productsList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
-    /* רווח בין התמונות */
-    gap: 20px;
-    margin: 10px;
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Gap between grid items */
+    padding: 10px; /* padding around the grid */
 }
 
-
-
+/* Styling for the image container within products */
 .products .image-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-around;
-    /* ליצור את התמונה והטקסט במרכז האנכי של הקונטיינר */
-    align-items: center;
-    /* ליצור את התמונה והטקסט במרכז האופקי של הקונטיינר */
-    text-align: center;
-    /* למרכז את הטקסט בתוך הקונטיינר */
-    position: relative;
-    overflow: hidden;
-    /* כדי להסתיר תמונה שמתחרטת מחוץ לתיבת התמונה */
-    box-shadow: var(--card-bsh);
-    /* Make each image section have a shadow to make it seem 3D */
-    border-radius: 10px;
-    background-color: white;
-    transition: transform 0.2s ease-in-out;
-    padding: 7px;
+    position: relative; /* Relative positioning */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Column direction */
+    justify-content: space-around; /* Space around items */
+    align-items: center; /* Center align items */
+    text-align: center; /* Center align text */
+    position: relative; /* Relative positioning */
+    overflow: hidden; /* Hide overflow */
+    box-shadow: var(--card-bsh); /* Box shadow */
+    border-radius: 10px; /* Rounded corners */
+    background-color: white; /* White background */
+    transition: transform 0.2s ease-in-out; /* Smooth transform transition */
+    padding: 7px; /* Padding inside the container */
 }
 
+/* Keyframes for rotating shadow animation */
 @keyframes rotate-shadow {
     0% {
-        box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8),
-            10px 0 10px 2px rgba(0, 0, 255, 0.8);
+        box-shadow: 
+            0 0 10px 2px rgba(255, 215, 0, 0.8), /* Yellow shadow */
+            10px 0 10px 2px rgba(0, 0, 255, 0.8); /* Blue shadow */
     }
-
     25% {
-        box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8),
-            0 10px 10px 2px rgba(255, 215, 0, 0.8);
+        box-shadow: 
+            0 0 10px 2px rgba(0, 0, 255, 0.8), /* Blue shadow */
+            0 10px 10px 2px rgba(255, 215, 0, 0.8); /* Yellow shadow */
     }
-
     50% {
-        box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8),
-            -10px 0 10px 2px rgba(0, 0, 255, 0.8);
+        box-shadow: 
+            0 0 10px 2px rgba(255, 215, 0, 0.8), /* Yellow shadow */
+            -10px 0 10px 2px rgba(0, 0, 255, 0.8); /* Blue shadow */
     }
-
     75% {
-        box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8),
-            0 -10px 10px 2px rgba(255, 215, 0, 0.8);
+        box-shadow: 
+            0 0 10px 2px rgba(0, 0, 255, 0.8), /* Blue shadow */
+            0 -10px 10px 2px rgba(255, 215, 0, 0.8); /* Yellow shadow */
     }
-
     100% {
-        box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8),
-            10px 0 10px 2px rgba(0, 0, 255, 0.8);
+        box-shadow: 
+            0 0 10px 2px rgba(255, 215, 0, 0.8), /* Yellow shadow */
+            10px 0 10px 2px rgba(0, 0, 255, 0.8); /* Blue shadow */
     }
 }
 
+/* Hover effect for the image container */
 .products .image-container:hover {
-    transform: scale(1.13);
-    animation: rotate-shadow 5s infinite linear;
+    transform: scale(1.13); /* Scale up on hover */
+    animation: rotate-shadow 5s infinite linear; /* Infinite rotating shadow animation */
 }
 
+/* Hover effect for the image name */
 .products .image-container:hover .image-name {
-    text-decoration: underline;
-    font-weight: bold;
+    text-decoration: underline; /* Underline text on hover */
+    font-weight: bold; /* Bold text */
 }
 
+/* Styling for product images within the image container */
 .products .image-container img {
-    padding: 7px;
-    max-width: 100%;
-    width: auto;
-    /* מקסימום רוחב של התמונה */
-    height: 50%;
-    /* שמירה על יחסיות */
-    display: block;
-    /* מניעת רווחים מסביב לתמונה */
-    margin-bottom: 10px;
-    /* רווח בין התמונה לטקסט */
-    /* width: 100%; */
-    /* שימוש ברוחב מקסימלי של התמונה בתיבה */
+    padding: 7px; /* Padding inside the image container */
+    max-width: 100%; /* Maximum width of the image */
+    width: auto; /* Auto width to maintain aspect ratio */
+    height: 50%; /* Set height to 50% */
+    display: block; /* Display as block to remove default spacing */
+    margin-bottom: 10px; /* Space below the image */
+    /* width: 100%;  Commented out: Use max width of the image within the container */
 }
 
+/* Styling for the model title within products */
 .products .model-title {
-    position: absolute;
-    bottom: 0;
-    left: -500px;
-    width: 100%;
-    text-align: center;
-    color: rgb(255, 255, 255), 255;
-    /* צבע הטקסט */
-    padding: 5px;
-    /* ריווח פנימי */
-    font-weight: bold;
-    /* דגש בטקסט */
-    font-size: 120px;
-    font-family: Arial, Helvetica, sans-serif;
+    position: absolute; /* Absolute positioning */
+    bottom: 0; /* Align to the bottom */
+    left: -500px; /* Move to the left off-screen */
+    width: 100%; /* Full width */
+    text-align: center; /* Center align text */
+    color: rgb(255, 255, 255); /* White text color */
+    padding: 5px; /* Padding inside the element */
+    font-weight: bold; /* Bold text */
+    font-size: 120px; /* Large font size */
+    font-family: Arial, Helvetica, sans-serif; /* Font family */
 }
 
+/* Styling for individual items within products */
 .products .item {
-    background-color: #f2f2f2;
-    text-align: center;
+    background-color: #f2f2f2; /* Light gray background color */
+    text-align: center; /* Center align text */
 }
 
+/* Styling for clothes images */
 .products .clothes img {
-    margin-bottom: 70px;
-    /* מוסיף רווח של 70 פיקסלים מתחת לכל תמונה */
-    max-width: 100%;
-    /* מקסימום רוחב של התמונה */
-    height: auto;
-    /* שמירה על יחסיות */
-    display: block;
-    /* מניעת רווחים מסביב לתמונה */
-    margin: 0 auto;
-    /* מרכוז התמונה באופן אופקי */
+    margin-bottom: 70px; /* Space below each image */
+    max-width: 100%; /* Maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Display as block to remove default spacing */
+    margin: 0 auto; /* Center align horizontally */
 }
 
+/* Styling for image names */
 .products .image-name {
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center; /* Center align text */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* Font family */
 }
 
-
+/* Styling for product prices */
 .products .price {
-    text-align: center;
-    /* מירכוז הטקסט */
-
+    text-align: center; /* Center align text */
 }
 
+/* General styling for images within products */
 .products img {
-    width: 80%;
-    /* קטן את הרוחב של התמונה ל-80% מהרוחב המקורי */
-    height: auto;
-    /* יחסיות בין הרוחב לגובה */
+    width: 80%; /* Set width to 80% of the original */
+    height: auto; /* Maintain aspect ratio */
 }
 
+/* Styling for the image container */
 .image-container {
-    position: relative;
-    display: inline-block;
-    margin: 10px;
+    position: relative; /* Relative positioning */
+    display: inline-block; /* Inline block layout */
+    margin: 10px; /* Margin around the container */
 }
 
-
+/* Styling for the wishlist button */
 .wishlist-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #dc3545;
-    /* צבע אדום */
-    font-size: 1.5rem;
-    position: absolute;
-    top: -10px;
-    right: -12px;
-    /* שינוי למיקום בצד ימין יותר */
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    background: none; /* No background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    color: #dc3545; /* Red color */
+    font-size: 1.5rem; /* Font size */
+    position: absolute; /* Absolute positioning */
+    top: -10px; /* Position from the top */
+    right: -12px; /* Position from the right */
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Smooth transitions */
 }
 
+/* Hover effect for the wishlist button */
 .wishlist-btn:hover {
-    transform: scale(1.3);
-    background-color: transparent;
-
+    transform: scale(1.3); /* Scale up on hover */
+    background-color: transparent; /* Transparent background */
 }
 
+/* Active state for the wishlist button */
 .wishlist-btn.wishlist-active {
-    color: #ff0000;
+    color: #ff0000; /* Bright red color */
 }
 
+/* Styling for the products list */
 .products #productsList {
-    display: grid;
-    gap: 10px;
-    margin: 10px;
-    grid-template-columns: repeat(6, 1fr); 
+    display: grid; /* Grid layout */
+    gap: 10px; /* Gap between grid items */
+    padding: 10px; /* padding around the grid */
+    grid-template-columns: repeat(6, 1fr); /* Six columns layout */
 }
 
-
+/* Media queries for responsive design */
 @media (max-width: 1200px) {
     .products #productsList {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr); /* Four columns layout for medium screens */
     }
 }
 
 @media (max-width: 992px) {
     .products #productsList {
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr); /* Three columns layout for small screens */
     }
 }
 
 @media (max-width: 768px) {
     .products #productsList {
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr); /* Two columns layout for extra small screens */
     }
 }
 
 @media (max-width: 576px) {
     .products #productsList {
-        grid-template-columns: 2fr; 
+        grid-template-columns: 2fr; /* Single column layout for very small screens */
     }
 }
 
 /* Modal styling */
 .modal-dialog {
-    border-radius: 30px;
-    /* Rounded corners for the modal container */
-    overflow: hidden;
-    /* Ensures rounded corners are applied to content inside */
+    border-radius: 30px; /* Rounded corners for the modal container */
+    overflow: hidden; /* Ensures rounded corners are applied to content inside */
 }
 
 .modal-content {
-    border-radius: 30px;
-    /* Rounded corners for the modal content */
-    border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6);
-    /* More pronounced shadow */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-    position: relative;
+    border-radius: 30px; /* Rounded corners for the modal content */
+    border: none; /* No border */
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
+    position: relative; /* Relative positioning */
 }
 
-.modal-header,
-.modal-footer {
-    border: none;
-    justify-content: center;
-    font-size: 1em;
-    padding: 20px;
-    /* Adjusted padding for a balanced look */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
+.modal-header, .modal-footer {
+    border: none; /* No border */
+    justify-content: center; /* Center align content */
+    font-size: 1em; /* Font size */
+    padding: 20px; /* Adjusted padding for a balanced look */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
 }
 
 .modal-header {
-    border-top-left-radius: 30px;
-    /* Rounded corners for the header */
-    border-top-right-radius: 30px;
-    /* Rounded corners for the header */
+    border-top-left-radius: 30px; /* Rounded corners for the header */
+    border-top-right-radius: 30px; /* Rounded corners for the header */
 }
 
 .modal-footer {
-    border-bottom-left-radius: 30px;
-    /* Rounded corners for the footer */
-    border-bottom-right-radius: 30px;
-    /* Rounded corners for the footer */
+    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
+    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
 }
 
 .modal-body {
-    padding: 20px;
-    /* Adjusted padding for a balanced look */
-    text-align: center;
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    padding: 20px; /* Adjusted padding for a balanced look */
+    text-align: center; /* Center align text */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
 }
 
+/* Styling for the filter section within products */
 .products .filter {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 10px;
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Column direction */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* Font family */
+    margin: 10px; /* Margin around the filter */
 }
 
 .products .filter form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    box-shadow: var(--card-bsh);
-    border-radius: 10px;
-    background-color: white;
-    padding: 10px;
-    gap: 25px;
+    display: flex; /* Flexbox layout */
+    flex-wrap: wrap; /* Wrap items */
+    align-items: center; /* Center align items vertically */
+    box-shadow: var(--card-bsh); /* Box shadow */
+    border-radius: 10px; /* Rounded corners */
+    background-color: white; /* White background */
+    padding: 10px; /* Padding inside the form */
+    gap: 25px; /* Gap between form elements */
 }
 
 .products .filter label {
-    margin: 5px 10px;
-    font-weight: bold;
+    margin: 5px 10px; /* Margin around the label */
+    font-weight: bold; /* Bold text */
 }
 
-.products .filter input,
-.products .filter select {
-    margin-left: 10px;
-    border-radius: 8px;
-    border: transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: none;
-    padding: 5px;
-    cursor: pointer;
-    transition: transform .2s ease-in;
+.products .filter input, .products .filter select {
+    margin-left: 10px; /* Margin to the left */
+    border-radius: 8px; /* Rounded corners */
+    border: transparent; /* No border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    outline: none; /* No outline */
+    padding: 5px; /* Padding inside the element */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.2s ease-in; /* Smooth transform transition */
 }
 
-.products .filter input:hover,
-.products .filter select:hover {
-    transform: scale(1.1);
+.products .filter input:hover, .products .filter select:hover {
+    transform: scale(1.1); /* Scale up on hover */
 }
 
+/* Styling for the price container within the filter form */
 .products .filter .price-container {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center align items vertically */
+    margin-left: 10px; /* Margin to the left */
 }
 
 .products .filter .dollar-sign {
-    margin-right: 5px;
-    font-size: 1.2em;
+    margin-right: 5px; /* Margin to the right */
+    font-size: 1.2em; /* Font size */
 }
 
 .products .filter .button-container {
-    display: flex;
-    gap: 10px;
-    margin-left: auto;
+    display: flex; /* Flexbox layout */
+    gap: 10px; /* Gap between buttons */
+    margin-left: auto; /* Align to the right */
 }
 
 .products .filter button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease;
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 20px; /* Rounded corners */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease; /* Smooth transitions */
 }
 
 .products .filter button:hover {
-    background-color: #bebebe;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
+    background-color: #bebebe; /* Light gray background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
+    transform: scale(1.1); /* Scale up on hover */
 }
 
-/* התאמות מדיה */
+/* Media queries for responsive filter form */
 @media (max-width: 992px) {
     .products .filter form {
-        flex-direction: column;
+        flex-direction: column; /* Column direction for medium screens */
     }
     .products .filter .button-container {
-        width: 100%;
-        justify-content: center;
-        margin-left: 0;
+        width: 100%; /* Full width */
+        justify-content: center; /* Center align content */
+        margin-left: 0; /* Remove left margin */
     }
 }
 
 @media (max-width: 576px) {
     .products .filter form {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: column; /* Column direction for small screens */
+        gap: 10px; /* Smaller gap */
     }
     .products .filter .button-container {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
+        flex-direction: column; /* Column direction for buttons */
+        width: 100%; /* Full width */
+        gap: 10px; /* Gap between buttons */
     }
 }
 
-/* הגדרת פריסת המוצרים */
+/* Styling for the products list */
 .products #productsList {
-    display: grid;
-    gap: 10px;
-    margin: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* פחות מוצרים בשורה */
+    display: grid; /* Grid layout */
+    gap: 10px; /* Gap between grid items */
+    padding: 10px; /* padding around the grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
 }
 
+/* Styling for product cards */
 .product-card {
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: var(--card-bsh);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    padding: 10px;
-    text-align: center;
+    background-color: #f2f2f2; /* Light gray background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--card-bsh); /* Box shadow */
+    overflow: hidden; /* Hide overflow */
+    transition: transform 0.2s ease-in-out; /* Smooth transform transition */
+    padding: 10px; /* Padding inside the card */
+    text-align: center; /* Center align text */
 }
 
 .product-card img {
-    max-width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+    max-width: 100%; /* Maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    border-bottom: 1px solid #ddd; /* Bottom border */
+    margin-bottom: 10px; /* Space below the image */
 }
 
 .product-card .product-info {
-    padding: 10px;
+    padding: 10px; /* Padding inside the info section */
 }
 
 .product-card h2 {
-    font-size: 1.5em;
-    margin: 0 0 10px;
+    font-size: 1.5em; /* Font size */
+    margin: 0 0 10px; /* Margin around the heading */
 }
 
 .product-card p {
-    font-size: 1em;
-    margin: 0 0 10px;
+    font-size: 1em; /* Font size */
+    margin: 0 0 10px; /* Margin around the paragraph */
 }
 
 .product-card .price {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #161b79;
+    font-size: 1.2em; /* Font size */
+    font-weight: bold; /* Bold text */
+    color: #161b79; /* Dark blue color */
 }
 
+/* Hover effect for product cards */
 .product-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Scale up on hover */
 }

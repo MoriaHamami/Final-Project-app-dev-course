@@ -1,38 +1,44 @@
+// Function to navigate to add ticket page
 function onAddTicket() {
-    $(location).attr('href', '/tickets/edit');
+    $(location).attr('href', '/tickets/edit') // Redirect to add ticket page
 }
 
+// Function to navigate to add news page
 function onAddNews() {
-    $(location).attr('href', '/about/edit');
+    $(location).attr('href', '/about/edit') // Redirect to add news page
 }
 
+// Function to navigate to add product page
 function onAddProduct() {
-    $(location).attr('href', '/products/edit');
+    $(location).attr('href', '/products/edit') // Redirect to add product page
 }
 
+// Function to navigate to add Facebook post page
 function onAddFacebookPost() {
-    $(location).attr('href', '/manager/edit-facebook');
+    $(location).attr('href', '/manager/edit-facebook') // Redirect to add Facebook post page
 }
 
+// Function to navigate to edit about page
 function onEditAbout() {
-    $(location).attr('href', '/about/edit-shops');
+    $(location).attr('href', '/about/edit-shops') // Redirect to edit about page
 }
 
+// Function to navigate to clients page
 function onGetClientsPage() {
-    $(location).attr('href', '/clients');
+    $(location).attr('href', '/clients') // Redirect to clients page
 }
 
+// Function to get statistic data from server for graphs
 async function getStats() {
     try {
         const ordersCount = await $.ajax({
-            url: '/manager/getStats',
-            method: 'GET',
-            contentType: 'application/json',
+            url: '/manager/getStats', // Endpoint to get statistics
+            method: 'GET', // HTTP method
+            contentType: 'application/json', // Content type for JSON data
         })
-        return ordersCount
-
+        return ordersCount // Return stats data
     } catch (error) {
-        console.error('Error:', error)
+        console.error('Error:', error) // Log any errors
     }
 }
 
@@ -191,23 +197,6 @@ async function updateGraphs() {
         const newDataPoint = { name: datapoint._id, value: datapoint.count }
         return newDataPoint
     })
-    // var data = [{
-    //     'name': "Bar Charts", 'value': 7
-    // }, {
-    //     'name': "Pie Charts", 'value': 19
-    // }, {
-    //     'name': "Scatterplots", 'value': 12
-    // }, {
-    //     'name': "Timelines", 'value': 14
-    // }, {
-    //     'name': "Node Graphs", 'value': 23
-    // }, {
-    //     'name': "Tree Graphs", 'value': 8
-    // }, {
-    //     'name': "Stream Graphs", 'value': 11
-    // }, {
-    //     'name': "Voronoi Diagrams", 'value': 14
-    // }]
 
     // Set the dimensions of the bars in the bar chart  
     let barsHeight = vh / 2,

@@ -2,39 +2,43 @@
 <html lang="en">
 
 <head>
+    <!-- Metadata and page settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Madrid | Manager Area</title>
-    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
+    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64"> <!-- Favicon -->
 
-    <!-- Libraries -->
+    <!-- Libraries and stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/styles/css/setup/vars.css">
-    <link rel="stylesheet" href="/styles/css/setup/font-face.css">
-    <link rel="stylesheet" href="/styles/css/setup/general.css">
-    <link rel="stylesheet" href="/styles/css/manager.css">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="/styles/css/setup/vars.css"> <!-- Custom variables -->
+    <link rel="stylesheet" href="/styles/css/setup/font-face.css"> <!-- Custom fonts -->
+    <link rel="stylesheet" href="/styles/css/setup/general.css"> <!-- General styles -->
+    <link rel="stylesheet" href="/styles/css/manager.css"> <!-- Page-specific styles -->
 
 </head>
 
 <body>
-    <!-- Adds header code here and send to it page val as "home" -->
-    <%- include('header.ejs',{page:'manager'}) -%>
+    <!-- Include the header with 'manager' as the current page -->
+    <%- include('header.ejs', {page:'manager'}) -%>
+    
     <main class="manager">
 
         <section class="personal-info">
             <article>
+                <!-- Manager's profile image -->
                 <img class="userImg"
                     src="<%= manager.imgURL?.includes('data:') ? manager.imgURL : ('/styles/imgs/clients/' + manager.imgURL) %>" />
             </article>
 
             <article>
-                <p class="name">Name: <%= manager.fullname %>
+                <!-- Manager's name and date created -->
+                <p class="name">Name: <%= manager.fullname %></p>
+                <p class="email">Member since: <%= manager.dateCreated.toLocaleDateString() %> at 
+                    <%= manager.dateCreated.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
                 </p>
-                <p class="email">Member since: <%= manager.dateCreated.toLocaleDateString() %> at <%=
-                            manager.dateCreated.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
-                </p>
+                <!-- Link to personal area -->
                 <a href="/client" class="button">
                     Personal area
                 </a>
@@ -42,6 +46,7 @@
         </section>
 
         <section class="add-options">
+            <!-- List of options to add various content -->
             <ul>
                 <li onclick="onAddTicket()">
                     <i class="bi bi-plus"></i>
@@ -73,26 +78,24 @@
         <section class="analytics">
             <h3>Analytics</h3>
             <h4>Clients per year</h4>
-            <div id="graph"></div>
+            <div id="graph"></div> <!-- Placeholder for clients per year graph -->
             <h4 class="bar-graph-head">Products per category</h4>
-            <svg id="chart"></svg>
+            <svg id="chart"></svg> <!-- Placeholder for products per category chart -->
         </section>
 
     </main>
-    <!-- Adds footer code here -->
+    <!-- Include the footer -->
     <%- include('footer.ejs') -%>
 
-    <!-- jQuery  -->
+    <!-- jQuery library -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <!-- D3JS -->
+    <!-- D3JS library -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
-    <!-- Local libraries -->
+    <!-- Local scripts -->
     <script src="/js/manager.js"></script>
-
 </body>
 
 </html>
-

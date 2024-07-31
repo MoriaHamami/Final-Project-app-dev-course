@@ -1,88 +1,95 @@
-// Global variables to help us keep track of input changes
-let gTitle = '';
-let gColor = '';
-let gFavePlayer = '';
-let gCat = '';
-let gPrice = 0;
-let gSizes = [];
-let gSrcImgs = [];
-// Initialize the number of images and sizes according to the DOM
-let gNextImgIdx = $('.edit-product .edit-imgs li').length ? $('.edit-product .edit-imgs li').length + 2 : 1;
-let gNextSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1;
-let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0;
-let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0;
+// Global variables to keep track of input changes
+let gTitle = '' // Product title
+let gColor = '' // Product color
+let gFavePlayer = '' // Favorite player
+let gCat = '' // Product category
+let gPrice = 0 // Product price
+let gSizes = [] // Product sizes
+let gSrcImgs = [] // Product image sources
 
-// Trigger file input when the add image button is clicked
+// Initialize number of images and sizes from the DOM
+let gNextImgIdx = $('.edit-product .edit-imgs li').length ? $('.edit-product .edit-imgs li').length + 2 : 1
+let gNextSizeIdx = $('.edit-product .edit-sizes li').length ? $('.edit-product .edit-sizes li').length + 2 : 1
+let gNumOfSizes = $('.edit-product .edit-sizes li').length || 0
+let gNumOfImgs = $('.edit-product .edit-imgs li').length || 0
+
+// Trigger file input when add image button is clicked
 $('.add-img-btn').click(function () {
-    $(".add-img-input").trigger('click');
-});
+    $(".add-img-input").trigger('click') // Simulate click on file input
+})
 
 // Add event listeners for update buttons on existing images
 for (let i = 0; i < gNumOfImgs; i++) {
     $(`.update-btn-${i}`).click(function () {
-        $(`.update-img-${i}`).trigger('click');
-    });
+        $(`.update-img-${i}`).trigger('click') // Simulate click on file input
+    })
 }
 
-// Functions to update global vars when changes occur in inputs
+// Function to update title value
 function onChangeTitle(newTitle) {
-    gTitle = newTitle;
+    gTitle = newTitle // Update global title variable
 }
 
+// Function to update color value
 function onChangeColor(newColor) {
-    gColor = newColor;
+    gColor = newColor // Update global color variable
 }
 
+// Function to update price value
 function onChangePrice(newPrice) {
-    gPrice = newPrice;
+    gPrice = newPrice // Update global price variable
 }
 
+// Function to update favorite player value
 function onChangeFavePlayer(newFavePlayer) {
-    gFavePlayer = newFavePlayer;
+    gFavePlayer = newFavePlayer // Update global favorite player variable
 }
 
+// Function to update category value
 function onChangeCat(inputType) {
     if (inputType === "select") {
-        const elSelect = $('.edit-product .edit-cat select');
+        const elSelect = $('.edit-product .edit-cat select')
         if (elSelect.find(":selected").val() === "other") {
-            elSelect.after(`<input placeholder="Type a category for product" onchange="onChangeCat('input')">`);
-            elSelect.hide();
+            // Show input field if "other" is selected
+            elSelect.after(`<input placeholder="Type a category for product" onchange="onChangeCat('input')">`)
+            elSelect.hide()
         } else {
-            gCat = elSelect.find(":selected").val();
+            // Update global category variable
+            gCat = elSelect.find(":selected").val()
         }
     } else {
-        const elInput = $('.edit-product .edit-cat input');
-        gCat = elInput.val();
+        const elInput = $('.edit-product .edit-cat input')
+        gCat = elInput.val() // Update global category variable
     }
 }
 
-// Add image source to global array
+// Function to add image source to global array
 function addTogSrcImgs(imgSrc) {
     if (imgSrc.includes('data:')) {
-        gSrcImgs.push(imgSrc);
+        gSrcImgs.push(imgSrc) // Add base64 image source
     } else {
-        const str = imgSrc;
-        const i = str.lastIndexOf('/');
-        const res = str.substring(i + 1);
-        gSrcImgs.push(res);
+        const str = imgSrc
+        const i = str.lastIndexOf('/')
+        const res = str.substring(i + 1)
+        gSrcImgs.push(res) // Add image file name
     }
 }
 
-// Update global image source array with images from the DOM
+// Function to update global image source array from the DOM
 function updateImgsSrc() {
-    const imgs = $('.edit-product .edit-imgs li img');
-    if (!imgs.length) return gSrcImgs = [];
-    imgs.each((_, img) => addTogSrcImgs(img.src));
+    const imgs = $('.edit-product .edit-imgs li img')
+    if (!imgs.length) return gSrcImgs = []
+    imgs.each((_, img) => addTogSrcImgs(img.src)) // Add each image source to array
 }
 
-// Handle adding a new image
+// Function to handle adding a new image
 function onAddImg(input) {
     if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.readAsDataURL(input.files[0]);
+        let reader = new FileReader()
+        reader.readAsDataURL(input.files[0]) // Read file as base64
         reader.onload = function (e) {
             if (gNumOfImgs != 0) {
-                const elLastImg = $('.edit-product .edit-imgs li:last-child');
+                const elLastImg = $('.edit-product .edit-imgs li:last-child')
                 elLastImg.after(
                     `<li id="idx-${gNextImgIdx}">
                         <img src="${e.target.result}" class="srcImg-${gNextImgIdx}">
@@ -91,7 +98,7 @@ function onAddImg(input) {
                         <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
                         <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
                     </li>`
-                );
+                )
             } else {
                 $('.edit-product .edit-imgs ul').append(
                     `<li id="idx-${gNextImgIdx}">
@@ -101,58 +108,58 @@ function onAddImg(input) {
                         <button type="button" class="update-btn-${gNextImgIdx}">Change</button>
                         <button type="button" id=${gNextImgIdx} class="deleteImg" onclick="onDeleteImg(${gNextImgIdx})">DELETE</button>
                     </li>`
-                );
+                )
             }
-            addFileListener(gNextImgIdx);
-            gNumOfImgs++;
-            gNextImgIdx++;
+            addFileListener(gNextImgIdx) // Add listener for update button
+            gNumOfImgs++
+            gNextImgIdx++
         }
     }
 }
 
-// Add event listener for the update button of a specific image
+// Function to add event listener for update button of a specific image
 function addFileListener(id) {
     $(`.update-btn-${id}`).click(function () {
-        $(`.update-img-${id}`).trigger('click');
-    });
+        $(`.update-img-${id}`).trigger('click') // Simulate click on file input
+    })
 }
 
-// Handle updating an existing image
+// Function to handle updating an existing image
 async function onChangeImg(input) {
     try {
-        const imgSrc = await readChangedURL(input);
-        addTogSrcImgs(imgSrc);
+        const imgSrc = await readChangedURL(input) // Get updated image source
+        addTogSrcImgs(imgSrc) // Add image source to global array
     } catch (e) {
-        console.log('e:', e);
+        console.log('Error:', e) // Log any errors
     }
 }
 
-// Handle deleting an image
+// Function to handle deleting an image
 function onDeleteImg(id) {
-    gNumOfImgs--;
-    $(`.edit-product .edit-imgs li#idx-${id}`).remove();
+    gNumOfImgs--
+    $(`.edit-product .edit-imgs li#idx-${id}`).remove() // Remove image from DOM
 }
 
-// Get img source from data received in input and update in DOM
+// Function to get image source from input data and update in DOM
 async function readChangedURL(input) {
     if (input.files && input.files[0]) {
         return new Promise((res, rej) => {
-            let reader = new FileReader();
-            reader.readAsDataURL(input.files[0]);
+            let reader = new FileReader()
+            reader.readAsDataURL(input.files[0]) // Read file as base64
             reader.onload = function (e) {
-                const imgUrl = e.target.result;
-                $(`.edit-product .srcImg-${input.id}`).attr('src', imgUrl);
-                $(input).attr('src', imgUrl);
-                res(imgUrl);
+                const imgUrl = e.target.result
+                $(`.edit-product .srcImg-${input.id}`).attr('src', imgUrl) // Update image source in DOM
+                $(input).attr('src', imgUrl) // Update input source attribute
+                res(imgUrl) // Resolve promise with image URL
             }
-        });
+        })
     }
 }
 
-// Handle adding a new size input
+// Function to handle adding a new size input
 function onAddSize() {
     if (gNumOfSizes != 0) {
-        const elLastSize = $('.edit-product .edit-sizes li:last-child');
+        const elLastSize = $('.edit-product .edit-sizes li:last-child')
         elLastSize.after(
             `<li id="idx-${gNextSizeIdx}">
                 <input value="" name="sizes">
@@ -160,7 +167,7 @@ function onAddSize() {
                     <i class="bi bi-trash"></i>
                 </button>
             </li>`
-        );
+        )
     } else {
         $('.edit-product .edit-sizes ul').append(
             `<li id="idx-1">
@@ -169,114 +176,113 @@ function onAddSize() {
                     <i class="bi bi-trash"></i>
                 </button>
             </li>`
-        );
+        )
     }
-    ++gNextSizeIdx;
-    ++gNumOfSizes;
+    ++gNextSizeIdx
+    ++gNumOfSizes
 }
 
-// Update global sizes array with sizes from the DOM
+// Function to update global sizes array from the DOM
 function updateSizes() {
-    const sizes = $('.edit-product .edit-sizes li input');
-    if (!sizes.length) return gSizes = [];
-    sizes.each((_, size) => size.value ? gSizes.push(size.value) : '');
+    const sizes = $('.edit-product .edit-sizes li input')
+    if (!sizes.length) return gSizes = []
+    sizes.each((_, size) => size.value ? gSizes.push(size.value) : '') // Add each size to array
 }
 
-// Handle deleting a size input
+// Function to handle deleting a size input
 function onDeleteSize(id) {
-    gNumOfSizes--;
-    $(`.edit-product .edit-sizes li#idx-${id}`).remove();
+    gNumOfSizes--
+    $(`.edit-product .edit-sizes li#idx-${id}`).remove() // Remove size from DOM
 }
 
-// Handle adding a new product
+// Function to handle adding a new product
 async function onAddProduct(ev) {
-    ev.preventDefault();
-    gSizes = [];
-    gSrcImgs = [];
-    updateImgsSrc();
-    updateSizes();
+    ev.preventDefault() // Prevent default form submission
+    gSizes = []
+    gSrcImgs = []
+    updateImgsSrc() // Update global image source array
+    updateSizes() // Update global sizes array
 
     try {
         const newProduct = await $.ajax({
-            url: '/products/edit',
-            method: 'POST',
-            contentType: 'application/json',
+            url: '/products/edit', // Endpoint to handle product addition
+            method: 'POST', // HTTP method
+            contentType: 'application/json', // Content type for JSON data
             data: JSON.stringify({
-                title: gTitle,
-                color: gColor,
-                cat: gCat,
-                srcImg: gSrcImgs,
-                favePlayer: gFavePlayer,
-                price: gPrice,
-                sizes: gSizes
+                title: gTitle, // Send product title
+                color: gColor, // Send product color
+                cat: gCat, // Send product category
+                srcImg: gSrcImgs, // Send product images
+                favePlayer: gFavePlayer, // Send favorite player
+                price: gPrice, // Send product price
+                sizes: gSizes // Send product sizes
             }),
-        });
-        // Trigger the modal
-        showNotice('The product has been successfully added.', true);
+        })
+        showNotice('The product has been successfully added.', newProduct._id) // Show success notice
     } catch (e) {
-        console.log('e:', e);
-        // TODO: Later show an error modal
+        console.log('Error:', e) // Log any errors
     }
 }
 
-// Handle updating an existing product
+// Function to handle updating an existing product
 async function onUpdateProduct(ev) {
-    ev.preventDefault();
-    gSizes = [];
-    gSrcImgs = [];
-    updateImgsSrc();
-    updateSizes();
+    ev.preventDefault() // Prevent default form submission
+    gSizes = []
+    gSrcImgs = []
+    updateImgsSrc() // Update global image source array
+    updateSizes() // Update global sizes array
 
     try {
-        await $.ajax({
-            url: '/products/edit/' + $('#updateButton').val(),
-            method: 'PUT',
-            contentType: 'application/json',
+         $.ajax({
+            url: '/products/edit/' + $('#updateButton').val(), // Endpoint to handle product update
+            method: 'PUT', // HTTP method
+            contentType: 'application/json', // Content type for JSON data
             data: JSON.stringify({
-                title: gTitle,
-                color: gColor,
-                cat: gCat,
-                srcImg: gSrcImgs,
-                favePlayer: gFavePlayer,
-                price: gPrice,
-                sizes: gSizes
+                title: gTitle, // Send product title
+                color: gColor, // Send product color
+                cat: gCat, // Send product category
+                srcImg: gSrcImgs, // Send product images
+                favePlayer: gFavePlayer, // Send favorite player
+                price: gPrice, // Send product price
+                sizes: gSizes // Send product sizes
             }),
-        });
-
-        // Show success message
-        showNotice('The product has been successfully updated.', false);
+        })
+        showNotice('The product has been successfully updated.', $('#updateButton').val()) // Show success notice
     } catch (e) {
-        console.log('e:', e);
+        console.log('Error:', e) // Log any errors
     }
 }
 
-// Handle deleting a product
+// Function to handle deleting a product
 async function onDeleteProduct(id) {
     try {
         const res = await $.ajax({
-            url: '/products/edit/' + id,
-            method: 'DELETE',
-            contentType: 'application/json',
-            data: JSON.stringify({ id }),
-        });
-        if (res.status !== 404) window.location.assign('/products');
+            url: '/products/edit/' + id, // Endpoint to handle product deletion
+            method: 'DELETE', // HTTP method
+            contentType: 'application/json', // Content type for JSON data
+            data: JSON.stringify({ id }), // Send product ID
+        })
+        if (res.status !== 404) {
+            window.location.assign('/products') // Redirect to products page
+            showNotice('The product has been deleted.', false) // Show success notice
+        }
     } catch (e) {
-        console.log('e:', e);
+        console.log('Error:', e) // Log any errors
     }
 }
 
-// Display a notice modal with a message
-function showNotice(message, redirectToCart) {
-    $('#noticeModalBody').text(message);
-    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
-    noticeModal.show();
+// Function to display a notice modal with a message
+function showNotice(message, productId) {
+    $('#noticeModalBody').text(message) // Update modal body with message
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}) // Initialize modal
+    noticeModal.show() // Show modal
 
     // Adding a delay before redirect or hiding modal
     setTimeout(function () {
-        if (redirectToCart) {
-            window.location.href = '/cart'; // Redirect to the cart page after 2 seconds
+        if (productId) {
+            window.location.href = `/products/product/${productId}` // Redirect to product page
         } else {
-            noticeModal.hide(); // Hide modal and stay on the same page
+            noticeModal.hide() // Hide modal
         }
-    }, 2000);
+    }, 2000)
 }

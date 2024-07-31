@@ -1,259 +1,282 @@
+/* Body styling */
 body {
-    background-color: #f9f9f9 !important;
-    font-family: Arial, sans-serif;
-    color: #333;
-    width: 100%;
-   
+    background-color: #f9f9f9 !important; /* Light background color */
+    font-family: Arial, sans-serif; /* Font family */
+    color: #333; /* Dark text color */
+    width: 100%; /* Full width */
 }
 
+/* Main product edit container */
 .edit-product {
-    display: flex; /* מאפשר יישור פנימי */
-    justify-content: center; /* מיישר את התוכן במרכז באופן אופקי */
-    align-items: center; /* מיישר את התוכן במרכז באופן אנכי */
-    height: 100%;
-    width: 80%;
-    margin: 0 auto; /* מיישר את המיין למרכז הדף */
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center align items horizontally */
+    align-items: center; /* Center align items vertically */
+    height: 100%; /* Full height */
+    width: 80%; /* 80% width */
+    margin: 0 auto; /* Center horizontally */
 }
 
+/* Form styling */
 form#editProduct {
-    width: 100%; /* מאפשר למיין להתרחב */
-    max-width: 800px; /* מגביל את הרוחב המקסימלי של הטופס */
-    background-color: #fff; /* צבע רקע לבן */
-    padding: 20px; /* ריפוד פנימי */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* צל עדין */
-    border-radius: 10px; /* פינות מעוגלות */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Maximum width */
+    background-color: #fff; /* White background color */
+    padding: 20px; /* Padding inside the form */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
 }
 
+/* Heading styling */
 .edit-product h3 {
-    margin: 10px 0;
-    color: #555;
-    text-align: center;
+    margin: 10px 0; /* Space above and below */
+    color: #555; /* Darker text color */
+    text-align: center; /* Center align text */
 }
 
+/* Flexbox layout for sections */
 .edit-sections {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: flex; /* Enable flexbox layout */
+    justify-content: space-between; /* Space between sections */
+    gap: 20px; /* Gap between sections */
+    flex-wrap: wrap; /* Wrap sections */
 }
 
-.edit-imgs,
-.edit-sizes,
-.edit-cat,
-.edit-txt {
-    flex: 1;
-    min-width: 200px;
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+/* Section styling */
+.edit-imgs, .edit-sizes, .edit-cat, .edit-txt {
+    flex: 1; /* Flex grow to fill available space */
+    min-width: 200px; /* Minimum width */
+    background-color: #ffffff; /* White background color */
+    border-radius: 16px; /* Rounded corners */
+    padding: 15px; /* Padding inside the section */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the section */
 }
 
-.edit-product .edit-sizes ul,
-.edit-product .edit-imgs ul {
-    padding: 0;
-    margin: 0;
-    width: 100%;
+/* List styling */
+.edit-product .edit-sizes ul, .edit-product .edit-imgs ul {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    width: 100%; /* Full width */
 }
 
-.edit-product .edit-sizes li,
-.edit-product .edit-imgs li {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5px 0;
-    width: 100%;
+/* List item styling */
+.edit-product .edit-sizes li, .edit-product .edit-imgs li {
+    list-style: none; /* Remove list style */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center align items */
+    justify-content: space-between; /* Space between items */
+    margin: 5px 0; /* Space above and below */
+    width: 100%; /* Full width */
 }
 
+/* Label styling */
 .edit-product label {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    width: 100%;
-    padding: 5px;
-    font-size: 1em;
-    justify-content: space-between;
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center align items */
+    margin: 10px 0; /* Space above and below */
+    width: 100%; /* Full width */
+    padding: 5px; /* Padding inside the label */
+    font-size: 1em; /* Regular font size */
+    justify-content: space-between; /* Space between items */
 }
 
-.edit-product .edit-sizes input,
-.edit-product .edit-imgs input,
-.edit-product .edit-cat select,
+/* Input and select styling */
+.edit-product .edit-sizes input, .edit-product .edit-imgs input, .edit-product .edit-cat select, .edit-product .edit-txt input {
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 5px; /* Padding inside the element */
+    width: 70%; /* 70% width */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions for border color and shadow */
+}
+
+/* Input focus styling */
+.edit-product .edit-sizes input:focus, .edit-product .edit-imgs input:focus, .edit-product .edit-cat select:focus, .edit-product .edit-txt input:focus {
+    border-color: #ff0004; /* Change border color on focus */
+    box-shadow: inset 0 1px 3px rgba(0, 123, 255, 0.25); /* Inner shadow for focus effect */
+}
+
+/* Specific input styling */
 .edit-product .edit-txt input {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 5px;
-    width: 70%;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--l-gray); /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 5px 10px; /* Padding inside the element */
+    margin-left: 5px; /* Margin on the left */
+    margin-right: 10px; /* Margin on the right */
+    max-width: 200px; /* Maximum width */
+    font-size: 1em; /* Regular font size */
+    transition: transform 0.3s; /* Smooth transition for transform */
 }
 
-.edit-product .edit-sizes input:focus,
-.edit-product .edit-imgs input:focus,
-.edit-product .edit-cat select:focus,
-.edit-product .edit-txt input:focus {
-    border-color: #ff0004;
-    box-shadow: inset 0 1px 3px rgba(0, 123, 255, 0.25);
-}
-
-.edit-product .edit-txt input {
-    border: 1px solid var(--l-gray);
-    border-radius: 10px;
-    padding: 5px 10px;
-    margin-left: 5px;
-    margin-right: 10px;
-    max-width: 200px;
-    font-size: 1em;
-    transition: transform 0.3s;
-}
-
+/* Input hover effect */
 .edit-product .edit-txt input:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Scale up on hover */
 }
 
+/* Image styling */
 .edit-product img {
-    height: 100px;
-    width: 100px;
-    border-radius: 12px;
-    object-fit: cover;
-    transition: transform 0.3s;
+    height: 100px; /* Fixed height */
+    width: 100px; /* Fixed width */
+    border-radius: 12px; /* Rounded corners */
+    object-fit: cover; /* Cover object fit */
+    transition: transform 0.3s; /* Smooth transition for transform */
 }
 
+/* Image hover effect */
 .edit-product img:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Scale up on hover */
 }
 
-#sizebtn,
-#addimg{
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color:white;
+/* Button styling */
+#sizebtn, #addimg {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
 }
 
-
+/* General button styling */
 .edit-product button {
-    margin-top: 10px;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    color: rgb(122, 113, 113);
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
+    margin-top: 10px; /* Space above the button */
+    border: none; /* Remove border */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside the button */
+    color: rgb(122, 113, 113); /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transitions for transform and background color */
 }
 
+/* Button hover effect */
 .edit-product button:hover {
-    transform: scale(1.05);
-    background-color: #df8796;
+    transform: scale(1.05); /* Scale up on hover */
+    background-color: #df8796; /* Background color on hover */
 }
 
+/* Flexbox layout for actions */
 .edit-actions {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+    margin-top: 20px; /* Space above the actions */
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center align items */
 }
 
+/* Delete button styling */
 .delete-button {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #f8d7da; /* Light red background color */
+    color: #721c24; /* Dark red text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding inside the button */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center align items */
 }
 
+/* Delete button hover effect */
 .delete-button:hover {
-    background-color: #f5c6cb;
-    color: #721c24;
+    background-color: #f5c6cb; /* Darker red background color on hover */
+    color: #721c24; /* Dark red text color */
 }
 
+/* Add button styling */
 .add-button {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    border: none; /* Remove border */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside the button */
+    color: white; /* White text color */
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center align items */
 }
 
+/* Add button hover effect */
 .add-button:hover {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Same gradient background on hover */
 }
 
+/* Delete button styling */
 #deleteButton {
-    background-color: #f5c6cb;
-    color: #721c24;
+    background-color: #f5c6cb; /* Light red background color */
+    color: #721c24; /* Dark red text color */
 }
 
+/* Small danger button styling */
 .btn.btn-danger.btn-sm {
-    background-color: #f5c6cb;
-    color: #721c24;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #f5c6cb; /* Light red background color */
+    color: #721c24; /* Dark red text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding inside the button */
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center align items */
 }
 
+/* Small danger button hover effect */
 .btn.btn-danger.btn-sm:hover {
-    background-color: #f1b0b7;
-    color: #721c24;
+    background-color: #f1b0b7; /* Darker red background color on hover */
+    color: #721c24; /* Dark red text color */
 }
 
+/* Primary button full width styling */
 .btn.btn-primary.w-100 {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
 }
 
+/* Update button styling */
 #updateButton {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
 }
-#trash{
-    background-color: #f8d7da;
-    color: #721c24;
+
+/* Trash button styling */
+#trash {
+    background-color: #f8d7da; /* Light red background color */
+    color: #721c24; /* Dark red text color */
 }
-/* עיצוב מודל */
+
+/* Modal dialog styling */
 .modal-dialog {
-    border-radius: 30px; 
-    overflow: hidden; 
-  }
-  
-  .modal-content {
-    border-radius: 30px; 
-    border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-    position: relative;
-  }
-  
-  .modal-header, .modal-footer {
-    border: none;
-    justify-content: center;
-    font-size: 1em;
-    padding: 20px; 
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-  }
-  
-  .modal-header {
-    border-top-left-radius: 30px; 
-    border-top-right-radius: 30px; 
-  }
-  .modal-footer {
-    border-bottom-left-radius: 30px; 
-    border-bottom-right-radius: 30px; 
-  }
-  
-  .modal-body {
-    padding: 20px; 
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.9);
-  }
+    border-radius: 30px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* Modal content styling */
+.modal-content {
+    border-radius: 30px; /* Rounded corners */
+    border: none; /* Remove border */
+    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* Deep shadow for the modal */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
+    position: relative; /* Position relative for internal positioning */
+}
+
+/* Modal header and footer styling */
+.modal-header, .modal-footer {
+    border: none; /* Remove border */
+    justify-content: center; /* Center align items */
+    font-size: 1em; /* Regular font size */
+    padding: 20px; /* Padding inside the header and footer */
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white; /* White text color */
+}
+
+/* Modal header styling */
+.modal-header {
+    border-top-left-radius: 30px; /* Rounded corners */
+    border-top-right-radius: 30px; /* Rounded corners */
+}
+
+/* Modal footer styling */
+.modal-footer {
+    border-bottom-left-radius: 30px; /* Rounded corners */
+    border-bottom-right-radius: 30px; /* Rounded corners */
+}
+
+/* Modal body styling */
+.modal-body {
+    padding: 20px; /* Padding inside the body */
+    text-align: center; /* Center align text */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+}

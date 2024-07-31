@@ -1,84 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata and page settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Manager Area | Edit Facebook </title>
-    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
+    <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64"> <!-- Favicon -->
 
-    <!-- Libraries -->
+    <!-- Libraries and stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/styles/css/setup/vars.css">
-    <link rel="stylesheet" href="/styles/css/setup/font-face.css">
-    <link rel="stylesheet" href="/styles/css/setup/general.css">
-    <link rel="stylesheet" href="/styles/css/edit-facebook.css">
+    <link rel="stylesheet" href="/styles/css/setup/vars.css"> <!-- Custom variables -->
+    <link rel="stylesheet" href="/styles/css/setup/font-face.css"> <!-- Custom fonts -->
+    <link rel="stylesheet" href="/styles/css/setup/general.css"> <!-- General styles -->
+    <link rel="stylesheet" href="/styles/css/edit-facebook.css"> <!-- Page-specific styles -->
 </head>
 <body>
 
+    <!-- Include the header -->
     <%- include('header.ejs', { page: 'edit-facebook' }) -%>
 
     <main class="edit-facebook">
-
-                        <!-- <article class="edit-imgs">
-                            <p>Post Image</p>
-                            <form id="myForm" enctype="multipart/form-data">
-
-                            <ul>
-                             <li id="1">
-                                        <img src="/styles/imgs/facebook/placeholder.png" class="srcImg-1" id="image-preview">
-                                        <button type="button" class="file-btn" >
-                                            Change image
-                                        </button>
-                                            <input type="file" accept="image/*" name="imgSrc" src="/styles/imgs/facebook/placeholder.png" onchange="onChangeImg(event)" id="1" class="file-input">
-                                        <button type="button" class="deleteImg" onclick="onDeleteImg()">DELETE</button>
-                                    </li>
-                            </ul>
-                            </form>
-
-                        </article> -->
-    
-        
-                <article class="edit-txt">
-
-
-                    <!-- <label>
-                        Title
-                        <input id="title" name="title" onchange="onChangeTitle(event.target.value)">
-                    </label> -->
-
-                    <label>
-                        Post Text
-                        <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"></textarea>
-                    </label>
-                    <label>
-                        Add link
-                        <input type="url" placeholder="http://www.example.com" id="URL" name="URL" onchange="onChangeURL(event.target.value)"></input>
-                    </label>
-                    
-                    <!-- <label>
-                        Date and Time
-                        <input id="date" type="datetime-local" value="<%= new Date(Date.now()).toISOString().slice(0, 16)  %>" name="date" onchange="onChangeDateTime(event.target.value)">
-                    </label> -->
-                    <article class="edit-actions">
-                        
-    
-                            <button type="button" id="updateButton"  onclick="facebookPost(event)">
-                           
-                                Add post
-                            </button>
-                         
-                    
-                    </article>
-                </article>
-
+        <!-- Section to edit post text -->
+        <article class="edit-txt">
+            <label>
+                Post Text
+                <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"></textarea>
+            </label>
+            <label>
+                Add link
+                <input type="url" placeholder="http://www.example.com" id="URL" name="URL" onchange="onChangeURL(event.target.value)"></input>
+            </label>
+            <article class="edit-actions">
+                <button type="button" id="updateButton" onclick="facebookPost(event)">
+                    Add post
+                </button>
+            </article>
+        </article>
     </main>
 
-
+    <!-- Include the footer -->
     <%- include('footer.ejs') -%>
 
-    <!-- Libraries  -->
+    <!-- Libraries and scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/edit-facebook.js"></script>
