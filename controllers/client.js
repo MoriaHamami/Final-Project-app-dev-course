@@ -1,7 +1,7 @@
-//Importing Services
-const clientsService = require('../services/clients')
-const ticketsService = require('../services/tickets')
-const productsService = require('../services/products')
+// Importing Services
+const clientsService = require('../services/clients');
+const ticketsService = require('../services/tickets');
+const productsService = require('../services/products');
 
 // Render client page with favorite items and orders
 const getClientPage = async (req, res) => {
@@ -13,7 +13,7 @@ const getClientPage = async (req, res) => {
 
         const clientInfo = await clientsService.getClientWithFaveItemsAndOrders(username);
         if (!clientInfo) {
-            return res.status(404).send('Client not found'); // client is not found
+            return res.status(404).send('Client not found'); // Client is not found
         }
 
         res.render('client', { client: clientInfo }); // Render client page with information
@@ -22,7 +22,7 @@ const getClientPage = async (req, res) => {
     }
 };
 
-//client orders and total amount
+// get client orders and calculate total amount
 async function getClientOrders(req, res) {
     const id = req.params.id;
     try {
@@ -41,25 +41,25 @@ async function getClientOrders(req, res) {
                 
                 // Fetch item information based on type
                 if (itemType === "ticket") {
-                    item.productInfo = await ticketsService.getTicketById(itemId); //ticket
+                    item.productInfo = await ticketsService.getTicketById(itemId); // Ticket
                     item.imgs = [item.productInfo.opImg]; // Set ticket image
                 } else {
-                    item.productInfo = await productsService.getProductById(itemId); //product
-                    item.imgs = item.productInfo.srcImg; // product images
+                    item.productInfo = await productsService.getProductById(itemId); // Product
+                    item.imgs = item.productInfo.srcImg; // Set product images
                 }
 
-                item.size = orderFromDB[j]?.size; // item size
-                item.type = itemType + 's'; //item type
+                item.size = orderFromDB[j]?.size; // Item size
+                item.type = itemType + 's'; // Item type
                 order.push(item);
                 sum += item?.price || 0; // Calculate total price
             }
             orders.push(order);
         }
 
-        orders.totalAmount = sum; // total amount
+        orders.totalAmount = sum; // Set total amount
         res.json(orders); // Send orders as JSON response
     } catch (e) {
-        res.status(500).json({ error: e.message }); //errors
+        res.status(500).json({ error: e.message }); // errors
     }
 }
 

@@ -2,6 +2,7 @@
 $(document).ready(function () {
     let clientIdToDelete = null;
 
+    // Initialize modals
     const deleteButtons = $('.delete-acc-btn');
     const confirmDeleteModal = new bootstrap.Modal($('#confirmDeleteModal')[0], {});
     const confirmDeleteButton = $('#confirmDeleteButton');
@@ -26,7 +27,7 @@ $(document).ready(function () {
                 });
 
                 if (res.status !== 404) {
-                    // Remove the row from the table
+                    // Remove the row from the table if client was deleted
                     const row = $(`button[data-client-id="${clientIdToDelete}"]`).closest('tr');
                     if (row) row.remove();
                     showNotice('Client removed successfully');
@@ -35,7 +36,6 @@ $(document).ready(function () {
                 }
                 confirmDeleteModal.hide();
             } catch (e) {
-                console.log('Error:', e);
                 showNotice('Error deleting client');
             }
         }
@@ -68,8 +68,9 @@ $('.orders-btn').click(function () {
     getOrdersById(id);
 });
 
-// Fetch and display orders by client ID
+// display orders by client ID
 async function getOrdersById(id) {
+    // Show loading indicator
     $('.shopping-cart').html('<div class="container" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="/styles/imgs/general/loader.webp" alt="loader" style="width:30%;"></div>');
     try {
         const orders = await $.ajax({
@@ -77,13 +78,13 @@ async function getOrdersById(id) {
             method: 'GET',
             contentType: 'application/json',
         });
-        // Create a long string that represents the HTML of products we want to be shown after we got the products from the DB 
+
         let str = '';
         if (orders?.length > 0) {
             for (let j = 0; j < orders.length; j++) {
                 let order = orders[j];
-                str += `   <h2>Items | ${order.length} </h2>
-                            <span class="product-container">`;
+                str += `<h2>Items | ${order.length} </h2>
+                        <span class="product-container">`;
                 for (let i = 0; i < order.length; i++) {
                     const product = order[i].productInfo;
                     str += `<div class="product"> 
@@ -107,18 +108,17 @@ async function getOrdersById(id) {
         }
         $('.shopping-cart').html(str);
     } catch (e) {
-        console.log('Error:', e);
         showNotice('Error fetching orders');
     }
 }
 
-// Get the image URL based on the source image and folder
+// Get the image URL 
 function getImgURL(srcImg, folder) {
     if (!srcImg) return "";
     return srcImg?.includes('data:') ? srcImg : ('/styles/imgs/' + folder + '/' + srcImg);
 }
 
-// Block or unblock a client by their ID
+// Block or unblock a client by ID
 async function onBlockClient(id, isBanned) {
     try {
         const res = await $.ajax({
@@ -134,18 +134,16 @@ async function onBlockClient(id, isBanned) {
             showNotice('Block status updated successfully');
         }
     } catch (e) {
-        console.log('Error:', e);
         showNotice('Failed to update block status');
     }
 }
 
-// Display a notice with a message and optionally redirect to the cart
+// notice a message and optionally redirect to the cart
 function showNotice(message, redirectToCart = false) {
     $('#noticeModalBody').text(message);
     const noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
     noticeModal.show();
 
-    // Adding a delay before redirect
     setTimeout(function () {
         if (redirectToCart) {
             window.location.href = '/cart'; // Redirect to the cart page after 2 seconds

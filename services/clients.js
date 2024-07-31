@@ -3,6 +3,7 @@ const Client = require('../models/clients');
 const Product = require('../models/products');
 const Ticket = require('../models/tickets');
 
+// Fetch all clients from the database
 async function getClientsFromDB() {
     try {
         const clientsFromDB = await Client.find({});
@@ -12,6 +13,7 @@ async function getClientsFromDB() {
     }
 }
 
+// Fetch cart items for a specific user by username
 async function getCartItemsFromDB(username) {
     try {
         const client = await Client.findOne({ username });
@@ -25,6 +27,7 @@ async function getCartItemsFromDB(username) {
     }
 }
 
+// Add a new item to the user's cart
 async function addCartItemToDB(username, productId, size, quantity) {
     try {
         const client = await Client.findOne({ username });
@@ -38,18 +41,25 @@ async function addCartItemToDB(username, productId, size, quantity) {
 
         const productObjectId = mongoose.Types.ObjectId(productId);
 
+        // Check if the product exists and if it's a ticket
         const product = await Product.findById(productObjectId);
         const isTicket = await Ticket.exists({ _id: productObjectId });
 
         const type = isTicket ? 'ticket' : 'product';
 
-        // בדיקה אם המוצר דורש מידה, ולוודא שהמידה ניתנה אם כן
+        // Validate size if required for non-ticket products
         if (!isTicket && product.sizes && product.sizes.length > 0 && !size) {
             throw new Error('Size is required for non-ticket products that have sizes');
         }
 
-        // הוסף פריט חדש לעגלה עם מזהה _id ייחודי
-        client.cartItems.push({ _id: new mongoose.Types.ObjectId(), id: productObjectId, type, size, quantity: parseInt(quantity, 10) });
+        // Add new item to cart with unique _id
+        client.cartItems.push({
+            _id: new mongoose.Types.ObjectId(),
+            id: productObjectId,
+            type,
+            size,
+            quantity: parseInt(quantity, 10)
+        });
 
         await client.save();
         return { success: true, message: 'Item added to cart successfully' };
@@ -59,14 +69,11 @@ async function addCartItemToDB(username, productId, size, quantity) {
     }
 }
 
-
-
-
+// Remove an item from the user's cart by cart item ID
 async function removeCartItemFromDB(username, cartItemId) {
     try {
         const client = await Client.findOne({ username });
         if (!client) {
-            console.error('Client not found:', username);
             return { success: false, message: 'Client not found' };
         }
 
@@ -74,27 +81,20 @@ async function removeCartItemFromDB(username, cartItemId) {
             return { success: false, message: 'Invalid cart item ID' };
         }
 
-        console.log('Client cart items:', client.cartItems); // Debugging
-        console.log('Searching for cart item:', cartItemId); // Debugging
-
-        // מצא את הפריט לפי ה-_id של הפריט בעגלה
+        // Find the cart item by _id
         const cartItemIndex = client.cartItems.findIndex(item => item._id && item._id.equals(cartItemId));
-
-        console.log('Found cartItemIndex:', cartItemIndex); // Debugging
 
         if (cartItemIndex > -1) {
             client.cartItems.splice(cartItemIndex, 1);
 
-            // עדכן את מסמך הלקוח ללא שימוש במנגנון גרסאות
+            // Update the client document without versioning
             await Client.updateOne(
                 { _id: client._id },
                 { $set: { cartItems: client.cartItems } }
             );
 
-            console.log('Item removed from cart successfully');
             return { success: true, message: 'Cart item removed successfully' };
         } else {
-            console.error('Cart item not found:', cartItemId);
             return { success: false, message: 'Cart item not found' };
         }
     } catch (e) {
@@ -103,39 +103,38 @@ async function removeCartItemFromDB(username, cartItemId) {
     }
 }
 
+// Fetch orders for a specific client by ID
 async function getOrdersFromDB(id) {
     try {
         const client = await Client.findById(id);
         return client?.orders;
     } catch (e) {
-        console.log('e:', e);
+        console.error('Error fetching orders from DB:', e);
     }
 }
 
+// Add the user's cart items to their orders and clear the cart
 async function addCartToOrders(username, cartTotal) {
     try {
-        console.log('Adding cart to orders for user:', username);
         const client = await Client.findOne({ username });
         if (!client) {
-            console.error('Client not found:', username);
             throw new Error('Client not found');
         }
 
-        // יצירת רשימה חדשה של פריטי ההזמנה מהעגלה
+        // Create a new order list from the cart items
         const newOrder = client.cartItems.map(item => ({
             id: item.id,
             type: item.type,
             size: item.size
         }));
 
-        // הוספת העגלה לרשימת ההזמנות ועדכון spent
+        // Add the cart to the orders and update spent amount
         client.orders.push(newOrder);
         client.cartItems = [];
         client.spent = (client.spent || 0) + cartTotal;
 
         await client.save();
 
-        console.log('Cart added to orders successfully');
         return { success: true, message: 'Cart added to orders successfully' };
     } catch (e) {
         console.error('Error adding cart to orders:', e);
@@ -143,17 +142,18 @@ async function addCartToOrders(username, cartTotal) {
     }
 }
 
-
+// Fetch a client by username
 async function getClientByUsername(username) {
     try {
         const client = await Client.findOne({ username });
         return client;
     } catch (e) {
-        console.error('Error fetching client by ID:', e);
+        console.error('Error fetching client by username:', e);
         throw e;
     }
 }
 
+// Fetch client registration stats
 async function getStats() {
     try {
         const data = await Client.aggregate([
@@ -175,18 +175,17 @@ async function getStats() {
                 $sort: { "_id.year": -1 }
             }
         ]);
-        console.log('data clients:', data);
         return data;
     } catch (e) {
-        console.log('e:', e);
+        console.error('Error fetching stats:', e);
     }
 }
 
+// Delete a client by ID
 const deleteClient = async (id) => {
     try {
         const client = await Client.findById(id);
-        if (!client)
-            return null;
+        if (!client) return null;
 
         await client.remove();
         return client;
@@ -195,8 +194,8 @@ const deleteClient = async (id) => {
     }
 };
 
+// Block or unblock a client by ID
 const blockClient = async (id, isBanned) => {
-    console.log("in service");
     try {
         const client = await Client.findById(id);
         if (!client) {
@@ -208,11 +207,12 @@ const blockClient = async (id, isBanned) => {
 
         return { success: true, message: 'Client status updated successfully', client };
     } catch (e) {
-        console.error(e);
+        console.error('Error blocking/unblocking client:', e);
         return { success: false, message: 'Server error', error: e };
     }
 }
 
+// Fetch a client by ID
 const getClientByIdFromDB = async (clientId) => {
     try {
         const client = await Client.findById(clientId);
@@ -223,6 +223,7 @@ const getClientByIdFromDB = async (clientId) => {
     }
 };
 
+// Fetch a client with favorite items and detailed orders by username
 async function getClientWithFaveItemsAndOrders(username) {
     try {
         const client = await Client.findOne({ username }).lean();
@@ -278,13 +279,13 @@ async function getClientWithFaveItemsAndOrders(username) {
     }
 }
 
+// Fetch favorite items for a specific user by username
 async function getFaveIetemsFromDB(username) {
     try {
         const client = await Client.findOne({ username });
         if (!client) {
             throw new Error('Client not found');
         }
-        console.log('Client faveitems:', client.faveItems);
         return client.faveItems;
     } catch (e) {
         console.error('Error fetching fave items from DB:', e);

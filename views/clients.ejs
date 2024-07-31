@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <!-- Include the header with 'clients' page active -->
     <%- include('header.ejs', {page: 'clients'}) -%>
 
     <main class="clients">
@@ -31,12 +32,13 @@
                         </tr>
                         <tr>
                             <th colspan="8">
-                                <!-- חיפוש משתמשים -->
+                                <!-- Search input for filtering clients -->
                                 <input type="text" id="searchInput" placeholder="Enter username"
                                     class="form-control mb-3 search-input">
                             </th>
                         </tr>
                         <tr>
+                            <!-- Table headers for client information -->
                             <th>Client's photo</th>
                             <th>Name</th>
                             <th>Total cart items</th>
@@ -53,38 +55,46 @@
                             <tr>
                                 <td>
                                     <% if (client.imgURL) { %>
+                                        <!-- Display client's photo if available -->
                                         <img class="client-photo"
                                             src="<%= client.imgURL.includes('data:') ? client.imgURL : ('/styles/imgs/clients/' + client.imgURL)%>">
-                                        <% } else { %>
-                                            <img class="client-photo" src="/styles/imgs/clients/p-25.png"
-                                                alt="Default photo">
-                                        <% } %>
+                                    <% } else { %>
+                                        <!-- Default photo if no client image is available -->
+                                        <img class="client-photo" src="/styles/imgs/clients/p-25.png"
+                                            alt="Default photo">
+                                    <% } %>
                                 </td>
                                 <td class="client-username">
                                     <%= client.fullname %>
                                 </td>
                                 <td>
+                                    <!-- Display the number of cart items -->
                                     <%= client.cartItems ? client.cartItems.length : 0 %>
                                 </td>
                                 <td>
+                                    <!-- Display the number of favorite items -->
                                     <%= client.faveItems ? client.faveItems.length : 0 %>
                                 </td>
                                 <td>
+                                    <!-- Button to delete client account -->
                                     <button class="delete-acc-btn" data-client-id="<%= client._id %>"
                                         onclick="onDeleteClient('<%= client._id %>')">
                                         Delete
                                     </button>
                                 </td>
                                 <td>
+                                    <!-- Display the total amount spent -->
                                     <%= client.spent %>$
                                 </td>
                                 <td>
+                                    <!-- Link to see client's orders -->
                                     <a class="nav-link orders-btn" data-bs-toggle="pill"
                                         href="#client<%= client.id %>" id="<%= client._id %>">
                                         <i class="bi bi-bag-check-fill"></i> See orders
                                     </a>
                                 </td>
                                 <td>
+                                    <!-- Checkbox to block/unblock client -->
                                     <input type="checkbox" class="block-checkbox" data-client-id="<%= client._id %>"
                                         <%= client.isBanned ? 'checked' : '' %> onclick="onBlockClient('<%= client._id %>', this.checked)">
                                 </td>
@@ -95,17 +105,21 @@
             </div>
 
             <div class="tab-content">
+                <!-- Loop through each client for their orders -->
                 <!-- <% clients.forEach(client => { %> -->
                 <div class="tab-pane fade <%= client.id === clients[0].id ? 'show active' : '' %>"
                     id="<%= client.id %>">
                     <div class="shopping-cart">
+                        <!-- If the client has purchases, display them -->
                         <!-- <% if (client.purchases && client.purchases.length > 0) { %> -->
                         <h2>Items | <%= client.purchases.length %></h2>
                         <h2>Date | <%= client.purchases.dateCreated %></h2>
                         <h2>Status | <%= client.purchaseStatus %></h2>
                         <span class="product-container">
+                            <!-- Loop through each order of the client -->
                             <!-- <% client.orders.forEach(order => { %> -->
                             <div class="product">
+                                <!-- Display product image and information -->
                                 <img src="<%= order.srcImg %>" alt="Product Image" class="product-image">
                                 <div class="product-info">
                                     <span class="product-name"><b>
@@ -122,6 +136,7 @@
                             </div>
                             <!-- <% }) %> -->
                         </span>
+                        <!-- If the client has no purchases, display a message -->
                         <!-- <% } else { %> -->
                         <div class="shopping-cart">
                             No purchases yet
@@ -134,7 +149,7 @@
         </div>
     </main>
 
-    <!-- Confirmation Modal -->
+    <!-- Confirmation Modal for deleting client -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -152,7 +167,7 @@
         </div>
     </div>
 
-    <!-- Success Modal -->
+    <!-- Success Modal for showing success messages -->
     <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -167,9 +182,7 @@
         </div>
     </div>
     
-    
-
-    <!-- Notice Modal -->
+    <!-- Notice Modal for showing general notices -->
     <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -186,6 +199,7 @@
         </div>
     </div>
 
+    <!-- Include the footer -->
     <%- include('footer.ejs') -%>
 
     <!-- Libraries -->
