@@ -8,7 +8,7 @@ const getAboutPage = async (req, res) => {
     const news = await newsService.getNew(); // Fetch news
     const coords = await aboutService.getCoords(); // Fetch coordinates
     coords.center = getCenterCoords(coords.data); // Calculate center coordinates
-    const isManager = req.session.isManager; // Check if the user is a manager
+    const isManager = await loginController.getIsManager(req, res); // Check if the user is a manager
     res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords, isManager });
   } catch (e) {
     res.status(500).json({ error: 'Error fetching news' }); // Handle errors
@@ -129,7 +129,8 @@ const searchNews = async (req, res) => {
     }
 
     const news = await newsService.searchNews(query); // Search for news articles
-    res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, isManager: req.session.isManager });
+    const isManager = await loginController.getIsManager(req, res); // Check if the user is a manager
+    res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, isManager});
   } catch (e) {
     res.status(500).json({ error: 'Error searching news' }); // Handle errors
   }

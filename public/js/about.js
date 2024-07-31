@@ -102,6 +102,7 @@ async function searchNews() {
         $('#newsResults').html(newContent); // Update the search results
     } catch (e) {
         // Handle error during search
+        console.log('Error in news filter:', e)
     }
 }
 
