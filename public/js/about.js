@@ -1,19 +1,19 @@
-// Global variables
+// Global variables to store form data
 let gGenre = '';
 let gTxt = '';
 let gDate = '';
 
 // Listeners for input changes
 function onChangeGenre(newGenre) {
-    gGenre = newGenre;
+    gGenre = newGenre; // Update global genre variable
 }
 
 function onChangeTxt(newTxt) {
-    gTxt = newTxt;
+    gTxt = newTxt; // Update global text variable
 }
 
 function onChangeDateTime(dateTime) {
-    gDate = dateTime;
+    gDate = dateTime; // Update global date variable
 }
 
 // Submit update for an existing article
@@ -42,16 +42,16 @@ async function onUpdateArticle(ev) {
 async function onDeleteArticle(id) {
     try {
         const res = await $.ajax({
-            url: '/about/edit/' + id,
+            url: '/about/edit/' + id, // URL for deleting the article
             method: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify({ id }),
         });
 
         if (res.status !== 404) {
-            showNotice('Article deleted successfully.', '/about'); // Show success message and redirect
+            showNotice('Article deleted successfully.', '/about'); // Show success message
         } else {
-            showNotice('Article could not be deleted.'); // Show failure message
+            showNotice('Article could not be deleted.'); // Show error message if article not found
         }
     } catch (e) {
         showNotice('An error occurred while deleting the article.'); // Show error message
@@ -63,13 +63,13 @@ async function onAddArticle(ev) {
     ev.preventDefault(); // Prevent form submission
 
     if (areFieldsEmpty()) {
-        showNotice('All fields must be filled out.');
+        showNotice('All fields must be filled out.'); // Show error if fields are empty
         return;
     }
 
     try {
         await $.ajax({
-            url: '/about/edit',
+            url: '/about/edit', // URL for adding a new article
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -79,7 +79,7 @@ async function onAddArticle(ev) {
             }),
         });
 
-        showNotice('New article added successfully.', '/about');
+        showNotice('New article added successfully.', '/about'); // Show success message and redirect
     } catch (e) {
         showNotice('An error occurred while adding the article.'); // Show error message
     }
@@ -92,14 +92,14 @@ async function searchNews() {
   
     try {
         const response = await $.ajax({
-            url: '/about/search',
+            url: '/about/search', // URL for searching news articles
             method: 'GET',
             data: { genre, text },
             dataType: 'html'
         });
   
         const newContent = $(response).find('#newsResults').html();
-        $('#newsResults').html(newContent); 
+        $('#newsResults').html(newContent); // Update the search results
     } catch (e) {
         // Handle error during search
     }
@@ -113,9 +113,9 @@ function showNotice(message, redirectTo = false) {
     // Redirect after a delay
     setTimeout(function() {
         if (redirectTo) {
-            window.location.href = redirectTo;
+            window.location.href = redirectTo; // Redirect to specified URL
         } else {
-            noticeModal.hide();
+            noticeModal.hide(); // Hide the modal
         }
     }, 2000);
 }

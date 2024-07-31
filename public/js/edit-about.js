@@ -46,7 +46,7 @@ function showAlert(message) {
     setTimeout(() => {
         alertBox.hide();
         window.location.assign('/about');
-    }, 3000);
+    }, 2000); // Changed to 2000 milliseconds (2 seconds)
 }
 
 // update the global shops array with current values from the DOM
@@ -86,6 +86,8 @@ function onDeleteShop(id) {
     gNumOfShops--;
     // Remove the shop from the DOM
     $(`.edit-about .edit-shops li#${id}`).remove();
+    showNotice('Shops updated successfully!');
+   
 }
 
 // Function to check if all input fields are filled
@@ -115,27 +117,39 @@ async function onUpdateShops() {
             data: JSON.stringify({
                 shops: gShops
             }),
-        })
+        });
         
         showNotice('Shops updated successfully!');
         // Redirect to the about page
-        window.location.assign('/about')
+        window.location.assign('/about');
     } catch (e) {
        // error 
     }
 }
 
-// show a notice message in a modal
-function showNotice(message, redirectToCart) {
-    $('#noticeModalBody').text(message);
-    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
-    noticeModal.show();
+// Function to show a notification modal
+function showNotice(message, redirectTo = false) {
+    console.log("showNotice called with message:", message, "redirectTo:", redirectTo);
+    
+    $('#noticeModalBody').text(message); // Set the message in the modal
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Initialize and show the modal
 
+    noticeModal.show(); // Show the modal
+
+    // Redirect after a delay
     setTimeout(function() {
-        if (redirectToCart) {
-            window.location.href = '/cart'; 
+        if (redirectTo) {
+            console.log("Redirecting to:", redirectTo);
+            window.location.href = redirectTo;
         } else {
-            noticeModal.hide(); 
+            console.log("Hiding notice modal");
+            noticeModal.hide();
         }
-    }, 300);
+    }, 2000);
+}
+
+
+function hideNotice() {
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {});
+    noticeModal.hide();
 }

@@ -27,6 +27,9 @@
             <article class="edit-shops">
                 <h3>Shops</h3>
 
+                  <!-- Instruction for saving shops -->
+         
+
                 <!-- Button to add a new shop -->
                 <button onclick="onAddShop(event.target)" type="button" class="add-btn">
                     <i class="bi bi-plus"></i>
@@ -37,6 +40,8 @@
                     <i class="bi bi-download"></i>
                     Save shops
                 </button>
+
+                <p class="fw-bold text-primary">To save the shops, please fill out all the fields and click the 'Save shops' button.</p>
                 
                 <!-- Check if coordinates data is available -->
                 <%if(coords !=null){%>
@@ -84,18 +89,21 @@
     <%- include('footer.ejs') -%>
     
     <!-- Modal for notices -->
-    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
-                </div>
-                <div class="modal-body" id="noticeModalBody">
-                    <!-- The message will be inserted here -->
-                </div>
+<div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="noticeModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- jQuery library -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
