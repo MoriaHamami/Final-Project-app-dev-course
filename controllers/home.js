@@ -3,7 +3,7 @@ function getHomePage(req, res) {
     res.render('home.ejs', {})
 }
 
-// Exports teh function
+// Exports function
 module.exports = {
     getHomePage
 } 

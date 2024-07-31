@@ -7,7 +7,7 @@ const homeController = require("../controllers/home")
 
 // Define the route for the home page
 router.route('/')
-    .get(homeController.getHomePage) // Handle GET requests to the root URL by calling getHomePage from the home controller
+    .get(homeController.getHomePage) // GET requests getHomePage from the home controller
 
-// Export the router to be used in other parts of the application
+// Export the router
 module.exports = router
