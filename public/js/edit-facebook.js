@@ -20,7 +20,7 @@ async function facebookPost(ev) {
     ev.preventDefault()
 
     // Check if both inputs are filled
-    if (!gTxt || !gURL) {
+    if (!gTxt) {
         showNotice('All inputs must be filled.', false)
         return
     }

@@ -1,63 +1,83 @@
 .edit-about {
-  background-color: var(--almost-white); 
+  background-color: var(--almost-white);
 }
 
 .edit-about h3 {
-  padding: 10px 10px 0 10px; 
-  margin: 0; 
+  padding: 10px 10px 0 10px;
+  margin: 0;
 }
 
 /* Ensure text does not break and fits properly in the shop section */
 .edit-about .edit-shops ul {
-  width: 100%; /* Full width of the container */
-  display: flex; /* Flexbox layout */
-  flex-direction: row; /* Horizontal layout */
-  flex-wrap: wrap; /* Wrap items to next line if needed */
+  width: 100%;
+  /* Full width of the container */
+  display: flex;
+  /* Flexbox layout */
+  flex-direction: row;
+  /* Horizontal layout */
+  flex-wrap: wrap;
+  /* Wrap items to next line if needed */
 }
 
 .edit-about .edit-shops li {
-  display: flex; 
-  flex-direction: column; /* Vertical layout */
-  background-color: white; 
-  margin: 10px; 
-  border-radius: 10px; /* Rounded corners */
-  padding: 30px; 
-  box-shadow: var(--card-bsh); /* Shadow for depth effect */
-  height: min-content; 
-  width: max-content; 
+  display: flex;
+  flex-direction: column;
+  /* Vertical layout */
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+  /* Rounded corners */
+  padding: 30px;
+  box-shadow: var(--card-bsh);
+  /* Shadow for depth effect */
+  height: min-content;
+  width: max-content;
 }
 
 .edit-about .edit-shops input {
-  margin-block: 5px; 
-  border-radius: 5px; /* Rounded corners */
-  border: 1px solid var(--ll-gray); 
-  outline: none; /* Remove default outline */
+  margin-block: 5px;
+  border-radius: 5px;
+  /* Rounded corners */
+  border: 1px solid var(--ll-gray);
+  outline: none;
+  /* Remove default outline */
 }
 
 .edit-about .edit-shops button {
-  margin: 5px 0 0 0; 
+  margin: 5px 0 0 0;
 }
 
 .edit-about .edit-shops button:hover {
-  background-color: var(--ll-gray); /* Background color on hover */
+  background-color: var(--ll-gray);
+  /* Background color on hover */
 }
 
 .edit-about .edit-shops .add-btn {
-  margin: 10px; 
+  margin: 10px;
 }
 
 .edit-about .edit-shops .save-btn {
-  background-color: var(--ll-gray); /* Background color for save button */
+  background-color: var(--ll-gray);
+  /* Background color for save button */
 }
 
 .edit-about .edit-shops .save-btn:hover {
-  background-color: var(--lll-gray); /* Background color on hover for save button */
+  background-color: var(--lll-gray);
+  /* Background color on hover for save button */
+}
+
+.edit-about .remark {
+  color: var(--gray);
+  margin-inline: 10px;
+  font-size: 0.8rem;
 }
 
 /* Modal styling */
 .modal-dialog {
-  border-radius: 30px; /* Rounded corners for the modal dialog */
-  overflow: hidden; /* Hide overflow content */
+  border-radius: 30px;
+  /* Rounded corners for the modal dialog */
+  overflow: hidden;
+  /* Hide overflow content */
 }
 
 .modal-content {
@@ -77,13 +97,17 @@
 }
 
 .modal-header {
-  border-top-left-radius: 30px; /* Rounded top-left corner */
-  border-top-right-radius: 30px; /* Rounded top-right corner */
+  border-top-left-radius: 30px;
+  /* Rounded top-left corner */
+  border-top-right-radius: 30px;
+  /* Rounded top-right corner */
 }
 
 .modal-footer {
-  border-bottom-left-radius: 30px; /* Rounded bottom-left corner */
-  border-bottom-right-radius: 30px; /* Rounded bottom-right corner */
+  border-bottom-left-radius: 30px;
+  /* Rounded bottom-left corner */
+  border-bottom-right-radius: 30px;
+  /* Rounded bottom-right corner */
 }
 
 /* Modal body styling */
@@ -93,7 +117,6 @@
   background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Semi-transparent white background */
 }
 
-.fw-bold text-primary
-{
-  color:#89abd0  !important
+.fw-bold text-primary {
+  color: #89abd0 !important
 }
