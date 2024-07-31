@@ -53,7 +53,10 @@ async function addToCart(productId) {
         }
     } catch (error) {
         // Show error notice if AJAX request fails
-        showNotice('Error adding product to cart', false);
+        showNotice('Please log in', false);
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 2000);
     }
 }
 

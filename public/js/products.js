@@ -76,16 +76,20 @@ async function getProductsBy(sortVal = '', isAsc = true) {
         })
 
         let str = '' // Initialize HTML string for product list
-        for (let i = 0; i < response.length; i++) {
-            str += `
-                <a class="image-container" href="/products/product/${response[i]._id}">
-                    <img src="${response[i].srcImg[0]?.includes('data:') ? response[i].srcImg[0] : ('/styles/imgs/products/' + response[i].srcImg[0])}" alt="product">
-                    <div class="image-name">${response[i].title}</div>
-                    <div class="price">${response[i].price}$</div>
-                    <button class="wishlist-btn ${favoriteProductIds.includes(response[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${response[i]._id}')">
-                        <i class="${favoriteProductIds.includes(response[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
-                    </button>
-                </a>`
+        if (response.length === 0) {
+            str = '<p class="no-products-message">No products available</p>' // Message for no products
+        } else {
+            for (let i = 0; i < response.length; i++) {
+                str += `
+                    <a class="image-container" href="/products/product/${response[i]._id}">
+                        <img src="${response[i].srcImg[0]?.includes('data:') ? response[i].srcImg[0] : ('/styles/imgs/products/' + response[i].srcImg[0])}" alt="product">
+                        <div class="image-name">${response[i].title}</div>
+                        <div class="price">${response[i].price}$</div>
+                        <button class="wishlist-btn ${favoriteProductIds.includes(response[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${response[i]._id}')">
+                            <i class="${favoriteProductIds.includes(response[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
+                        </button>
+                    </a>`
+            }
         }
 
         $('#productsList').html(str) // Update product list display
