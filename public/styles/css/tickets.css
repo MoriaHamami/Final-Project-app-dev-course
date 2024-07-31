@@ -3,6 +3,11 @@ main.tickets{
     top:0px; 
 }
 
+footer{
+    /* Dont let footer bottom attribute in general file affect the bottom in this page */
+    bottom:0px !important; 
+}
+
 .tickets {
     background-color: var(--almost-white);
     padding: 20px;
