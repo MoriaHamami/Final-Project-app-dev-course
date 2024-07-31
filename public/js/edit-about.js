@@ -121,7 +121,7 @@ async function onUpdateShops() {
         
         showNotice('Shops updated successfully!');
         // Redirect to the about page
-        window.location.assign('/about');
+        //window.location.assign('/about');
     } catch (e) {
        // error 
     }
