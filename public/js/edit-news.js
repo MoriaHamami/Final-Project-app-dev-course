@@ -21,9 +21,19 @@ function addTogSrcImgs(opImg) {
     // Here you can add additional functions for image editing if needed
 }
 
+// Function to check if any input field is empty
+function areFieldsEmpty() {
+    return gGenre.trim() === '' || gTxt.trim() === '' || gDate.trim() === '';
+}
+
 // Function to send an update for an existing article
 async function onUpdateArticle(ev) {
     ev.preventDefault();
+
+    if (areFieldsEmpty()) {
+        showNotice('All fields must be filled out.');
+        return;
+    }
 
     try {
         await $.ajax({
@@ -68,6 +78,11 @@ async function onDeleteArticle(id) {
 // Function to add a new article
 async function onAddArticle(ev) {
     ev.preventDefault();
+
+    if (areFieldsEmpty()) {
+        showNotice('All fields must be filled out.');
+        return;
+    }
 
     try {
         const newArticle = await $.ajax({
