@@ -128,10 +128,12 @@ header {
     gap: 10px;
 }
 
+
+
 .cart .btn-primary,
 .cart .btn-light {
-    border-radius: 16px;
-    width: 100%;
+    border-radius: 20px;
+    width: 90%;
     font-size: 18px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -140,12 +142,14 @@ header {
 .cart .btn-primary {
     background-color: rgb(62, 49, 250);
     color: #ffffff;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .cart .btn-light {
     background-color: #ffffff;
     color: rgb(62, 49, 250);
     border: 1px solid rgb(62, 49, 250);
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .cart .btn-light:hover {
@@ -153,6 +157,10 @@ header {
     color: #ffffff;
 }
 
+.cart .btn-primary:hover,
+.cart .btn-light:hover{
+    transform: scale(1.04);
+}
 /* Product Container */
 .cart .product-container {
     max-height: 70vh;

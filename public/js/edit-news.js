@@ -39,7 +39,6 @@ async function onUpdateArticle(ev) {
 
         showNotice('Article updated successfully.');
     } catch (e) {
-        console.log('Error:', e);
         showNotice('An error occurred while updating the article.');
     }
 }
@@ -60,7 +59,6 @@ async function onDeleteArticle(id) {
             showNotice('Article could not be deleted.');
         }
     } catch (e) {
-        console.log('Error:', e);
         showNotice('An error occurred while deleting the article.');
     }
 }
@@ -83,7 +81,6 @@ async function onAddArticle(ev) {
 
         showNotice('New article added successfully.', '/about'); // Change to the appropriate URL for the main news page
     } catch (e) {
-        console.log('Error:', e);
         showNotice('An error occurred while adding the article.');
     }
 }

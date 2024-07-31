@@ -1,8 +1,9 @@
 .manager {
     background-color: var(--almost-white);
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
     padding: 20px;
     gap: 20px;
 }
@@ -15,8 +16,7 @@
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    height: min-content;
-    width: min-content;
+    width: 90%;
 }
 
 .manager ul {
@@ -28,8 +28,34 @@
     margin: 0;
 }
 
-.manager .button {
-    margin-inline: 0;
+.headline {
+    color: black;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: ;
+}
+
+.headline h1 {
+    margin: 0;
+}
+
+.button {
+    border: 1px solid var(--l-gray);
+    background-color: var(--lll-gray);
+    width: max-content;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 20px !important;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in, transform 0.2s ease-in;
+   font-weight: bold;
+}
+
+.button:hover {
+    background-color: var(--primary-color-dark);
+    transform: scale(1.05);
 }
 
 .manager i {
@@ -38,18 +64,18 @@
 }
 
 .manager .personal-info {
-    width: max-content;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
+    text-align: center;
 }
 
 .manager .userImg {
-    width: 50px;
+    width: 85px;
     border-radius: 50%;
-    margin-inline-end: 20px;
-    border: 2px solid #090c10;
+    margin-bottom: 10px;
+    border:transparent
 }
 
 .manager .personal-info article {
@@ -58,6 +84,8 @@
     justify-content: space-between;
     gap: 5px;
 }
+
+
 
 .manager .personal-info p {
     padding-inline-end: 20px;
@@ -72,10 +100,10 @@
 
 .manager .add-options ul {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0;
+    flex-direction: column;
     gap: 10px;
 }
+
 
 .manager .add-options li,
 .manager .shops button {
@@ -88,12 +116,13 @@
     cursor: pointer;
     color: #010102;
     font-weight: bold;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.2s ease-in, transform 0.2s ease-in;
 }
 
 .manager .add-options li:hover,
 .manager .shops button:hover {
-    background-color: #e0e0e0;
+    background-color: var(--primary-color-dark);
+    transform: scale(1.05);  background-color: #e0e0e0;
 }
 
 .manager .bar-graph-head {
@@ -102,24 +131,20 @@
     color: #555;
 }
 
-/* LINE GRAPH STYLING */
 .manager #graph {
     margin-inline-start: 50px;
 }
 
-/* BAR GRAPH STYLING */
 .manager .bar {
     fill: #06447b;
 }
 
-/* Lighten the axis lines */
 .manager #x-axis path,
 #y-axis line,
 #y-axis path {
     stroke: #666;
 }
 
-/* Remove the tick marks on the x-axis */
 .manager #x-axis .tick line {
     visibility: hidden;
 }
@@ -135,4 +160,39 @@
 
 .manager .orders {
     width: 100%;
+}
+
+.manager .analytics {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .manager {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .manager section {
+        width: 45%;
+    }
+
+    .manager .personal-info {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .manager .userImg {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .manager .add-options ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .manager .analytics {
+        width: 80%;
+    }
 }
