@@ -127,16 +127,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 80%; 
 }
 
 .product .product_images img {
-  width: 80%;
-  object-fit: contain;
+  width: 100%; 
+  height: auto; 
+  max-width: 450px;
+  max-height: 300px; 
+  object-fit: contain; 
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: none;
 }
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {

@@ -152,3 +152,8 @@ async function addToCart(productId, size, quantity) {
         showNotice('Error adding product to cart');
     }
 }
+
+async function goToProductsPage(){
+    window.location.assign('/products'); 
+
+}
