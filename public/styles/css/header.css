@@ -2,20 +2,14 @@ header {
   display: flex !important;
   align-items: center;
   justify-content: space-between;
-
   background-color: var(--almost-white);
   border-bottom: 1px solid rgba(140, 140, 140, 0.384);
-
   height: 73px;
   width: 100%;
   padding: 30px;
-
-  /* Stay at the top always */
-  position: fixed;
+  position: fixed; /* Stay at the top always */
   top: 0;
-
-  /* Make the header appear above all elemnts */
-  z-index: 16;
+  z-index: 16; /* Make the header appear above all elements */
 }
 
 /* Remove a tags default styling */
@@ -65,9 +59,8 @@ header .cart-btn {
   margin-inline-end: 10px;
   padding: 3px 10px;
   background: none;
-  /* Remove a tag default styling */
   color: inherit;
-  text-decoration: none;
+  text-decoration: none; /* Remove a tag default styling */
 } 
 
 header .fave-btn:hover,
@@ -75,7 +68,6 @@ header .signin-btn:hover,
 header .cart-btn:hover {
   text-shadow: var(--txtsh);
   color: var(--blue);
-
 }
 
 /* SMALL SCREENS */
@@ -100,26 +92,20 @@ header .cart-btn:hover {
 
   /* In small screens create a dropdown effect */
   header nav {
-    /* Start the dropdown below the header */
-    position: absolute;
+    position: absolute; /* Start the dropdown below the header */
     top: 100px;
-    /* Position the items in the dropdown */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     text-align: center;
     width: 100%;
-    /* Give dropdown no height at first for later transition */
-    max-height: 0;
-    /* When the height changes, change it slowly and gradually */
-    transition: max-height 0.6s;
-    /* Dont show the dropdown hidden over the header */
-    overflow: hidden;
+    max-height: 0; /* Give dropdown no height at first for later transition */
+    transition: max-height 0.6s; /* When the height changes, change it slowly and gradually */
+    overflow: hidden; /* Don't show the dropdown hidden over the header */
   }
 
   body.menu-open nav {
-    /* When dropdown is selected to open, change gradually the height */
-    transition: max-height 0.6s;
+    transition: max-height 0.6s; /* When dropdown is selected to open, change gradually the height */
     max-height: 100vh;
   }
 
@@ -149,16 +135,12 @@ header .cart-btn:hover {
   .dark-screen {
     position: fixed;
     cursor: pointer;
-    /* Center the dark screen (= top: 0, bottom: 0, left: 0, right: 0) */
-    inset: 0;
+    inset: 0; /* Center the dark screen (= top: 0, bottom: 0, left: 0, right: 0) */
     background-color: black;
-    /* Change opacity gradually when appearing and disappearing */
-    opacity: 0;
+    opacity: 0; /* Change opacity gradually when appearing and disappearing */
     transition: opacity 0.6s;
-    /* Show infront of everything (except the header) */
-    z-index: 16;
-    /* When the darkscreen isnt seen, dont trigger its pointer events */
-    pointer-events: none;
+    z-index: 16; /* Show in front of everything (except the header) */
+    pointer-events: none; /* When the dark screen isn't seen, don't trigger its pointer events */
   }
 
   /* Make the dark screen seen when the menu is open and trigger its pointer events */
@@ -185,7 +167,7 @@ header .cart-btn:hover {
     text-shadow: var(--dark-txtsh);
   }
 
-  /* Dont show the dark screen in wide screens */
+  /* Don't show the dark screen in wide screens */
   .menu-toggle-btn,
   .dark-screen {
     display: none;

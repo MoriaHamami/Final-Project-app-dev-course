@@ -2,8 +2,12 @@ $(document).ready(function() {
     // Event listener for removing an item from the cart
     $(document).on('click', '.icon-text, .bi-trash3', function() {
         const cartItemId = $(this).data('cart-item-id');
-        console.log('Sending cartItemId:', cartItemId); // Debugging
         removeItem(cartItemId);
+    });
+
+    // Event listener for proceeding to shipping
+    $(document).on('click', '.btn-primary', function() {
+        proceedToShipping();
     });
 });
 
@@ -13,7 +17,6 @@ $(document).ready(function() {
  */
 async function removeItem(cartItemId) {
     try {
-        console.log('Removing item:', cartItemId); // Debugging
         const response = await $.ajax({
             url: '/cart/remove',
             method: 'POST',
@@ -21,17 +24,17 @@ async function removeItem(cartItemId) {
             data: JSON.stringify({ cartItemId })
         });
 
-        console.log('Response from server:', response); // Debugging
-
         if (response.success) {
+            // Show success message and reload the page
             showNotice('Product removed from cart successfully', function() {
                 window.location.reload();
             });
         } else {
+            // Show error message from server
             showNotice(response.message || 'Error removing product from cart');
         }
     } catch (e) {
-        console.log('Error removing product from cart:', e);
+        // Show error message if request fails
         showNotice('Error removing product from cart');
     }
 }
@@ -42,7 +45,6 @@ async function removeItem(cartItemId) {
  * @param {function} [callback] - Optional callback function to run after the notice is hidden.
  */
 function showNotice(message, callback) {
-    console.log('Showing notice:', message); // Debugging
     var $noticeModalBody = $('#noticeModalBody');
     if ($noticeModalBody.length) {
         $noticeModalBody.text(message);
@@ -72,7 +74,7 @@ function showLargePopup(message) {
         $largePopupContent.html(`<h1>${message}</h1>`);
         $largePopup.css('display', 'flex'); // Show the popup
 
-        // Hide the popup after a few seconds
+        // Hide the popup after a few seconds and redirect to home
         setTimeout(function() {
             $largePopup.css('display', 'none'); // Hide the popup
             window.location.assign('/'); // Redirect after closing the popup
@@ -122,7 +124,6 @@ async function proceedToShipping() {
             showNotice(response.message || 'Error processing order');
         }
     } catch (e) {
-        console.log('Error processing order:', e);
         showNotice('Error processing order');
     }
 }
@@ -148,7 +149,10 @@ async function addToCart(productId, size, quantity) {
             showNotice(response.message || 'Error adding product to cart');
         }
     } catch (e) {
-        console.log('Error adding product to cart:', e);
         showNotice('Error adding product to cart');
     }
+}
+
+function goToProductsPage() {
+    window.location.assign('/products');
 }

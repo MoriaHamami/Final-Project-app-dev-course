@@ -10,7 +10,6 @@ var gBGColor = "white";
 
 // Handle the onload event to ensure the image is fully loaded before drawing on it
 img.onload = function () {
-    // Draw the image on the canvas
     ctx.drawImage(img, 0, 0, canvas.offsetWidth, canvas.offsetHeight);
 };
 
@@ -73,7 +72,6 @@ $('#saveBtn').on('click', async function () {
         });
         window.location.assign('/cart');
     } catch (error) {
-        console.error('Error:', error);
         alert('Error saving image: ' + error.message);
     }
 });

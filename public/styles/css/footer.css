@@ -1,15 +1,11 @@
 /* This specifies the name of our animation. */
 @keyframes move-words {
-
-    /* At the start of the animation, we set the initial position of the text to left: 100%, 
-    which means the text is completely off-screen to the right. */
+    /*which means the text is completely off-screen to the right. */
     0% {
         left: 100%;
     }
 
-    /* At the end of the animation, we set the final position of the text to left: -100%, 
-    which means the text is completely off-screen to the left. 
-    This creates the effect of the text moving from right to left across the screen. */
+    /* This creates the effect of the text moving from right to left across the screen. */
     100% {
         left: -100%;
     }
@@ -42,12 +38,9 @@ footer .words {
     margin: 0;
 
     /* Giving words a gradient color */
-    /* First, create a gradient background */
-    background: linear-gradient(90deg, var(--red), var(--blue), var(--gold));
-    /* Fill the text with the gradient background */
-    -webkit-background-clip: text;
-    /* Turn the whole gradient-background transparent */
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, var(--red), var(--blue), var(--gold)); 
+    -webkit-background-clip: text; /* Fill the text with the gradient background */
+    -webkit-text-fill-color: transparent; /* Turn the whole gradient-background transparent */
 }
 
 /* Every section in footer */
@@ -82,7 +75,7 @@ footer .pages .end {
     flex-direction: column;
 }
 
-/* Sponsors icon will have a seperating line from social media */
+/* Sponsors icon will have a separating line from social media */
 footer .sponsors {
     border-bottom: 1px solid gray;
 }
@@ -101,8 +94,7 @@ footer .contact img {
     cursor: pointer;
     height: 40px;
     padding: 10px;
-    /* The height of the img wont include the padding */
-    box-sizing: content-box;
+    box-sizing: content-box; /* The height of the img won't include the padding */
 }
 
 footer .logo {
@@ -113,18 +105,14 @@ footer .logo img {
     height: 450px;
 }
 
-footer{
+footer {
     position: relative;
-    /* Because the main is 73px from top, 
-    we dont want the footer to be covered */
-    bottom: -73px;
+    bottom: -73px; /* Because the main is 73px from top, we don't want the footer to be covered */
 }
 
 @media (max-width: 600px) {
-    /* Because the main is 100px from top, 
-    we dont want the footer to be covered */
     footer {
         position: relative;
-        bottom: -100px;
+        bottom: -100px; /* Because the main is 100px from top, we don't want the footer to be covered */
     }
 }

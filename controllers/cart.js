@@ -29,21 +29,17 @@ async function getCartPage(req, res) {
                 item.quantity = itemInfo.quantity;
                 item.cartItemId = itemInfo._id; // Adding the cart item _id
                 sum += item.price || 0; // Calculate the total amount
-                return { ...item.toObject(), type: itemInfo.type, cartItemId: itemInfo._id, size: itemInfo.size, price: item.price }; // Make sure to include cartItemId and size
+                return { ...item.toObject(), type: itemInfo.type, cartItemId: itemInfo._id, size: itemInfo.size, price: item.price }; // Include cartItemId and size
             }
             return null;
         }));
 
         cartItems = cartItems.filter(item => item !== null);
-        console.log("Total sum:", sum); // Debugging line to check the total sum
         res.render('cart', { cartItems, totalAmount: sum, username });
     } catch (e) {
         res.status(500).send("Error retrieving cart page.");
     }
 }
-
-
-
 
 // Function to get cart items
 async function getCartItems(req, res) {
@@ -112,7 +108,6 @@ async function addEditShirtToCart(req, res) {
 }
 
 // Function to checkout the cart
-// Function to checkout the cart
 async function checkoutCart(req, res) {
     try {
         const username = req.session.username;
@@ -122,7 +117,7 @@ async function checkoutCart(req, res) {
 
         const cartTotal = req.body.cartTotal;
 
-        // הוספת פריטי העגלה להזמנות ועדכון spent
+        // Add cart items to orders and update spent amount
         const result = await clientsService.addCartToOrders(username, cartTotal);
         if (result.success) {
             res.json({ success: true, message: 'Cart checked out successfully' });
@@ -133,7 +128,6 @@ async function checkoutCart(req, res) {
         res.status(500).json({ success: false, message: 'Error during checkout' });
     }
 }
-
 
 module.exports = {
     getCartPage,

@@ -63,7 +63,7 @@ body {
 }
 
 .buttons-container button {
-    cursor: pointer;
+    cursor: pointer; /* Allow button to be clickable */
 }
 
 .buttons-container button:hover {
@@ -88,7 +88,7 @@ body {
 }
 
 .color:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Make the color circle larger on hover */
 }
 
 .color-button {
@@ -125,7 +125,7 @@ body {
 
 #colorPicker .color:hover,
 #colorShirtPicker .color:hover {
-    opacity: 0.8;
+    opacity: 0.8; /* Make color circles slightly transparent on hover */
 }
 
 #colorPicker .color,
@@ -238,6 +238,6 @@ body {
 }
 
 #saveBtn:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
