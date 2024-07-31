@@ -1,3 +1,8 @@
+main.tickets{
+    /* Dont let main top attribute in general file affect the top in this page */
+    top:0px; 
+}
+
 .tickets {
     background-color: var(--almost-white);
     padding: 20px;
