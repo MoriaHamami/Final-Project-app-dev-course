@@ -41,6 +41,7 @@ function getCenterCoords(coords) {
   };
 }
 
+// Create a new news article
 const createNew = async (req, res) => {
   const { genre, txt, date } = req.body;
   try {
@@ -51,6 +52,7 @@ const createNew = async (req, res) => {
   }
 };
 
+// Get a news article by ID
 const getNew = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -73,22 +75,39 @@ const getNew = async (req, res) => {
   }
 };
 
+const News = require('../models/news');
+
+// Update a news article
 const updateNew = async (req, res) => {
   const id = req.params.id;
-  const { genre, txt, date } = req.body;
+  const updates = req.body;
+
   try {
-    await newsService.updateArticle(id, genre, txt, date); // Update the article
-    res.json({ success: true, message: 'Article updated successfully' }); // Success response
+    const article = await News.findById(id);
+    if (!article) {
+      return res.status(404).json({ error: 'Article not found' });
+    }
+
+    // Update only the fields that were sent in the request
+    for (let key in updates) {
+      if (updates.hasOwnProperty(key)) {
+        article[key] = updates[key];
+      }
+    }
+
+    const savedArticle = await article.save();
+    res.json({ success: true, message: 'Article updated successfully' });
   } catch (e) {
-    res.status(500).json({ error: 'Error updating article' }); // Handle errors
+    res.status(500).json({ error: 'Error updating article', details: e.message });
   }
 };
 
+// Delete a news article
 const deleteNew = async (req, res) => {
   try {
     const article = await newsService.deleteArticle(req.params.id); // Delete the article
     if (!article) {
-      return res.status(404).json({ error: 'Article not found' }); // Handle article not found
+      return res.status(404).json({ error: 'Article not found' }); // If the article was not found
     }
     res.json({ success: true, message: 'Article deleted successfully' }); // Success response
   } catch (e) {
@@ -96,6 +115,7 @@ const deleteNew = async (req, res) => {
   }
 };
 
+// Search for news articles
 const searchNews = async (req, res) => {
   const { genre, text } = req.query;
 

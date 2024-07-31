@@ -39,19 +39,16 @@ const updateArticle = async (id, genre, txt, date) => {
 };
 
 // Delete article by ID
-const deleteArticle = async (id) => {
+async function deleteArticle(id) {
   try {
-    const article = await News.findById(id);
-    if (!article) {
-      return null; // Return null if article is not found
-    }
-
-    await article.deleteOne(); // Delete the article
+    const article = await News.findByIdAndDelete(id);
     return article;
   } catch (e) {
-    return e; // Return the error if deletion fails
+    console.error('Error deleting article:', e);
+    throw e;
   }
-};
+}
+
 
 // Fetch article by ID
 const getNewById = async (id) => {
