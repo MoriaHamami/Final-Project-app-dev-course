@@ -25,7 +25,9 @@ const createProduct = async (title = "", color = "", cat = "", price = 0, gender
 // Function gets distinct product categories
 const getDistinctCats = async () => {
   try {
-    return await Product.find({}).distinct("cat") // Find distinct categories in products
+    // Check categories of products that are for display (not edited shirts for example)
+    const filter = { toDisplay: { $ne: false } }
+    return await Product.find(filter).distinct("cat") // Find distinct categories in products
   } catch (e) {
     console.error('Error fetching distinct categories:', e) // Log error
     throw new Error('Error fetching distinct categories') // Throw a new error
