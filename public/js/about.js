@@ -84,24 +84,24 @@ async function onAddArticle(ev) {
 }
 
 async function searchNews() {
-    const genre = $('#genreFilter').val(); // Use jQuery to get the value of genreFilter
-    const text = $('#textFilter').val(); // Use jQuery to get the value of textFilter
+    const genre = $('#genreFilter').val();
+    const text = $('#textFilter').val();
   
     try {
       const response = await $.ajax({
-        url: '/about/search', // Ensure this is the correct URL
+        url: '/about/search', // וודא שזו הכתובת הנכונה
         method: 'GET',
         data: { genre, text },
         dataType: 'html'
       });
   
-      // Extract the new HTML for #newsResults and replace the existing content
-      const newContent = $(response).find('#newsResults').html(); // Assuming #newsResults is the correct ID in your about.ejs
-      $('#newsResults').html(newContent); // Use jQuery to set the new content of newsResults
+      const newContent = $(response).find('#newsResults').html();
+      $('#newsResults').html(newContent);
     } catch (e) {
       console.log('Error searching news:', e);
     }
-  }
+}
+
   
 
 

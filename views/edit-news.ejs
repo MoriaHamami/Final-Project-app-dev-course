@@ -18,39 +18,48 @@
 </head>
 <body>
 
+    <!-- Include header template with page-specific data -->
     <%- include('header.ejs', { page: 'edit-news' }) -%>
 
     <main class="edit-news">
         <div class="container">
             <form id="editArticle">
+                <!-- Article information section -->
                 <article class="edit-txt">
                     <h3>Article Information</h3>
 
                     <label>
                         Title
+                        <!-- Title input field with dynamic value -->
                         <input id="genre" value="<%= article != null ? article.genre : '' %>" name="genre" onchange="onChangeGenre(event.target.value)">
                     </label>
 
                     <label>
                         Text
+                        <!-- Text area for article content with dynamic value -->
                         <textarea id="txt" name="txt" rows="10" onchange="onChangeTxt(event.target.value)"><%= article != null ? article.txt : '' %></textarea>
                     </label>
                     
                     <label>
                         Date and Time
+                        <!-- Date and time input field with dynamic value -->
                         <input id="date" type="datetime-local" value="<%= article != null ? new Date(article.date).toISOString().slice(0, 16) : '' %>" name="date" onchange="onChangeDateTime(event.target.value)">
                     </label>
                 </article>
 
+                <!-- Action buttons section -->
                 <article class="edit-actions">
                     <% if (article != null) { %>
+                        <!-- Button to update the article -->
                         <button type="button" id="updateButton" value="<%= article._id %>" onclick="onUpdateArticle(event)">
                             Save Changes
                         </button>
+                        <!-- Button to delete the article -->
                         <button type="button" id="deleteButton" onclick="onDeleteArticle('<%= article._id %>')">
                             Delete Article
                         </button>
                     <% } else { %>
+                        <!-- Button to add a new article -->
                         <button type="button" id="addButton" onclick="onAddArticle(event)">
                             Add Article
                         </button>
@@ -74,9 +83,10 @@
         </div>
     </div>
 
+    <!-- Include footer template -->
     <%- include('footer.ejs') -%>
 
-    <!-- Libraries  -->
+    <!-- Libraries -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/edit-news.js"></script>

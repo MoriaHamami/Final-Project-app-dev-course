@@ -7,13 +7,14 @@ const getAboutPage = async (req, res) => {
     const news = await newsService.getNew();
     const coords = await aboutService.getCoords();
     coords.center = getCenterCoords(coords.data);
-    const isManager = await loginController.getIsManager(req, res);
-res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords, isManager });
+    const isManager = req.session.isManager; // וודא שהמשתמש מחובר ומוגדר כמנהל
+    res.render('about.ejs', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: coords, isManager });
   } catch (e) {
     console.log('שגיאה בשליפת חדשות:', e);
     res.status(500).json({ error: 'שגיאה בשליפת חדשות' });
   }
 };
+
 
 function getCenterCoords(coords) {
   let lats = 0;
@@ -112,14 +113,13 @@ const searchNews = async (req, res) => {
     }
 
     const news = await newsService.searchNews(query);
-
-    // Render the about page with the search results
-    res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, layout: false });
+    res.render('about', { news, GOOGLE_KEY: process.env.GOOGLE_KEY, coords: req.coords, isManager: req.session.isManager });
   } catch (e) {
-    console.log('Error searching about:', e);
-    res.status(500).json({ error: 'Error searching about' });
+    console.log('Error searching news:', e);
+    res.status(500).json({ error: 'Error searching news' });
   }
 };
+
 
 
 

@@ -6,10 +6,12 @@
     <title>Manager Area | Edit Shops</title>
     <link rel="icon" href="/styles/imgs/header/real-madrid-logo.png" sizes="64x64">
 
-    <!-- Libraries -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/styles/css/setup/vars.css">
     <link rel="stylesheet" href="/styles/css/setup/general.css">
     <link rel="stylesheet" href="/styles/css/setup/font-face.css">
@@ -17,6 +19,7 @@
 </head>
 
 <body>
+    <!-- Include header -->
     <%- include('header.ejs', {page:'edit-about'}) -%>
 
     <main class="edit-about">
@@ -24,23 +27,29 @@
             <article class="edit-shops">
                 <h3>Shops</h3>
 
+                <!-- Add shop button -->
                 <button onclick="onAddShop(event.target)" type="button" class="add-btn">
                     <i class="bi bi-plus"></i>
                     Add shop
                 </button>
+                <!-- Save shops button -->
                 <button onclick="onUpdateShops(event.target)" type="button" class="save-btn">
                     <i class="bi bi-download"></i>
                     Save shops
                 </button>
                 
+                <!-- Check if coordinates are available -->
                 <%if(coords !=null){%>
                     <ul>
+                        <!-- Iterate over shops data -->
                         <% for(let i=0; i< coords.data.length; i++) { %>
                             <li id="<%= i %>">
+                                <!-- Shop details inputs -->
                                 <input value="<%= coords.data[i].name %>" name="shops">
                                 <input value="<%= coords.data[i].address %>" name="shops">
                                 <input value="<%= coords.data[i].lat %>" name="shops" type="number">
                                 <input value="<%= coords.data[i].long %>" name="shops" type="number">
+                                <!-- Delete shop button -->
                                 <button type="button" onclick="onDeleteShop('<%=i%>')">
                                     <i class="bi bi-trash"></i> Remove 
                                 </button>
@@ -49,11 +58,13 @@
                     </ul>
                 <%}else{%>
                     <ul>
+                        <!-- Default empty shop inputs if no coordinates -->
                         <li id="0">
                             <input value="" placeholder="Type location name" name="shops">
                             <input value="" placeholder="Type location address" name="shops">
                             <input value="" placeholder="Type location latitude" name="shops" type="number">
                             <input value="" placeholder="Type location longitude" name="shops" type="number">
+                            <!-- Delete shop button -->
                             <button type="button" onclick="onDeleteShop(0)">
                                 <i class="bi bi-trash"></i> Remove 
                             </button>
@@ -64,11 +75,14 @@
         </form>
     </main>
 
+    <!-- Success alert -->
     <div id="alert" class="alert alert-success" role="alert" style="display:none;">
         Shops updated successfully!
     </div>
 
+    <!-- Include footer -->
     <%- include('footer.ejs') -%>
+    
     <!-- Notice Modal -->
     <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -83,9 +97,10 @@
         </div>
     </div>
 
-    <!-- Libraries  -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
     <script src="/js/edit-about.js"></script>
 </body>
 </html>

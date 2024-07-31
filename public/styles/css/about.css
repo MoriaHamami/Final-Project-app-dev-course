@@ -1,8 +1,6 @@
-
 .news {
     background: whitesmoke;
 }
-
 
 .news #imgheader {  
     width: 100%;
@@ -10,24 +8,20 @@
 }
 
 .news #headerimg {
-    
     width: 100%;
-
     object-fit: cover;
-    /* transform: translateY(-30%); */
-    
 }
 
 .news .title {
     width: 30%;
     transform: translate(0, -50%);
-    font-family: GoogleSans, arial, sans-serif-medium, sans-serif in;
+    font-family: GoogleSans, arial, sans-serif-medium, sans-serif;
     font-size: 48px;
     font-weight: bold;
-    color: #ececec; /* צבע טקסט */
+    color: #ececec; /* Text color */
     text-align: center;
     letter-spacing: 4px;
-    background-color: #161b79; /* צבע רקע */
+    background-color: #161b79; /* Background color */
     padding-left: 14px;
     padding-right: 10px;
     margin-bottom: -90px;
@@ -56,20 +50,18 @@
     color: #fff; 
     text-align: center;
     padding: 20px 0;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-    border-radius: 10px; /* נוספה הגדרת border-radius */
-    
-
+    border-radius: 10px;
 }
 
 .news nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0; /* נוספה הגדרה להסרת המרווחים בין רכיבי ה-nav */
-    display: flex; /* שימוש ב-flexbox ליישור האלמנטים */
-    justify-content: center; /* יישור למרכז */
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .news nav ul li {
@@ -82,7 +74,7 @@
 }
 
 .news main {
-    flex-direction: column; /* הגדרה נכונה של flex-direction */
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0px;
@@ -90,65 +82,69 @@
 
 .news section {
     flex: 0 0 calc(50% - 20px);
-    margin-bottom: 20px; /* שינוי ערך המרווח למטה */
+    margin-bottom: 20px;
 }
 
 .news section h2 {
     font-weight: bold;
-    color: #ddc721; /* צבע כחול בהיר לטקסט */
+    color: #ddc721; /* Light blue text */
     text-shadow: 
-        1px 1px 2px rgba(0, 0, 128, 0.7), /* גבול כהה כחול */
-        0 0 5px rgba(5, 21, 126, 0.7), /* הצללה כחולה מוארת */
-        0 0 10px rgba(14, 56, 119, 0.5); /* הצללה כחולה רכה */
+        1px 1px 2px rgba(0, 0, 128, 0.7),
+        0 0 5px rgba(5, 21, 126, 0.7),
+        0 0 10px rgba(14, 56, 119, 0.5);
     padding: 10px;
-    font-family: Arial, sans-serif; /* גופן */
+    font-family: Arial, sans-serif;
 }
+
 .news article {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 20px;
-    margin-bottom: 20px; 
-    border-radius: 15px; 
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .news article h3 {
     margin-top: 0;
-    color: #424242; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    color: #424242;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-weight: bold;
 }
-.news .map{
+
+.news .map {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.news gmp-map{
+
+.news gmp-map {
     height: 300px;
     width: 80%;
     margin-block: 30px;
 }
+
 .news .lates_updates > article {
     font-size: 150%;
     align-items: center;
     text-align: center;
     background-color: #f1f3ed6d;
-} 
+}
 
 .news .lates_updates h3 {
     margin-top: 0;
-    color: #424242; 
+    color: #424242;
     text-shadow: none;
     font-weight: bold;
     font-size: larger;
 }
 
 .news .lates_updates footer {
-    background-color: #e5ec9483; 
-    color: #030202; 
+    background-color: #e5ec9483;
+    color: #030202;
     text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* הגדרת הגופן */
-    font-size: 35px; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
     text-shadow: none;
 }
 
@@ -156,10 +152,9 @@
     display: flex;
 }
 
-
 .news .vertical-line {
-    border-right: 2px solid rgba(182, 177, 177, 0.197); 
-    height: 100px; /* גובה של הקו בפיקסלים */
+    border-right: 2px solid rgba(182, 177, 177, 0.197);
+    height: 100px;
     display: flex;
     align-items: start;
     justify-content: center;
@@ -184,62 +179,66 @@
 
 .news #newsCarousel {
     width: 95%;
-    margin: 0 auto; 
+    margin: 0 auto;
     overflow: hidden;
     border-radius: 10px;
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
 }
 
-.news #newsCarousel .edit-icon button{
+.news #newsCarousel .edit-icon button {
     padding: 3px 5px;
-font-size: smaller;
+    font-size: smaller;
 }
-.news #newsCarousel .edit-icon{
+
+.news #newsCarousel .edit-icon {
     z-index: 1;
-   position: absolute;
-   top: 10px;
-   right: 15%;
+    position: absolute;
+    top: 10px;
+    right: 15%;
 }
 
 .news #newsCarousel:hover {
-    animation: scaleUp 0.3s forwards; 
+    animation: scaleUp 0.3s forwards;
     cursor: pointer;
 }
 
 .news #newsCarousel:not(:hover) {
-    animation: scaleDown 0.3s forwards; 
+    animation: scaleDown 0.3s forwards;
 }
 
+/* Animation to scale up an element */
 @keyframes scaleUp {
     from {
-        transform: scale(1);
+        transform: scale(1); /* Starting state: element at its original size */
     }
     to {
-        transform: scale(1.02);
+        transform: scale(1.02); /* Ending state: element scaled up slightly */
     }
 }
 
+/* Animation to scale down an element */
 @keyframes scaleDown {
     from {
-        transform: scale(1.02);
+        transform: scale(1.02); /* Starting state: element scaled up slightly */
     }
     to {
-        transform: scale(1);
+        transform: scale(1); /* Ending state: element at its original size */
     }
 }
+
 
 .news #newsCarousel .news-image {
     width: 4%;
     height: auto;
-    border-radius: 10px; 
-    margin-left: 97.3%; 
+    border-radius: 10px;
+    margin-left: 97.3%;
     margin-top: -12px;
 }
 
 .news #newsCarousel .carousel-item .update_content {
-    flex-grow: 1; 
+    flex-grow: 1;
 }
+
 .news #newsCarousel .carousel-item .update_content h3,
 .news #newsCarousel .carousel-item .update_content p {
     margin: 0;
@@ -249,12 +248,12 @@ font-size: smaller;
 .news #newsCarousel .carousel-item .update_content h3 {
     font-size: 1.9em;
     font-weight: bold;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: -86px;
     color: #004d9d;
     text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
     transition: color 0.3s ease-in-out;
-    text-transform: capitalize; 
+    text-transform: capitalize;
 }
 
 #newsCarousel .carousel-item .update_content p {
@@ -266,477 +265,69 @@ font-size: smaller;
 
 .article-footer {
     font-size: 0.9em;
-    color: #383838;
-    text-align: right;
-    margin-top:68px;
-    margin-bottom: -66px;
-    padding-right: 10px;
-    background: linear-gradient(90deg, #f9d976, #f1d180ba, #f1d180ba); 
-    border-radius: 5px 5px; 
-}
-.carousel-control-prev, .carousel-control-next {
-    background-color: transparent;
-    margin: -60px;
-    margin-top: -80px; 
-    transition: transform 0.3s ease-in-out; 
+    color: #555;
+    margin-top: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
 }
 
-.carousel-control-prev:hover, .carousel-control-next:hover {
-    transform: scale(1.15); 
-    background-color: transparent; 
-}
-
-/* כדי לוודא שהם לא משתנים יותר מדי ב-hover */
-.carousel-control-prev:not(:hover), .carousel-control-next:not(:hover) {
-    transform: scale(1);
-}
-
-/* סגנון לחצים עצמם */
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background-size: 100%, 100%; 
-    filter: brightness(1); 
-    transition: filter 0.3s ease-in-out; 
-}
-
-.carousel-control-prev:hover .carousel-control-prev-icon, 
-.carousel-control-next:hover .carousel-control-next-icon {
-    filter: brightness(0.5); /* כהות יותר של החצים ב-hover */
-}
-.located p {
-    text-align: right;
-    top: 45px; /* אפשר לשנות את הערך לפי הצורך */
-    margin-right: 240px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: darkblue;
-    font-size: 1.7rem;
-    
-}
-
-.filter {
-    margin-top: 70px; /* הוספת מרווח חיצוני עליון */
-    margin-left: 15px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.article-footer .author,
+.article-footer .date {
+    margin: 0;
     font-weight: bold;
 }
 
-.filter form {
-    display: flex;
-    align-items: center; /* יישור אנכי של האלמנטים */
+.article-footer .author {
+    color: #333;
 }
 
-.filter .form-group {
-    display: flex;
-    align-items: center; /* יישור אנכי של האלמנטים בתוך הקבוצה */
-    margin-right: 20px; /* מרווח בין קבוצות הטופס */
+.article-footer .date {
+    color: #888;
 }
 
-.filter label {
-    margin-right: 10px; /* מרווח בין הלייבל לשדה */
-}
-
-.filter input {
-    border-radius: 10px;
-    margin-right: 10px; /* מרווח בין השדה לכפתור */
-    border: transparent;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.filter button {
-    border-radius: 20px;
-    margin-right: 10px; /* מרווח בין הכפתורים */
-    background-color: #cfcfcf; /* צבע רקע ראשוני */
-    color: rgb(71, 71, 71); /* צבע טקסט ראשוני */
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease;
-    
-}
-
-.filter button i {
-    margin-right: 8px; /* מרווח בין האייקון לכתוב */
-}
-.filter button:hover {
-    background-color: #bebebe; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transform: scale(1.1);
-}
-
-#whoarewe {
-    text-align: left;
-    border: none; 
-    padding: 20px; 
-    margin: 55px; 
- 
-    margin-left: 75px;
-    margin-top: 10%;
-    width: 55%;
-    padding-top: 20px; /* Ensure there's enough space for the fixed title */
-}
-
-#whoarewe .title {
-    font-size: 3em;
-    font-weight: bold;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 2px gray;
-    top: 10px; /* Adjust as needed */
-    left: 75px; /* Adjust to align with section */
-    background-color: darkblue; /* Optional, to avoid content overlap */
-    z-index: 0; /* Ensure it stays above other content */
-    padding: 10px; /* Adds padding for better readability */
-    width: calc(55% - 40px); /* Adjust width as necessary */
-}
-
-#whoarewe p1 {
-    font-size: xx-large;
-    font-weight: bold;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    letter-spacing: 1.5px;
-    text-shadow: 2px 2px 2px gray;
-    margin-top: 20px; /* Ensure the paragraph content does not overlap with the fixed title */
-}
-
-p.columns {
-    font-size: 20px;
-    margin-top: -45px;
-    margin-bottom: 90px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    column-count: 2; /* Increase the number of columns */
-    column-gap: 40px; /* Decrease the space between columns */
-    max-width: 90%;
-    align-items:center ;
-    justify-content: center;
-    margin-left: 5%;
-
-}
-  .font{
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 22px;
-    text-shadow: none;
-    letter-spacing: normal;
-  }
-
-
-
-#carouselExampleSlidesOnly {
-    width: 100%; 
-
-}
-
-.carousel-item img {
-    max-width: 100%; 
-    max-height: 100%; 
-    width: auto; 
-    height: auto; 
-    border-radius: 5px;
-}
-
-
-#innumbers {
-    background: rgb(255, 230, 67); 
-    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); 
-    padding: 60px;
-    text-align: left;
-    border-bottom: 3px solid darkblue;
-    border-top: 3px solid darkblue;
-    
-}
-
-#innumbers h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: rgb(25, 25, 123);
-    margin-top: -30px;
-    margin-bottom: 50px;
-}
-
-#titlesCard {
-    margin-bottom: 10px; /* רווח בין הכותרת לכרטיס */
-    text-align: center; /* ממרכז את הכותרת */
-    
-}
-
-#titlesCard span {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 1em; /* כותרות קטנות יותר */
-    color: #161b79; 
-    margin: 62px;
-}
-
-
-
-/* עיצוב קונטיינר של הכרטיסים */
-.container {
-    display: flex;
-    justify-content: center;
-    gap: 112px; /* הגדלת רווח בין הכרטיסים */
-    overflow-x: auto; /* מוסיף גלילה אופקית במקרה הצורך */
-    padding: 10px 10px;
-    width: 100%;
-    border: #161b79;
-}
-
-.card {
-    width: 150px; /* הקטנת רוחב הכרטיס */
-    height: 180px; /* הקטנת גובה הכרטיס */
-    perspective: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: linear-gradient(150deg, #f1ca3d, #d2d2d2); 
-    border: transparent;
-}
-
-.card-inner {
-    width: 100%;
-    height: 140px; /* גובה הכרטיס עצמו */
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-}
-
-.card:hover .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-}
-
-.card-front {
-    background-color: white; /* הסרת רקע לבן */
-    border: solid 5px #161b79;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 10px; 
-}
-
-.card-back {
-    background-color: white; /* הסרת רקע לבן */
-    border-radius: 20px;
-    border: solid 5px #161b79;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transform: rotateY(180deg);
-}
-
-.card img {
-    width: 70px; /* הקטנת רוחב התמונה */
-    height: auto;
-    object-fit: cover; /* תמונה תואמת את גודל המרחב בלי לשנות את יחסי היחס */
-    border-radius: 5px;
-}
-
-.card p {
-    font-size: 2.5rem; /* הקטנת גודל הפונט */
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-.card-back .side {
-    display: none;
-}
-
-.card:hover .card-back .side {
-    display: block;
-    padding: 20px;
-}
-
-
-.newsTitle {
-    text-align: center; /* מרכז את הטקסט */
-    padding: 20px; /* מרווח פנימי */
-    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.5), /* הצללה זהבית רכה */
-                0 0 25px rgba(255, 215, 0, 0.6), /* הצללה זהבית מוארת */
-                0 0 5px rgba(255, 215, 0, 0.7); /* הצללה זהבית נוספת */
-    margin-top: -210px;
-    margin-bottom: -60px;  
-    opacity: 0; /* התחל עם שקיפות מלאה */
-    animation: fadeIn 2s ease-in-out forwards; /* הגדרת אנימציה */          
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0; /* התחלה בשקיפות מלאה */
-        transform: translateY(-20px); /* הזזה כלפי מעלה */
-    }
-    to {
-        opacity: 1; /* סיום בשקיפות אפס */
-        transform: translateY(0); /* חזרה למקום המקורי */
-    }
-}
-
-.newsTitle h1 {
-    color: #161b79; 
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    font-size: 4em; 
-    margin: 0; 
-    padding: 0;
-    transition: transform 0.3s ease; 
-}
-
-.newsTitle h1:hover {
-    transform: scale(1.2); 
-}
-
-
+/* Modal styles */
 .modal-dialog {
-    border-radius: 30px; 
-    overflow: hidden; /
-  }wo
-  
-  .modal-content {
-    border-radius: 30px; /* Rounded corners for the modal content */
-    border: none;
-    box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* More pronounced shadow */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-    position: relative;
-  }
-  
-  .modal-header, .modal-footer {
-    border: none;
-    justify-content: center;
-    font-size: 1em;
-    padding: 20px; /* Adjusted padding for a balanced look */
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-  }
-  
-  .modal-header {
-    border-top-left-radius: 30px; /* Rounded corners for the header */
-    border-top-right-radius: 30px; /* Rounded corners for the header */
-  }
-  
-  .modal-footer {
-    border-bottom-left-radius: 30px; /* Rounded corners for the footer */
-    border-bottom-right-radius: 30px; /* Rounded corners for the footer */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Adjusted padding for a balanced look */
-    text-align: center;
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  }
-
-  .bottom-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center; /* ליישור האיברים במרכז בצורה אנכית */
-    
-  }
-
-  .contact-info {
-    font-family: Arial, sans-serif;
-    margin-left: 60px; /* הזזה שמאלה */
-    padding: 20px;
-    border: transparent;
-    max-width: 570px; /* רוחב מקסימלי */
-    transition: transform 0.3s ease; /* הוספת מעבר חלק */
+    border-radius: 15px; 
 }
 
-.contact-info:hover {
-    transform: scale(1.05); /* הגדלה של 5% */
+.modal-content {
+    border-radius: 15px; 
 }
 
-.contact-info h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 25px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: darkblue;
+.modal-header {
+    border-bottom: none; 
 }
 
-.contact-info p {
-    font-size: 17px;
-    margin: 5px 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.modal-footer {
+    border-top: none; 
 }
 
-.contact-info a {
-    color: #007bff;
-    text-decoration: none;
+/* Responsive design */
+@media (max-width: 768px) {
+    .news .title {
+        font-size: 36px;
+    }
+
+    .news section {
+        flex: 0 0 100%;
+    }
+
+    .news .map {
+        width: 100%;
+    }
+
+    .news #newsCarousel .news-image {
+        width: 50%;
+    }
 }
 
-.contact-info a:hover {
-    text-decoration: underline;
-}
+@media (max-width: 576px) {
+    .news .title {
+        font-size: 24px;
+    }
 
-
-.map {
-width: 50%;
-    
-}
-
-.map:hover{
-    transform: scale(1.05);
-}
-.map h3 {
-    font-size: 24px;
-    margin-bottom:-10px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: darkblue;
-}
-
-gmp-map {
-    width: 100%;
-    height: 80%; 
-    border-radius: 8px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-}
-
-/* @font-face {
-    font-family: GoogleSans;
-    src: url(../fonts/OpenSans-Regular.ttf);
-}
-    
-*
-{
-    font-family: GoogleSans, arial, sans-serif-medium, sans-serif in !important
-} */
-
-.articles-filers
-{
-    display: flex;
-    margin-top: 200px;
-    flex-direction: column;
-}
-
-.carousel-item active
-{
-    width: 50%;
-}
-
-#carouselExampleSlidesOnly .carousel-item img {
-    width: 30%; /* הגדרה של רוחב התמונה */
-    height: auto; /* שמירה על יחס רוחב-גובה */
-    margin: 0 auto; /* מרכז את התמונות */
-    border-radius: 5px; /* אופציונלי, לשמירה על קצוות מעוגלים */
-    display: flex;
-}
-
-
-.w-100 {
-    width: 30% !important;
-}
-
-#pictures-cro
-{
-    display: flex;
-    margin: 0 auto;
+    .news #newsCarousel .news-image {
+        width: 70%;
+    }
 }

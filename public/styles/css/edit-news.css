@@ -1,63 +1,63 @@
 /* General Container Styling */
 .container {
-  max-width: 800px; /* Increased width for a more spacious layout */
-  margin: 0 auto;
-  padding: 20px;
-  position: relative; /* Ensures container is positioned above background */
-  z-index: 1; /* Keeps container above the background */
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 20px; 
+  position: relative; /* Ensure container is positioned above the background */
+  z-index: 1; /* Keep container above the background */
 }
 
 /* Main Background Styling */
 .edit-news {
-  position: relative; /* Position relative to use pseudo-elements */
-  padding: 20px; /* Optional: Add padding to keep content away from edges */
-  background: whitesmoke; /* White smoke background color */
-  overflow: hidden; /* Ensures overlay does not overflow */
+  position: relative; /* Allows use of pseudo-elements */
+  padding: 20px; 
+  background: whitesmoke; 
+  overflow: hidden; /* Prevents overflow of pseudo-element */
 }
 
 /* Pseudo-element for Background Image */
 .edit-news::before {
-  content: "";
-  position: absolute;
+  content: ""; /* Empty content for the pseudo-element */
+  position: absolute; /* Position it absolutely to cover the entire section */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/styles/imgs/footer/abstract-bg.png') no-repeat center center;
-  background-size: cover;
-  opacity: 0.5; /* Adjust opacity to make the image more transparent */
-  z-index: 0; /* Position below the content */
+  background: url('/styles/imgs/footer/abstract-bg.png') no-repeat center center; 
+  background-size: cover; /* Cover the entire section */
+  opacity: 0.5; /* Transparency of the background image */
+  z-index: 0; /* Place below the content */
 }
 
 /* Ensure container content is above the image */
 .edit-news > * {
-  position: relative;
-  z-index: 1; /* Ensures content is above the background image */
+  position: relative; /* Ensures content is above the background image */
+  z-index: 1; /* Keeps content above the pseudo-element */
 }
 
 /* Form Styling */
 .edit-txt label {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 1.1em; /* Slightly larger font size */
-  color: #333; /* Darker text color for better readability */
+  display: block; /* Block display for labels */
+  margin-bottom: 1rem; 
+  font-size: 1.1em;
+  color: #333; 
 }
 
 .edit-txt input, .edit-txt textarea {
-  width: 100%;
-  border-radius: 8px; /* Rounded corners */
-  border: 1px solid #ddd; /* Light border for input fields */
-  padding: 10px; /* Added padding for better spacing */
-  box-sizing: border-box; /* Ensures padding is included in width */
-  font-size: 1em; /* Consistent font size */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-  background: whitesmoke;
+  width: 100%; 
+  border-radius: 8px; 
+  border: 1px solid #ddd; 
+  padding: 10px; 
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+  background: whitesmoke; 
 }
 
 /* Input Focus Styling */
 .edit-txt input:focus, .edit-txt textarea:focus {
-  background: #fff; /* Keep background white */
-  border-color: #2575fc; /* Change border color on focus */
+  background: #fff; 
+  border-color: #2575fc; 
   box-shadow: 0 0 5px rgba(37, 117, 252, 0.5); /* Subtle shadow effect */
   outline: none; /* Remove default outline */
 }
@@ -65,25 +65,25 @@
 /* Modal Styling */
 .modal-dialog {
   border-radius: 30px; 
-  overflow: hidden; 
+  overflow: hidden; /* Hide overflow */
 }
 
 .modal-content {
   border-radius: 30px; 
-  border: none;
-  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); 
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  position: relative;
+  border: none; 
+  box-shadow: 0 12px 24px rgba(88, 127, 249, 0.6); /* Shadow effect for the modal */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: white; 
+  position: relative; 
 }
 
 .modal-header, .modal-footer {
-  border: none;
-  justify-content: center;
-  font-size: 1em;
+  border: none; /* No border */
+  justify-content: center; 
+  font-size: 1em; 
   padding: 20px; 
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); 
+  color: white; 
 }
 
 .modal-header {
@@ -97,41 +97,41 @@
 
 .modal-body {
   padding: 20px; 
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center; 
+  background-color: rgba(255, 255, 255, 0.9); 
 }
 
 /* Button Styling */
 button {
   border: none;
-  border-radius: 8px; /* Rounded corners for buttons */
-  padding: 10px 20px;
-  font-size: 1em;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition */
+  border-radius: 8px; 
+  padding: 10px 20px; 
+  font-size: 1em; 
+  color: #fff; 
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
 button#updateButton {
-  background: #007bff; /* Primary button color */
+  background: #007bff; 
 }
 
 button#updateButton:hover {
-  background: #0056b3; /* Darker shade on hover */
+  background: #0056b3; 
 }
 
 button#deleteButton {
-  background: #dc3545; /* Danger button color */
+  background: #dc3545; /* Red background for delete button */
 }
 
 button#deleteButton:hover {
-  background: #c82333; /* Darker shade on hover */
+  background: #c82333; /* Darker red on hover */
 }
 
 button#addButton {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient background for add button */
 }
 
 button#addButton:hover {
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Maintain gradient background on hover */
 }
