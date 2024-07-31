@@ -1,43 +1,37 @@
-// Global variables to store the search criteria
+// Global variables
 let gTitle = '';
 let gMonth = 0;
 let gStadium = '';
 
-// Function to set the selected month and filter the tickets
+// filter by month 
 function setMonth(newMonth = 0) {
-    gMonth = newMonth; // Update the selected month
-    console.log(`Month set to: ${gMonth}`);
-    filterTickets(); // Filter tickets based on the new month
+    gMonth = newMonth;
+    filterTickets(); 
 }
 
-// Function to set the selected title and filter the tickets
+// filter by title
 function setTitle(newTitle = '') {
-    gTitle = newTitle; // Update the selected title
-    console.log(`Title set to: ${gTitle}`);
-    filterTickets(); // Filter tickets based on the new title
+    gTitle = newTitle;
+    filterTickets(); 
 }
 
-// Function to set the selected stadium and filter the tickets
+// filter by stadium
 function setStadiumFilter(newStadium = '') {
-    gStadium = newStadium; // Update the selected stadium
-    console.log(`Stadium set to: ${gStadium}`);
-    filterTickets(); // Filter tickets based on the new stadium
+    gStadium = newStadium;
+    filterTickets(); 
 }
 
-// Function to filter tickets based on the selected criteria
+// Function to filter tickets
 async function filterTickets() {
     try {
-        // Create the URL for the filter request
         let url = `/tickets/filter?title=${gTitle}`;
-        
+
         if (gMonth !== 0) {
-            // Add month to the URL if a month is selected
-            url += `&month=${gMonth}`;
+            url += `&month=${gMonth}`; // Add month
         }
-        
+
         if (gStadium) {
-            // Add stadium to the URL if a stadium is selected
-            url += `&stadium=${gStadium}`;
+            url += `&stadium=${gStadium}`; // Add stadium
         }
 
         // Send an AJAX request to the server to get the filtered tickets
@@ -46,7 +40,7 @@ async function filterTickets() {
             method: 'GET',
             contentType: 'application/json',
         });
-        console.log('Filtered tickets:', tickets);
+
         renderTickets(tickets); // Display the filtered tickets
     } catch (error) {
         console.error('Error fetching tickets:', error); // Handle errors
@@ -114,10 +108,10 @@ function renderTickets(tickets) {
             </div>`;
         }
     }
-    $('#tickets').html(str); // Add the tickets to the page using jQuery
+    $('#tickets').html(str); 
 }
 
-// Function to navigate to the ticket edit page based on the ticket ID
+//  edit page by ticket ID
 function getEditTicketPage(ticketId) {
     window.location.href = `/tickets/edit/${ticketId}`;
 }
@@ -155,17 +149,17 @@ async function addToCart(ticketId) {
     }
 }
 
-// Function to show notices to the user
+// show notices 
 function showNotice(message, redirectToLogin) {
-    $('#noticeModalBody').text(message); // Display the message in the modal body using jQuery
-    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); // Create a new modal
-    noticeModal.show(); // Show the modal
+    $('#noticeModalBody').text(message); 
+    var noticeModal = new bootstrap.Modal($('#noticeModal')[0], {}); 
+    noticeModal.show(); 
 
     setTimeout(function() {
         if (redirectToLogin) {
             window.location.href = '/login'; // Redirect to login page if needed
         } else {
-            noticeModal.hide(); // Hide the modal after some time
+            noticeModal.hide(); // Hide 
         }
-    }, 3000); // Adjust the timeout as needed
+    }, 3000);
 }

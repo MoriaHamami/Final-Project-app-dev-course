@@ -35,8 +35,8 @@ async function isManagerLoggedIn(req, res, next) {
         } else {
             res.redirect('/login');
         }
-    } catch (e) {
-        console.log('Error:', e);
+    } catch {
+        res.redirect('/login');
     }
 }
 
@@ -58,12 +58,10 @@ async function login(req, res) {
         } else {
             res.render("login.ejs", { user: null, error: result.message });
         }
-    } catch (e) {
-        console.log('Error:', e);
+    } catch {
         res.render("login.ejs", { user: null, error: "Login error, please try again later" });
     }
 }
-
 
 // Register function
 async function register(req, res) {
@@ -77,8 +75,7 @@ async function register(req, res) {
         await loginService.register(fullname, username, password, imgURL);
         req.session.username = username;
         res.status(201).json({ message: "Successfully registered!" });
-    } catch (e) {
-        console.log('Error:', e);
+    } catch {
         res.status(500).json({ error: "Registration error, please try again later" });
     }
 }
@@ -100,7 +97,7 @@ async function getPermissions(req, res) {
         const isManager = await loginService.getIsManager(req.session.username);
         const user = { isManager };
         res.json(user);
-    } catch (e) {
+    } catch {
         res.json({ user: null });
     }
 }
@@ -110,8 +107,8 @@ async function getIsManager(req, res) {
     try {
         const isManager = await loginService.getIsManager(req.session?.username);
         return isManager;
-    } catch (e) {
-        console.log('Error:', e);
+    } catch {
+        return false;
     }
 }
 
@@ -124,8 +121,7 @@ const getClientPage = async (req, res) => {
             return res.status(404).send('Client not found');
         }
         res.render('client', { client: clientInfo });
-    } catch (e) {
-        console.error('Error fetching client:', e);
+    } catch {
         res.status(500).send('Internal Server Error');
     }
 };

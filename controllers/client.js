@@ -1,28 +1,28 @@
-const clientsService = require('../services/clients');
-const ticketsService = require('../services/tickets'); // Missing import for ticketsService
-const productsService = require('../services/products'); // Missing import for productsService
+//Importing Services
+const clientsService = require('../services/clients')
+const ticketsService = require('../services/tickets')
+const productsService = require('../services/products')
 
 // Render client page with favorite items and orders
 const getClientPage = async (req, res) => {
     try {
         const username = req.session.username;
         if (!username) {
-            throw new Error('Username is not found in session');
+            throw new Error('Username is not found in session'); // Check if username exists in session
         }
 
         const clientInfo = await clientsService.getClientWithFaveItemsAndOrders(username);
         if (!clientInfo) {
-            return res.status(404).send('Client not found');
+            return res.status(404).send('Client not found'); // client is not found
         }
 
-        res.render('client', { client: clientInfo });
+        res.render('client', { client: clientInfo }); // Render client page with information
     } catch (e) {
-        console.error('Error fetching client:', e.message);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Internal Server Error'); // errors
     }
 };
 
-// Fetch client orders and calculate total amount
+//client orders and total amount
 async function getClientOrders(req, res) {
     const id = req.params.id;
     try {
@@ -41,31 +41,31 @@ async function getClientOrders(req, res) {
                 
                 // Fetch item information based on type
                 if (itemType === "ticket") {
-                    item.productInfo = await ticketsService.getTicketById(itemId);
-                    item.imgs = [item.productInfo.opImg];
+                    item.productInfo = await ticketsService.getTicketById(itemId); //ticket
+                    item.imgs = [item.productInfo.opImg]; // Set ticket image
                 } else {
-                    item.productInfo = await productsService.getProductById(itemId);
-                    item.imgs = item.productInfo.srcImg;
+                    item.productInfo = await productsService.getProductById(itemId); //product
+                    item.imgs = item.productInfo.srcImg; // product images
                 }
 
-                item.size = orderFromDB[j]?.size;
-                item.type = itemType + 's';
+                item.size = orderFromDB[j]?.size; // item size
+                item.type = itemType + 's'; //item type
                 order.push(item);
-                sum += item?.price || 0;
+                sum += item?.price || 0; // Calculate total price
             }
             orders.push(order);
         }
 
-        orders.totalAmount = sum;
-        res.json(orders);
+        orders.totalAmount = sum; // total amount
+        res.json(orders); // Send orders as JSON response
     } catch (e) {
-        res.status(500).json({ error: e.message });
+        res.status(500).json({ error: e.message }); //errors
     }
 }
 
 // Render edit shirt page
-function getEditShirt(req, res){
-    res.render('edit-shirt.ejs', {})
+function getEditShirt(req, res) {
+    res.render('edit-shirt.ejs', {}); // Render edit shirt page
 }
 
 module.exports = {
