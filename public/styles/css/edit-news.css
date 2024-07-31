@@ -95,10 +95,11 @@
   border-bottom-right-radius: 30px; 
 }
 
+/* Modal body styling */
 .modal-body {
-  padding: 20px; 
-  text-align: center; 
-  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  padding: 20px; /* Padding inside the body */
+  text-align: center; /* Center align text */
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Semi-transparent white background */
 }
 
 /* Button Styling */
