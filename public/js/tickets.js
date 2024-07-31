@@ -55,6 +55,10 @@ function renderTickets(tickets) {
     } else {
         // Create HTML for each ticket and display it on the page
         for (let i = 0; i < tickets.length; i++) {
+            const ticketDate = new Date(tickets[i].date);
+            const formattedDate = ticketDate.toLocaleDateString('en-GB').replace(/\//g, '.');
+            const formattedTime = ticketDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
             str += `<div class="card" style="width: 18rem;" data-stadium="${tickets[i].stadium}">
                 <div class="battle">
                     <div class="team">
@@ -80,11 +84,11 @@ function renderTickets(tickets) {
                     <h4 class="card-title">${tickets[i].title}</h4>
                     <div>
                         <i class="bi bi-calendar3"></i>
-                        <span>${new Date(tickets[i].date).toLocaleDateString()}</span>
+                        <span>${formattedDate}</span>
                     </div>
                     <div>
                         <i class="bi bi-clock"></i>
-                        <span>${new Date(tickets[i].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span>${formattedTime}</span>
                     </div>
                     <div class="icon-text-container">
                         <div>
@@ -95,7 +99,7 @@ function renderTickets(tickets) {
                     <div class="icon-text-container">
                         <div>
                             <i class="bi bi-ticket-detailed"></i>
-                            <span id="priceof_tic">${tickets[i].price}€</span>
+                            <span id="priceof_tic">${tickets[i].price}$</span>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">

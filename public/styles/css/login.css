@@ -4,10 +4,11 @@
     box-sizing: border-box;
     outline: none !important;
     border: none !important;
+
 }
 
 body {
-    margin: 50px 0;
+    margin: 0px 0;
 }
 
 .img {
@@ -37,6 +38,11 @@ h1, h5 {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    transition: transform 0.3s ease;
+}
+
+.userDetails:hover{
+    transform: scale(1.01);
 }
 
 .userDetails input[type="email"] {
@@ -46,7 +52,7 @@ h1, h5 {
     margin: 0 auto;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 16px;
     outline: none;
 }
@@ -55,6 +61,8 @@ h1, h5 {
     border-color: rgb(62, 49, 250);
     box-shadow: 0 0 5px rgb(62, 49, 250);
 }
+
+
 
 #cant {
     color: rgb(62, 49, 250);
@@ -83,7 +91,7 @@ h4 {
 
 .btn-primary {
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-    border-radius: 16px;
+    border-radius: 20px;
     width: 394px;
     height: 64px;
     margin-top: 10px;
@@ -92,10 +100,16 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 19px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: none;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.btn-primary:hover{
+    transform: scale(1.04);
+    font-size: 23px;
 }
 
 .btn-primary:focus, 
@@ -126,16 +140,26 @@ h4 {
     margin: 0 auto;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 16px;
     font-size: 16px;
     outline: none;
+}
+
+#register-btn{
+    padding: 60px;
+    transition: transform 0.3s ease;
+}
+
+#register-btn:hover{
+    text-decoration: underline;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)
 }
 
 #registerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 2px;
 }
 
 .image-upload {
@@ -143,7 +167,8 @@ h4 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: -7px;
+
 }
 
 .image-upload img {
@@ -165,12 +190,18 @@ h4 {
     padding: 10px 20px;
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
-    border-radius: 10px;
+    border-radius: 13px;
     cursor: pointer;
     margin-top: 10px;
     text-align: center;
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.image-upload label:hover{
+    transform: scale(1.04);
+    font-size: 18px;
 }
 
 .image-upload .deleteImg {
@@ -228,4 +259,28 @@ h4 {
 .text-danger {
     margin-top: 10px;
     text-align: center;
+}
+
+.sign-in-container {
+    text-align: center; /* מרכז את הטקסט */
+    margin-top: -60px; /* מרווח עליון */
+    padding-bottom: 30px;
+}
+
+.separator {
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+.sign-in-text {
+    margin: 0; 
+    font-size: 16px; 
+}
+
+.sifn-in-text a{
+    transition: text-shadow 0.3s ease, text-decoration 0.3s ease;
+}
+.sign-in-text a:hover{
+text-decoration: underline;
+text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)
 }
