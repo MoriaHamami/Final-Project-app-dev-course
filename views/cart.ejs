@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,6 @@
     <link rel="stylesheet" href="/styles/css/setup/general.css">
     <link rel="stylesheet" href="/styles/css/cart.css">
 </head>
-
 <body>
     <%- include('header.ejs', {page:'cart'}) -%>
     <main class="cart">
@@ -60,12 +58,13 @@
                         </div>
                         <div class="col text-center">
                             <h4><%= cartItems?.reduce((total, item) => total + item.price, 0) %> $</h4>
+                            <!-- הוספת שדה מוסתר עם הסכום הכולל של העגלה -->
+                            <input type="hidden" id="cartTotal" value="<%= cartItems?.reduce((total, item) => total + item.price, 0) %>">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="orderDetails">
             <div class="customerD">
                 <h4>Your details</h4>
@@ -122,5 +121,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/cart.js"></script>
 </body>
-
 </html>

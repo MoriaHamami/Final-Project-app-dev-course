@@ -89,13 +89,13 @@ function showLargePopup(message) {
 }
 
 async function proceedToShipping() {
-    // Check if the cart is empty
+    // בדוק אם העגלה ריקה
     if (gCartItems.length === 0) {
         showNotice('Your cart is empty.');
         return;
     }
 
-    // Check if all fields are filled
+    // בדוק אם כל השדות מלאים
     const fullName = $('#fullName').val().trim();
     const email = $('#email').val().trim();
     const phoneNumber = $('#phoneNumber').val().trim();
@@ -110,17 +110,34 @@ async function proceedToShipping() {
     }
 
     try {
-        const cartTotal = gCartItems.reduce((total, item) => total + item.price, 0);
+        // קבל את הסכום הכולל מהשדה המוסתר
+        const cartTotal = parseFloat($('#cartTotal').val());
+
+        // לוגים לדיבוג
+        console.log('gCartItems:', gCartItems);
+        console.log('Cart Total:', cartTotal); 
 
         const response = await $.ajax({
             url: '/cart/checkout',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ cartTotal })
+            data: JSON.stringify({
+                cartItems: gCartItems, // שלח את הפריטים בעגלה
+                cartTotal: cartTotal // שלח את הסכום הכולל של העגלה
+            }),
+            success: function(data) {
+                console.log('AJAX Success:', data);
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX Error:', error);
+            }
         });
 
         if (response.success) {
-            showLargePopup('Thank you for your purchase!');
+            showNotice('Thank you for your purchase!');
+            setTimeout(function() {
+                window.location.assign('/client');
+            }, 2000);
         } else {
             showNotice(response.message || 'Error processing order');
         }
@@ -129,6 +146,7 @@ async function proceedToShipping() {
         showNotice('Error processing order');
     }
 }
+
 
 async function addToCart(productId, size, quantity) {
     try {
