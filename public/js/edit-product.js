@@ -127,8 +127,7 @@ function addFileListener(id) {
 // Function to handle updating an existing image
 async function onChangeImg(input) {
     try {
-        const imgSrc = await readChangedURL(input) // Get updated image source
-        addTogSrcImgs(imgSrc) // Add image source to global array
+        readChangedURL(input) // Update img tag after image change
     } catch (e) {
         console.log('Error:', e) // Log any errors
     }

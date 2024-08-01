@@ -3,8 +3,6 @@ footer {
     bottom: 0 !important;
 }
 
-main.client {}
-
 .client .client_details,
 .client .yourhistory {
     border: 1px solid var(--l-gray); /* Add light border */
@@ -145,7 +143,7 @@ main.client {}
     padding: 20px;
     border-radius: 25px;
     margin: 0 10px;
-    max-height: 60%;
+    height: 100vh;
     width: 62%;
 }
 
@@ -226,7 +224,6 @@ main.client {}
 
 .client .tab-content {
     overflow: auto;
-    height: 70vh;
 }
 
 /* Scrollbar Styling */
@@ -266,6 +263,7 @@ main.client {}
 
     .client .yourhistory {
         width: 90%;
+        height: 100vh;
     }
 
     .favorite_list,
@@ -290,6 +288,7 @@ main.client {}
     .client .client_details,
     .client .yourhistory {
         width: 100%;
+        height: 100vh;
     }
 
     .favorite_list,
@@ -321,6 +320,9 @@ main.client {}
     .client .yourhistory {
         width: 100%;
         padding: 10px;
+    }
+    .client .yourhistory {
+        height: 100vh;
     }
 
     .favorite_list,

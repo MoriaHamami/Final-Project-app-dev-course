@@ -1,3 +1,5 @@
+let gCartItems = []
+
 $(document).ready(function() {
     // Event listener for removing an item from the cart
     $(document).on('click', '.icon-text, .bi-trash3', function() {
@@ -5,12 +7,25 @@ $(document).ready(function() {
         console.log('Sending cartItemId:', cartItemId); // Debugging
         removeItem(cartItemId);
     });
+    updateCartItems()
 });
 
-/**
- * Remove an item from the cart.
- * @param {string} cartItemId - The ID of the cart item to be removed.
- */
+
+//  Updates initial cart items from db
+function updateCartItems() {
+    $.ajax({
+        url: '/cart/cartItems', // API endpoint to getCartItems
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(cartItems) {
+            gCartItems = cartItems
+        },
+        error: function(error) {
+            // Log any errors to the console
+            console.error('Error:', error);
+        }
+    });
+}
 async function removeItem(cartItemId) {
     try {
         console.log('Removing item:', cartItemId); // Debugging
@@ -36,11 +51,6 @@ async function removeItem(cartItemId) {
     }
 }
 
-/**
- * Show a notice message to the user.
- * @param {string} message - The message to display.
- * @param {function} [callback] - Optional callback function to run after the notice is hidden.
- */
 function showNotice(message, callback) {
     console.log('Showing notice:', message); // Debugging
     var $noticeModalBody = $('#noticeModalBody');
@@ -60,10 +70,6 @@ function showNotice(message, callback) {
     }
 }
 
-/**
- * Show a large popup with a message.
- * @param {string} message - The message to display in the popup.
- */
 function showLargePopup(message) {
     var $largePopup = $('.large-popup');
     var $largePopupContent = $('.large-popup-content');
@@ -82,12 +88,9 @@ function showLargePopup(message) {
     }
 }
 
-/**
- * Proceed to the shipping step in the checkout process.
- */
 async function proceedToShipping() {
     // Check if the cart is empty
-    if (cartItems.length === 0) {
+    if (gCartItems.length === 0) {
         showNotice('Your cart is empty.');
         return;
     }
@@ -107,7 +110,7 @@ async function proceedToShipping() {
     }
 
     try {
-        const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+        const cartTotal = gCartItems.reduce((total, item) => total + item.price, 0);
 
         const response = await $.ajax({
             url: '/cart/checkout',
@@ -127,12 +130,6 @@ async function proceedToShipping() {
     }
 }
 
-/**
- * Add a product to the cart.
- * @param {string} productId - The ID of the product to add.
- * @param {string} size - The size of the product.
- * @param {number} quantity - The quantity of the product.
- */
 async function addToCart(productId, size, quantity) {
     try {
         const response = await $.ajax({
@@ -155,5 +152,4 @@ async function addToCart(productId, size, quantity) {
 
 async function goToProductsPage(){
     window.location.assign('/products'); 
-
 }

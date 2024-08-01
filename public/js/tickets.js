@@ -2,6 +2,24 @@
 let gTitle = '';
 let gMonth = 0;
 let gStadium = '';
+let gIsManager = false
+updateIsManager()
+
+// Checks if the user is a manager
+function updateIsManager() {
+    $.ajax({
+        url: '/login/isLogged', // API endpoint to check login status
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(user) {
+            gIsManager = user?.isManager
+        },
+        error: function(error) {
+            // Log any errors to the console
+            console.error('Error:', error);
+        }
+    });
+}
 
 // filter by month 
 function setMonth(newMonth = 0) {
@@ -76,7 +94,7 @@ function renderTickets(tickets) {
                     </div>
                 </div>
                 <div class="card-body">
-                 ${isManager ?
+                 ${gIsManager ?
                     `<div class="edit-icon" onclick="getEditTicketPage('${tickets[i]._id}')">
                         <i class="bi bi-pencil"></i>
                     </div>` : ""

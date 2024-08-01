@@ -6,13 +6,30 @@ let gSortIsAsc = { // Sort order
     price: true,
     title: true
 }
-
 var timeOutFunctionId // Timeout ID for debounce
+let gFaveProductIds = []
 
 // Initialize products list on document ready
 $(document).ready(() => {
     getProductsBy()
+    updateFaveProductsIds()
+
 })
+
+function updateFaveProductsIds() {
+    $.ajax({
+        url: '/products/faveIds', // API endpoint to check login status
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(faveIds) {
+            gFaveProductIds = faveIds
+        },
+        error: function(error) {
+            // Log any errors to the console
+            console.error('Error:', error);
+        }
+    });
+}
 
 // Function to update the price output
 function updateOutput(newPrice) {
@@ -85,8 +102,8 @@ async function getProductsBy(sortVal = '', isAsc = true) {
                         <img src="${response[i].srcImg[0]?.includes('data:') ? response[i].srcImg[0] : ('/styles/imgs/products/' + response[i].srcImg[0])}" alt="product">
                         <div class="image-name">${response[i].title}</div>
                         <div class="price">${response[i].price}$</div>
-                        <button class="wishlist-btn ${favoriteProductIds.includes(response[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${response[i]._id}')">
-                            <i class="${favoriteProductIds.includes(response[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
+                        <button class="wishlist-btn ${gFaveProductIds.includes(response[i]._id.toString()) ? 'wishlist-active' : ''}" onclick="toggleWishlist(event, this, '${response[i]._id}')">
+                            <i class="${gFaveProductIds.includes(response[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
                         </button>
                     </a>`
             }

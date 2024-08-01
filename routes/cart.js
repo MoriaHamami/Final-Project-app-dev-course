@@ -26,5 +26,9 @@ router.route('/remove')
 router.route('/checkout')
     .post(loginController.isLoggedIn, cartController.checkoutCart) // Check if the user is logged in before 
 
+// Define the route for checking out the cart
+router.route('/cartItems')
+    .get(loginController.isLoggedIn, cartController.getCartItems) // Check if the user is logged in before 
+
 
 module.exports = router;

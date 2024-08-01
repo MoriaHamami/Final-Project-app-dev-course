@@ -10,6 +10,10 @@ const { isLoggedIn } = loginController  // Import isLoggedIn function
 router.route('/')
     .get(productsController.getProducts)
 
+// Route to get fave product ids
+router.route('/faveIds')
+    .get(productsController.getFaveProductIds)
+
 // Route to filter products based on criteria
 router.route('/filter')
     .get(productsController.getProductsByFilter)

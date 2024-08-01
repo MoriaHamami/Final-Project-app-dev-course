@@ -5,26 +5,44 @@ const Client = require('../models/clients') // Import Client model
 // Function renders the products page
 const getProducts = async (req, res) => {
   try {
-      const username = req.session.username // Get logged-in username
-      let favoriteProductIds = [] // Initialize favorite product IDs
+    const username = req.session.username // Get logged-in username
+    let favoriteProductIds = [] // Initialize favorite product IDs
 
-      if (username) {
-          const client = await Client.findOne({ username }) // Find client by username
-          favoriteProductIds = client ? client.faveItems.map(item => item.toString()) : [] // Get favorite product IDs
-      }
+    if (username) {
+      const client = await Client.findOne({ username }) // Find client by username
+      favoriteProductIds = client ? client.faveItems.map(item => item.toString()) : [] // Get favorite product IDs
+    }
 
-      const productsInfo = await productService.getProducts() // Get products info
-      res.render('products.ejs', {
-          products: productsInfo.products, // Render products
-          maxPrice: productsInfo.maxPrice, // Maximum price
-          minPrice: productsInfo.minPrice, // Minimum price
-          cats: productsInfo.cat, // Categories
-          sizes: productsInfo.sizes, // Sizes
-          favoriteProductIds: JSON.stringify(favoriteProductIds), // Favorite product IDs
-      })
+    const productsInfo = await productService.getProducts() // Get products info
+    res.render('products.ejs', {
+      products: productsInfo.products, // Render products
+      maxPrice: productsInfo.maxPrice, // Maximum price
+      minPrice: productsInfo.minPrice, // Minimum price
+      cats: productsInfo.cat, // Categories
+      sizes: productsInfo.sizes, // Sizes
+      favoriteProductIds: JSON.stringify(favoriteProductIds), // Favorite product IDs
+    })
   } catch (e) {
-      console.log('Error rendering products page:', e) // Log any errors
-      res.status(500).send('Internal Server Error') // Send 500 status code
+    console.log('Error rendering products page:', e) // Log any errors
+    res.status(500).send('Internal Server Error') // Send 500 status code
+  }
+}
+
+// Function sends back the fave product ids
+const getFaveProductIds = async (req, res) => {
+  try {
+    const username = req.session.username // Get logged-in username
+    let favoriteProductIds = [] // Initialize favorite product IDs
+
+    if (username) {
+      const client = await Client.findOne({ username }) // Find client by username
+      favoriteProductIds = client ? client.faveItems.map(item => item.toString()) : [] // Get favorite product IDs
+    }
+
+    res.json(favoriteProductIds)
+  } catch (e) {
+    console.log('Error getting fave product ids:', e) // Log any errors
+    res.status(500).send('Internal Server Error') // Send 500 status code
   }
 }
 
@@ -125,26 +143,26 @@ const toggleWishlist = async (req, res) => {
   const username = req.session.username // Get logged-in username
 
   if (!username) {
-      return res.status(401).json({ success: false, message: 'You must log in first to add to favorites.' }) // Return 401 if not logged in
+    return res.status(401).json({ success: false, message: 'You must log in first to add to favorites.' }) // Return 401 if not logged in
   }
 
   try {
-      const client = await Client.findOne({ username }) // Find client by username
+    const client = await Client.findOne({ username }) // Find client by username
 
-      if (isAdding) {
-          if (!client.faveItems.includes(productId)) {
-              client.faveItems.push(productId) // Add product to favorites if not already included
-          }
-      } else {
-          client.faveItems = client.faveItems.filter(item => item.toString() !== productId) // Remove product from favorites
+    if (isAdding) {
+      if (!client.faveItems.includes(productId)) {
+        client.faveItems.push(productId) // Add product to favorites if not already included
       }
+    } else {
+      client.faveItems = client.faveItems.filter(item => item.toString() !== productId) // Remove product from favorites
+    }
 
-      await client.save() // Save updated client
+    await client.save() // Save updated client
 
-      res.json({ success: true }) // Send success response
+    res.json({ success: true }) // Send success response
   } catch (error) {
-      console.error('Error toggling wishlist:', error) // Log any errors
-      res.status(500).json({ success: false, error: 'Internal Server Error' }) // Return 500 if server error
+    console.error('Error toggling wishlist:', error) // Log any errors
+    res.status(500).json({ success: false, error: 'Internal Server Error' }) // Return 500 if server error
   }
 }
 
@@ -152,9 +170,10 @@ const toggleWishlist = async (req, res) => {
 module.exports = {
   createProduct,
   getProducts,
-  getProduct, 
-  updateProduct, 
+  getProduct,
+  updateProduct,
   deleteProduct,
-  getProductsByFilter, 
-  toggleWishlist 
+  getProductsByFilter,
+  toggleWishlist,
+  getFaveProductIds
 }

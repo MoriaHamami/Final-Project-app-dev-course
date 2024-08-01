@@ -49,7 +49,7 @@ async function getCartItems(req, res) {
             return res.redirect('/login');
         }
         const cartItems = await clientsService.getCartItemsFromDB(username);
-        return cartItems;
+        res.json(cartItems);
     } catch (e) {
         throw e;
     }

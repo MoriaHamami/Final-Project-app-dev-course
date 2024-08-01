@@ -125,25 +125,11 @@ $('#textInput').on('input', function () {
     enteredText = this.value;
 });
 
-// Function to draw a sketch on the shirt
-function drawSketch(x, y) {
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = "black";
-    ctx.fill();
-}
-
 // Add event listeners for the color picker buttons
 $('.color').each(function () {
     $(this).on('click', function () {
         currentColor = $(this).css('backgroundColor');
     });
-});
-
-// Add event listener for drawing on the shirt
-$('#myCanvas').on('mousedown', function (event) {
-    var rect = canvas.getBoundingClientRect(); // Get the absolute position of the canvas
-    drawSketch(event.clientX - rect.left, event.clientY - rect.top); // Adjust to the absolute mouse position
 });
 
 // Function to draw the shirt frame
