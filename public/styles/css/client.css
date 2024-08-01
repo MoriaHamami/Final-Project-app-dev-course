@@ -3,7 +3,7 @@ footer {
     bottom: 0 !important;
 }
 
-.client .client_details,
+.client .personal_data,
 .client .yourhistory {
     border: 1px solid var(--l-gray); /* Add light border */
     border-radius: 25px; /* Make edges round */
@@ -79,8 +79,8 @@ footer {
     padding: 8%;
     border-radius: 25px;
     margin-bottom: 10px;
-    height: 100%;
-    overflow: hidden;
+    height: 100vh;
+    overflow: auto;
 }
 
 .client .client_details {
@@ -227,11 +227,13 @@ footer {
 }
 
 /* Scrollbar Styling */
+.client .personal_data::-webkit-scrollbar,
 .client .tab-content::-webkit-scrollbar {
     width: 8px;
     /* Width of the scrollbar */
 }
 
+.client .personal_data::-webkit-scrollbar-thumb,
 .client .tab-content::-webkit-scrollbar-thumb {
     background-color: #ddd;
     /* Color of the scrollbar thumb */
@@ -239,11 +241,13 @@ footer {
     /* Rounded corners for the thumb */
 }
 
+.client .personal_data::-webkit-scrollbar-thumb:hover,
 .client .tab-content::-webkit-scrollbar-thumb:hover {
     background-color: #ccc;
     /* Darker color on hover */
 }
 
+.client .personal_data::-webkit-scrollbar-track,
 .client .tab-content::-webkit-scrollbar-track {
     background-color: #f0f0f0;
     /* Background color of the scrollbar track */
