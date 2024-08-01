@@ -1,6 +1,40 @@
-const weatherApiKey = '54e5fa763dd39a887729e98f2ca75202'; // API key for OpenWeatherMap
-const city = 'Madrid'; // The city to display weather for
-const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`;
+let city = 'Madrid'; // The city to display weather for
+let weatherApiKey = ''; // API key for OpenWeatherMap
+let weatherApiUrl = '';
+
+// Fetch the weather data when the document is ready
+$(document).ready(async function() {
+    const res = await getWeatherApi()
+    if(res){
+        $.ajax({
+            url: weatherApiUrl,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                displayWeather(data); // Display the weather data on success
+            },
+            error: function(error) {
+                console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
+            }
+        });
+    }
+});
+
+async function getWeatherApi(){
+    try{
+        const key = await $.ajax({
+            url: '/weatherAPI', 
+            method: 'GET',
+            contentType: 'application/json'
+        })
+        weatherApiKey = key
+        weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`
+        return true
+    } catch(error){
+        console.error('Error:', error);
+        return false
+    }
+}
 
 function getShopPage() {
     window.location.assign('/products'); // Redirect to the products page
@@ -41,17 +75,4 @@ function findWeatherForDate(weatherList, date) {
     return weatherList.find(weather => weather.dt_txt.includes(targetDate)); // Find the weather data for the specific date
 }
 
-// Fetch the weather data when the document is ready
-$(document).ready(function() {
-    $.ajax({
-        url: weatherApiUrl,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            displayWeather(data); // Display the weather data on success
-        },
-        error: function(error) {
-            console.log('An error occurred while fetching data from the OpenWeatherMap API:', error);
-        }
-    });
-});
+

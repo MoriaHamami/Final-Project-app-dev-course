@@ -54,7 +54,6 @@ app.use("/tickets", require("./routes/tickets")); // Tickets page
 app.use("/manager", require("./routes/manager")); // Manager page
 app.use("/clients", require("./routes/clients")); // Clients page
 app.use("/cart", require("./routes/cart")); // Cart page
-app.use("/", require("./routes/home")); // Home page (again)
 
 // Start server
 const port = process.env.PORT || 8084; // Set port

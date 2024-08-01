@@ -8,6 +8,8 @@ const homeController = require("../controllers/home")
 // Define the route for the home page
 router.route('/')
     .get(homeController.getHomePage) // GET requests getHomePage from the home controller
+router.route('/weatherAPI')
+    .get(homeController.getWeatherApiKey) 
 
 // Export the router
 module.exports = router
