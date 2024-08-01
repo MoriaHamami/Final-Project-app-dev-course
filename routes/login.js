@@ -16,9 +16,6 @@ router.route('/register')
 router.route('/logout')
     .get(loginController.logout); // GET request to handle logout
 
-// For later use: example route that requires user to be logged in
-// router.get('/secret', loginController.isLoggedIn, loginController.funcExampleForShowingSecretPage)
-
 // Route for getting user details if authenticated
 router.get('/user/details', (req, res) => {
     if (req.isAuthenticated()) {

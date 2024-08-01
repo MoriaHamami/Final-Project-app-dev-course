@@ -177,7 +177,7 @@ async function onAddTicket(ev) {
             }),
         });
 
-        showNotice('New ticket added successfully.', false);
+        showNotice('New ticket added successfully and posted to Facebook.', false);
         setTimeout(function () {
             window.location.href = '/tickets';
         }, 2000);

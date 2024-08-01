@@ -6,14 +6,14 @@ const getTickets = async (req, res) => {
   try {
     const ALLTickets = await ticketsService.getTickets();
     const isManager = await loginController.getIsManager(req, res);
-    
+
     // Check if all tickets have a valid date
     ALLTickets.forEach(ticket => {
       if (!ticket.date) {
         ticket.date = null;
       }
     });
-    
+
     res.render('tickets.ejs', { ALLTickets, isManager });
   } catch (e) {
     res.status(500).json({ error: 'Error fetching tickets' });
@@ -29,12 +29,12 @@ const getTicketsByFilter = async (req, res) => {
 
     const filter = {};
 
-   
+
     if (titleFilter) {
       filter.title = new RegExp(titleFilter, 'i');
     }
 
-   
+
     if (monthFilter && monthFilter !== "0") {
       const month = parseInt(monthFilter) - 1;
 
@@ -48,7 +48,7 @@ const getTicketsByFilter = async (req, res) => {
       filter.$or = dateFilters;
     }
 
-    
+
     if (stadiumFilter) {
       filter.stadium = stadiumFilter;
     }
@@ -76,6 +76,7 @@ const createTicket = async (req, res) => {
   const { title, price, stadium, opImg, opponent, date } = req.body;
   try {
     const newTicket = await ticketsService.createTicket(title, price, stadium, opImg, opponent, date);
+    updateEventInFB(newTicket)
     res.json(newTicket);
   } catch (e) {
     res.status(500).json({ error: 'Error creating ticket' });
@@ -137,6 +138,34 @@ const deleteTicket = async (req, res) => {
     res.status(500).json({ error: "Ticket wasn't deleted successfully", details: e });
   }
 };
+
+// Function handles Facebook post submission
+async function updateEventInFB(ev) {
+  const API_BASE = 'https://graph.facebook.com/v15.0' // Set base URL for Facebook API
+  const txt = "Hey! A new exciting event is coming up! On " + new Date(ev?.date).toLocaleDateString() + " we will go up against " + ev?.opponent  + ". \n Will we see you there? \n Hala Madrid! ⚽🏆"
+  // Create an object for the Facebook post
+  const fbPostObj = {
+    message: txt // Set message to text from request body
+  }
+
+  try {
+    // Send POST request to Facebook API
+    const postResp = await fetch(`${API_BASE}/${process.env.FACEBOOK_ID}/feed?access_token=${process.env.FACEBOOK_API}`, {
+      method: 'POST', // Use POST method
+      headers: {
+        'Content-Type': 'application/json' // Set content type to JSON
+      },
+      body: JSON.stringify(fbPostObj) // Send Facebook post object as JSON
+    })
+
+    const post = await postResp.json() // Parse response JSON
+    if (post.error) {
+      throw new Error(post.error.message) // Throw error if response contains an error
+    }
+  } catch (e) {
+    console.log('Error posting to Facebook:', e) // Log any errors
+  }
+}
 
 // Export all the functions
 module.exports = {

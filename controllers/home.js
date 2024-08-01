@@ -1,6 +1,7 @@
 // Func renders the home page
 function getHomePage(req, res) { 
-    res.render('home.ejs', {})
+    const key = process.env.GAMES_API
+    res.render('home.ejs', {GAMES_API: key})
 }
 
 function getWeatherApiKey(req, res) { 

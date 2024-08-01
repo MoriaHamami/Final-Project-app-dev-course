@@ -7,11 +7,9 @@ const clientController = require("../controllers/client");
 const loginController = require("../controllers/login");
 
 router.route('/')
-    // .get(clientController.getClientPage)
     .get(isLoggedIn, getClientPage); // Route for client page, if user is logged in
 
 router.route('/canvas-edit')
-    // .get(clientController.getEditShirt) 
     .get(isLoggedIn, clientController.getEditShirt); // Route for editing shirt if user is logged in
 
 router.route('/:id')

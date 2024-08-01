@@ -4,6 +4,7 @@ let weatherApiUrl = '';
 
 // Fetch the weather data when the document is ready
 $(document).ready(async function() {
+
     const res = await getWeatherApi()
     if(res){
         $.ajax({
@@ -18,6 +19,7 @@ $(document).ready(async function() {
             }
         });
     }
+
 });
 
 async function getWeatherApi(){
