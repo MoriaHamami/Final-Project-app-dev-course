@@ -10,7 +10,6 @@ $(document).ready(function() {
     updateCartItems()
 });
 
-
 //  Updates initial cart items from db
 function updateCartItems() {
     $.ajax({
@@ -26,6 +25,7 @@ function updateCartItems() {
         }
     });
 }
+
 async function removeItem(cartItemId) {
     try {
         console.log('Removing item:', cartItemId); // Debugging

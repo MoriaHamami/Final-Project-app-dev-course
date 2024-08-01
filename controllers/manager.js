@@ -17,7 +17,7 @@ async function getManagerPage(req, res) {
 // Function renders the Facebook edit page
 async function getFacebookEditPage(req, res) {
     try {
-        res.render('edit-facebook.ejs', { key:123 }) // Render the Facebook edit page with a key
+        res.render('edit-facebook.ejs') // Render the Facebook edit page
     } catch (e) {
         console.log('Error rendering Facebook edit page:', e) // Log any errors
         res.status(500).send('Internal Server Error') // Send 500 status code

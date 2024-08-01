@@ -3,7 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    overflow-x: hidden; /* מניעת גלילה אופקית */
+    overflow-x: hidden; 
 }
 
 header {
@@ -17,8 +17,8 @@ header {
     flex-direction: column;
     padding: 20px;
     gap: 20px;
-    max-width: 100%; /* מניעת חריגה מהמסך */
-    overflow-x: hidden; /* מניעת גלילה אופקית */
+    max-width: 100%; 
+    overflow-x: hidden; 
 }
 
 @media (min-width: 768px) {

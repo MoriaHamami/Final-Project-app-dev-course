@@ -89,7 +89,7 @@
                     <div class="price">
                         <%= products[i].price %>$
                     </div>
-                    <!-- כפתור הלב להוספת לרשימת המשאלות -->
+<!-- heart to add item to favorite list  -->
                     <button class="wishlist-btn <%= favoriteProductIds.includes(products[i]._id.toString()) ? 'wishlist-active' : '' %>" onclick="toggleWishlist(event, this, '<%= products[i]._id %>')">
                         <i class="<%= favoriteProductIds.includes(products[i]._id.toString()) ? 'bi bi-heart-fill' : 'bi bi-heart' %>"></i>
                     </button>
@@ -107,7 +107,7 @@
                     <h5 class="modal-title" id="noticeModalLabel">Notice</h5>
                 </div>
                 <div class="modal-body" id="noticeModalBody">
-                    <!-- The message will be inserted here -->
+
                 </div>
             </div>
         </div>

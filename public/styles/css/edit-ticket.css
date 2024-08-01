@@ -234,7 +234,7 @@
 /* Media Queries */
 @media (max-width: 768px) {
     .edit-ticket form {
-        grid-template-columns: 1fr; /* עמודה אחת למסכים קטנים */
+        grid-template-columns: 1fr; 
     }
 
     .edit-ticket .edit-img_info {

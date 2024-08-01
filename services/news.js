@@ -55,7 +55,7 @@ const getNewById = async (id) => {
   try {
     return await News.findById(id);
   } catch (error) {
-    throw error; // Throw error if fetching fails
+    throw error; // Throw error 
   }
 };
 
@@ -64,7 +64,7 @@ const searchNews = async (query) => {
   try {
     return await News.find(query); // Return search results
   } catch (e) {
-    throw e; // Throw error if search fails
+    throw e; // Throw error 
   }
 };
 
