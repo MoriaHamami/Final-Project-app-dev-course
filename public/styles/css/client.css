@@ -6,7 +6,7 @@ footer {
 .client .personal_data,
 .client .yourhistory {
     border: 1px solid var(--l-gray); /* Add light border */
-    border-radius: 25px; /* Make edges round */
+    border-radius: 25px; 
 }
 
 /* Custom button styles */
@@ -178,7 +178,6 @@ footer {
 .order {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* Repeat 4 columns, each taking up 1 fraction of the space */
     gap: 20px;
     padding: 20px;
 }
@@ -188,7 +187,6 @@ footer {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    /* עגול יותר */
 }
 
 .items-header,
@@ -273,7 +271,6 @@ footer {
     .favorite_list,
     .order {
         grid-template-columns: repeat(2, 1fr);
-        /* Repeat 2 columns instead of 4 */
     }
 
     .client .client_details {

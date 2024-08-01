@@ -80,11 +80,6 @@ async function register(req, res) {
     }
 }
 
-// Example function for showing a secret page
-function funcExampleForShowingSecretPage(req, res) {
-    res.render("manager", { username: req.session.username });
-}
-
 // Get username from session
 async function getUsername(req, res) {
     return req.session.username;
@@ -133,7 +128,6 @@ module.exports = {
     registerForm,
     logout,
     isLoggedIn,
-    funcExampleForShowingSecretPage,
     isManagerLoggedIn,
     getUsername,
     getIsManager,

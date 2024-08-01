@@ -262,8 +262,8 @@ h4 {
 }
 
 .sign-in-container {
-    text-align: center; /* מרכז את הטקסט */
-    margin-top: -60px; /* מרווח עליון */
+    text-align: center; 
+    margin-top: -60px; 
     padding-bottom: 30px;
 }
 
