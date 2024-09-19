@@ -32,7 +32,7 @@ The main features of the system include:
    - The system supports diverse filter and sorting functionalities, allowing users to search and filter products based on multiple parameters. 
    
 - **Real-time API Integration**:
-   - To enhance the user experience, we've integrated several real-time APIs:
+  To enhance the user experience, we've integrated several real-time APIs:
    - **Weather API**: Users can see current weather updates relevant to their location, adding an interesting interactive element.
    - **Game Score Updates API**: For users who enjoy being updated on the latest Real Madrid games, we provide live updates from popular gaming events and matches.
    - **Facebook API**: New products are automatically uploaded to our Facebook page, keeping our feed updated with the latest items in the store, without manual input. In addition, administrators can upload posts from the admin panel on our website.
