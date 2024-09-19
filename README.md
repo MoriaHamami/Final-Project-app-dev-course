@@ -1,9 +1,20 @@
-# Real Madrid Store Project
+<div id="header" align="center">
+    <h1>Real Madrid Store Project</h1>
+</div>
 
-## Overview
 Welcome to our Real Madrid store project! This platform was developed as part of our academic coursework, and it combines several modern web technologies to create a fully functional and user-friendly online shopping experience. Our project showcases a store with dynamic data, user authentication, and various management features that are relevant to both customers and administrators.
 
-### Features
+![Main board image](public/styles/imgs/readme/home-page.png "Board-main-page")
+___
+
+### Table of Contents
+- [Features](#features)
+- [Application Features](#application-features)
+- [Technologies](#technologies)
+- [Showcase](#showcase)
+- [Authors](#authors)
+
+## Features
 The main features of the system include:
 
 1. **Product Management**: 
@@ -31,19 +42,27 @@ The main features of the system include:
    - We’ve incorporated **D3.js** to present dynamic graphs. These graphs display real-time data such as a clients per year count and products per category count.
    - The graphs include query capabilities such as **GroupBy** in MongoDB, which helps us group our data.
 
-### Pages and Navigation
+## Showcase
 The platform consists of several key pages that create a seamless user experience:
 
+![Homepage image](public/styles/imgs/readme/home-page.png "Home-page")
 - **Home Page**: The landing page features a call to action button leading to our store, game score updates, slider showcasing our players, and a weather widget providing live updates.
+![Product page image](public/styles/imgs/readme/home-page.png "Product-page")
 - **Product Page**: Each product has its own page with several images, videos, and options to add to the cart.
+![Custom page image](public/styles/imgs/readme/home-page.png "Custom-page")
 - **Custom T-Shirt**: Using HTML canvas, users can create custom shirts and add to their cart.
+[Ticket page image](public/styles/imgs/readme/home-page.png "Ticket-page")
 - **Ticket Page**: The ticket page includes several filtering options and allows users to buy tickets to our games.
+[Admin page image](public/styles/imgs/readme/home-page.png "Admin-page")
 - **Admin Dashboard**: Accessible only to administrators, this dashboard allows us to manage products, tickets and news, view all orders and users, upload facebook posts and analyze store statistics through our data visualizations.
+[Cart page image](public/styles/imgs/readme/home-page.png "Cart-page")
 - **Shopping Cart**: Users can view and edit items they’ve added to their cart and proceed to checkout.
+[Personal page image](public/styles/imgs/readme/home-page.png "Personal-page")
 - **Personal Area**: Logged-in users have access to their personal order history, displaying details of all past purchases, and to their favorite items. 
+[About page image](img/readme/home-page.png "About-page")
 - **About Page**: This page displays our store locations on Google Maps, making it easy for customers to find the nearest branch. In addition, up to date news uploaded by the admin can be visible on a slider in the news section. 
 
-### Technologies Used
+## Technologies
 - **Backend**: 
   - Node.js with Express
   - MongoDB for data storage
@@ -58,6 +77,13 @@ The platform consists of several key pages that create a seamless user experienc
   - Google Maps
 - **Data Visualization**: 
   - D3.js for dynamic, real-time graphs displaying store statistics
+
+## Authors
+ - [Moria Hamami](https://github.com/MoriaHamami)
+ - [Lihi Deshe](https://github.com/lihideshe)
+ - [Tal Mohaban](https://github.com/Talmohaban)
+ - [Noa Moscato](https://github.com/Noamos321)
+ - [Ziv Arbel](https://github.com/Zivarbel)
 
 ### Conclusion
 Our project not only meets the academic requirements but also offers a real-world, practical application for managing an online store. The integration of multiple APIs, advanced search functionality, and user-friendly design ensures a seamless shopping experience for users while providing powerful management tools for store administrators.
