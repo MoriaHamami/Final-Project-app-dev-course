@@ -17,35 +17,35 @@ ___
 ## Features
 The main features of the system include:
 
-1. **Product Management**: 
+- **Product Management**: 
    - Customers can browse through various products, search based on multiple criteria, and filter results to find exactly what they're looking for.
    - Administrators can manage the store's products through an admin panel, including adding new items, updating details, and removing products when necessary.
 
-2. **User Authentication & Role Management**:
-   - The platform includes a login system where regular users and administrators have different permissions.
+- **User Authentication & Role Management**:
+   - The platform includes a login and registration system where regular users and administrators have different permissions.
    - Users can view and manage their personal order history, while administrators have access to more advanced features like viewing all orders and editing customer data.
 
-3. **Shopping Cart & Order History**:
+- **Shopping Cart & Order History**:
    - Users can easily add items to their shopping cart and proceed to checkout. After placing an order, they can review their order history at any time.
 
-4. **Advanced Search & Grouping**:
+- **Advanced Search & Grouping**:
    - The system supports diverse filter and sorting functionalities, allowing users to search and filter products based on multiple parameters. 
    
-5. **Real-time API Integration**:
+- **Real-time API Integration**:
    - To enhance the user experience, we've integrated several real-time APIs:
-     - **Weather API**: Users can see current weather updates relevant to their location, adding an interesting interactive element.
-     - **Game Score Updates API**: For users who enjoy being updated on the latest Real Madrid games, we provide live updates from popular gaming events and matches.
-     - **Facebook API**: New products are automatically uploaded to our Facebook page, keeping our feed updated with the latest items in the store, without manual input. In addition, administrators can upload posts from the admin panel on our website.
-     - **Google Maps API**: In the “About” section, we use Google Maps to show the locations of all our store branches. The map dynamically updates with locations pulled from our MongoDB database.
+   - **Weather API**: Users can see current weather updates relevant to their location, adding an interesting interactive element.
+   - **Game Score Updates API**: For users who enjoy being updated on the latest Real Madrid games, we provide live updates from popular gaming events and matches.
+   - **Facebook API**: New products are automatically uploaded to our Facebook page, keeping our feed updated with the latest items in the store, without manual input. In addition, administrators can upload posts from the admin panel on our website.
+   - **Google Maps API**: In the “About” section, we use Google Maps to show the locations of all our store branches. The map dynamically updates with locations pulled from our MongoDB database.
        
-6. **Data Visualization**:
+- **Data Visualization**:
    - We’ve incorporated **D3.js** to present dynamic graphs. These graphs display real-time data such as a clients per year count and products per category count.
    - The graphs include query capabilities such as **GroupBy** in MongoDB, which helps us group our data.
 
 ## Showcase
 The platform consists of several key pages that create a seamless user experience:
 
-![Homepage image](public/styles/imgs/readme/home-page.png "Home-page")
+![Homepage image](public/styles/imgs/readme/home-page2.png "Home-page")
 - **Home Page**: The landing page features a call to action button leading to our store, game score updates, slider showcasing our players, and a weather widget providing live updates.
 ![Product page image](public/styles/imgs/readme/product-page.png "Product-page")
 - **Product Page**: Each product has its own page with several images, videos, and options to add to the cart.
@@ -54,6 +54,7 @@ The platform consists of several key pages that create a seamless user experienc
 [Ticket page image](public/styles/imgs/readme/ticket-page.png "Ticket-page")
 - **Ticket Page**: The ticket page includes several filtering options and allows users to buy tickets to our games.
 [Admin page image](public/styles/imgs/readme/admin-page.png "Admin-page")
+[Users page image](public/styles/imgs/readme/users-page.png "Users-page")
 - **Admin Dashboard**: Accessible only to administrators, this dashboard allows us to manage products, tickets and news, view all orders and users, upload facebook posts and analyze store statistics through our data visualizations.
 [Cart page image](public/styles/imgs/readme/cart-page.png "Cart-page")
 - **Shopping Cart**: Users can view and edit items they’ve added to their cart and proceed to checkout.
@@ -61,6 +62,7 @@ The platform consists of several key pages that create a seamless user experienc
 - **Personal Area**: Logged-in users have access to their personal order history, displaying details of all past purchases, and to their favorite items. 
 [About page image](img/readme/about-page.png "About-page")
 - **About Page**: This page displays our store locations on Google Maps, making it easy for customers to find the nearest branch. In addition, up to date news uploaded by the admin can be visible on a slider in the news section. 
+[About page image](img/readme/about-page2.png "About-page")
 
 ## Technologies
 - **Backend**: 
