@@ -60,9 +60,9 @@ The platform consists of several key pages that create a seamless user experienc
 - **Shopping Cart**: Users can view and edit items they’ve added to their cart and proceed to checkout.
 [Personal page image](public/styles/imgs/readme/personal-page.png "Personal-page")
 - **Personal Area**: Logged-in users have access to their personal order history, displaying details of all past purchases, and to their favorite items. 
-[About page image](img/readme/about-page.png "About-page")
+[About page image](public/styles/imgs/readme/about-page.png "About-page")
 - **About Page**: This page displays our store locations on Google Maps, making it easy for customers to find the nearest branch. In addition, up to date news uploaded by the admin can be visible on a slider in the news section. 
-[About page image](img/readme/about-page2.png "About-page")
+[About page image](public/styles/imgs/readme/about-page2.png "About-page")
 
 ## Technologies
 - **Backend**: 
