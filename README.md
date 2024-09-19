@@ -4,7 +4,7 @@
 
 Welcome to our Real Madrid store project! This platform was developed as part of our academic coursework, and it combines several modern web technologies to create a fully functional and user-friendly online shopping experience. Our project showcases a store with dynamic data, user authentication, and various management features that are relevant to both customers and administrators.
 
-![Main board image](public/styles/imgs/readme/home-page.png "Board-main-page")
+![Main board image](public/styles/imgs/readme/intro.mp4 "Board-main-page")
 ___
 
 ### Table of Contents
