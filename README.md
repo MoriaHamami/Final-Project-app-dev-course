@@ -32,7 +32,8 @@ The main features of the system include:
    - The system supports diverse filter and sorting functionalities, allowing users to search and filter products based on multiple parameters. 
    
 - **Real-time API Integration**:
-   - To enhance the user experience, we've integrated several real-time APIs:
+
+  To enhance the user experience, we've integrated several real-time APIs:
    - **Weather API**: Users can see current weather updates relevant to their location, adding an interesting interactive element.
    - **Game Score Updates API**: For users who enjoy being updated on the latest Real Madrid games, we provide live updates from popular gaming events and matches.
    - **Facebook API**: New products are automatically uploaded to our Facebook page, keeping our feed updated with the latest items in the store, without manual input. In addition, administrators can upload posts from the admin panel on our website.
@@ -45,24 +46,47 @@ The main features of the system include:
 ## Showcase
 The platform consists of several key pages that create a seamless user experience:
 
+### Home Page
+The landing page features a call to action button leading to our store, game score updates, slider showcasing our players, and a weather widget providing live updates.
+
 ![Homepage image](public/styles/imgs/readme/home-page2.png "Home-page")
-- **Home Page**: The landing page features a call to action button leading to our store, game score updates, slider showcasing our players, and a weather widget providing live updates.
+
+### Product Page
+Each product has its own page with several images, videos, and options to add to the cart.
+
 ![Product page image](public/styles/imgs/readme/product-page.png "Product-page")
-- **Product Page**: Each product has its own page with several images, videos, and options to add to the cart.
+
+### Custom T-Shirt
+Using HTML canvas, users can create custom shirts and add to their cart.
+
 ![Custom page image](public/styles/imgs/readme/custom-page.png "Custom-page")
-- **Custom T-Shirt**: Using HTML canvas, users can create custom shirts and add to their cart.
-[Ticket page image](public/styles/imgs/readme/ticket-page.png "Ticket-page")
-- **Ticket Page**: The ticket page includes several filtering options and allows users to buy tickets to our games.
-[Admin page image](public/styles/imgs/readme/admin-page.png "Admin-page")
-[Users page image](public/styles/imgs/readme/users-page.png "Users-page")
-- **Admin Dashboard**: Accessible only to administrators, this dashboard allows us to manage products, tickets and news, view all orders and users, upload facebook posts and analyze store statistics through our data visualizations.
-[Cart page image](public/styles/imgs/readme/cart-page.png "Cart-page")
-- **Shopping Cart**: Users can view and edit items they’ve added to their cart and proceed to checkout.
-[Personal page image](public/styles/imgs/readme/personal-page.png "Personal-page")
-- **Personal Area**: Logged-in users have access to their personal order history, displaying details of all past purchases, and to their favorite items. 
-[About page image](img/readme/about-page.png "About-page")
-- **About Page**: This page displays our store locations on Google Maps, making it easy for customers to find the nearest branch. In addition, up to date news uploaded by the admin can be visible on a slider in the news section. 
-[About page image](img/readme/about-page2.png "About-page")
+
+### Ticket Page
+The ticket page includes several filtering options and allows users to buy tickets to our games.
+
+![Ticket page image](public/styles/imgs/readme/ticket-page.png "Ticket-page")
+
+### Admin Dashboard
+Accessible only to administrators, this dashboard allows us to manage products, tickets and news, view all orders and users, upload facebook posts and analyze store statistics through our data visualizations.
+
+![Admin page image](public/styles/imgs/readme/admin-page.png "Admin-page")
+![Users page image](public/styles/imgs/readme/users-page.png "Users-page")
+
+### Shopping Cart
+Users can view and edit items they’ve added to their cart and proceed to checkout.
+
+![Cart page image](public/styles/imgs/readme/cart-page.png "Cart-page")
+
+### Personal Area
+Logged-in users have access to their personal order history, displaying details of all past purchases, and to their favorite items. 
+
+![Personal page image](public/styles/imgs/readme/personal-page.png "Personal-page")
+
+### About Page
+This page displays our store locations on Google Maps, making it easy for customers to find the nearest branch. In addition, up to date news uploaded by the admin can be visible on a slider in the news section. 
+
+![About page image](public/styles/imgs/readme/about-page.png "About-page")
+![About page image](public/styles/imgs/readme/about-page2.png "About-page")
 
 ## Technologies
 - **Backend**: 

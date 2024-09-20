@@ -2,7 +2,7 @@
 require("dotenv").config(); 
 
 // Load environment variables based on NODE_ENV
-require('custom-env').env(process.env.NODE_ENV, './configurations'); 
+require('custom-env').env(process.env.NODE_ENV, './'); 
 
 // Connect to MongoDB
 const mongoose = require("mongoose");
